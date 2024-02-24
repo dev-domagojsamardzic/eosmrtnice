@@ -16,10 +16,10 @@ class AdminUserSeeder extends Seeder
     {
         DB::table('users')->insert([
             'name' => 'Leon Rešetar',
-            'email' => 'test@email.com',
+            'email' => 'admin@email.com',
             'type' => UserType::ADMIN,
             'email_verified_at' => now(),
-            'password' => Hash::make('leonresetar2024'),
+            'password' => Hash::make('admin'),
             'remember_token' => null,
             'created_at' => now(),
             'updated_at' => null,
