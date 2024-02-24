@@ -27,10 +27,13 @@ and execute the following command:
     ```
 4. To run the container, navigate to the application's directory (you should already be there), and run:
 
-
     ```./vendor/bin/sail up -d```
 
-5. Your application is available at http://127.0.0.1
+5. Run migrations using
+
+    ```./vendor/bin/sail artisan migrate```
+
+6. Your application is available at http://127.0.0.1
 
 
 
