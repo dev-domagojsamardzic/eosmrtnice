@@ -33,7 +33,11 @@ and execute the following command:
 
     ```./vendor/bin/sail artisan migrate```
 
-6. Your application is available at http://127.0.0.1
+6. Install NPM packages
+
+    ```./vendor/bin/sail npm install```
+
+7. Your application is available at http://127.0.0.1
 
 
 
