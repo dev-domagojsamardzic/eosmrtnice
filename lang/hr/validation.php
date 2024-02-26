@@ -109,7 +109,7 @@ return [
     'missing' => 'Polje :attribute mora biti nepostojeće.',
     'missing_if' => 'Polje :attribute mora biti nepostojeće kada je :other :value.',
     'missing_unless' => 'Polje :attribute mora biti nepostojeće osim ako :other nije :value.',
-    'missing_with' => 'Polje :attribute mora biti nepostojeće kada je :values prisutno.',
+    'missing_with' => 'Polje :attribute mora biti nepostojeće kada je :values prisutan.',
     'missing_with_all' => 'Polje :attribute mora biti nepostojeće kada su prisutni :values.',
     'multiple_of' => 'Polje :attribute mora biti višekratnik broja :value.',
     'not_in' => 'Odabrani :attribute je nevažeći.',
