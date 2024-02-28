@@ -24,6 +24,11 @@ return [
         'forgot_password' => 'Zaboravili ste lozinku?',
         'name' => 'Ime i prezime',
     ],
+    'placeholders' => [
+        'email' => 'Unesite email adresu',
+        'password' => 'Unesite lozinku',
+    ],
+    'welcome' => 'Welcome',
     'log_in' => 'Prijava',
     'log_out' => 'Odjava',
     'register' => 'Registriraj se',

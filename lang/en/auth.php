@@ -24,6 +24,11 @@ return [
         'forgot_password' => 'Forgot your password?',
         'name' => 'Full Name',
     ],
+    'placeholders' => [
+        'email' => 'Enter email address here',
+        'password' => 'Enter password here',
+    ],
+    'welcome' => 'Dobrodošli',
     'log_in' => 'Log in',
     'log_out' => 'Log Out',
     'register' => 'Register',
