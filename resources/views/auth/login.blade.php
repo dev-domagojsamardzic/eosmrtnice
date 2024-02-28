@@ -31,7 +31,7 @@
                                                 placeholder="{{ __('auth.placeholders.email') }}"/>
                                         </div>
                                         <div class="form-group">
-                                            <input type="password" class="form-control form-control-user"
+                                            <input type="password" class="form-control"
                                                    id="exampleInputPassword" placeholder="{{ __('auth.placeholders.password') }}">
                                         </div>
                                         <div class="form-group">
