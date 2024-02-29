@@ -70,7 +70,7 @@
                                         <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2" />
                                     </div>
                                 </div>
-                                <x-primary-button class="ms-4">
+                                <x-primary-button class="mt-5">
                                     {{ __('auth.register') }}
                                 </x-primary-button>
                             </form>

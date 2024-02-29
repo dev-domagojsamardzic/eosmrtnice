@@ -52,7 +52,7 @@
                                                 </label>
                                             </div>
                                         </div>
-                                        <x-primary-button class="m-4">
+                                        <x-primary-button class="mt-4">
                                             {{ __('auth.log_in') }}
                                         </x-primary-button>
                                     </form>
