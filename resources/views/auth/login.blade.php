@@ -15,7 +15,7 @@
                         <!-- Nested Row within Card Body -->
                         <div class="row">
                             <div class="col-lg-6 d-none d-lg-block px-3 py-5">
-                                <img src="{{ asset('storage/images/cross.svg') }}">
+                                <img alt="{{ config('app.name') }}" src="{{ asset('storage/images/cross.svg') }}">
                             </div>
                             <div class="col-lg-6">
                                 <div class="p-5">
@@ -52,9 +52,9 @@
                                                 </label>
                                             </div>
                                         </div>
-                                        <button type="submit" class="btn btn-primary btn-user btn-block">
+                                        <x-primary-button class="m-4">
                                             {{ __('auth.log_in') }}
-                                        </button>
+                                        </x-primary-button>
                                     </form>
                                     <hr>
                                     @if (Route::has('password.request'))
