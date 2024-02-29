@@ -1,31 +1,53 @@
 <x-guest-layout>
-    <div class="mb-4 text-sm text-gray-600 dark:text-gray-400">
-        {{ __('auth.verify_email_text') }}
-    </div>
 
-    @if (session('status') == 'verification-link-sent')
-        <div class="mb-4 font-medium text-sm text-green-600 dark:text-green-400">
-            {{ __('auth.new_verification_link_text') }}
-        </div>
-    @endif
+    <!-- Session Status -->
+    <x-auth-session-status class="mb-4" :status="session('status')"/>
 
-    <div class="mt-4 flex items-center justify-between">
-        <form method="POST" action="{{ route('verification.send') }}">
-            @csrf
+    <div class="container">
+        <!-- Outer Row -->
+        <div class="row justify-content-center">
 
-            <div>
-                <x-primary-button>
-                    {{ __('auth.resend_verification_email') }}
-                </x-primary-button>
+            <div class="col-xl-10 col-lg-12 col-md-9">
+
+                <div class="card o-hidden border-0 shadow-lg my-5">
+                    <div class="card-body p-0">
+                        <!-- Nested Row within Card Body -->
+                        <div class="row">
+                            <div
+                                class="d-flex justify-content-center align-items-center col-lg-5 d-none px-3 py-5 bg-verify-email-image">
+                                <img height="300" width="auto" alt="{{ config('app.name') }}"
+                                     src="{{ asset('storage/images/cross.svg') }}">
+                            </div>
+                            <div class="col-lg-7">
+                                <div class="p-5">
+                                    <div class="text-left">
+                                        <h1 class="h4 text-gray-900 mb-4">{{ __('auth.new_verification_link_title') }}</h1>
+
+                                        @if (session('status') === 'verification-link-sent')
+                                            <p class="mb-4">
+                                                {{ __('auth.new_verification_link_text') }}
+                                            </p>
+                                        @endif
+                                    </div>
+                                    <form method="POST" action="{{ route('verification.send') }}">
+                                        @csrf
+                                        <x-primary-button>
+                                            {{ __('auth.resend_verification_email') }}
+                                        </x-primary-button>
+                                    </form>
+                                    <hr>
+                                    <form method="POST" action="{{ route('logout') }}">
+                                        @csrf
+                                        <x-primary-button>
+                                            {{ __('auth.log_out') }}
+                                        </x-primary-button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-        </form>
-
-        <form method="POST" action="{{ route('logout') }}">
-            @csrf
-
-            <button type="submit" class="underline text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800">
-                {{ __('auth.log_out') }}
-            </button>
-        </form>
+        </div>
     </div>
 </x-guest-layout>

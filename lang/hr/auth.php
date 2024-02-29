@@ -49,4 +49,5 @@ return [
     'confirm_password_text' => 'Molimo Vas da potvrdite svoju lozinku prije nastavka.',
     'verify_email_text' => 'Hvala Vam na vašoj prijavi! Prije nego počnemo, potrebno je pročitati mail koji smo Vam upravo poslali te kliknuti na link u mailu. Na taj način ćete potvrditi svoj račun. Ako niste primili ovakav mail, rado ćemo Vam poslati drugi.',
     'new_verification_link_text' => 'Novi verifikacijski link je poslan na email adresu koju ste upisali prilikom registracije.',
+    'new_verification_link_title' => 'Potvrda email adrese',
 ];
