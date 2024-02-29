@@ -10,7 +10,8 @@ use Illuminate\Notifications\Notifiable;
 
 /**
  * @property    int         id
- * @property    string      name
+ * @property    string      first_name
+ * @property    string      last_name
  * @property    string      email
  * @property    string      type
  * @property    Carbon      email_verified_at
@@ -31,7 +32,8 @@ class User extends Authenticatable implements MustVerifyEmail
      * @var array<int, string>
      */
     protected $fillable = [
-        'name',
+        'first_name',
+        'last_name',
         'email',
         'password',
     ];
