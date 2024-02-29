@@ -34,6 +34,7 @@ return [
     'register' => 'Registriraj se',
     'confirm' => 'Potvrdi',
     'reset_password' => 'Promijeni lozinku',
+    'create_account' => 'Napravi novi račun',
     'resend_verification_email' => 'Ponovo pošalji poveznicu',
     'forgot_password_text' => 'Zaboravili ste lozinku? Nema problema. Upišite svoju email adresu i mi ćemo Vam poslati poveznicu putem koje ćete moći promijeniti lozinku.',
     'email_password_reset_link' => 'Pošalji poveznicu za promjenu lozinke',
