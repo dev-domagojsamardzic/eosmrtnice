@@ -170,8 +170,8 @@ return [
     */
 
     'custom' => [
-        'attribute-name' => [
-            'rule-name' => 'custom-message',
+        'password' => [
+            'confirmed' => 'Lozinka se ne podudara sa ponovljenom lozinke. Budite pažljivi i pokušajte ponovo.',
         ],
     ],
 
@@ -186,6 +186,12 @@ return [
     |
     */
 
-    'attributes' => [],
+    'attributes' => [
+        'first_name' => 'Ime',
+        'last_name' => 'Prezime',
+        'email' => 'Email',
+        'password' => 'Lozinka',
+        'password_confirmation' => 'Potvrda lozinke',
+    ],
 
 ];
