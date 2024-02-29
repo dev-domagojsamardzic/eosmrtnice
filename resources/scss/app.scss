@@ -1,7 +1,10 @@
 @use "sass:math";
 
-// TODO: Import font
+// sans serif font
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+// monospace font
 
 // Import admin panel CSS
 // https://startbootstrap.com/theme/sb-admin-2
-@import "sb-admin-2.scss";
+@import "_sb_admin_2.scss";
+@import "_bootstrap_override";

@@ -8,57 +8,69 @@
 
             <div class="col-xl-10 col-lg-12 col-md-9">
 
+                <!-- Session Status -->
+                <x-auth-session-status class="mb-4" :status="session('status')" />
                 <div class="card o-hidden border-0 shadow-lg my-5">
                     <div class="card-body p-0">
                         <!-- Nested Row within Card Body -->
                         <div class="row">
-                            <div class="col-lg-6 d-none d-lg-block bg-login-image"></div>
+                            <div class="col-lg-6 d-none d-lg-block px-3 py-5">
+                                <img src="{{ asset('storage/images/cross.svg') }}">
+                            </div>
                             <div class="col-lg-6">
                                 <div class="p-5">
-                                    <div class="text-center">
+                                    <div class="text-left">
                                         <h1 class="h4 text-gray-900 mb-4">{{ config('app.name') }}</h1>
                                     </div>
-                                    <form>
+                                    <form method="POST" action="{{ route('login') }}">
+                                        @csrf
                                         <div class="form-group">
+                                            <x-input-label for="email" :value="__('auth.labels.email')" />
                                             <x-text-input
                                                 id="email"
-                                                aria-describedby="email"
-                                                class="form-control"
                                                 type="email"
                                                 name="email"
                                                 :value="old('email')"
-                                                required autofocus autocomplete="email"
+                                                required autofocus autocomplete
                                                 placeholder="{{ __('auth.placeholders.email') }}"/>
+                                            <x-input-error :messages="$errors->get('email')" class="mt-2" />
                                         </div>
                                         <div class="form-group">
-                                            <input type="password" class="form-control"
-                                                   id="exampleInputPassword" placeholder="{{ __('auth.placeholders.password') }}">
+                                            <x-input-label for="password" :value="__('auth.labels.password')" />
+                                            <x-text-input id="password"
+                                                          type="password"
+                                                          name="password"
+                                                          placeholder="{{ __('auth.placeholders.password') }}"
+                                                          required autocomplete="current-password" />
+                                            <x-input-error :messages="$errors->get('password')" class="mt-2" />
                                         </div>
                                         <div class="form-group">
-                                            <div class="custom-control custom-checkbox small">
-                                                <input type="checkbox" class="custom-control-input" id="customCheck">
-                                                <label class="custom-control-label" for="customCheck">
+                                            <div class="custom-control custom-checkbox">
+                                                <input type="checkbox" class="custom-control-input" name="remember_me" id="remember_me">
+                                                <label class="custom-control-label" for="remember_me">
                                                     {{ __('auth.labels.remember_me') }}
                                                 </label>
                                             </div>
                                         </div>
-                                        <a href="#" class="btn btn-primary btn-user btn-block">
+                                        <button type="submit" class="btn btn-primary btn-user btn-block">
                                             {{ __('auth.log_in') }}
-                                        </a>
+                                        </button>
                                     </form>
                                     <hr>
+                                    @if (Route::has('password.request'))
+                                        <div class="text-center">
+                                            <a class="small" href="{{ route('password.request') }}">{{ __('auth.labels.forgot_password') }}</a>
+                                        </div>
+                                    @endif
+
                                     <div class="text-center">
-                                        <a class="small" href="#">{{ __('auth.labels.forgot_password') }}</a>
-                                    </div>
-                                    <div class="text-center">
-                                        <a class="small" href="#">{{ __('auth.create_account') }}</a>
+                                        <a class="small" href="{{ route('register') }}">{{ __('auth.create_account') }}</a>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-
             </div>
         </div>
     </div>
