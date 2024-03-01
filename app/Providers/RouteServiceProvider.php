@@ -19,7 +19,7 @@ class RouteServiceProvider extends ServiceProvider
      */
     public const ADMIN = '/admin/dashboard';
     public const PARTNER = '/partner/dashboard';
-    public const HOME = '/dashboard';
+    public const HOME = '/user/dashboard';
 
     /**
      * Define your route model bindings, pattern filters, and other route configuration.
@@ -36,19 +36,19 @@ class RouteServiceProvider extends ServiceProvider
                 ->group(base_path('routes/api.php'));
 
             // custom route groups
-            Route::middleware(['web', 'auth:admin'])
+            Route::middleware(['web', 'auth', 'verified', 'admin'])
                 ->prefix('admin')
                 ->as('admin.')
                 ->scopeBindings()
                 ->group(base_path('routes/admin.php'));
 
-            Route::middleware(['web', 'auth:partner'])
+            Route::middleware(['web', 'auth', 'verified', 'partner'])
                 ->prefix('partner')
                 ->as('partner.')
                 ->scopeBindings()
                 ->group(base_path('routes/partner.php'));
 
-            Route::middleware(['web', 'auth:user'])
+            Route::middleware(['web', 'auth', 'verified', 'user'])
                 ->prefix('user')
                 ->as('user.')
                 ->scopeBindings()

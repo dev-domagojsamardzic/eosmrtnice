@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Enums\UserType;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\LoginRequest;
 use App\Providers\RouteServiceProvider;
@@ -29,7 +30,19 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerate();
 
-        return redirect()->intended(RouteServiceProvider::HOME);
+        if(auth()->user()->type === UserType::ADMIN->value) {
+            return redirect()->intended(RouteServiceProvider::ADMIN);
+        }
+
+        if(auth()->user()->type === UserType::PARTNER->value) {
+            return redirect()->intended(RouteServiceProvider::PARTNER);
+        }
+
+        if(auth()->user()->type === UserType::USER->value) {
+            return redirect()->intended(RouteServiceProvider::HOME);
+        }
+
+        return redirect()->route('login');
     }
 
     /**

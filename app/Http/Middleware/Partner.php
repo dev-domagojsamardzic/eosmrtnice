@@ -17,7 +17,7 @@ class Partner
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if (Auth::check() && Auth::user()->type === UserType::PARTNER) {
+        if (Auth::check() && Auth::user()->type === UserType::PARTNER->value) {
             return $next($request);
         }
 
