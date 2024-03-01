@@ -33,6 +33,25 @@ class RouteServiceProvider extends ServiceProvider
                 ->prefix('api')
                 ->group(base_path('routes/api.php'));
 
+            // custom route groups
+            Route::middleware(['web', 'auth:admin'])
+                ->prefix('admin')
+                ->as('admin.')
+                ->scopeBindings()
+                ->group(base_path('routes/admin.php'));
+
+            Route::middleware(['web', 'auth:partner'])
+                ->prefix('partner')
+                ->as('partner.')
+                ->scopeBindings()
+                ->group(base_path('routes/partner.php'));
+
+            Route::middleware(['web', 'auth:user'])
+                ->prefix('user')
+                ->as('user.')
+                ->scopeBindings()
+                ->group(base_path('routes/user.php'));
+
             Route::middleware('web')
                 ->group(base_path('routes/web.php'));
         });
