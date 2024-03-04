@@ -17,10 +17,10 @@ class User
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if (Auth::check() && Auth::user()->type === UserType::USER->value) {
+        if (Auth::check() && Auth::user()->type === UserType::USER) {
             return $next($request);
         }
 
-        return redirect()->route('login');
+        return redirect()->back();
     }
 }

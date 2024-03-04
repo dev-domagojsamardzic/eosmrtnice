@@ -17,10 +17,10 @@ class Administrator
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if (Auth::check() && Auth::user()->type === UserType::ADMIN->value) {
+        if (Auth::check() && Auth::user()->type === UserType::ADMIN) {
             return $next($request);
         }
 
-        return redirect()->route('login');
+        return redirect()->back();
     }
 }

@@ -17,10 +17,10 @@ class Partner
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if (Auth::check() && Auth::user()->type === UserType::PARTNER->value) {
+        if (Auth::check() && Auth::user()->type === UserType::PARTNER) {
             return $next($request);
         }
 
-        return redirect()->route('login');
+        return redirect()->back();
     }
 }
