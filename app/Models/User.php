@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Enums\UserType;
 use Carbon\Carbon;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -13,7 +14,7 @@ use Illuminate\Notifications\Notifiable;
  * @property    string      first_name
  * @property    string      last_name
  * @property    string      email
- * @property    string      type
+ * @property    UserType    type
  * @property    Carbon      email_verified_at
  * @property    string      password
  * @property    string      remember_token
@@ -56,5 +57,6 @@ class User extends Authenticatable implements MustVerifyEmail
     protected $casts = [
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
+        'type' => UserType::class,
     ];
 }
