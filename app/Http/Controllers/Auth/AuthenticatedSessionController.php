@@ -30,16 +30,16 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerate();
 
-        if(auth()->user()->type === UserType::ADMIN->value) {
+        if(auth()->user()->type === UserType::ADMIN) {
             return redirect()->intended(RouteServiceProvider::ADMIN);
         }
 
-        if(auth()->user()->type === UserType::PARTNER->value) {
+        if(auth()->user()->type === UserType::PARTNER) {
             return redirect()->intended(RouteServiceProvider::PARTNER);
         }
 
-        if(auth()->user()->type === UserType::USER->value) {
-            return redirect()->intended(RouteServiceProvider::HOME);
+        if(auth()->user()->type === UserType::USER) {
+            return redirect()->intended(RouteServiceProvider::USER);
         }
 
         return redirect()->route('login');
