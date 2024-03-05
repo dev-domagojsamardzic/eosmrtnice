@@ -31,6 +31,7 @@ class RegisteredUserController extends Controller
         $user = User::create([
             'first_name' => $request->first_name,
             'last_name' => $request->last_name,
+            'sex' => $request->sex,
             'email' => $request->email,
             'password' => Hash::make($request->password),
         ]);
@@ -39,6 +40,6 @@ class RegisteredUserController extends Controller
 
         Auth::login($user);
 
-        return redirect(RouteServiceProvider::HOME);
+        return redirect(RouteServiceProvider::USER);
     }
 }
