@@ -38,6 +38,16 @@
                                             placeholder="{{ __('auth.placeholders.last_name') }}"/>
                                     </div>
                                 </div>
+                                <div class="form-group row">
+                                    <div class="col-sm-12 mb-3 mb-sm-0">
+                                        <x-input-label class="d-block" for="sex" :value="__('auth.labels.sex')" />
+                                        @php
+                                            $options = \App\Enums\UserSex::options();
+                                        @endphp
+                                        <x-input-radio-inline name="sex" :options="$options"></x-input-radio-inline>
+                                    </div>
+
+                                </div>
                                 <div class="form-group">
                                     <x-input-label for="email" :value="__('auth.labels.email')" />
                                     <x-text-input
