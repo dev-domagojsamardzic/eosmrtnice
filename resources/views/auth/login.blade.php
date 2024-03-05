@@ -66,6 +66,10 @@
                                     <div class="text-center">
                                         <a class="small" href="{{ route('register') }}">{{ __('auth.create_account') }}</a>
                                     </div>
+                                    <hr>
+                                    <div class="text-center">
+                                        <a class="small" href="{{ route('partner.register') }}">{{ __('auth.become_a_partner') }}</a>
+                                    </div>
                                 </div>
                             </div>
                         </div>
