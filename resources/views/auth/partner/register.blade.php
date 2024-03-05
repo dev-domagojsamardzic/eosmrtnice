@@ -12,7 +12,10 @@
                     <div class="col-lg-7">
                         <div class="p-5">
                             <div class="text-left">
-                                <h1 class="h4 text-gray-900 mb-4">{{ __('auth.welcome_partner') }}</h1>
+                                <h1 class="h4 text-gray-900 mb-4">{{ __('auth.looking_forward_cooperating') }}</h1>
+                            </div>
+                            <div class="text-left">
+                                <h4>{{ __('auth.partner_representative_user') }}</h4>
                             </div>
                             <form  method="POST" action="{{ route('partner.register') }}">
                                 @csrf
@@ -80,7 +83,103 @@
                                         <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2" />
                                     </div>
                                 </div>
+
                                 <hr class="my-4">
+
+                                {{-- Company data --}}
+                                <div class="text-left">
+                                    <h4>{{ __('auth.company_data') }}</h4>
+                                </div>
+
+                                <div class="form-group">
+                                    <x-input-label for="company_title" :value="__('auth.labels.company_title')" />
+                                    <x-text-input
+                                        id="company_title"
+                                        type="text"
+                                        name="company_title"
+                                        :value="old('company_title')"
+                                        required autofocus autocomplete
+                                        placeholder="{{ __('auth.placeholders.company_title') }}"/>
+                                    <x-input-error :messages="$errors->get('company_title')" class="mt-2" />
+                                </div>
+
+                                <div class="form-group">
+                                    <x-input-label for="company_address" :value="__('auth.labels.company_address')" />
+                                    <x-text-input
+                                        id="company_address"
+                                        type="text"
+                                        name="company_address"
+                                        :value="old('company_address')"
+                                        required autofocus autocomplete
+                                        placeholder="{{ __('auth.placeholders.company_address') }}"/>
+                                    <x-input-error :messages="$errors->get('company_address')" class="mt-2" />
+                                </div>
+
+                                <div class="form-group row">
+                                    <div class="col-sm-9 mb-3 mb-sm-0">
+                                        <x-input-label for="company_town" :value="__('auth.labels.company_town')" />
+                                        <x-text-input id="company_town"
+                                                      type="text"
+                                                      name="company_town"
+                                                      placeholder="{{ __('auth.placeholders.company_town') }}"
+                                                      required autocomplete="company_town" />
+                                        <x-input-error :messages="$errors->get('company_town')" class="mt-2" />
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <x-input-label for="company_zipcode" :value="__('auth.labels.company_zipcode')" />
+                                        <x-text-input id="company_zipcode"
+                                                      type="text"
+                                                      name="company_zipcode"
+                                                      placeholder="{{ __('auth.placeholders.company_zipcode') }}"
+                                                      required autocomplete="company_zipcode" />
+                                        <x-input-error :messages="$errors->get('company_zipcode')" class="mt-2" />
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <x-input-label for="company_oib" :value="__('auth.labels.company_oib')" />
+                                    <x-text-input
+                                        id="company_oib"
+                                        type="text"
+                                        name="company_oib"
+                                        :value="old('company_oib')"
+                                        required autofocus autocomplete
+                                        placeholder="{{ __('auth.placeholders.company_oib') }}"/>
+                                    <x-input-error :messages="$errors->get('company_oib')" class="mt-2" />
+                                </div>
+
+                                <div class="form-group">
+                                    <x-input-label for="company_email" :value="__('auth.labels.company_email')" />
+                                    <x-text-input
+                                        id="company_email"
+                                        type="text"
+                                        name="company_email"
+                                        :value="old('company_oib')"
+                                        required autofocus autocomplete
+                                        placeholder="{{ __('auth.placeholders.company_email') }}"/>
+                                    <x-input-error :messages="$errors->get('company_email')" class="mt-2" />
+                                </div>
+
+                                <div class="form-group row">
+                                    <div class="col-sm-6 mb-3 mb-sm-0">
+                                        <x-input-label for="company_phone" :value="__('auth.labels.company_phone')" />
+                                        <x-text-input id="company_phone"
+                                                      type="text"
+                                                      name="company_phone"
+                                                      placeholder="{{ __('auth.placeholders.company_phone') }}"
+                                                      required autocomplete="company_phone" />
+                                        <x-input-error :messages="$errors->get('company_phone')" class="mt-2" />
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <x-input-label for="company_mobile" :value="__('auth.labels.company_mobile')" />
+                                        <x-text-input id="company_mobile"
+                                                      type="text"
+                                                      name="company_mobile"
+                                                      placeholder="{{ __('auth.placeholders.company_mobile') }}"
+                                                      required autocomplete="company_mobile" />
+                                        <x-input-error :messages="$errors->get('company_mobile')" class="mt-2" />
+                                    </div>
+                                </div>
 
                                 <x-primary-button class="mt-5">
                                     {{ __('auth.register') }}
