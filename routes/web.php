@@ -10,6 +10,7 @@ use App\Http\Controllers\Auth\NewPasswordController;
 use App\Http\Controllers\Auth\PasswordController;
 use App\Http\Controllers\Auth\PasswordResetLinkController;
 use App\Http\Controllers\Auth\RegisteredUserController;
+use App\Http\Controllers\Auth\Partner\RegisteredUserController as PartnerRegisteredUserController;
 use App\Http\Controllers\Auth\VerifyEmailController;
 
 /*
@@ -34,10 +35,18 @@ Route::get('/', static function () {
 });*/
 
 Route::middleware('guest')->group(function () {
+
+    // user register
     Route::get('register', [RegisteredUserController::class, 'create'])
         ->name('register');
+    Route::post('register', [RegisteredUserController::class, 'store'])
+        ->name('register');
 
-    Route::post('register', [RegisteredUserController::class, 'store']);
+    // partner register
+    Route::get('partner/register', [PartnerRegisteredUserController::class, 'create'])
+        ->name('partner.register');
+    Route::post('partner/register', [PartnerRegisteredUserController::class, 'store'])
+        ->name('partner.register');
 
     Route::get('login', [AuthenticatedSessionController::class, 'create'])
         ->name('login');
