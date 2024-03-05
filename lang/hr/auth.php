@@ -26,6 +26,7 @@ return [
         'forgot_password' => 'Zaboravili ste lozinku?',
         'name' => 'Ime i prezime',
         'already_have_account_login' => 'Već imate račun? Prijavite se.',
+        'sex' => 'Spol',
     ],
     'placeholders' => [
         'first_name' => 'Unesite ime',
@@ -51,5 +52,6 @@ return [
     'new_verification_link_text' => 'Novi verifikacijski link je poslan na email adresu koju ste upisali prilikom registracije.',
     'new_verification_link_title' => 'Potvrda email adrese',
     'confirm_password_title' => 'Porvrda lozinke',
-    'confirm_password' => 'Potvrdi lozinku'
+    'confirm_password' => 'Potvrdi lozinku',
+    'become_a_partner' => 'Želite li postati naš partner?',
 ];

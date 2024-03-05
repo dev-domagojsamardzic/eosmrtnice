@@ -26,6 +26,7 @@ return [
         'forgot_password' => 'Forgot your password?',
         'name' => 'Full Name',
         'already_have_account_login' => 'Already have an account? Login here.',
+        'sex' => 'Sex',
     ],
     'placeholders' => [
         'first_name' => 'Enter First Name here',
@@ -51,5 +52,6 @@ return [
     'new_verification_link_text' => 'A new verification link has been sent to the email address you provided during registration.',
     'new_verification_link_title' => 'Verify your Email',
     'confirm_password_title' => 'Password Confirmation',
-    'confirm_password' => 'Confirm Password'
+    'confirm_password' => 'Confirm Password',
+    'become_a_partner' => 'Would you like to become our partner?',
 ];
