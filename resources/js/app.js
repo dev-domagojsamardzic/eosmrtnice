@@ -1,5 +1,15 @@
 import './bootstrap';
 
+import './jquery/jquery.slim.min.js';
+//import './jquery/jquery.slim.min.map';
+import './jquery/jquery.min.js';
+
+import './jquery-easing/jquery.easing.js';
+import './jquery-easing/jquery.easing.compatibility.js';
+
+import './bootstrap/bootstrap.js';
+import './bootstrap/bootstrap.bundle.js';
+
 import '@popperjs/core';
 
 import './sb-admin/sb-admin-2.min.js';
