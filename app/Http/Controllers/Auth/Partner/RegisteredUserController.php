@@ -38,6 +38,8 @@ class RegisteredUserController extends Controller
             'password' => Hash::make($request->password),
         ]);
 
+        // TODO: create new company
+
         event(new Registered($user));
 
         Auth::login($user);
