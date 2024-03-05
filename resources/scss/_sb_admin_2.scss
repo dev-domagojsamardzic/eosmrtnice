@@ -2,7 +2,10 @@
 @import "variables.scss";
 
 // Import Bootstrap
-@import "../vendor/bootstrap/scss/bootstrap.scss";
+@import "bootstrap/bootstrap.scss";
+
+// Import FontAwesome 5
+@import "fontawesome/fontawesome.scss";
 
 // Import Custom SB Admin 2 Mixins and Components
 @import "mixins.scss";
