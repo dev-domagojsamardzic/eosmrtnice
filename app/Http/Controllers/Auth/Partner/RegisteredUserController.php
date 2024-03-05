@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Auth\Partner;
 
+use App\Enums\UserType;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\RegisterRequest;
 use App\Models\User;
@@ -19,7 +20,7 @@ class RegisteredUserController extends Controller
      */
     public function create(): View
     {
-        return view('auth.register');
+        return view('auth/partner.register');
     }
 
     /**
@@ -31,6 +32,8 @@ class RegisteredUserController extends Controller
         $user = User::create([
             'first_name' => $request->first_name,
             'last_name' => $request->last_name,
+            'sex' => $request->sex,
+            'type' => UserType::PARTNER,
             'email' => $request->email,
             'password' => Hash::make($request->password),
         ]);
@@ -39,6 +42,6 @@ class RegisteredUserController extends Controller
 
         Auth::login($user);
 
-        return redirect(RouteServiceProvider::HOME);
+        return redirect(RouteServiceProvider::PARTNER);
     }
 }
