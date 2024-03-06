@@ -7,6 +7,8 @@ use Carbon\Carbon;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
@@ -24,6 +26,8 @@ use Illuminate\Notifications\Notifiable;
  * @property        Carbon      updated_at
  * -------------------------------------------
  * @property-read   string      full_name
+ * -------------------------------------------
+ * @property        Company     $companies
  */
 
 class User extends Authenticatable implements MustVerifyEmail
@@ -74,5 +78,14 @@ class User extends Authenticatable implements MustVerifyEmail
         return Attribute::make(
             get: fn () => $this->first_name . ' ' . $this->last_name,
         );
+    }
+
+    /**
+     * user's companies
+     * @return HasMany
+     */
+    public function companies(): HasMany
+    {
+        return $this->hasMany(Company::class);
     }
 }
