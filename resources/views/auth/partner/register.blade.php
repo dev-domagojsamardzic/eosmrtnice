@@ -171,13 +171,13 @@
                                         <x-input-error :messages="$errors->get('company_phone')" class="mt-2" />
                                     </div>
                                     <div class="col-sm-6">
-                                        <x-input-label for="company_mobile" :value="__('auth.labels.company_mobile')" />
-                                        <x-text-input id="company_mobile"
+                                        <x-input-label for="company_mobile_phone" :value="__('auth.labels.company_mobile')" />
+                                        <x-text-input id="company_mobile_phone"
                                                       type="text"
-                                                      name="company_mobile"
+                                                      name="company_mobile_phone"
                                                       placeholder="{{ __('auth.placeholders.company_mobile') }}"
-                                                      required autocomplete="company_mobile" />
-                                        <x-input-error :messages="$errors->get('company_mobile')" class="mt-2" />
+                                                      required autocomplete="company_mobile_phone" />
+                                        <x-input-error :messages="$errors->get('company_mobile_phone')" class="mt-2" />
                                     </div>
                                 </div>
 
