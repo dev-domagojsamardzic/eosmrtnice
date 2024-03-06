@@ -93,6 +93,11 @@
                             <div class="text-center">
                                 <a class="small" href="{{ route('login') }}">{{ __('auth.labels.already_have_account_login') }}</a>
                             </div>
+
+                            <hr>
+                            <div class="text-center">
+                                <a class="small" href="{{ route('partner.register') }}">{{ __('auth.become_a_partner') }}</a>
+                            </div>
                         </div>
                     </div>
                 </div>
