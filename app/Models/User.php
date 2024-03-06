@@ -7,8 +7,8 @@ use Carbon\Carbon;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
@@ -22,8 +22,10 @@ use Illuminate\Notifications\Notifiable;
  * @property        Carbon      email_verified_at
  * @property        string      password
  * @property        string      remember_token
+ * @property        bool        active
  * @property        Carbon      created_at
  * @property        Carbon      updated_at
+ * @property        Carbon      deleted_at
  * -------------------------------------------
  * @property-read   string      full_name
  * -------------------------------------------
@@ -34,6 +36,7 @@ class User extends Authenticatable implements MustVerifyEmail
 {
     use HasFactory;
     use Notifiable;
+    use SoftDeletes;
 
     /**
      * The attributes that are mass assignable.

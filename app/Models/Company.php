@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Carbon;
 
 /**
@@ -18,8 +19,10 @@ use Illuminate\Support\Carbon;
  * @property        string      email
  * @property        string      phone
  * @property        string      mobile_phone
+ * @property        string      active
  * @property        Carbon      created_at
  * @property        Carbon      updated_at
+ * @property        Carbon      deleted_at
  * -------------------------------------------
  * @property-read   string      full_name
  * -------------------------------------------
@@ -29,6 +32,7 @@ use Illuminate\Support\Carbon;
 class Company extends Model
 {
     use HasFactory;
+    use SoftDeletes;
 
     /**
      * The attributes that are mass assignable.
