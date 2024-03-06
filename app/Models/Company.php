@@ -35,6 +35,15 @@ class Company extends Model
     use SoftDeletes;
 
     /**
+     * Default attributes
+     *
+     * @var array
+     */
+    protected $attributes = [
+        'active' => true,
+    ];
+
+    /**
      * The attributes that are mass assignable.
      *
      * @var array<int, string>

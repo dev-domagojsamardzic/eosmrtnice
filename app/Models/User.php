@@ -39,6 +39,16 @@ class User extends Authenticatable implements MustVerifyEmail
     use SoftDeletes;
 
     /**
+     * Default attributes
+     *
+     * @var array
+     */
+    protected $attributes = [
+        'type' => UserType::USER,
+        'active' => true,
+    ];
+
+    /**
      * The attributes that are mass assignable.
      *
      * @var array<int, string>
