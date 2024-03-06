@@ -98,7 +98,8 @@
                                         type="text"
                                         name="company_title"
                                         :value="old('company_title')"
-                                        required autofocus autocomplete
+                                        required autofocus
+                                        autocomplete="company_title"
                                         placeholder="{{ __('auth.placeholders.company_title') }}"/>
                                     <x-input-error :messages="$errors->get('company_title')" class="mt-2" />
                                 </div>
@@ -110,7 +111,7 @@
                                         type="text"
                                         name="company_address"
                                         :value="old('company_address')"
-                                        required autofocus autocomplete
+                                        autocomplete="company_address"
                                         placeholder="{{ __('auth.placeholders.company_address') }}"/>
                                     <x-input-error :messages="$errors->get('company_address')" class="mt-2" />
                                 </div>
@@ -121,8 +122,9 @@
                                         <x-text-input id="company_town"
                                                       type="text"
                                                       name="company_town"
+                                                      :value="old('company_town')"
                                                       placeholder="{{ __('auth.placeholders.company_town') }}"
-                                                      required autocomplete="company_town" />
+                                                      autocomplete="company_town" />
                                         <x-input-error :messages="$errors->get('company_town')" class="mt-2" />
                                     </div>
                                     <div class="col-sm-3">
@@ -130,8 +132,9 @@
                                         <x-text-input id="company_zipcode"
                                                       type="text"
                                                       name="company_zipcode"
+                                                      :value="old('company_zipcode')"
                                                       placeholder="{{ __('auth.placeholders.company_zipcode') }}"
-                                                      required autocomplete="company_zipcode" />
+                                                      autocomplete="company_zipcode" />
                                         <x-input-error :messages="$errors->get('company_zipcode')" class="mt-2" />
                                     </div>
                                 </div>
@@ -143,7 +146,6 @@
                                         type="text"
                                         name="company_oib"
                                         :value="old('company_oib')"
-                                        required autofocus autocomplete
                                         placeholder="{{ __('auth.placeholders.company_oib') }}"/>
                                     <x-input-error :messages="$errors->get('company_oib')" class="mt-2" />
                                 </div>
@@ -154,8 +156,8 @@
                                         id="company_email"
                                         type="text"
                                         name="company_email"
-                                        :value="old('company_oib')"
-                                        required autofocus autocomplete
+                                        :value="old('company_email')"
+                                        autocomplete
                                         placeholder="{{ __('auth.placeholders.company_email') }}"/>
                                     <x-input-error :messages="$errors->get('company_email')" class="mt-2" />
                                 </div>
@@ -166,8 +168,9 @@
                                         <x-text-input id="company_phone"
                                                       type="text"
                                                       name="company_phone"
+                                                      :value="old('company_phone')"
                                                       placeholder="{{ __('auth.placeholders.company_phone') }}"
-                                                      required autocomplete="company_phone" />
+                                                      autocomplete="company_phone" />
                                         <x-input-error :messages="$errors->get('company_phone')" class="mt-2" />
                                     </div>
                                     <div class="col-sm-6">
@@ -175,8 +178,9 @@
                                         <x-text-input id="company_mobile_phone"
                                                       type="text"
                                                       name="company_mobile_phone"
+                                                      :value="old('company_mobile_phone')"
                                                       placeholder="{{ __('auth.placeholders.company_mobile') }}"
-                                                      required autocomplete="company_mobile_phone" />
+                                                      autocomplete="company_mobile_phone" />
                                         <x-input-error :messages="$errors->get('company_mobile_phone')" class="mt-2" />
                                     </div>
                                 </div>
