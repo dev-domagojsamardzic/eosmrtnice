@@ -14,23 +14,44 @@
         <!-- Scripts -->
         @vite(['resources/scss/app.scss', 'resources/js/app.js'])
     </head>
-    <body class="font-sans antialiased">
-        <div class="min-h-screen bg-gray-100 dark:bg-gray-900">
-            @include('layouts.navigation')
 
-            <!-- Page Heading -->
-            @if (isset($header))
-                <header class="bg-white dark:bg-gray-800 shadow">
-                    <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
-                        {{ $header }}
+    {{-- New layout --}}
+    <body id="page-top">
+        <div id="wrapper">
+            <!-- Sidebar -->
+            @include(auth_user_type() . '.sidebar')
+            <!-- End of Sidebar -->
+
+            <!-- Content Wrapper -->
+            <div id="content-wrapper" class="d-flex flex-column">
+
+                <!-- TopBar -->
+                <div id="content">
+
+                    <!-- Main Content -->
+                    @include('layouts.navigation')
+                    <!-- End of TopBar -->
+
+                    <!-- Begin Page Content -->
+                    <div class="container-fluid">
+
+                        <!-- Page Heading -->
+                        @if (isset($header))
+                            <h1 class="h3 mb-4 text-gray-800">{{ $header }}</h1>
+                        @endif
+
+                        <!-- Page Content -->
+                        <main>
+                            {{ $slot }}
+                        </main>
+
                     </div>
-                </header>
-            @endif
-
-            <!-- Page Content -->
-            <main>
-                {{ $slot }}
-            </main>
+                    <!-- /.container-fluid -->
+                </div>
+                <!-- End of Main Content -->
+            </div>
+            <!-- End of Content Wrapper -->
         </div>
     </body>
+    {{-- New layout end --}}
 </html>
