@@ -47,7 +47,7 @@
                                         @php
                                             $options = \App\Enums\UserSex::options();
                                         @endphp
-                                        <x-input-radio-inline name="sex" :options="$options"></x-input-radio-inline>
+                                        <x-input-radio-inline name="sex" :options="$options" :selected="\App\Enums\UserSex::MALE->value"></x-input-radio-inline>
                                     </div>
 
                                 </div>
