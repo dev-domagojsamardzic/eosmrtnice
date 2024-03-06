@@ -15,7 +15,7 @@
                         <!-- Nested Row within Card Body -->
                         <div class="row">
                             <div class="col-lg-6 d-none d-flex align-items-center justify-content-center px-3 py-5 bg-login-image">
-                                <img height="250" width="auto" alt="{{ config('app.name') }}" src="{{ asset('storage/images/cross.svg') }}">
+                                <img height="200" width="auto" alt="{{ config('app.name') }}" src="{{ asset('storage/images/logo_vector_black.svg') }}">
                             </div>
                             <div class="col-lg-6">
                                 <div class="p-5">
