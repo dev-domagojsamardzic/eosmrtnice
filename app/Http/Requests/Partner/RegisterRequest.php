@@ -50,13 +50,13 @@ class RegisterRequest extends FormRequest
             'password' => ['required', 'confirmed', Password::defaults()],
 
             'company_title' => ['required', 'string', 'max:255'],
-            'company_address' => ['string', 'max:512'],
-            'company_town' => ['string', 'max:255'],
-            'company_zipcode' => ['number', 'max:6'],
-            'company_oib' => ['number', 'digits:11'],
-            'company_email' => ['string', 'email', 'max:255'],
-            'company_phone' => ['string', 'max:64'],
-            'company_mobile_phone' => ['string', 'max:64']
+            'company_address' => ['nullable','string', 'max:512'],
+            'company_town' => ['nullable','string', 'max:255'],
+            'company_zipcode' => ['nullable','numeric'],
+            'company_oib' => ['nullable','numeric', 'digits:11'],
+            'company_email' => ['nullable','string', 'email', 'max:255'],
+            'company_phone' => ['nullable','string', 'max:64'],
+            'company_mobile_phone' => ['nullable','string', 'max:64']
         ];
     }
 }
