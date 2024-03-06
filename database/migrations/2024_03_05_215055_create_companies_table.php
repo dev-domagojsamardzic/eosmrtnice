@@ -17,10 +17,10 @@ return new class extends Migration
             $table->foreignIdFor(User::class);
             $table->string('title');
             $table->string('address')->nullable();
-            $table->char('zipcode');
-            $table->string('town');
+            $table->string('town')->nullable();
+            $table->char('zipcode')->nullable();
             $table->char('oib',11)->nullable();
-            $table->string('email')->unique();
+            $table->string('email')->nullable();
             $table->string('phone')->nullable();
             $table->string('mobile_phone')->nullable();
             $table->timestamps();
