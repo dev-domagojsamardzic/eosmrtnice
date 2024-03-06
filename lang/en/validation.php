@@ -190,8 +190,17 @@ return [
         'first_name' => 'First Name',
         'last_name' => 'Last Name',
         'email' => 'Email',
+        'sex' => 'Sex',
         'password' => 'Password',
         'password_confirmation' => 'Password Confirmation',
+        'company_title' => 'Company title',
+        'company_address' => 'Company address',
+        'company_town' => 'Company town',
+        'company_zipcode' => 'Company zipcode',
+        'company_oib' => 'Company OIB',
+        'company_email' => 'Company email',
+        'company_phone' => 'Company phone',
+        'company_mobile_phone' => 'Company mobile phone',
     ],
 
 ];

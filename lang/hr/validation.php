@@ -190,8 +190,17 @@ return [
         'first_name' => 'Ime',
         'last_name' => 'Prezime',
         'email' => 'Email',
+        'sex' => 'Spol',
         'password' => 'Lozinka',
         'password_confirmation' => 'Potvrda lozinke',
+        'company_title' => 'Naziv firme',
+        'company_address' => 'Adresa firme',
+        'company_town' => 'Sjedište firme',
+        'company_zipcode' => 'Poštanski broj',
+        'company_oib' => 'OIB firme',
+        'company_email' => 'Službeni email',
+        'company_phone' => 'Telefon',
+        'company_mobile_phone' => 'Mobilni telefon',
     ],
 
 ];
