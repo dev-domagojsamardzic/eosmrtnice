@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'users_management' => 'Upravljanje korisnicima',
+    'accounts' => 'Računi korisnika',
     'users' => 'Korisnici',
     'partners' => 'Partneri',
 ];

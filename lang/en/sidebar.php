@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'users_management' => 'Users Management',
+    'accounts' => 'Accounts',
     'users' => 'Users',
     'partners' => 'Partners',
 ];
