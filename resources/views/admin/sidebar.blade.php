@@ -5,7 +5,7 @@
         <div class="sidebar-brand-icon">
             <img height="40" src="{{ asset('storage/images/logo_vector_white.svg') }}" alt="{{ config('app.name') }}">
         </div>
-        <div class="sidebar-brand-text mx-3">{{ config('app.name') }}</div>
+        <div class="sidebar-brand-text mx-3 mt-3">{{ config('app.name') }}</div>
     </a>
 
     <!-- Divider -->
@@ -23,7 +23,7 @@
 
     <!-- Heading -->
     <div class="sidebar-heading">
-        {{ __('sidebar.users_management') }}
+        {{ __('sidebar.accounts') }}
     </div>
 
     <!-- Nav Item - Partners -->
@@ -42,4 +42,9 @@
 
     <!-- Divider -->
     <hr class="sidebar-divider">
+
+    <!-- Sidebar Toggler (Sidebar) -->
+    <div class="text-center d-none d-md-inline">
+        <button class="rounded-circle border-0" id="sidebarToggle"></button>
+    </div>
 </ul>
