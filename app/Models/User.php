@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Enums\UserType;
 use Carbon\Carbon;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -100,5 +101,29 @@ class User extends Authenticatable implements MustVerifyEmail
     public function companies(): HasMany
     {
         return $this->hasMany(Company::class);
+    }
+
+    /**
+     * Scope a query to only include partners (type=ADMIN)
+     */
+    public function scopeAdmins(Builder $query): void
+    {
+        $query->where('type', UserType::ADMIN);
+    }
+
+    /**
+     * Scope a query to only include partners (type=PARTNER)
+     */
+    public function scopePartners(Builder $query): void
+    {
+        $query->where('type', UserType::PARTNER);
+    }
+
+    /**
+     * Scope a query to only include users (type=USER).
+     */
+    public function scopeUsers(Builder $query): void
+    {
+        $query->where('type', UserType::USER);
     }
 }
