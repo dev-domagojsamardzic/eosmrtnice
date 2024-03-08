@@ -126,4 +126,12 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         $query->where('type', UserType::USER);
     }
+
+    /**
+     * Scope a query to only include active users
+     */
+    public function scopeActive(Builder $query): void
+    {
+        $query->where('active', true);
+    }
 }

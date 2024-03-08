@@ -54,8 +54,8 @@
             <!-- End of Content Wrapper -->
         </div>
         <!-- Scripts -->
-        @filamentScripts
         @vite(['resources/js/app.js'])
+        @filamentScripts
     </body>
     {{-- New layout end --}}
 </html>

@@ -1,5 +1,9 @@
 @use "sass:math";
 
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 // sans serif font
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
 // monospace font
@@ -9,6 +13,4 @@
 @import "_sb_admin_2.scss";
 @import "_bootstrap_override";
 
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+
