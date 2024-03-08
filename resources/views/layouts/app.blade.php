@@ -13,6 +13,7 @@
 
         <!-- Scripts -->
         @vite(['resources/scss/app.scss', 'resources/js/app.js'])
+        <livewire:styles />
     </head>
 
     {{-- New layout --}}
@@ -52,6 +53,7 @@
             </div>
             <!-- End of Content Wrapper -->
         </div>
+        <livewire:scripts />
     </body>
     {{-- New layout end --}}
 </html>
