@@ -28,7 +28,7 @@
 
     <!-- Nav Item - Partners -->
     <li class="nav-item">
-        <a class="nav-link" href="#">
+        <a class="nav-link" href="{{ route(auth_user_type() . '.partners.index') }}">
             <i class="fas fa-handshake"></i>
             <span>{{ __('sidebar.partners') }}</span></a>
     </li>
