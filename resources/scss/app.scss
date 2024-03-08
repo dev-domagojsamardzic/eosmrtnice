@@ -8,3 +8,7 @@
 // https://startbootstrap.com/theme/sb-admin-2
 @import "_sb_admin_2.scss";
 @import "_bootstrap_override";
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
