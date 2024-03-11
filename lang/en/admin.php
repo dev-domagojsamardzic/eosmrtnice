@@ -7,4 +7,5 @@ return [
     'active' => 'Active',
     'inactive' => 'Inactive',
     'created' => 'Created At',
+    'sex' => 'Spol',
 ];
