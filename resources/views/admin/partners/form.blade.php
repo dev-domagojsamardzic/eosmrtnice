@@ -1,12 +1,12 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-weight-bolder mb-4">
-            {{ __('admin.partners') }} - {{ __("common.{$action}") }}
+            {{ __('admin.partners') }} - {{ __("common.{$action_name}") }}
         </h2>
     </x-slot>
 
     <div>
-        <form method="POST" action="{{ $route }}">
+        <form method="POST" action="{{ $action }}">
             @csrf
             {{ method_field('PUT') }}
             <div class="form-group row">

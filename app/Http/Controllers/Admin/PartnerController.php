@@ -56,7 +56,7 @@ class PartnerController extends Controller
             'admin.partners.form', [
                 'partner' => $partner,
                 'action_name' => $action,
-                'route' => $route,
+                'action' => $route,
                 'quit' => route(auth_user_type() . '.partners.index'),
             ]
         );

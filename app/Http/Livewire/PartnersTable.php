@@ -5,7 +5,6 @@ namespace App\Http\Livewire;
 use App\Models\User;
 use Carbon\Carbon;
 use Filament\Tables\Actions\Action;
-use Filament\Tables\Actions\EditAction;
 use Filament\Forms\Concerns\InteractsWithForms;
 use Filament\Forms\Contracts\HasForms;
 use Filament\Tables\Columns\TextColumn;
