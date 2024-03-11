@@ -2,6 +2,7 @@
 
 return [
     'partners' => 'Partners',
+    'users' => 'Users',
     'full_name' => 'Full Name',
     'email' => 'Email',
     'active' => 'Active',
