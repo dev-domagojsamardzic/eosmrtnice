@@ -5,5 +5,6 @@ return [
     'full_name' => 'Ime i Prezime',
     'email' => 'Email',
     'active' => 'Aktivni',
-    'inactive' => 'Neaktivni'
+    'inactive' => 'Neaktivni',
+    'created' => 'Dodano',
 ];

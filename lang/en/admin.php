@@ -6,4 +6,5 @@ return [
     'email' => 'Email',
     'active' => 'Active',
     'inactive' => 'Inactive',
+    'created' => 'Created At',
 ];
