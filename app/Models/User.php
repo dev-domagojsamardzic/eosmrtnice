@@ -46,7 +46,7 @@ class User extends Authenticatable implements MustVerifyEmail
      */
     protected $attributes = [
         'type' => UserType::USER,
-        'active' => true,
+        'active' => 1,
     ];
 
     /**
