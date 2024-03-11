@@ -38,27 +38,35 @@
                 </div>
             </div>
             <div class="form-group row">
-                <x-input-label for="email" :value="__('auth.labels.email')" />
-                <x-text-input
-                    id="email"
-                    type="email"
-                    name="email"
-                    :value="old('email', $partner->email)"
-                    placeholder="{{ __('auth.placeholders.email') }}"/>
-                <x-input-error :messages="$errors->get('email')" class="mt-2" />
+                <div class="col-12">
+                    <x-input-label for="email" :value="__('auth.labels.email')" />
+                    <x-text-input
+                        id="email"
+                        type="email"
+                        name="email"
+                        :value="old('email', $partner->email)"
+                        placeholder="{{ __('auth.placeholders.email') }}"/>
+                    <x-input-error :messages="$errors->get('email')" class="mt-2" />
+                </div>
             </div>
             <div class="form-group row mt-2">
-                <div class="custom-control custom-switch">
-                    <input name="active" type="checkbox" class="custom-control-input" id="activeSwitch" {{ $partner->active ? "checked" : "" }}>
-                    <label class="custom-control-label" for="activeSwitch">{{ __('common.active') }}</label>
+                <div class="col-2">
+                    <div class="custom-control custom-switch">
+                        <input name="active" type="checkbox" class="custom-control-input" id="activeSwitch" {{ $partner->active ? "checked" : "" }}>
+                        <label class="custom-control-label" for="activeSwitch">{{ __('common.active') }}</label>
+                    </div>
                 </div>
             </div>
 
             <div class="form-group row mt-5">
-                <button type="submit" class="btn btn-primary btn-user">
-                    {{ __('common.save') }}
-                </button>
-                <a class="btn btn-link btn-user ml-3" href="{{ url()->previous() }}">{{ __('common.quit') }}</a>
+                <div class="col-12">
+                    <button type="submit" class="btn btn-primary btn-user">
+                        {{ __('common.save') }}
+                    </button>
+                    <a class="btn btn-link btn-user ml-5" href="{{ url()->previous() }}">
+                        {{ __('common.quit') }}
+                    </a>
+                </div>
             </div>
         </form>
     </div>
