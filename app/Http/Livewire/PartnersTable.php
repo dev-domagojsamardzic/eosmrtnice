@@ -4,9 +4,10 @@ namespace App\Http\Livewire;
 
 use App\Models\User;
 use Carbon\Carbon;
+use Filament\Tables\Actions\Action;
+use Filament\Tables\Actions\EditAction;
 use Filament\Forms\Concerns\InteractsWithForms;
 use Filament\Forms\Contracts\HasForms;
-use Filament\Tables\Actions\Action;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Concerns\InteractsWithTable;
 use Filament\Tables\Contracts\HasTable;
@@ -99,9 +100,6 @@ class PartnersTable extends Component implements HasTable, HasForms
     private function getActions(): array
     {
         return [
-            Action::make('show')
-                ->label(__('common.show'))
-                ->url(fn (User $partner): string => route(auth_user_type() . '.partners.show', $partner)),
             Action::make('edit')
                 ->label(__('common.edit'))
                 ->url(fn (User $partner): string => route(auth_user_type() . '.partners.edit', $partner)),
