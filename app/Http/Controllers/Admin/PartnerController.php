@@ -2,11 +2,10 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Enums\UserType;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Admin\PartnerRequest;
 use App\Models\User;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
 use Illuminate\View\View;
 
 class PartnerController extends Controller
@@ -38,9 +37,14 @@ class PartnerController extends Controller
         return $this->form($partner, 'edit');
     }
 
-    public function update(User $partner, Request $request): RedirectResponse
+    /**
+     * @param User $partner
+     * @param PartnerRequest $request
+     * @return RedirectResponse
+     */
+    public function update(User $partner, PartnerRequest $request): RedirectResponse
     {
-
+        return $this->apply($partner, $request);
     }
 
     /**
@@ -52,11 +56,29 @@ class PartnerController extends Controller
     private function form(User $partner, string $action): View
     {
         $route = match($action) {
-            'edit' => route(auth_user_type() . '.partners.edit', ['partner' => $partner]),
-            'create' => route(auth_user_type() . '.partners.create'),
+            'edit' => route(auth_user_type() . '.partners.update', ['partner' => $partner]),
+            'create' => route(auth_user_type() . '.partners.store'),
             default => ''
         };
 
         return view('admin.partners.form', ['partner' => $partner, 'action' => $action, 'route' => $route]);
+    }
+
+    /**
+     * Apply changes on resource
+     * @param User $partner
+     * @param PartnerRequest $request
+     * @return RedirectResponse
+     */
+    private function apply(User $partner, PartnerRequest $request): RedirectResponse
+    {
+        $partner->first_name = $request->input('first_name');
+        $partner->last_name = $request->input('last_name');
+        $partner->sex = $request->input('sex');
+        $partner->email = $request->input('email');
+        $partner->active = $request->boolean('active');
+        $partner->save();
+
+        return redirect()->route('admin.partners.index');
     }
 }
