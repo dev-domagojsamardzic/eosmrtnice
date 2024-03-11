@@ -8,6 +8,7 @@
     <div>
         <form method="POST" action="{{ $route }}">
             @csrf
+            {{ method_field('PUT') }}
             <div class="form-group row">
                 <div class="col-sm-6 mb-3 mb-sm-0">
                     <x-input-label for="first_name" :value="__('auth.labels.first_name')" />
