@@ -19,15 +19,6 @@ class PartnerController extends Controller
     }
 
     /**
-     * @param User $partner
-     * @return View
-     */
-    public function show(User $partner): View
-    {
-        return view('admin.partners.form', ['partner' => $partner]);
-    }
-
-    /**
      * Show partner edit form
      * @param User $partner
      * @return View
@@ -61,7 +52,14 @@ class PartnerController extends Controller
             default => ''
         };
 
-        return view('admin.partners.form', ['partner' => $partner, 'action' => $action, 'route' => $route]);
+        return view(
+            'admin.partners.form', [
+                'partner' => $partner,
+                'action_name' => $action,
+                'route' => $route,
+                'quit' => route(auth_user_type() . '.partners.index'),
+            ]
+        );
     }
 
     /**
