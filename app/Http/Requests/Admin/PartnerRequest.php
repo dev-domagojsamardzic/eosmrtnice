@@ -6,6 +6,13 @@ use App\Models\User;
 use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
 
+/**
+ * @property        string          first_name
+ * @property        string          last_name
+ * @property        string          email
+ * @property        string          sex
+ * @property        bool          active
+ */
 class PartnerRequest extends FormRequest
 {
     /**
