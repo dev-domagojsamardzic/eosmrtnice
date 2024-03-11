@@ -35,7 +35,6 @@ class PartnerRequest extends FormRequest
             'last_name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255'],
             'sex' => ['required', 'in:m,f'],
-            'active' => ['required'],
         ];
     }
 }
