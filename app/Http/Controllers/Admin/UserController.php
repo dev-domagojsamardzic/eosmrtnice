@@ -3,13 +3,18 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Admin\PartnerRequest;
-use App\Models\User;
+use App\Http\Requests\Admin\BasicUserRequest;
+use App\Models\BasicUser;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
 
 class UserController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->authorizeResource(BasicUser::class);
+    }
     /**
      * Display all users
      */
@@ -20,32 +25,32 @@ class UserController extends Controller
 
     /**
      * Show users edit form
-     * @param User $user
+     * @param BasicUser $user
      * @return View
      */
-    public function edit(User $user): View
+    public function edit(BasicUser $user): View
     {
         return $this->form($user, 'edit');
     }
 
     /**
      * Update resource
-     * @param User $user
-     * @param PartnerRequest $request
+     * @param BasicUser $user
+     * @param BasicUserRequest $request
      * @return RedirectResponse
      */
-    public function update(User $user, PartnerRequest $request): RedirectResponse
+    public function update(BasicUser $user, BasicUserRequest $request): RedirectResponse
     {
         return $this->apply($user, $request);
     }
 
     /**
      * Display resource's form
-     * @param User $user
+     * @param BasicUser $user
      * @param string $action
      * @return View
      */
-    private function form(User $user, string $action): View
+    private function form(BasicUser $user, string $action): View
     {
         $route = match($action) {
             'edit' => route(auth_user_type() . '.users.update', ['user' => $user]),
@@ -65,11 +70,11 @@ class UserController extends Controller
 
     /**
      * Apply changes on resource
-     * @param User $user
-     * @param PartnerRequest $request
+     * @param BasicUser $user
+     * @param BasicUserRequest $request
      * @return RedirectResponse
      */
-    private function apply(User $user, PartnerRequest $request): RedirectResponse
+    private function apply(BasicUser $user, BasicUserRequest $request): RedirectResponse
     {
         $user->first_name = $request->input('first_name');
         $user->last_name = $request->input('last_name');
