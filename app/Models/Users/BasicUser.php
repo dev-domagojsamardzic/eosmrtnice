@@ -27,7 +27,7 @@ use Carbon\Carbon;
  * @property        Company     $companies
  */
 
-class User extends BaseUserModel
+class BasicUser extends BaseUserModel
 {
     public function __construct(array $attributes = [])
     {
