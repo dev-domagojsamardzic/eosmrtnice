@@ -9,4 +9,6 @@ return [
     'inactive' => 'Neaktivni',
     'created' => 'Dodano',
     'sex' => 'Spol',
+    'first_name' => 'Ime',
+    'last_name' => 'Prezime',
 ];

@@ -16,6 +16,9 @@ return [
     'deactivate' => 'Deaktiviraj',
     'active' => 'Aktivan',
     'save' => 'Spremi',
+    'saved' => 'Spremljeno',
     'back' => 'Natrag',
     'quit' => 'Odustani',
+    'update' => 'Ažuriraj',
+    'updated' => 'Ažurirano',
 ];

@@ -201,6 +201,7 @@ return [
         'company_email' => 'Company email',
         'company_phone' => 'Company phone',
         'company_mobile_phone' => 'Company mobile phone',
+        'current_password' => 'Current password',
     ],
 
 ];

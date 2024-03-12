@@ -73,4 +73,7 @@ return [
     'become_a_partner' => 'Would you like to become our partner?',
     'partner_representative_user' => 'Company representative information',
     'company_data' => 'Company information',
+    'your_email_is_unverified' => 'Your email address is unverified.',
+    'click_here_to_resend_verification_email' => 'Click here to re-send the verification email.',
+    'new_verification_link_sent' => 'A new verification link has been sent to your email address.',
 ];

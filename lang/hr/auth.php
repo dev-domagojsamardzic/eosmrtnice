@@ -73,4 +73,7 @@ return [
     'become_a_partner' => 'Želite li postati naš partner?',
     'partner_representative_user' => 'Podatci o predstavniku firme',
     'company_data' => 'Podatci o firmi',
+    'your_email_is_unverified' => 'Vaše email addresa nije verificirana.',
+    'click_here_to_resend_verification_email' => 'Klikni ovdje kako bi Vam ponovo poslali verifikacijski email.',
+    'new_verification_link_sent' => 'Novi verifikacijski link je poslan na Vašu email adresu.',
 ];

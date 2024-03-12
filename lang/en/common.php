@@ -16,6 +16,9 @@ return [
     'deactivate' => 'Deactivate',
     'active' => 'Active',
     'save' => 'Save',
+    'saved' => 'Saved',
     'back' => 'Back',
     'quit' => 'Quit',
+    'update' => 'Update',
+    'updated' => 'Updated',
 ];

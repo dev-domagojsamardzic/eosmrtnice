@@ -1,12 +1,16 @@
 <section>
-    <header>
-        <h2 class="text-lg font-medium text-gray-900 dark:text-gray-100">
-            {{ __('Profile Information') }}
-        </h2>
+    <header class="row">
+        <div class="col-12">
+            <h2 class="text-lg font-medium text-gray-900 dark:text-gray-100">
+                {{ __('profile.basic_information') }}
+            </h2>
+        </div>
 
-        <p class="mt-1 text-sm text-gray-600 dark:text-gray-400">
-            {{ __("Update your account's profile information and email address.") }}
-        </p>
+        <div class="col-12">
+            <p class="mt-1 text-sm text-gray-600 dark:text-gray-400">
+                {{ __('profile.basic_information_subtitle') }}
+            </p>
+        </div>
     </header>
 
     <form id="send-verification" method="post" action="{{ route('verification.send') }}">
@@ -17,10 +21,25 @@
         @csrf
         @method('patch')
 
-        <div>
-            <x-input-label for="name" :value="__('Name')" />
-            <x-text-input id="name" name="name" type="text" class="mt-1 block w-full" :value="old('name', $user->name)" required autofocus autocomplete="name" />
-            <x-input-error class="mt-2" :messages="$errors->get('name')" />
+        <div class="form-group row">
+            <div class="col-6 col-sm-12 col-xs-12">
+                <x-input-label for="first_name" :value="__('admin.first_name')" />
+                <x-text-input id="first_name" name="first_name" type="text" class="mt-1 block w-full" :value="old('first_name', $user->first_name)" required autofocus autocomplete="first_name" />
+                <x-input-error class="mt-2" :messages="$errors->get('first_name')" />
+            </div>
+            <div class="col-6 col-sm-12 col-xs-12">
+                <x-input-label for="last_name" :value="__('admin.last_name')" />
+                <x-text-input id="last_name" name="last_name" type="text" class="mt-1 block w-full" :value="old('last_name', $user->last_name)" required autocomplete="last_name" />
+                <x-input-error class="mt-2" :messages="$errors->get('last_name')" />
+            </div>
+
+            <div class="col-sm-12 mt-4">
+                <x-input-label class="d-block" for="sex" :value="__('auth.labels.sex')" />
+                @php
+                    $options = \App\Enums\UserSex::options();
+                @endphp
+                <x-input-radio-inline name="sex" :options="$options" :selected="$user->sex"></x-input-radio-inline>
+            </div>
         </div>
 
         <div>
@@ -31,16 +50,16 @@
             @if ($user instanceof \Illuminate\Contracts\Auth\MustVerifyEmail && ! $user->hasVerifiedEmail())
                 <div>
                     <p class="text-sm mt-2 text-gray-800 dark:text-gray-200">
-                        {{ __('Your email address is unverified.') }}
+                        {{ __('auth.your_email_is_unverified') }}
 
                         <button form="send-verification" class="underline text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800">
-                            {{ __('Click here to re-send the verification email.') }}
+                            {{ __('auth.click_here_to_resend_verification_email') }}
                         </button>
                     </p>
 
                     @if (session('status') === 'verification-link-sent')
                         <p class="mt-2 font-medium text-sm text-green-600 dark:text-green-400">
-                            {{ __('A new verification link has been sent to your email address.') }}
+                            {{ __('auth.new_verification_link_sent') }}
                         </p>
                     @endif
                 </div>
@@ -48,17 +67,17 @@
         </div>
 
         <div class="flex items-center gap-4">
-            <x-primary-button>{{ __('Save') }}</x-primary-button>
+            <x-primary-button>{{ __('common.save') }}</x-primary-button>
 
-            @if (session('status') === 'profile-updated')
+            {{--@if (session('status') === 'profile-updated')
                 <p
                     x-data="{ show: true }"
                     x-show="show"
                     x-transition
                     x-init="setTimeout(() => show = false, 2000)"
                     class="text-sm text-gray-600 dark:text-gray-400"
-                >{{ __('Saved.') }}</p>
-            @endif
+                >{{ __('common.saved') }}</p>
+            @endif--}}
         </div>
     </form>
 </section>

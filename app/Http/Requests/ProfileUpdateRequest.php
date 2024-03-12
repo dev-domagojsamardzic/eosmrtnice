@@ -6,6 +6,12 @@ use App\Models\User;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
+/**
+ * @property        string          first_name
+ * @property        string          last_name
+ * @property        string          sex
+ * @property        string          email
+ */
 class ProfileUpdateRequest extends FormRequest
 {
     /**
@@ -16,7 +22,9 @@ class ProfileUpdateRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => ['required', 'string', 'max:255'],
+            'first_name' => ['required', 'string', 'max:255'],
+            'last_name' => ['required', 'string', 'max:255'],
+            'sex' => ['required', 'in:m,f'],
             'email' => ['required', 'string', 'lowercase', 'email', 'max:255', Rule::unique(User::class)->ignore($this->user()->id)],
         ];
     }
