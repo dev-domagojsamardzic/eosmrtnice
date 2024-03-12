@@ -101,7 +101,15 @@ class PartnersTable extends Component implements HasTable, HasForms
         return [
             Action::make('edit')
                 ->label(__('common.edit'))
+                ->icon('heroicon-s-pencil-square')
+                ->iconButton()
                 ->url(fn (User $partner): string => route(auth_user_type() . '.partners.edit', $partner)),
+            Action::make('delete')
+                ->label(__('common.delete'))
+                ->icon('heroicon-s-trash')
+                ->iconButton()
+                ->requiresConfirmation()
+                ->action(fn (User $record) => $record->delete())
         ];
     }
 }
