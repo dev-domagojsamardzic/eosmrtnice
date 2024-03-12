@@ -48,17 +48,7 @@ class Company extends Model
      *
      * @var array<int, string>
      */
-    protected $fillable = [
-        'title',
-        'user_id',
-        'address',
-        'zipcode',
-        'town',
-        'oib',
-        'email',
-        'phone',
-        'mobile_phone',
-    ];
+    protected $fillable = [];
 
     /**
      * Company's user (owner, representative)

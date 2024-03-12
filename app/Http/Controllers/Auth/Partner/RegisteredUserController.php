@@ -30,26 +30,26 @@ class RegisteredUserController extends Controller
      */
     public function store(PartnerRegisterRequest $request): RedirectResponse
     {
-        $user = User::create([
-            'first_name' => $request->first_name,
-            'last_name' => $request->last_name,
-            'sex' => $request->sex,
-            'type' => UserType::PARTNER,
-            'email' => $request->email,
-            'password' => Hash::make($request->password),
-        ]);
+        $user = new User();
+        $user->first_name = $request->first_name;
+        $user->last_name = $request->last_name;
+        $user->sex = $request->sex;
+        $user->type = UserType::PARTNER;
+        $user->email = $request->email;
+        $user->password = Hash::make($request->password);
+        $user->save();
 
-        $company = Company::create([
-            'title' => $request->company_title,
-            'user_id' => $user->id,
-            'address' => $request->company_address,
-            'town' => $request->company_town,
-            'zipcode' => $request->company_zipcode,
-            'oib' => $request->company_oib,
-            'email' => $request->company_email,
-            'phone' => $request->company_phone,
-            'mobile_phone' => $request->company_mobile_phone,
-        ]);
+        $company = new Company();
+        $company->title = $request->company_title;
+        $company->user()->associate($user);
+        $company->address = $request->company_address;
+        $company->town = $request->company_town;
+        $company->zipcode = $request->company_zipcode;
+        $company->oib = $request->company_oib;
+        $company->email = $request->company_email;
+        $company->phone = $request->company_phone;
+        $company->mobile_phone = $request->company_mobile_phone;
+        $company->save();
 
         event(new Registered($user));
 
