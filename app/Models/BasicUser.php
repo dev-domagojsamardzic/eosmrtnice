@@ -1,11 +1,13 @@
 <?php
 
-namespace App\Models\Users;
+namespace App\Models;
 
 use App\Enums\UserType;
-use App\Models\Company;
+use App\Models\Scopes\BasicUserScope;
+use App\Models\Scopes\PartnerScope;
 use App\Models\User as BaseUserModel;
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Attributes\ScopedBy;
 
 /**
  * @property        int         id
@@ -27,15 +29,30 @@ use Carbon\Carbon;
  * @property        Company     $companies
  */
 
-class Partner extends BaseUserModel
+#[ScopedBy([BasicUserScope::class])]
+class BasicUser extends BaseUserModel
 {
+    /**
+     * Table name
+     * @var string
+     */
+    protected $table = 'users';
+
     public function __construct(array $attributes = [])
     {
         parent::__construct($attributes);
         // Override type attribute
         $attributes = $this->getAttributes();
-        $attributes['type'] = UserType::PARTNER;
+        $attributes['type'] = UserType::USER;
         $this->attributes = $attributes;
+    }
+
+    /**
+     * The "booted" method of the model.
+     */
+    protected static function booted(): void
+    {
+        static::addGlobalScope(new BasicUserScope);
     }
 
 }
