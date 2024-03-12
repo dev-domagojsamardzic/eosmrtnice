@@ -10,6 +10,12 @@ use Illuminate\View\View;
 
 class PartnerController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->authorizeResource(Partner::class);
+    }
+
     /**
      * Display all partners
      */
