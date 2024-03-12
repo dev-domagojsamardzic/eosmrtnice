@@ -23,7 +23,7 @@
 
     <!-- Heading -->
     <div class="sidebar-heading">
-        {{ __('sidebar.accounts') }}
+        {{ __('sidebar.management') }}
     </div>
 
     <!-- Nav Item - Partners -->
@@ -38,6 +38,13 @@
         <a class="nav-link" href="{{ route(auth_user_type() . '.users.index') }}">
             <i class="fas fa-users"></i>
             <span>{{ __('sidebar.users') }}</span></a>
+    </li>
+
+    <!-- Nav Item - Companies -->
+    <li class="nav-item">
+        <a class="nav-link" href="{{ route(auth_user_type() . '.companies.index') }}">
+            <i class="fas fa-building"></i>
+            <span>{{ __('sidebar.companies') }}</span></a>
     </li>
 
     <!-- Divider -->

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\CompanyController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Admin\PartnerController;
@@ -16,4 +17,7 @@ Route::resource('partners',PartnerController::class)
     ->only(['index', 'edit', 'update']);
 
 Route::resource('users', UserController::class)
+    ->only(['index', 'edit', 'update']);
+
+Route::resource('companies', CompanyController::class)
     ->only(['index', 'edit', 'update']);
