@@ -8,12 +8,12 @@ use App\Models\BasicUser;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
 
-class UserController extends Controller
+class BasicUserController extends Controller
 {
 
     public function __construct()
     {
-        $this->authorizeResource(BasicUser::class);
+        //$this->authorizeResource(BasicUser::class);
     }
     /**
      * Display all users
@@ -35,13 +35,13 @@ class UserController extends Controller
 
     /**
      * Update resource
+     * @param BasicUserRequest $requestBasic
      * @param BasicUser $user
-     * @param BasicUserRequest $request
      * @return RedirectResponse
      */
-    public function update(BasicUser $user, BasicUserRequest $request): RedirectResponse
+    public function update(BasicUserRequest $requestBasic, BasicUser $user): RedirectResponse
     {
-        return $this->apply($user, $request);
+        return $this->apply($user, $requestBasic);
     }
 
     /**
