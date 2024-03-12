@@ -6,7 +6,7 @@ use App\Enums\UserType;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Partner\RegisterRequest as PartnerRegisterRequest;
 use App\Models\Company;
-use App\Models\User;
+use App\Models\Partner;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\RedirectResponse;
@@ -30,11 +30,10 @@ class RegisteredUserController extends Controller
      */
     public function store(PartnerRegisterRequest $request): RedirectResponse
     {
-        $user = new User();
+        $user = new Partner();
         $user->first_name = $request->first_name;
         $user->last_name = $request->last_name;
         $user->sex = $request->sex;
-        $user->type = UserType::PARTNER;
         $user->email = $request->email;
         $user->password = Hash::make($request->password);
         $user->save();

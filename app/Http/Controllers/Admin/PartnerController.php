@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\PartnerRequest;
-use App\Models\User;
+use App\Models\Partner;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
 
@@ -20,31 +20,31 @@ class PartnerController extends Controller
 
     /**
      * Show partner edit form
-     * @param User $partner
+     * @param Partner $partner
      * @return View
      */
-    public function edit(User $partner): View
+    public function edit(Partner $partner): View
     {
         return $this->form($partner, 'edit');
     }
 
     /**
-     * @param User $partner
+     * @param Partner $partner
      * @param PartnerRequest $request
      * @return RedirectResponse
      */
-    public function update(User $partner, PartnerRequest $request): RedirectResponse
+    public function update(Partner $partner, PartnerRequest $request): RedirectResponse
     {
         return $this->apply($partner, $request);
     }
 
     /**
      * Display resource's form
-     * @param User $partner
+     * @param Partner $partner
      * @param string $action
      * @return View
      */
-    private function form(User $partner, string $action): View
+    private function form(Partner $partner, string $action): View
     {
         $route = match($action) {
             'edit' => route(auth_user_type() . '.partners.update', ['partner' => $partner]),
@@ -64,11 +64,11 @@ class PartnerController extends Controller
 
     /**
      * Apply changes on resource
-     * @param User $partner
+     * @param Partner $partner
      * @param PartnerRequest $request
      * @return RedirectResponse
      */
-    private function apply(User $partner, PartnerRequest $request): RedirectResponse
+    private function apply(Partner $partner, PartnerRequest $request): RedirectResponse
     {
         $partner->first_name = $request->input('first_name');
         $partner->last_name = $request->input('last_name');

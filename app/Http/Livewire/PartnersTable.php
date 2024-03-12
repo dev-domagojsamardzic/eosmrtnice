@@ -2,7 +2,7 @@
 
 namespace App\Http\Livewire;
 
-use App\Models\User;
+use App\Models\Partner;
 use Carbon\Carbon;
 use Filament\Tables\Actions\Action;
 use Filament\Forms\Concerns\InteractsWithForms;
@@ -30,7 +30,7 @@ class PartnersTable extends Component implements HasTable, HasForms
             ->emptyStateHeading(__('common.empty'))
             ->striped()
             ->query(
-                User::query()->partners()
+                Partner::query()
             )
             ->actions($this->getActions())
             ->columns($this->getColumns())
@@ -103,13 +103,13 @@ class PartnersTable extends Component implements HasTable, HasForms
                 ->label(__('common.edit'))
                 ->icon('heroicon-s-pencil-square')
                 ->iconButton()
-                ->url(fn (User $partner): string => route(auth_user_type() . '.partners.edit', $partner)),
+                ->url(fn (Partner $partner): string => route(auth_user_type() . '.partners.edit', $partner)),
             Action::make('delete')
                 ->label(__('common.delete'))
                 ->icon('heroicon-s-trash')
                 ->iconButton()
                 ->requiresConfirmation()
-                ->action(fn (User $record) => $record->delete())
+                ->action(fn (Partner $record) => $record->delete())
         ];
     }
 }
