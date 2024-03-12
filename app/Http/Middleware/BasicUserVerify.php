@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpFoundation\Response;
 
-class Partner
+class BasicUserVerify
 {
     /**
      * Handle an incoming request.
@@ -17,7 +17,7 @@ class Partner
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if (Auth::check() && Auth::user()->type === UserType::PARTNER) {
+        if (Auth::check() && Auth::user()->type === UserType::USER) {
             return $next($request);
         }
 
