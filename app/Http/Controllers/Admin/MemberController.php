@@ -53,17 +53,17 @@ class MemberController extends Controller
     private function form(Member $member, string $action): View
     {
         $route = match($action) {
-            'edit' => route(auth_user_type() . '.users.update', ['user' => $member]),
-            'create' => route(auth_user_type() . '.users.store'),
+            'edit' => route(auth_user_type() . '.members.update', ['member' => $member]),
+            'create' => route(auth_user_type() . '.members.store'),
             default => ''
         };
 
         return view(
-            'admin.users.form', [
+            'admin.members.form', [
                 'user' => $member,
                 'action_name' => $action,
                 'action' => $route,
-                'quit' => route(auth_user_type() . '.users.index'),
+                'quit' => route(auth_user_type() . '.members.index'),
             ]
         );
     }
@@ -83,6 +83,6 @@ class MemberController extends Controller
         $member->active = $request->boolean('active');
         $member->save();
 
-        return redirect()->route('admin.users.index');
+        return redirect()->route('admin.members.index');
     }
 }
