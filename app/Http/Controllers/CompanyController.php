@@ -33,7 +33,7 @@ class CompanyController extends Controller
      * @param CompanyRequest $request
      * @return RedirectResponse
      */
-    public function update(Company $company, CompanyRequest $request)
+    public function update(Company $company, CompanyRequest $request): RedirectResponse
     {
         return $this->apply($company, $request);
     }
