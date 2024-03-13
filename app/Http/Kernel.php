@@ -67,6 +67,6 @@ class Kernel extends HttpKernel
 
         'admin' => \App\Http\Middleware\AdministratorVerify::class,
         'partner' => \App\Http\Middleware\PartnerVerify::class,
-        'user' => \App\Http\Middleware\BasicUserVerify::class,
+        'user' => \App\Http\Middleware\MemberVerify::class,
     ];
 }

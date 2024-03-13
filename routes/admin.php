@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\Admin\BasicUserController;
+use App\Http\Controllers\Admin\MemberController;
 use App\Http\Controllers\CompanyController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProfileController;
@@ -16,7 +16,7 @@ Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.up
 Route::resource('partners',PartnerController::class)
     ->only(['index', 'edit', 'update']);
 
-Route::resource('users', BasicUserController::class)
+Route::resource('members', MemberController::class)
     ->only(['index', 'edit', 'update']);
 
 Route::resource('companies', CompanyController::class)

@@ -4,7 +4,7 @@ namespace App\Models;
 
 use App\Enums\UserType;
 use App\Models\Scopes\PartnerScope;
-use App\Models\User as BaseUserModel;
+use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Attributes\ScopedBy;
 
@@ -29,7 +29,7 @@ use Illuminate\Database\Eloquent\Attributes\ScopedBy;
  */
 
 #[ScopedBy([PartnerScope::class])]
-class Partner extends BaseUserModel
+class Partner extends User
 {
     /**
      * Table name

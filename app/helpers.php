@@ -36,13 +36,13 @@ if (!function_exists('is_partner')) {
     }
 }
 
-if (!function_exists('is_user')) {
+if (!function_exists('is_member')) {
     /**
      * Check if currently authenticated user is admin
      * @return bool
      */
-    function is_user(): bool
+    function is_member(): bool
     {
-        return auth()?->user()?->type === UserType::USER;
+        return auth()?->user()?->type === UserType::MEMBER;
     }
 }

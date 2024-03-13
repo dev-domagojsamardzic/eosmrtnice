@@ -2,10 +2,10 @@
 
 namespace App\Policies;
 
-use App\Models\BasicUser;
+use App\Models\Member;
 use App\Models\User;
 
-class BasicUserPolicy
+class MemberPolicy
 {
     /**
      * Determine whether the user can view any models.
@@ -18,9 +18,9 @@ class BasicUserPolicy
     /**
      * Determine whether the user can view the model.
      */
-    public function view(User $user, BasicUser $basicUser): bool
+    public function view(User $user, Member $member): bool
     {
-        return is_admin() || $user->id === $basicUser->id;
+        return is_admin() || $user->id === $member->id;
     }
 
     /**
@@ -34,7 +34,7 @@ class BasicUserPolicy
     /**
      * Determine whether the user can update the model.
      */
-    public function update(User $user, BasicUser $basicUser): bool
+    public function update(User $user, Member $member): bool
     {
         return is_admin();
     }
@@ -42,7 +42,7 @@ class BasicUserPolicy
     /**
      * Determine whether the user can delete the model.
      */
-    public function delete(User $user, BasicUser $basicUser): bool
+    public function delete(User $user, Member $member): bool
     {
         return is_admin();
     }
@@ -50,7 +50,7 @@ class BasicUserPolicy
     /**
      * Determine whether the user can restore the model.
      */
-    public function restore(User $user, BasicUser $basicUser): bool
+    public function restore(User $user, Member $member): bool
     {
         return is_admin();
     }
@@ -58,7 +58,7 @@ class BasicUserPolicy
     /**
      * Determine whether the user can permanently delete the model.
      */
-    public function forceDelete(User $user, BasicUser $basicUser): bool
+    public function forceDelete(User $user, Member $member): bool
     {
         return is_admin();
     }

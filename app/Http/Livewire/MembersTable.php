@@ -2,7 +2,7 @@
 
 namespace App\Http\Livewire;
 
-use App\Models\BasicUser;
+use App\Models\Member;
 use Carbon\Carbon;
 use Filament\Tables\Actions\Action;
 use Filament\Forms\Concerns\InteractsWithForms;
@@ -16,7 +16,7 @@ use Filament\Tables\Table;
 use Illuminate\Contracts\View\View;
 use Exception;
 
-class UsersTable extends Component implements HasTable, HasForms
+class MembersTable extends Component implements HasTable, HasForms
 {
     use InteractsWithTable;
     use InteractsWithForms;
@@ -30,7 +30,7 @@ class UsersTable extends Component implements HasTable, HasForms
             ->emptyStateHeading(__('common.empty'))
             ->striped()
             ->query(
-                BasicUser::query()
+                Member::query()
             )
             ->actions($this->getActions())
             ->columns($this->getColumns())
@@ -38,7 +38,7 @@ class UsersTable extends Component implements HasTable, HasForms
     }
     public function render(): View
     {
-        return view('livewire.users-table');
+        return view('livewire.members-table');
     }
 
     /**
@@ -103,13 +103,13 @@ class UsersTable extends Component implements HasTable, HasForms
                 ->label(__('common.edit'))
                 ->icon('heroicon-s-pencil-square')
                 ->iconButton()
-                ->url(fn (BasicUser $partner): string => route(auth_user_type() . '.users.edit', $partner)),
+                ->url(fn (Member $partner): string => route(auth_user_type() . '.members.edit', $partner)),
             Action::make('delete')
                 ->label(__('common.delete'))
                 ->icon('heroicon-s-trash')
                 ->iconButton()
                 ->requiresConfirmation()
-                ->action(fn (BasicUser $record) => $record->delete())
+                ->action(fn (Member $record) => $record->delete())
         ];
     }
 }

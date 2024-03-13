@@ -45,7 +45,7 @@ class UserSeeder extends Seeder
             'first_name' => 'Korisnik',
             'last_name' => 'Korisniković',
             'email' => 'dokisb1001@gmail.com',
-            'type' => UserType::USER,
+            'type' => UserType::MEMBER,
             'sex' => 'F',
             'email_verified_at' => now(),
             'password' => Hash::make('user'),

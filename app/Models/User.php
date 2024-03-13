@@ -45,7 +45,7 @@ class User extends Authenticatable implements MustVerifyEmail
      * @var array
      */
     protected $attributes = [
-        'type' => UserType::USER,
+        'type' => UserType::MEMBER,
         'active' => 1,
     ];
 
@@ -113,11 +113,11 @@ class User extends Authenticatable implements MustVerifyEmail
     }
 
     /**
-     * Scope a query to only include users (type=USER).
+     * Scope a query to only include members (type=MEMBER).
      */
-    public function scopeUsers(Builder $query): void
+    public function scopeMembers(Builder $query): void
     {
-        $query->where('type', UserType::USER);
+        $query->where('type', UserType::MEMBER);
     }
 
     /**

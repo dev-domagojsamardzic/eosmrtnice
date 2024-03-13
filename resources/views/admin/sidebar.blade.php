@@ -35,7 +35,7 @@
 
     <!-- Nav Item - Users -->
     <li class="nav-item">
-        <a class="nav-link" href="{{ route(auth_user_type() . '.users.index') }}">
+        <a class="nav-link" href="{{ route(auth_user_type() . '.members.index') }}">
             <i class="fas fa-users"></i>
             <span>{{ __('sidebar.users') }}</span></a>
     </li>

@@ -38,8 +38,8 @@ class AuthenticatedSessionController extends Controller
             return redirect()->intended(RouteServiceProvider::PARTNER);
         }
 
-        if(auth()->user()->type === UserType::USER) {
-            return redirect()->intended(RouteServiceProvider::USER);
+        if(auth()->user()->type === UserType::MEMBER) {
+            return redirect()->intended(RouteServiceProvider::MEMBER);
         }
 
         return redirect()->route('login');

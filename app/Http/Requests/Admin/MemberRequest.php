@@ -14,7 +14,7 @@ use Illuminate\Validation\Rule;
  * @property        string          sex
  * @property        bool          active
  */
-class BasicUserRequest extends FormRequest
+class MemberRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.

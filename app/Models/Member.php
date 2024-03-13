@@ -3,8 +3,8 @@
 namespace App\Models;
 
 use App\Enums\UserType;
-use App\Models\Scopes\BasicUserScope;
-use App\Models\User as BaseUserModel;
+use App\Models\Scopes\MemberScope;
+use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Attributes\ScopedBy;
 
@@ -28,8 +28,8 @@ use Illuminate\Database\Eloquent\Attributes\ScopedBy;
  * @property        Company     $companies
  */
 
-#[ScopedBy([BasicUserScope::class])]
-class BasicUser extends BaseUserModel
+#[ScopedBy([MemberScope::class])]
+class Member extends User
 {
     /**
      * Table name
@@ -42,7 +42,7 @@ class BasicUser extends BaseUserModel
         parent::__construct($attributes);
         // Override type attribute
         $attributes = $this->getAttributes();
-        $attributes['type'] = UserType::USER;
+        $attributes['type'] = UserType::MEMBER;
         $this->attributes = $attributes;
     }
 
@@ -51,7 +51,7 @@ class BasicUser extends BaseUserModel
      */
     protected static function booted(): void
     {
-        static::addGlobalScope(new BasicUserScope);
+        static::addGlobalScope(new MemberScope);
     }
 
 }

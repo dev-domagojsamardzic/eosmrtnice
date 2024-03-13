@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\RegisterRequest;
-use App\Models\BasicUser;
+use App\Models\Member;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\RedirectResponse;
@@ -28,7 +28,7 @@ class RegisteredUserController extends Controller
      */
     public function store(RegisterRequest $request): RedirectResponse
     {
-        $user = new BasicUser();
+        $user = new Member();
         $user->first_name = $request->first_name;
         $user->last_name = $request->last_name;
         $user->sex = $request->sex;
@@ -40,6 +40,6 @@ class RegisteredUserController extends Controller
 
         Auth::login($user);
 
-        return redirect(RouteServiceProvider::USER);
+        return redirect(RouteServiceProvider::MEMBER);
     }
 }
