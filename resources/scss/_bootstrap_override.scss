@@ -2,6 +2,11 @@
 .custom-select:focus,
 .custom-file .custom-file-input:focus ~ .custom-file-label {
     box-shadow: $box-shadow;
+    color: $black;
+}
+
+.form-control {
+    color: $gray-900;
 }
 
 .btn-primary {
