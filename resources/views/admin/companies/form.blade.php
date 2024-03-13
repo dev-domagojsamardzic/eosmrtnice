@@ -23,7 +23,7 @@
             </div>
             <div class="form-group row">
                 <div class="col-lg-6 col-md-8 my-2">
-                    <x-input-label for="address" :value="__('admin.company_address')" />
+                    <x-input-label for="address" :value="__('admin.address')" />
                     <x-text-input
                         id="address"
                         type="text"
@@ -33,7 +33,7 @@
                     <x-input-error :messages="$errors->get('address')" class="mt-2" />
                 </div>
                 <div class="col-lg-4 col-md-8 my-2">
-                    <x-input-label for="town" :value="__('admin.company_town')" />
+                    <x-input-label for="town" :value="__('admin.town')" />
                     <x-text-input
                         id="town"
                         type="text"
@@ -43,7 +43,7 @@
                     <x-input-error :messages="$errors->get('town')" class="mt-2" />
                 </div>
                 <div class="col-lg-2 col-md-4 my-2">
-                    <x-input-label for="zipcode" :value="__('admin.company_zipcode')" />
+                    <x-input-label for="zipcode" :value="__('admin.zipcode')" />
                     <x-text-input
                         id="zipcode"
                         type="text"
@@ -55,7 +55,7 @@
             </div>
             <div class="form-group row">
                 <div class="col-md-6 col-sm-12 my-2">
-                    <x-input-label for="oib" :value="__('admin.company_oib')" />
+                    <x-input-label for="oib" :value="__('admin.oib')" />
                     <x-text-input
                         id="oib"
                         type="text"
@@ -65,7 +65,7 @@
                     <x-input-error :messages="$errors->get('oib')" class="mt-2" />
                 </div>
                 <div class="col-md-6 col-sm-12 my-2">
-                    <x-input-label for="email" :value="__('admin.company_email')" />
+                    <x-input-label for="email" :value="__('admin.email')" />
                     <x-text-input
                         id="email"
                         type="email"
@@ -77,7 +77,7 @@
             </div>
             <div class="form-group row">
                 <div class="col-md-6 col-sm-12 my-2">
-                    <x-input-label for="phone" :value="__('admin.company_phone')" />
+                    <x-input-label for="phone" :value="__('admin.phone')" />
                     <x-text-input
                         id="phone"
                         type="text"
@@ -87,13 +87,13 @@
                     <x-input-error :messages="$errors->get('phone')" class="mt-2" />
                 </div>
                 <div class="col-md-6 col-sm-12 my-2">
-                    <x-input-label for="mobile_phone" :value="__('admin.company_mobile_phone')" />
+                    <x-input-label for="mobile_phone" :value="__('admin.mobile_phone')" />
                     <x-text-input
                         id="mobile_phone"
                         type="text"
                         name="mobile_phone"
                         :value="old('mobile_phone', $company->mobile_phone)"
-                        placeholder="{{ __('admin.placeholders.mobile_phone') }}"/>
+                        placeholder="{{ __('admin.placeholders.company_mobile_phone') }}"/>
                     <x-input-error :messages="$errors->get('mobile_phone')" class="mt-2" />
                 </div>
             </div>
@@ -110,7 +110,7 @@
                     <button type="submit" class="btn btn-primary btn-user">
                         {{ __('common.save') }}
                     </button>
-                    <a class="btn btn-link btn-user ml-5" href="{{ url()->previous() }}">
+                    <a class="btn btn-link btn-user ml-5" href="{{ $quit }}">
                         {{ __('common.quit') }}
                     </a>
                 </div>
