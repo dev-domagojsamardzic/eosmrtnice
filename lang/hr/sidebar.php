@@ -5,5 +5,5 @@ return [
     'management' => 'Upravljanja',
     'users' => 'Korisnici',
     'partners' => 'Partneri',
-    'companies' => 'Firme',
+    'companies' => 'Tvrtke',
 ];
