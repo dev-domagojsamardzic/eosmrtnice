@@ -5,6 +5,17 @@ namespace App\Http\Requests\Admin;
 use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
 
+/**
+ * @property        string          title
+ * @property        string          address
+ * @property        string          town
+ * @property        string          zipcode
+ * @property        string          oib
+ * @property        string          email
+ * @property        string          phone
+ * @property        string          mobile_phone
+ * @property        bool            active
+ */
 class CompanyRequest extends FormRequest
 {
     /**
