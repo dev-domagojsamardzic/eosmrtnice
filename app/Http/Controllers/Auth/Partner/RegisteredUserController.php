@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\Auth\Partner;
 
-use App\Enums\UserType;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Partner\RegisterRequest as PartnerRegisterRequest;
 use App\Models\Company;
