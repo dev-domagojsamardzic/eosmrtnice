@@ -202,6 +202,7 @@ return [
         'company_phone' => 'telefon',
         'company_mobile_phone' => 'mobilni telefon',
         'current_password' => 'trenutna lozinka',
+        'title' => 'naziv',
     ],
 
 ];
