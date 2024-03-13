@@ -35,6 +35,7 @@ class PartnerController extends Controller
     }
 
     /**
+     * Update resource
      * @param Partner $partner
      * @param PartnerRequest $request
      * @return RedirectResponse

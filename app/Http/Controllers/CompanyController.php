@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Admin\CompanyRequest;
 use App\Models\Company;
-use Illuminate\Http\Request;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
 
 class CompanyController extends Controller
@@ -24,6 +25,17 @@ class CompanyController extends Controller
     public function edit(Company $company): View
     {
         return $this->form($company, 'edit');
+    }
+
+    /**
+     * Update resource
+     * @param Company $company
+     * @param CompanyRequest $request
+     * @return RedirectResponse
+     */
+    public function update(Company $company, CompanyRequest $request)
+    {
+        return $this->apply($company, $request);
     }
 
     /**
@@ -48,5 +60,27 @@ class CompanyController extends Controller
                 'quit' => route(auth_user_type() . '.companies.index'),
             ]
         );
+    }
+
+    /**
+     * Apply changes on resource
+     * @param Company $company
+     * @param CompanyRequest $request
+     * @return RedirectResponse
+     */
+    private function apply(Company $company, CompanyRequest $request): RedirectResponse
+    {
+        $company->title = $request->input('title');
+        $company->address = $request->input('address');
+        $company->town = $request->input('town');
+        $company->zipcode = $request->input('zipcode');
+        $company->oib = $request->input('oib');
+        $company->email = $request->input('email');
+        $company->phone = $request->input('phone');
+        $company->mobile_phone = $request->input('mobile_phone');
+        $company->active = $request->boolean('active');
+        $company->save();
+
+        return redirect()->route('admin.companies.index');
     }
 }
