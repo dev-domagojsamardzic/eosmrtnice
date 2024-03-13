@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-weight-bolder mb-4">
-            {{ __('admin.users') }} - {{ __("common.{$action_name}") }}
+            {{ __('admin.companies') }} - {{ __("common.{$action_name}") }}
         </h2>
     </x-slot>
 
@@ -10,55 +10,101 @@
             @csrf
             {{ method_field('PUT') }}
             <div class="form-group row">
-                <div class="col-sm-6 mb-3 mb-sm-0">
-                    <x-input-label for="first_name" :value="__('auth.labels.first_name')" />
+                <div class="col-lg-6 col-sm-12 my-2">
+                    <x-input-label for="title" :value="__('admin.company_title')" />
                     <x-text-input
-                        id="first_name"
+                        id="title"
                         type="text"
-                        name="first_name"
-                        :value="old('first_name', $user->first_name)"
-                        placeholder="{{ __('auth.placeholders.first_name') }}"/>
-                </div>
-                <div class="col-sm-6 mb-3 mb-sm-0">
-                    <x-input-label for="last_name" :value="__('auth.labels.last_name')" />
-                    <x-text-input
-                        id="last_name"
-                        type="text"
-                        name="last_name"
-                        :value="old('last_name', $user->last_name)"
-                        placeholder="{{ __('auth.placeholders.last_name') }}"/>
+                        name="title"
+                        :value="old('title', $company->title)"
+                        placeholder="{{ __('admin.placeholders.company_title') }}"/>
+                    <x-input-error :messages="$errors->get('title')" class="mt-2" />
                 </div>
             </div>
             <div class="form-group row">
-                <div class="col-sm-12 mb-3 mb-sm-0">
-                    <x-input-label class="d-block" for="sex" :value="__('auth.labels.sex')" />
-                    @php
-                        $options = \App\Enums\UserSex::options();
-                    @endphp
-                    <x-input-radio-inline name="sex" :options="$options" :selected="$user->sex"></x-input-radio-inline>
+                <div class="col-lg-6 col-md-8 my-2">
+                    <x-input-label for="address" :value="__('admin.company_address')" />
+                    <x-text-input
+                        id="address"
+                        type="text"
+                        name="address"
+                        :value="old('address', $company->address)"
+                        placeholder="{{ __('admin.placeholders.company_address') }}"/>
+                    <x-input-error :messages="$errors->get('address')" class="mt-2" />
+                </div>
+                <div class="col-lg-4 col-md-8 my-2">
+                    <x-input-label for="town" :value="__('admin.company_town')" />
+                    <x-text-input
+                        id="town"
+                        type="text"
+                        name="town"
+                        :value="old('town', $company->town)"
+                        placeholder="{{ __('admin.placeholders.company_town') }}"/>
+                    <x-input-error :messages="$errors->get('town')" class="mt-2" />
+                </div>
+                <div class="col-lg-2 col-md-4 my-2">
+                    <x-input-label for="zipcode" :value="__('admin.company_zipcode')" />
+                    <x-text-input
+                        id="zipcode"
+                        type="text"
+                        name="zipcode"
+                        :value="old('zipcode', $company->zipcode)"
+                        placeholder="{{ __('admin.placeholders.company_zipcode') }}"/>
+                    <x-input-error :messages="$errors->get('zipcode')" class="mt-2" />
                 </div>
             </div>
             <div class="form-group row">
-                <div class="col-12">
-                    <x-input-label for="email" :value="__('auth.labels.email')" />
+                <div class="col-md-6 col-sm-12 my-2">
+                    <x-input-label for="oib" :value="__('admin.company_oib')" />
+                    <x-text-input
+                        id="oib"
+                        type="text"
+                        name="oib"
+                        :value="old('oib', $company->oib)"
+                        placeholder="{{ __('admin.placeholders.company_oib') }}"/>
+                    <x-input-error :messages="$errors->get('oib')" class="mt-2" />
+                </div>
+                <div class="col-md-6 col-sm-12 my-2">
+                    <x-input-label for="email" :value="__('admin.company_email')" />
                     <x-text-input
                         id="email"
                         type="email"
                         name="email"
-                        :value="old('email', $user->email)"
-                        placeholder="{{ __('auth.placeholders.email') }}"/>
-                    <x-input-error :messages="$errors->get('email')" class="mt-2" />
+                        :value="old('email', $company->email)"
+                        placeholder="{{ __('admin.placeholders.company_email') }}"/>
+                </div>
+                <x-input-error :messages="$errors->get('email')" class="mt-2" />
+            </div>
+            <div class="form-group row">
+                <div class="col-md-6 col-sm-12 my-2">
+                    <x-input-label for="phone" :value="__('admin.company_phone')" />
+                    <x-text-input
+                        id="phone"
+                        type="text"
+                        name="phone"
+                        :value="old('phone', $company->phone)"
+                        placeholder="{{ __('admin.placeholders.company_phone') }}"/>
+                    <x-input-error :messages="$errors->get('phone')" class="mt-2" />
+                </div>
+                <div class="col-md-6 col-sm-12 my-2">
+                    <x-input-label for="mobile_phone" :value="__('admin.company_mobile_phone')" />
+                    <x-text-input
+                        id="mobile_phone"
+                        type="text"
+                        name="mobile_phone"
+                        :value="old('mobile_phone', $company->mobile_phone)"
+                        placeholder="{{ __('admin.placeholders.mobile_phone') }}"/>
+                    <x-input-error :messages="$errors->get('mobile_phone')" class="mt-2" />
                 </div>
             </div>
-            <div class="form-group row mt-2">
-                <div class="col-2">
+            <div class="form-group row">
+                <div class="col-2 my-2">
                     <div class="custom-control custom-switch">
-                        <input name="active" type="checkbox" class="custom-control-input" id="activeSwitch" {{ $user->active ? "checked" : "" }}>
-                        <label class="custom-control-label" for="activeSwitch">{{ __('common.active') }}</label>
+                        <input name="active" type="checkbox" class="custom-control-input" id="activeSwitch" {{ $company->active ? "checked" : "" }}>
+                        <label class="custom-control-label" for="activeSwitch">{{ __('admin.is_active') }}</label>
                     </div>
                 </div>
             </div>
-
             <div class="form-group row mt-5">
                 <div class="col-12">
                     <button type="submit" class="btn btn-primary btn-user">

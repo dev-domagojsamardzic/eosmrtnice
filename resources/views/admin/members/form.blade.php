@@ -18,6 +18,7 @@
                         name="first_name"
                         :value="old('first_name', $user->first_name)"
                         placeholder="{{ __('auth.placeholders.first_name') }}"/>
+                    <x-input-error :messages="$errors->get('first_name')" class="mt-2" />
                 </div>
                 <div class="col-sm-6 mb-3 mb-sm-0">
                     <x-input-label for="last_name" :value="__('auth.labels.last_name')" />
@@ -27,6 +28,7 @@
                         name="last_name"
                         :value="old('last_name', $user->last_name)"
                         placeholder="{{ __('auth.placeholders.last_name') }}"/>
+                    <x-input-error :messages="$errors->get('last_name')" class="mt-2" />
                 </div>
             </div>
             <div class="form-group row">
@@ -64,7 +66,7 @@
                     <button type="submit" class="btn btn-primary btn-user">
                         {{ __('common.save') }}
                     </button>
-                    <a class="btn btn-link btn-user ml-5" href="{{ url()->previous() }}">
+                    <a class="btn btn-link btn-user ml-5" href="{{ $quit }}">
                         {{ __('common.quit') }}
                     </a>
                 </div>
