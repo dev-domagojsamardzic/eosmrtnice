@@ -42,7 +42,7 @@ class UserSeeder extends Seeder
         ]);
         // User
         DB::table('users')->insert([
-            'first_name' => 'Korisnik',
+            'first_name' => 'Korisnica',
             'last_name' => 'Korisniković',
             'email' => 'dokisb1001@gmail.com',
             'type' => UserType::MEMBER,

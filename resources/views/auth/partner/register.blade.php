@@ -119,7 +119,7 @@
                                 </div>
 
                                 <div class="form-group row">
-                                    <div class="col-sm-9 mb-3 mb-sm-0">
+                                    <div class="col-sm-8 mb-3 mb-sm-0">
                                         <x-input-label for="company_town" :value="__('auth.labels.company_town')" />
                                         <x-text-input id="company_town"
                                                       type="text"
@@ -130,7 +130,7 @@
                                                       autocomplete="company_town" />
                                         <x-input-error :messages="$errors->get('company_town')" class="mt-2" />
                                     </div>
-                                    <div class="col-sm-3">
+                                    <div class="col-sm-4">
                                         <x-input-label for="company_zipcode" :value="__('auth.labels.company_zipcode')" />
                                         <x-text-input id="company_zipcode"
                                                       type="text"
@@ -140,6 +140,17 @@
                                                       required
                                                       autocomplete="company_zipcode" />
                                         <x-input-error :messages="$errors->get('company_zipcode')" class="mt-2" />
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <div class="col-sm-12">
+                                        <x-input-label for="county_id" :value="__('auth.labels.company_county')" />
+                                        <select class="form-control" id="county_id" name="county_id">
+                                            @foreach($counties as $id => $county)
+                                                <option value="{{ $id }}">{{ $county }}</option>
+                                            @endforeach
+                                        </select>
                                     </div>
                                 </div>
 

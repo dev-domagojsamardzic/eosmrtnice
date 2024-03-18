@@ -31,6 +31,7 @@ return [
         'company_address' => 'Adresa (obavezno)',
         'company_town' => 'Grad (obavezno)',
         'company_zipcode' => 'Poštanski broj (obavezno)',
+        'company_county' => 'Županija (obavezno)',
         'company_oib' => 'OIB (obavezno)',
         'company_email' => 'Email',
         'company_phone' => 'Fiksni telefon',

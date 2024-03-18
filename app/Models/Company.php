@@ -24,9 +24,9 @@ use Illuminate\Support\Carbon;
  * @property        Carbon      updated_at
  * @property        Carbon      deleted_at
  * -------------------------------------------
- * @property-read   string      full_name
- * -------------------------------------------
- * @property        Company     $companies
+ * @property        Partner     user
+ * @property        County      county
+ *
  */
 
 class Company extends Model
@@ -50,6 +50,7 @@ class Company extends Model
      */
     protected $casts = [
         'created_at' => 'datetime',
+        'updated_at' => 'datetime',
     ];
 
     /**
@@ -66,5 +67,14 @@ class Company extends Model
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
+    }
+
+    /**
+     * Company's county
+     * @return BelongsTo
+     */
+    public function county(): BelongsTo
+    {
+        return $this->belongsTo(County::class);
     }
 }

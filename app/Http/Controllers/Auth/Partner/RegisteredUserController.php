@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth\Partner;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Partner\RegisterRequest as PartnerRegisterRequest;
 use App\Models\Company;
+use App\Models\County;
 use App\Models\Partner;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Auth\Events\Registered;
@@ -20,7 +21,12 @@ class RegisteredUserController extends Controller
      */
     public function create(): View
     {
-        return view('auth/partner.register');
+        $counties = County::query()
+            ->orderBy('title', 'asc')
+            ->pluck('title', 'id')
+            ->toArray();
+
+        return view('auth/partner.register', ['counties' => $counties]);
     }
 
     /**
@@ -43,6 +49,7 @@ class RegisteredUserController extends Controller
         $company->address = $request->company_address;
         $company->town = $request->company_town;
         $company->zipcode = $request->company_zipcode;
+        $company->county()->associate($request->county_id);
         $company->oib = $request->company_oib;
         $company->email = $request->company_email;
         $company->phone = $request->company_phone;

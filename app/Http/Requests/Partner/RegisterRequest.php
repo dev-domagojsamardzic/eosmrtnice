@@ -19,6 +19,7 @@ use Illuminate\Validation\Rules\Password;
  * @property    string      company_address
  * @property    string      company_town
  * @property    string      company_zipcode
+ * @property    int         county_id
  * @property    string      company_oib
  * @property    string      company_email
  * @property    string      company_phone
@@ -53,6 +54,7 @@ class RegisterRequest extends FormRequest
             'company_address' => ['nullable','string', 'max:512'],
             'company_town' => ['nullable','string', 'max:255'],
             'company_zipcode' => ['nullable','numeric'],
+            'county_code' => ['required','exists:counties,id'],
             'company_oib' => ['required', 'numeric', 'digits:11'],
             'company_email' => ['nullable','string', 'email', 'max:255'],
             'company_phone' => ['nullable','string', 'max:64'],
