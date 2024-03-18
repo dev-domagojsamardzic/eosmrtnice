@@ -166,7 +166,7 @@
                      aria-labelledby="userDropdown">
                     <a class="dropdown-item" href="{{ route(auth_user_type() . '.profile.edit') }}">
                         <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
-                        Profile
+                        {{ __('common.profile') }}
                     </a>
                     {{--<a class="dropdown-item" href="#">
                         <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
@@ -181,7 +181,7 @@
                         @csrf
                         <button type="submit" class="dropdown-item" data-toggle="modal" data-target="#logoutModal">
                             <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-                            Logout
+                            {{ __('common.logout') }}
                         </button>
                     </form>
                 </div>

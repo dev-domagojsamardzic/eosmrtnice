@@ -21,4 +21,6 @@ return [
     'quit' => 'Quit',
     'update' => 'Update',
     'updated' => 'Updated',
+    'profile' => 'Profile',
+    'logout' => 'Logout',
 ];

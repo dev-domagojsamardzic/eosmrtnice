@@ -21,4 +21,6 @@ return [
     'quit' => 'Odustani',
     'update' => 'Ažuriraj',
     'updated' => 'Ažurirano',
+    'profile' => 'Profil',
+    'logout' => 'Odjava',
 ];
