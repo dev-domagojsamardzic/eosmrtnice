@@ -71,7 +71,7 @@
                                                       type="password"
                                                       name="password"
                                                       placeholder="{{ __('auth.placeholders.password') }}"
-                                                      required autocomplete="current-password" />
+                                                      required/>
                                         <x-input-error :messages="$errors->get('password')" class="mt-2" />
                                     </div>
                                     <div class="col-sm-6">
@@ -80,7 +80,7 @@
                                                       type="password"
                                                       name="password_confirmation"
                                                       placeholder="{{ __('auth.placeholders.confirm_password') }}"
-                                                      required autocomplete="new-password" />
+                                                      required/>
                                         <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2" />
                                     </div>
                                 </div>
@@ -113,6 +113,7 @@
                                         name="company_address"
                                         :value="old('company_address')"
                                         autocomplete="company_address"
+                                        required
                                         placeholder="{{ __('auth.placeholders.company_address') }}"/>
                                     <x-input-error :messages="$errors->get('company_address')" class="mt-2" />
                                 </div>
@@ -125,6 +126,7 @@
                                                       name="company_town"
                                                       :value="old('company_town')"
                                                       placeholder="{{ __('auth.placeholders.company_town') }}"
+                                                      required
                                                       autocomplete="company_town" />
                                         <x-input-error :messages="$errors->get('company_town')" class="mt-2" />
                                     </div>
@@ -135,6 +137,7 @@
                                                       name="company_zipcode"
                                                       :value="old('company_zipcode')"
                                                       placeholder="{{ __('auth.placeholders.company_zipcode') }}"
+                                                      required
                                                       autocomplete="company_zipcode" />
                                         <x-input-error :messages="$errors->get('company_zipcode')" class="mt-2" />
                                     </div>
@@ -147,6 +150,7 @@
                                         type="text"
                                         name="company_oib"
                                         :value="old('company_oib')"
+                                        required
                                         placeholder="{{ __('auth.placeholders.company_oib') }}"/>
                                     <x-input-error :messages="$errors->get('company_oib')" class="mt-2" />
                                 </div>
