@@ -157,7 +157,11 @@
             <li class="nav-item dropdown no-arrow">
                 <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{ auth()->user()->full_name }}</span>
+                    <span class="mr-2 d-none d-lg-inline text-gray-600 small">
+                        {{ auth()->user()->full_name }}
+                        <br>
+                       <span class="text-gray-500">{{ auth()->user()->email }}</span>
+                    </span>
                     <img class="img-profile rounded-circle"
                          src="{{ asset('storage/images/avatar/avatar_default_' . auth()->user()->sex . '.svg') }}">
                 </a>
