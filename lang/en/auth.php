@@ -36,6 +36,7 @@ return [
         'company_email' => 'Email',
         'company_phone' => 'Phone (landline)',
         'company_mobile' => 'Phone (mobile)',
+        'company_type' => 'Company Type',
     ],
     'placeholders' => [
         'first_name' => 'Enter First Name here',

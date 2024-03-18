@@ -36,6 +36,7 @@ return [
         'company_email' => 'Email',
         'company_phone' => 'Fiksni telefon',
         'company_mobile' => 'Mobilni telefon',
+        'company_type' => 'Tip tvrtke',
     ],
     'placeholders' => [
         'first_name' => 'Unesite ime',

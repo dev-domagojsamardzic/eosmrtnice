@@ -2,9 +2,11 @@
 
 namespace App\Http\Requests\Partner;
 
+use App\Enums\CompanyType;
 use App\Models\User;
 use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 use Illuminate\Validation\Rules\Password;
 
 /**
@@ -15,6 +17,7 @@ use Illuminate\Validation\Rules\Password;
  * @property    string      password
  * @property    string      confirm_password
  * -----------------------------------------
+ * @property    int         company_type
  * @property    string      company_title
  * @property    string      company_address
  * @property    string      company_town
@@ -50,6 +53,7 @@ class RegisterRequest extends FormRequest
             'sex' => ['required', 'in:m,f'],
             'password' => ['required', 'confirmed', Password::defaults()],
 
+            'company_type' => ['required', Rule::enum(CompanyType::class)],
             'company_title' => ['required', 'string', 'max:255'],
             'company_address' => ['nullable','string', 'max:512'],
             'company_town' => ['nullable','string', 'max:255'],

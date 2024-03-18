@@ -44,6 +44,7 @@ class RegisteredUserController extends Controller
         $user->save();
 
         $company = new Company();
+        $company->type = $request->company_type;
         $company->title = $request->company_title;
         $company->user()->associate($user);
         $company->address = $request->company_address;

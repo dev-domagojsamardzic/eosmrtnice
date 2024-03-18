@@ -93,6 +93,15 @@
                                 </div>
 
                                 <div class="form-group">
+                                    <x-input-label for="company_type" :value="__('auth.labels.company_type')" />
+                                    <select class="form-control" id="company_type" name="company_type">
+                                        @foreach(App\Enums\CompanyType::options() as $id => $title)
+                                            <option value="{{ $id }}">{{ $title }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+
+                                <div class="form-group">
                                     <x-input-label for="company_title" :value="__('auth.labels.company_title')" />
                                     <x-text-input
                                         id="company_title"
