@@ -160,7 +160,7 @@
                     <span class="mr-2 d-none d-lg-inline text-gray-600 small">
                         {{ auth()->user()->full_name }}
                         <br>
-                       <span class="text-gray-500">{{ auth()->user()->email }}</span>
+                       <small class="text-gray-700">{{ auth()->user()->email }}</small>
                     </span>
                     <img class="img-profile rounded-circle"
                          src="{{ asset('storage/images/avatar/avatar_default_' . auth()->user()->sex . '.svg') }}">
