@@ -33,8 +33,8 @@ return [
         'company_zipcode' => 'Poštanski broj (obavezno)',
         'company_oib' => 'OIB (obavezno)',
         'company_email' => 'Email',
-        'company_phone' => 'Telefon (fiksni)',
-        'company_mobile' => 'Telefon (mobilni)',
+        'company_phone' => 'Fiksni telefon',
+        'company_mobile' => 'Mobilni telefon',
     ],
     'placeholders' => [
         'first_name' => 'Unesite ime',
