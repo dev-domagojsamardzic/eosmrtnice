@@ -2,10 +2,11 @@
 
 namespace App\Enums;
 
-enum UserSex: string
+enum CompanyType: int
 {
-    case MALE = 'm';
-    case FEMALE = 'f';
+    case FUNERAL = 1;
+    case MASONRY = 2;
+    case FLOWERS = 3;
 
     public static function options(): array
     {
