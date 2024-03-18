@@ -23,4 +23,7 @@ return [
     'updated' => 'Ažurirano',
     'profile' => 'Profil',
     'logout' => 'Odjava',
+    'you_are_logged_in' => 'Prijavljeni ste.',
+    'something_went_wrong' => 'Nešto je pošlo po zlu.',
+    'deleted' => 'Obrisano.',
 ];

@@ -82,8 +82,16 @@ class PartnerController extends Controller
         $partner->sex = $request->input('sex');
         $partner->email = $request->input('email');
         $partner->active = $request->boolean('active');
-        $partner->save();
 
-        return redirect()->route('admin.partners.index');
+        try{
+            $partner->save();
+        }catch (\Exception $e) {
+            return redirect()
+                ->route('admin.partners.index')
+                ->with('alert', ['class' => 'danger', 'message' => __('common.something_went_wrong')]);
+        }
+
+        return redirect()->route('admin.partners.index')
+            ->with('alert', ['class' => 'success', 'message' => __('common.saved')]);
     }
 }

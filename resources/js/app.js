@@ -12,6 +12,17 @@ import '@popperjs/core';
 
 import './sb-admin/sb-admin-2.min.js';
 
+
+/**
+ * Handle bootstrap alert
+ */
+$(document).ready(function() {
+    setTimeout(() => {
+        $('#flash_alert').fadeOut();
+    }, 2000);
+})
+
+
 /*import Alpine from 'alpinejs';
 
 window.Alpine = Alpine;

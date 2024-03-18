@@ -81,8 +81,16 @@ class MemberController extends Controller
         $member->sex = $request->input('sex');
         $member->email = $request->input('email');
         $member->active = $request->boolean('active');
-        $member->save();
 
-        return redirect()->route('admin.members.index');
+        try{
+            $member->save();
+        }catch (\Exception $e) {
+            return redirect()
+                ->route('admin.members.index')
+                ->with('alert', ['class' => 'danger', 'message' => __('common.something_went_wrong')]);
+        }
+
+        return redirect()->route('admin.members.index')
+            ->with('alert', ['class' => 'success', 'message' => __('common.saved')]);
     }
 }

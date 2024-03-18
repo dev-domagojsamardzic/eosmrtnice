@@ -39,3 +39,14 @@ a {
 a:hover, a.active {
     color: lighten($black, 10%);
 }
+
+.alert-absolute-flex {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    min-width: 200px;
+    gap: 30px;
+}

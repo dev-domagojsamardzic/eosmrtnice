@@ -79,8 +79,16 @@ class CompanyController extends Controller
         $company->phone = $request->input('phone');
         $company->mobile_phone = $request->input('mobile_phone');
         $company->active = $request->boolean('active');
-        $company->save();
 
-        return redirect()->route('admin.companies.index');
+        try{
+            $company->save();
+        }catch (\Exception $e) {
+            return redirect()
+                ->route('admin.companies.index')
+                ->with('alert', ['class' => 'danger', 'message' => __('common.something_went_wrong')]);
+        }
+
+        return redirect()->route('admin.companies.index')
+            ->with('alert', ['class' => 'success', 'message' => __('common.saved')]);
     }
 }

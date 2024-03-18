@@ -18,6 +18,7 @@
 
     {{-- New layout --}}
     <body id="page-top">
+
         <div id="wrapper">
             <!-- Sidebar -->
             @include(auth_user_type() . '.sidebar')
@@ -34,7 +35,7 @@
                     <!-- End of TopBar -->
 
                     <!-- Begin Page Content -->
-                    <div class="container-fluid">
+                    <div class="container-fluid" style="position: relative">
 
                         <!-- Page Heading -->
                         @if (isset($header))
@@ -45,11 +46,24 @@
                         <main>
                             {{ $slot }}
                         </main>
-
                     </div>
                     <!-- /.container-fluid -->
                 </div>
                 <!-- End of Main Content -->
+
+                <!-- Boostrap alert -->
+                @if(session()->has('alert'))
+                    @php
+                        $flash = session('alert')
+                    @endphp
+                    <div id="flash_alert" class="alert alert-absolute-flex alert-{{ $flash['class'] }} fade show" role="alert">
+                        {{ $flash['message'] }}
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                @endif
+
             </div>
             <!-- End of Content Wrapper -->
         </div>

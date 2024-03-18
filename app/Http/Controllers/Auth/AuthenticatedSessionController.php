@@ -31,18 +31,26 @@ class AuthenticatedSessionController extends Controller
         $request->session()->regenerate();
 
         if(auth()->user()->type === UserType::ADMIN) {
-            return redirect()->intended(RouteServiceProvider::ADMIN);
+            return redirect()
+                ->intended(RouteServiceProvider::ADMIN)
+                ->with('alert', ['class' => 'success', 'message' => __('common.you_are_logged_in')]);
         }
 
         if(auth()->user()->type === UserType::PARTNER) {
-            return redirect()->intended(RouteServiceProvider::PARTNER);
+            return redirect()
+                ->intended(RouteServiceProvider::PARTNER)
+                ->with('alert', ['class' => 'success', 'message' => __('common.you_are_logged_in')]);
         }
 
         if(auth()->user()->type === UserType::MEMBER) {
-            return redirect()->intended(RouteServiceProvider::MEMBER);
+            return redirect()
+                ->intended(RouteServiceProvider::MEMBER)
+                ->with('alert', ['class' => 'success', 'message' => __('common.you_are_logged_in')]);
         }
 
-        return redirect()->route('login');
+        return redirect()
+            ->route('login')
+            ->with('alert', ['class' => 'danger', 'message' => __('common.something_went_wrong')]);
     }
 
     /**

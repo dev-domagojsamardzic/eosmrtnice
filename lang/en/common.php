@@ -23,4 +23,7 @@ return [
     'updated' => 'Updated',
     'profile' => 'Profile',
     'logout' => 'Logout',
+    'you_are_logged_in' => 'You are logged in.',
+    'something_went_wrong' => 'Something went wrong.',
+    'deleted' => 'Deleted.',
 ];
