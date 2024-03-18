@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Enums\CompanyType;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -12,6 +13,7 @@ use Illuminate\Support\Carbon;
  * @property        int         id
  * @property        int         user_id
  * @property        string      title
+ * @property        int         type
  * @property        string      address
  * @property        string      zipcode
  * @property        string      town
@@ -49,6 +51,7 @@ class Company extends Model
      * @var array<string, string>
      */
     protected $casts = [
+        'type' => CompanyType::class,
         'created_at' => 'datetime',
         'updated_at' => 'datetime',
     ];
