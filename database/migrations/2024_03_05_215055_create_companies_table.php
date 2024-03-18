@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('address')->nullable();
             $table->string('town')->nullable();
             $table->char('zipcode')->nullable();
-            $table->char('oib',11)->nullable();
+            $table->char('oib',11)->nullable(false);
             $table->string('email')->nullable();
             $table->string('phone')->nullable();
             $table->string('mobile_phone')->nullable();

@@ -53,7 +53,7 @@ class RegisterRequest extends FormRequest
             'company_address' => ['nullable','string', 'max:512'],
             'company_town' => ['nullable','string', 'max:255'],
             'company_zipcode' => ['nullable','numeric'],
-            'company_oib' => ['nullable','numeric', 'digits:11'],
+            'company_oib' => ['required', 'numeric', 'digits:11'],
             'company_email' => ['nullable','string', 'email', 'max:255'],
             'company_phone' => ['nullable','string', 'max:64'],
             'company_mobile_phone' => ['nullable','string', 'max:64']
