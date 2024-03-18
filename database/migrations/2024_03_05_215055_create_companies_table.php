@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\County;
 use App\Models\User;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
@@ -19,6 +20,7 @@ return new class extends Migration
             $table->string('address')->nullable(false);
             $table->string('town')->nullable(false);
             $table->char('zipcode')->nullable(false);
+            $table->foreignIdFor(County::class);
             $table->char('oib',11)->nullable(false);
             $table->string('email')->nullable();
             $table->string('phone')->nullable();
