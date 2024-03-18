@@ -3,6 +3,7 @@
 namespace App\Http\Livewire;
 
 use App\Models\Company;
+use App\Models\County;
 use Filament\Support\Enums\FontWeight;
 use Filament\Tables\Columns\Layout\Split;
 use Filament\Tables\Actions\Action;
@@ -85,11 +86,10 @@ class CompaniesTable extends Component implements HasTable, HasForms
             Panel::make([
                 Stack::make([
                     TextColumn::make('address')
-                        ->label(__('admin.address')),
-                    TextColumn::make('town')
-                        ->label(__('admin.town')),
-                    TextColumn::make('zipcode')
-                        ->label(__('admin.zipcode')),
+                        ->label(__('admin.address'))
+                        ->formatStateUsing(fn(Company $company): string => $company->address . ', ' . $company->zipcode . ' ' . $company->town),
+                    TextColumn::make('county.title')
+                        ->label(__('admin.county')),
                     TextColumn::make('oib')
                         ->label(__('admin.oib')),
                     TextColumn::make('email')
@@ -118,6 +118,9 @@ class CompaniesTable extends Component implements HasTable, HasForms
                     0 => __('admin.is_inactive'),
                 ])
             ->default(1),
+            SelectFilter::make('county_id')
+                ->label(__('admin.county'))
+                ->options(County::query()->pluck('title', 'id')->toArray())
         ];
     }
 

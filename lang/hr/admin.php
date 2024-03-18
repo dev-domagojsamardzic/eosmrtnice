@@ -22,6 +22,7 @@ return [
     'is_inactive' => 'Neaktivna',
     'phone' => 'Broj telefona',
     'mobile_phone' => 'Mobitel',
+    'county' => 'Županija',
     'placeholders' => [
         'company_title' => 'Unesite naziv tvrtke',
         'company_address' => 'Unesite adresu tvrtke',

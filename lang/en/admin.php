@@ -22,6 +22,7 @@ return [
     'is_inactive' => 'Inactive',
     'phone' => 'Phone Number',
     'mobile_phone' => 'Mobile Phone Number',
+    'county' => 'County',
     'placeholders' => [
         'company_title' => 'Enter Company Title here',
         'company_address' => 'Enter Company Address here',
