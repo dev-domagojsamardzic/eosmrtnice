@@ -11,9 +11,9 @@ use Illuminate\Support\Carbon;
 
 /**
  * @property        int         id
+ * @property        int         type
  * @property        int         user_id
  * @property        string      title
- * @property        int         type
  * @property        string      address
  * @property        string      zipcode
  * @property        string      town

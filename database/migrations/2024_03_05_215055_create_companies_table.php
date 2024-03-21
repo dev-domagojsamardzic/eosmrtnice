@@ -16,6 +16,7 @@ return new class extends Migration
         Schema::create('companies', static function (Blueprint $table) {
             $table->id();
             $table->foreignIdFor(User::class);
+            $table->unsignedTinyInteger('type')->nullable(false);
             $table->string('title')->nullable(false);
             $table->unsignedTinyInteger('type')->nullable(false);
             $table->string('address')->nullable(false);
