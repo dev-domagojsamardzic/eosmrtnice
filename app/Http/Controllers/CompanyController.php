@@ -82,13 +82,12 @@ class CompanyController extends Controller
 
         try{
             $company->save();
+            return redirect()->route('admin.companies.index')
+                ->with('alert', ['class' => 'success', 'message' => __('common.saved')]);
         }catch (\Exception $e) {
             return redirect()
                 ->route('admin.companies.index')
                 ->with('alert', ['class' => 'danger', 'message' => __('common.something_went_wrong')]);
         }
-
-        return redirect()->route('admin.companies.index')
-            ->with('alert', ['class' => 'success', 'message' => __('common.saved')]);
     }
 }

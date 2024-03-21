@@ -85,13 +85,12 @@ class PartnerController extends Controller
 
         try{
             $partner->save();
+            return redirect()->route('admin.partners.index')
+                ->with('alert', ['class' => 'success', 'message' => __('common.saved')]);
         }catch (\Exception $e) {
             return redirect()
                 ->route('admin.partners.index')
                 ->with('alert', ['class' => 'danger', 'message' => __('common.something_went_wrong')]);
         }
-
-        return redirect()->route('admin.partners.index')
-            ->with('alert', ['class' => 'success', 'message' => __('common.saved')]);
     }
 }
