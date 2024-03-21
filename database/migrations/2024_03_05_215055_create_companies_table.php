@@ -18,7 +18,6 @@ return new class extends Migration
             $table->foreignIdFor(User::class);
             $table->unsignedTinyInteger('type')->nullable(false);
             $table->string('title')->nullable(false);
-            $table->unsignedTinyInteger('type')->nullable(false);
             $table->string('address')->nullable(false);
             $table->string('town')->nullable(false);
             $table->char('zipcode')->nullable(false);
