@@ -7,12 +7,17 @@ use App\Models\Member;
 use Carbon\Carbon;
 use Filament\Forms\Concerns\InteractsWithForms;
 use Filament\Forms\Contracts\HasForms;
+use Filament\Tables\Actions\ActionGroup;
 use Filament\Tables\Actions\DeleteAction;
 use Filament\Tables\Actions\EditAction;
+use Filament\Tables\Columns\Layout\Split;
+use Filament\Tables\Columns\Layout\Stack;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Concerns\InteractsWithTable;
 use Filament\Tables\Contracts\HasTable;
 use Filament\Tables\Filters\SelectFilter;
+use Filament\Tables\Grouping\Group;
+use Illuminate\Database\Eloquent\Builder;
 use Livewire\Component;
 use Filament\Tables\Table;
 use Illuminate\Contracts\View\View;
@@ -34,8 +39,19 @@ class MembersTable extends Component implements HasTable, HasForms
             ->query(
                 Member::query()
             )
+            ->groups([
+                Group::make('active')
+                    ->titlePrefixedWithLabel(false)
+                    ->orderQueryUsing(fn (Builder $query) => $query->orderBy('active', 'desc'))
+                    ->getTitleFromRecordUsing(fn (Member $member): string => $member->active ? __('common.active_records') : __('common.inactive_records'))
+            ])
+            ->defaultGroup('active')
+            ->groupingSettingsHidden()
             ->actions($this->getActions())
-            ->columns($this->getColumns())
+            ->columns([
+                Split::make($this->getColumns())->visibleFrom('md'),
+                Stack::make($this->getColumns())->hiddenFrom('md'),
+            ])
             ->filters($this->getFilters());
     }
     public function render(): View
@@ -51,27 +67,29 @@ class MembersTable extends Component implements HasTable, HasForms
     {
         return [
             TextColumn::make('full_name')
-            ->label(__('admin.full_name'))
-            ->sortable(['first_name','last_name'])
-            ->searchable(['first_name','last_name']),
-            TextColumn::make('email')
-                ->label(__('admin.email'))
-                ->searchable()
-                ->sortable(),
+                ->label(__('admin.full_name'))
+                ->sortable(['first_name','last_name'])
+                ->searchable(['first_name','last_name']),
             TextColumn::make('active')
                 ->label(__('admin.active'))
                 ->badge()
                 ->formatStateUsing(fn(int $state): string => match($state) {
-                    1 => __('common.yes'),
-                    0 => __('common.no'),
+                    1 => __('admin.is_active_m'),
+                    0 => __('admin.is_inactive_m'),
                 })
                 ->color(fn(int $state): string => match($state) {
                     1 => 'success',
                     0 => 'danger',
                 })
                 ->sortable(),
+            TextColumn::make('email')
+                ->label(__('admin.email'))
+                ->icon('heroicon-m-envelope')
+                ->searchable()
+                ->sortable(),
             TextColumn::make('created_at')
                 ->label(__('admin.created'))
+                ->icon('heroicon-m-clock')
                 ->formatStateUsing(fn (Carbon $date): string => $date->format('d.m.Y.'))
         ];
     }
@@ -90,7 +108,6 @@ class MembersTable extends Component implements HasTable, HasForms
                     1 => __('admin.active'),
                     0 => __('admin.inactive'),
                 ])
-            ->default(1),
         ];
     }
 
@@ -101,20 +118,19 @@ class MembersTable extends Component implements HasTable, HasForms
     private function getActions(): array
     {
         return [
-            EditAction::make('edit')
-                ->label(__('common.edit'))
-                ->icon('heroicon-s-pencil-square')
-                ->iconButton()
-                ->url(fn (Member $partner): string => route(auth_user_type() . '.members.edit', $partner)),
-            DeleteAction::make('delete')
-                ->label(__('common.delete'))
-                ->icon('heroicon-s-trash')
-                ->iconButton()
-                ->requiresConfirmation()
-                ->modalHeading(__('admin.delete_member'))
-                ->modalSubmitActionLabel(__('common.delete'))
-                ->action(function(Member $member) { (new MemberController())->destroy($member); }),
-
+            ActionGroup::make([
+                EditAction::make('edit')
+                    ->label(__('common.edit'))
+                    ->icon('heroicon-s-pencil-square')
+                    ->url(fn (Member $partner): string => route(auth_user_type() . '.members.edit', $partner)),
+                DeleteAction::make('delete')
+                    ->label(__('common.delete'))
+                    ->icon('heroicon-s-trash')
+                    ->requiresConfirmation()
+                    ->modalHeading(__('admin.delete_member'))
+                    ->modalSubmitActionLabel(__('common.delete'))
+                    ->action(function(Member $member) { (new MemberController())->destroy($member); }),
+            ]),
         ];
     }
 }
