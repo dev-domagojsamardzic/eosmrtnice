@@ -2,11 +2,13 @@
 
 namespace App\Http\Livewire;
 
+use App\Http\Controllers\Admin\PartnerController;
 use App\Models\Partner;
 use Carbon\Carbon;
-use Filament\Tables\Actions\Action;
 use Filament\Forms\Concerns\InteractsWithForms;
 use Filament\Forms\Contracts\HasForms;
+use Filament\Tables\Actions\DeleteAction;
+use Filament\Tables\Actions\EditAction;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Concerns\InteractsWithTable;
 use Filament\Tables\Contracts\HasTable;
@@ -99,17 +101,19 @@ class PartnersTable extends Component implements HasTable, HasForms
     private function getActions(): array
     {
         return [
-            Action::make('edit')
+            EditAction::make('edit')
                 ->label(__('common.edit'))
                 ->icon('heroicon-s-pencil-square')
                 ->iconButton()
                 ->url(fn (Partner $partner): string => route(auth_user_type() . '.partners.edit', $partner)),
-            Action::make('delete')
+            DeleteAction::make('delete')
                 ->label(__('common.delete'))
                 ->icon('heroicon-s-trash')
                 ->iconButton()
                 ->requiresConfirmation()
-                ->action(fn (Partner $record) => $record->delete())
+                ->modalHeading(__('admin.delete_partner'))
+                ->modalSubmitActionLabel(__('common.delete'))
+                ->action(function(Partner $partner) { (new PartnerController())->destroy($partner); })
         ];
     }
 }

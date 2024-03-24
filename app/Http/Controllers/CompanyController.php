@@ -6,6 +6,7 @@ use App\Http\Requests\Admin\CompanyRequest;
 use App\Models\Company;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
+use Livewire\Features\SupportRedirects\Redirector;
 
 class CompanyController extends Controller
 {
@@ -36,6 +37,24 @@ class CompanyController extends Controller
     public function update(Company $company, CompanyRequest $request): RedirectResponse
     {
         return $this->apply($company, $request);
+    }
+
+    /**
+     * Delete resource
+     * @param Company $company
+     * @return RedirectResponse|Redirector
+     */
+    public function destroy(Company $company): RedirectResponse|Redirector
+    {
+        try {
+            $company->delete();
+            return redirect()->route('admin.companies.index')
+                ->with('alert', ['class' => 'success', 'message' => __('common.deleted')]);
+        } catch (\Exception $e) {
+            return redirect()
+                ->route('admin.companies.index')
+                ->with('alert', ['class' => 'danger', 'message' => __('common.something_went_wrong')]);
+        }
     }
 
     /**

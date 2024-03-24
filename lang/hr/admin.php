@@ -32,5 +32,8 @@ return [
         'company_email' => 'Unesite poslovni email',
         'company_phone' => 'Unesite broj telefona',
         'company_mobile_phone' => 'Unesite mobilni broj'
-    ]
+    ],
+    'delete_partner' => 'Obriši partnera',
+    'delete_memeber' => 'Obriši korisnika',
+    'delete_company' => 'Obriši tvrtku',
 ];

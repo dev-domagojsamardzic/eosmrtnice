@@ -32,5 +32,8 @@ return [
         'company_email' => 'Enter business email here',
         'company_phone' => 'Enter Phone Number (landline) if exists',
         'company_mobile_phone' => 'Enter Phone Number (mobile) if exists'
-    ]
+    ],
+    'delete_partner' => 'Delete partner',
+    'delete_member' => 'Delete member',
+    'delete_company' => 'Delete company',
 ];

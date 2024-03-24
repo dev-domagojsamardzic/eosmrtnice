@@ -2,11 +2,13 @@
 
 namespace App\Http\Livewire;
 
+use App\Http\Controllers\Admin\MemberController;
 use App\Models\Member;
 use Carbon\Carbon;
-use Filament\Tables\Actions\Action;
 use Filament\Forms\Concerns\InteractsWithForms;
 use Filament\Forms\Contracts\HasForms;
+use Filament\Tables\Actions\DeleteAction;
+use Filament\Tables\Actions\EditAction;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Concerns\InteractsWithTable;
 use Filament\Tables\Contracts\HasTable;
@@ -99,17 +101,20 @@ class MembersTable extends Component implements HasTable, HasForms
     private function getActions(): array
     {
         return [
-            Action::make('edit')
+            EditAction::make('edit')
                 ->label(__('common.edit'))
                 ->icon('heroicon-s-pencil-square')
                 ->iconButton()
                 ->url(fn (Member $partner): string => route(auth_user_type() . '.members.edit', $partner)),
-            Action::make('delete')
+            DeleteAction::make('delete')
                 ->label(__('common.delete'))
                 ->icon('heroicon-s-trash')
                 ->iconButton()
                 ->requiresConfirmation()
-                ->action(fn (Member $record) => $record->delete())
+                ->modalHeading(__('admin.delete_member'))
+                ->modalSubmitActionLabel(__('common.delete'))
+                ->action(function(Member $member) { (new MemberController())->destroy($member); }),
+
         ];
     }
 }

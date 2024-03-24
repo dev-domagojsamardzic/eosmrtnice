@@ -2,11 +2,13 @@
 
 namespace App\Http\Livewire;
 
+use App\Http\Controllers\CompanyController;
 use App\Models\Company;
 use App\Models\County;
 use Filament\Support\Enums\FontWeight;
+use Filament\Tables\Actions\DeleteAction;
+use Filament\Tables\Actions\EditAction;
 use Filament\Tables\Columns\Layout\Split;
-use Filament\Tables\Actions\Action;
 use Filament\Forms\Concerns\InteractsWithForms;
 use Filament\Forms\Contracts\HasForms;
 use Filament\Tables\Columns\Layout\Panel;
@@ -131,17 +133,19 @@ class CompaniesTable extends Component implements HasTable, HasForms
     private function getActions(): array
     {
         return [
-            Action::make('edit')
+            EditAction::make('edit')
                 ->label(__('common.edit'))
                 ->icon('heroicon-s-pencil-square')
                 ->iconButton()
                 ->url(fn (Company $company): string => route(auth_user_type() . '.companies.edit', $company)),
-            Action::make('delete')
+            DeleteAction::make('delete')
                 ->label(__('common.delete'))
                 ->icon('heroicon-s-trash')
                 ->iconButton()
                 ->requiresConfirmation()
-                ->action(fn (Company $company) => $company->delete())
+                ->modalHeading(__('admin.delete_company'))
+                ->modalSubmitActionLabel(__('common.delete'))
+                ->action(function(Company $company) { (new CompanyController())->destroy($company); })
         ];
     }
 }

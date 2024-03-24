@@ -7,6 +7,7 @@ use App\Http\Requests\Admin\PartnerRequest;
 use App\Models\Partner;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
+use Livewire\Features\SupportRedirects\Redirector;
 
 class PartnerController extends Controller
 {
@@ -43,6 +44,24 @@ class PartnerController extends Controller
     public function update(Partner $partner, PartnerRequest $request): RedirectResponse
     {
         return $this->apply($partner, $request);
+    }
+
+    /**
+     * Delete resource
+     * @param Partner $partner
+     * @return RedirectResponse|Redirector
+     */
+    public function destroy(Partner $partner): RedirectResponse|Redirector
+    {
+        try{
+            $partner->delete();
+            return redirect()->route('admin.partners.index')
+                ->with('alert', ['class' => 'success', 'message' => __('common.deleted')]);
+        }catch (\Exception $e) {
+            return redirect()
+                ->route('admin.partners.index')
+                ->with('alert', ['class' => 'danger', 'message' => __('common.something_went_wrong')]);
+        }
     }
 
     /**

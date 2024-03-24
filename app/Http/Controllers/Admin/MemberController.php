@@ -7,6 +7,7 @@ use App\Http\Requests\Admin\MemberRequest;
 use App\Models\Member;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
+use Livewire\Features\SupportRedirects\Redirector;
 
 class MemberController extends Controller
 {
@@ -42,6 +43,24 @@ class MemberController extends Controller
     public function update(MemberRequest $memberRequest, Member $member): RedirectResponse
     {
         return $this->apply($member, $memberRequest);
+    }
+
+    /**
+     * Delete resource
+     * @param Member $member
+     * @return RedirectResponse|Redirector
+     */
+    public function destroy(Member $member): RedirectResponse|Redirector
+    {
+        try{
+            $member->delete();
+            return redirect()->route('admin.members.index')
+                ->with('alert', ['class' => 'success', 'message' => __('common.deleted')]);
+        }catch (\Exception $e) {
+            return redirect()
+                ->route('admin.members.index')
+                ->with('alert', ['class' => 'danger', 'message' => __('common.something_went_wrong')]);
+        }
     }
 
     /**
