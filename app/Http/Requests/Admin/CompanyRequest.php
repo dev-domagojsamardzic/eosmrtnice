@@ -2,11 +2,14 @@
 
 namespace App\Http\Requests\Admin;
 
+use App\Enums\CompanyType;
 use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 /**
  * @property        string          title
+ * @property        CompanyType     type
  * @property        string          address
  * @property        string          town
  * @property        string          zipcode
@@ -34,11 +37,12 @@ class CompanyRequest extends FormRequest
     public function rules(): array
     {
         return [
+            'type' => ['required', Rule::enum(CompanyType::class)],
             'title' => ['required', 'string', 'max:255'],
             'address' => ['nullable','string', 'max:512'],
             'town' => ['nullable','string', 'max:255'],
             'zipcode' => ['nullable','numeric'],
-            'oib' => ['nullable','numeric', 'digits:11'],
+            'oib' => ['required','numeric', 'digits:11'],
             'email' => ['nullable','string', 'email', 'max:255'],
             'phone' => ['nullable','string', 'max:64'],
             'mobile_phone' => ['nullable','string', 'max:64']

@@ -50,3 +50,7 @@ a:hover, a.active {
     min-width: 200px;
     gap: 30px;
 }
+
+.navbar-nav.sidebar.accordion.toggled .sidebar-brand-icon img {
+    max-height: 50px;
+}

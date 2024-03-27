@@ -10,20 +10,33 @@
             @csrf
             {{ method_field('PUT') }}
             <div class="form-group row">
-                <div class="col-lg-6 col-sm-12 my-2">
-                    <x-input-label for="title" :value="__('admin.company_title')" />
+
+                <div class="col-lg-6 col-sm-12">
+                    <div class="form-group">
+                        <x-input-label for="type" :value="__('admin.labels.company_type')" />
+                        <select class="form-control" name="type" id="type" required>
+                            @foreach($types as $value => $type)
+                                <option value="{{ $value }}" {{ $value === $company->type->value ? "selected" : "" }}>{{ $type }}</option>
+                            @endforeach
+                        </select>
+                        <x-input-error :messages="$errors->get('type')" class="mt-2" />
+                    </div>
+                </div>
+                <div class="col-lg-6 col-sm-12">
+                    <x-input-label for="title" :value="__('admin.labels.company_title')" />
                     <x-text-input
                         id="title"
                         type="text"
                         name="title"
                         :value="old('title', $company->title)"
+                        required
                         placeholder="{{ __('admin.placeholders.company_title') }}"/>
                     <x-input-error :messages="$errors->get('title')" class="mt-2" />
                 </div>
             </div>
             <div class="form-group row">
                 <div class="col-lg-6 col-md-8 my-2">
-                    <x-input-label for="address" :value="__('admin.address')" />
+                    <x-input-label for="address" :value="__('admin.labels.company_address')" />
                     <x-text-input
                         id="address"
                         type="text"
@@ -33,7 +46,7 @@
                     <x-input-error :messages="$errors->get('address')" class="mt-2" />
                 </div>
                 <div class="col-lg-4 col-md-8 my-2">
-                    <x-input-label for="town" :value="__('admin.town')" />
+                    <x-input-label for="town" :value="__('admin.labels.company_town')" />
                     <x-text-input
                         id="town"
                         type="text"
@@ -43,7 +56,7 @@
                     <x-input-error :messages="$errors->get('town')" class="mt-2" />
                 </div>
                 <div class="col-lg-2 col-md-4 my-2">
-                    <x-input-label for="zipcode" :value="__('admin.zipcode')" />
+                    <x-input-label for="zipcode" :value="__('admin.labels.company_zipcode')" />
                     <x-text-input
                         id="zipcode"
                         type="text"
@@ -61,11 +74,12 @@
                         type="text"
                         name="oib"
                         :value="old('oib', $company->oib)"
+                        required
                         placeholder="{{ __('admin.placeholders.company_oib') }}"/>
                     <x-input-error :messages="$errors->get('oib')" class="mt-2" />
                 </div>
                 <div class="col-md-6 col-sm-12 my-2">
-                    <x-input-label for="email" :value="__('admin.email')" />
+                    <x-input-label for="email" :value="__('admin.labels.company_email')" />
                     <x-text-input
                         id="email"
                         type="email"
@@ -77,7 +91,7 @@
             </div>
             <div class="form-group row">
                 <div class="col-md-6 col-sm-12 my-2">
-                    <x-input-label for="phone" :value="__('admin.phone')" />
+                    <x-input-label for="phone" :value="__('admin.labels.company_phone')" />
                     <x-text-input
                         id="phone"
                         type="text"
@@ -87,7 +101,7 @@
                     <x-input-error :messages="$errors->get('phone')" class="mt-2" />
                 </div>
                 <div class="col-md-6 col-sm-12 my-2">
-                    <x-input-label for="mobile_phone" :value="__('admin.mobile_phone')" />
+                    <x-input-label for="mobile_phone" :value="__('admin.labels.company_mobile_phone')" />
                     <x-text-input
                         id="mobile_phone"
                         type="text"
@@ -101,7 +115,7 @@
                 <div class="col-2 my-2">
                     <div class="custom-control custom-switch">
                         <input name="active" type="checkbox" class="custom-control-input" id="activeSwitch" {{ $company->active ? "checked" : "" }}>
-                        <label class="custom-control-label" for="activeSwitch">{{ __('admin.is_active') }}</label>
+                        <label class="custom-control-label" for="activeSwitch">{{ __('admin.is_active_f') }}</label>
                     </div>
                 </div>
             </div>

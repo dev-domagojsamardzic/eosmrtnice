@@ -46,6 +46,17 @@ return [
         'company_phone' => 'Unesite broj telefona',
         'company_mobile_phone' => 'Unesite mobilni broj'
     ],
+    'labels' => [
+        'company_type' => 'Vrsta tvrtke (obavezno)',
+        'company_title' => 'Naziv tvrtke (obavezno)',
+        'company_address' => 'Adresa',
+        'company_town' => 'Grad',
+        'company_zipcode' => 'Poštanski broj',
+        'company_oib' => 'OIB tvrtke (obavezno)',
+        'company_email' => 'Službena email adresa',
+        'company_phone' => 'Telefon',
+        'company_mobile_phone' => 'Mobilni telefon',
+    ],
     'delete_partner' => 'Obriši partnera',
     'delete_memeber' => 'Obriši korisnika',
     'delete_company' => 'Obriši tvrtku',
