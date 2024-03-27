@@ -45,14 +45,8 @@ class CompaniesTable extends Component implements HasTable, HasForms
             ->query(
                 Company::query()
             )
-            ->groups([
-                Group::make('active')
-                    ->titlePrefixedWithLabel(false)
-                    ->orderQueryUsing(fn (Builder $query) => $query->orderBy('active', 'desc'))
-                    ->getTitleFromRecordUsing(fn (Company $company): string => $company->active ? __('common.active_records') : __('common.inactive_records'))
-            ])
+            ->groups($this->getGroups())
             ->defaultGroup('active')
-            ->groupingSettingsHidden()
             ->actions($this->getActions())
             ->columns($this->getColumns())
             ->filters($this->getFilters());
@@ -89,8 +83,8 @@ class CompaniesTable extends Component implements HasTable, HasForms
                     ->label(__('admin.active'))
                     ->badge()
                     ->formatStateUsing(fn(int $state): string => match($state) {
-                        1 => __('admin.is_active'),
-                        0 => __('admin.is_inactive'),
+                        1 => __('admin.is_active_f'),
+                        0 => __('admin.is_inactive_f'),
                     })
                     ->color(fn(int $state): string => match($state) {
                         1 => 'success',
@@ -146,8 +140,8 @@ class CompaniesTable extends Component implements HasTable, HasForms
             SelectFilter::make('active')
                 ->label(__('admin.active'))
                 ->options([
-                    1 => __('admin.is_active'),
-                    0 => __('admin.is_inactive'),
+                    1 => __('admin.is_active_f_pl'),
+                    0 => __('admin.is_inactive_f_pl'),
                 ]),
             SelectFilter::make('county_id')
                 ->label(__('admin.county'))
@@ -175,6 +169,26 @@ class CompaniesTable extends Component implements HasTable, HasForms
                     ->modalSubmitActionLabel(__('common.delete'))
                     ->action(function(Company $company) { (new CompanyController())->destroy($company); })
             ])->iconPosition(IconPosition::Before),
+        ];
+    }
+
+    /**
+     * Return table groups
+     * @return array
+     */
+    private function getGroups(): array
+    {
+        return [
+            Group::make('active')
+                ->label(__('admin.is_active_f_pl'))
+                ->titlePrefixedWithLabel(false)
+                ->orderQueryUsing(fn (Builder $query) => $query->orderBy('active', 'desc'))
+                ->getTitleFromRecordUsing(fn (Company $company): string => $company->active ? __('admin.is_active_f_pl') : __('admin.is_inactive_f_pl')),
+            Group::make('type')
+                ->label(__('admin.by_type'))
+                ->titlePrefixedWithLabel(false)
+                ->orderQueryUsing(fn (Builder $query) => $query->orderBy('type'))
+                ->getTitleFromRecordUsing(fn (Company $company): string => $company->type->translate())
         ];
     }
 }
