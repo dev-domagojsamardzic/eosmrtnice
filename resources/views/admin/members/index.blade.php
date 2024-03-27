@@ -4,5 +4,5 @@
             {{ __('admin.users') }}
         </h2>
     </x-slot>
-    @livewire('members-table')
+    @livewire('tables.members-table')
 </x-app-layout>

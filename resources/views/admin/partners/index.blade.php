@@ -4,5 +4,5 @@
             {{ __('admin.partners') }}
         </h2>
     </x-slot>
-    @livewire('partners-table')
+    @livewire('tables.partners-table')
 </x-app-layout>

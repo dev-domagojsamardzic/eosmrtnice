@@ -1,10 +1,11 @@
 <?php
 
-namespace App\Http\Livewire;
+namespace App\Http\Livewire\Tables;
 
-use App\Http\Controllers\Admin\MemberController;
-use App\Models\Member;
+use App\Http\Controllers\Admin\PartnerController;
+use App\Models\Partner;
 use Carbon\Carbon;
+use Exception;
 use Filament\Forms\Concerns\InteractsWithForms;
 use Filament\Forms\Contracts\HasForms;
 use Filament\Support\Enums\FontWeight;
@@ -18,13 +19,12 @@ use Filament\Tables\Concerns\InteractsWithTable;
 use Filament\Tables\Contracts\HasTable;
 use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Grouping\Group;
-use Illuminate\Database\Eloquent\Builder;
-use Livewire\Component;
 use Filament\Tables\Table;
 use Illuminate\Contracts\View\View;
-use Exception;
+use Illuminate\Database\Eloquent\Builder;
+use Livewire\Component;
 
-class MembersTable extends Component implements HasTable, HasForms
+class PartnersTable extends Component implements HasTable, HasForms
 {
     use InteractsWithTable;
     use InteractsWithForms;
@@ -38,13 +38,13 @@ class MembersTable extends Component implements HasTable, HasForms
             ->emptyStateHeading(__('common.empty'))
             ->striped()
             ->query(
-                Member::query()
+                Partner::query()
             )
             ->groups([
                 Group::make('active')
                     ->titlePrefixedWithLabel(false)
                     ->orderQueryUsing(fn (Builder $query) => $query->orderBy('active', 'desc'))
-                    ->getTitleFromRecordUsing(fn (Member $member): string => $member->active ? __('common.active_records') : __('common.inactive_records'))
+                    ->getTitleFromRecordUsing(fn (Partner $partner): string => $partner->active ? __('common.active_records') : __('common.inactive_records'))
             ])
             ->defaultGroup('active')
             ->groupingSettingsHidden()
@@ -57,7 +57,7 @@ class MembersTable extends Component implements HasTable, HasForms
     }
     public function render(): View
     {
-        return view('livewire.members-table');
+        return view('livewire.partners-table');
     }
 
     /**
@@ -92,7 +92,7 @@ class MembersTable extends Component implements HasTable, HasForms
             TextColumn::make('created_at')
                 ->label(__('admin.created'))
                 ->icon('heroicon-m-clock')
-                ->formatStateUsing(fn (Carbon $date): string => $date->format('d.m.Y.'))
+                ->formatStateUsing(fn (Carbon $date): string => $date->format('d.m.Y.')),
         ];
     }
 
@@ -109,7 +109,7 @@ class MembersTable extends Component implements HasTable, HasForms
                 ->options([
                     1 => __('admin.active'),
                     0 => __('admin.inactive'),
-                ])
+                ]),
         ];
     }
 
@@ -123,16 +123,14 @@ class MembersTable extends Component implements HasTable, HasForms
             ActionGroup::make([
                 EditAction::make('edit')
                     ->label(__('common.edit'))
-                    ->icon('heroicon-s-pencil-square')
-                    ->url(fn (Member $partner): string => route(auth_user_type() . '.members.edit', $partner)),
+                    ->url(fn (Partner $partner): string => route(auth_user_type() . '.partners.edit', $partner)),
                 DeleteAction::make('delete')
                     ->label(__('common.delete'))
-                    ->icon('heroicon-s-trash')
                     ->requiresConfirmation()
-                    ->modalHeading(__('admin.delete_member'))
+                    ->modalHeading(__('admin.delete_partner'))
                     ->modalSubmitActionLabel(__('common.delete'))
-                    ->action(function(Member $member) { (new MemberController())->destroy($member); }),
-            ])
+                    ->action(function(Partner $partner) { (new PartnerController())->destroy($partner); })
+            ]),
         ];
     }
 }

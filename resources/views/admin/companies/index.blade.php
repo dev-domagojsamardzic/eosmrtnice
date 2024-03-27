@@ -4,5 +4,5 @@
             {{ __('admin.companies') }}
         </h2>
     </x-slot>
-    @livewire('companies-table')
+    @livewire('tables.companies-table')
 </x-app-layout>
