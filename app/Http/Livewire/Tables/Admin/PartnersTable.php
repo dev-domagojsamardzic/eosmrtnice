@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Livewire\Tables;
+namespace App\Http\Livewire\Tables\Admin;
 
 use App\Http\Controllers\Admin\PartnerController;
 use App\Models\Partner;

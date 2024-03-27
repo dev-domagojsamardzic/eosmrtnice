@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Livewire\Tables;
+namespace App\Http\Livewire\Tables\Admin;
 
 use App\Enums\CompanyType;
 use App\Http\Controllers\Admin\CompanyController;
