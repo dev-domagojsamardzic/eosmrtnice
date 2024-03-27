@@ -1,7 +1,9 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
+use App\Enums\CompanyType;
+use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\CompanyRequest;
 use App\Models\Company;
 use Illuminate\Http\RedirectResponse;
@@ -65,6 +67,8 @@ class CompanyController extends Controller
      */
     private function form(Company $company, string $action): View
     {
+        $types = CompanyType::options();
+
         $route = match($action) {
             'edit' => route(auth_user_type() . '.companies.update', ['company' => $company]),
             'create' => route(auth_user_type() . '.companies.store'),
@@ -74,6 +78,7 @@ class CompanyController extends Controller
         return view(
             'admin.companies.form', [
                 'company' => $company,
+                'types' => $types,
                 'action_name' => $action,
                 'action' => $route,
                 'quit' => route(auth_user_type() . '.companies.index'),
@@ -89,6 +94,7 @@ class CompanyController extends Controller
      */
     private function apply(Company $company, CompanyRequest $request): RedirectResponse
     {
+        $company->type = $request->input('type');
         $company->title = $request->input('title');
         $company->address = $request->input('address');
         $company->town = $request->input('town');

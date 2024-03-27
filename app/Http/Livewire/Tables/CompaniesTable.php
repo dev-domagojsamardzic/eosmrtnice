@@ -3,7 +3,7 @@
 namespace App\Http\Livewire\Tables;
 
 use App\Enums\CompanyType;
-use App\Http\Controllers\CompanyController;
+use App\Http\Controllers\Admin\CompanyController;
 use App\Models\Company;
 use App\Models\County;
 use Exception;
