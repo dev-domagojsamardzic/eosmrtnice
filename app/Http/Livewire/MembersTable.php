@@ -7,6 +7,9 @@ use App\Models\Member;
 use Carbon\Carbon;
 use Filament\Forms\Concerns\InteractsWithForms;
 use Filament\Forms\Contracts\HasForms;
+use Filament\Support\Enums\Alignment;
+use Filament\Support\Enums\FontWeight;
+use Filament\Support\Enums\IconPosition;
 use Filament\Tables\Actions\ActionGroup;
 use Filament\Tables\Actions\DeleteAction;
 use Filament\Tables\Actions\EditAction;
@@ -15,6 +18,7 @@ use Filament\Tables\Columns\Layout\Stack;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Concerns\InteractsWithTable;
 use Filament\Tables\Contracts\HasTable;
+use Filament\Tables\Enums\ActionsPosition;
 use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Grouping\Group;
 use Illuminate\Database\Eloquent\Builder;
@@ -50,7 +54,7 @@ class MembersTable extends Component implements HasTable, HasForms
             ->actions($this->getActions())
             ->columns([
                 Split::make($this->getColumns())->visibleFrom('md'),
-                Stack::make($this->getColumns())->hiddenFrom('md'),
+                Stack::make($this->getColumns())->hiddenFrom('md')->space(3),
             ])
             ->filters($this->getFilters());
     }
@@ -68,6 +72,7 @@ class MembersTable extends Component implements HasTable, HasForms
         return [
             TextColumn::make('full_name')
                 ->label(__('admin.full_name'))
+                ->weight(FontWeight::Bold)
                 ->sortable(['first_name','last_name'])
                 ->searchable(['first_name','last_name']),
             TextColumn::make('active')
@@ -130,7 +135,7 @@ class MembersTable extends Component implements HasTable, HasForms
                     ->modalHeading(__('admin.delete_member'))
                     ->modalSubmitActionLabel(__('common.delete'))
                     ->action(function(Member $member) { (new MemberController())->destroy($member); }),
-            ]),
+            ])
         ];
     }
 }

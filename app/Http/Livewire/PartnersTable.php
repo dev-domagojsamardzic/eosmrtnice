@@ -51,7 +51,7 @@ class PartnersTable extends Component implements HasTable, HasForms
             ->actions($this->getActions())
             ->columns([
                 Split::make($this->getColumns())->visibleFrom('md'),
-                Stack::make($this->getColumns())->hiddenFrom('md'),
+                Stack::make($this->getColumns())->hiddenFrom('md')->space(3),
             ])
             ->filters($this->getFilters());
     }
