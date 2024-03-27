@@ -40,12 +40,7 @@ class MembersTable extends Component implements HasTable, HasForms
             ->query(
                 Member::query()
             )
-            ->groups([
-                Group::make('active')
-                    ->titlePrefixedWithLabel(false)
-                    ->orderQueryUsing(fn (Builder $query) => $query->orderBy('active', 'desc'))
-                    ->getTitleFromRecordUsing(fn (Member $member): string => $member->active ? __('common.active_records') : __('common.inactive_records'))
-            ])
+            ->groups($this->getGroups())
             ->defaultGroup('active')
             ->groupingSettingsHidden()
             ->actions($this->getActions())
@@ -133,6 +128,20 @@ class MembersTable extends Component implements HasTable, HasForms
                     ->modalSubmitActionLabel(__('common.delete'))
                     ->action(function(Member $member) { (new MemberController())->destroy($member); }),
             ])
+        ];
+    }
+
+    /**
+     * Return table groups
+     * @return array
+     */
+    private function getGroups(): array
+    {
+        return [
+            Group::make('active')
+                ->titlePrefixedWithLabel(false)
+                ->orderQueryUsing(fn (Builder $query) => $query->orderBy('active', 'desc'))
+                ->getTitleFromRecordUsing(fn (Member $member): string => $member->active ? __('common.active_records') : __('common.inactive_records'))
         ];
     }
 }

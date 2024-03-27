@@ -40,12 +40,7 @@ class PartnersTable extends Component implements HasTable, HasForms
             ->query(
                 Partner::query()
             )
-            ->groups([
-                Group::make('active')
-                    ->titlePrefixedWithLabel(false)
-                    ->orderQueryUsing(fn (Builder $query) => $query->orderBy('active', 'desc'))
-                    ->getTitleFromRecordUsing(fn (Partner $partner): string => $partner->active ? __('common.active_records') : __('common.inactive_records'))
-            ])
+            ->groups($this->getGroups())
             ->defaultGroup('active')
             ->groupingSettingsHidden()
             ->actions($this->getActions())
@@ -131,6 +126,20 @@ class PartnersTable extends Component implements HasTable, HasForms
                     ->modalSubmitActionLabel(__('common.delete'))
                     ->action(function(Partner $partner) { (new PartnerController())->destroy($partner); })
             ]),
+        ];
+    }
+
+    /**
+     * Return table groups
+     * @return array
+     */
+    private function getGroups(): array
+    {
+        return [
+            Group::make('active')
+                ->titlePrefixedWithLabel(false)
+                ->orderQueryUsing(fn (Builder $query) => $query->orderBy('active', 'desc'))
+                ->getTitleFromRecordUsing(fn (Partner $partner): string => $partner->active ? __('common.active_records') : __('common.inactive_records'))
         ];
     }
 }
