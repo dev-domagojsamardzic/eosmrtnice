@@ -27,6 +27,7 @@ return [
     'phone' => 'Broj telefona',
     'mobile_phone' => 'Mobitel',
     'county' => 'Županija',
+    'company_representative' => 'Vlasnik/Predstavnik',
     'placeholders' => [
         'company_title' => 'Unesite naziv tvrtke',
         'company_address' => 'Unesite adresu tvrtke',

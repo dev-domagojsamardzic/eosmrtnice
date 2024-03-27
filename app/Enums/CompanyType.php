@@ -17,4 +17,14 @@ enum CompanyType: int
         }
         return $options;
     }
+
+    /**
+     * Translate resource
+     * @param string $locale
+     * @return string
+     */
+    public function translate(string $locale = 'hr'): string
+    {
+        return __('enums.' . strtolower($this->name), locale: $locale);
+    }
 }

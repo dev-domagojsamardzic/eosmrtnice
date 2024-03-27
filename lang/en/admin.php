@@ -23,6 +23,7 @@ return [
     'phone' => 'Phone Number',
     'mobile_phone' => 'Mobile Phone Number',
     'county' => 'County',
+    'company_representative' => 'Company Representative',
     'placeholders' => [
         'company_title' => 'Enter Company Title here',
         'company_address' => 'Enter Company Address here',

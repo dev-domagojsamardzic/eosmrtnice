@@ -25,7 +25,8 @@ class CompanySeeder extends Seeder
             'email' => 'kompanija@email.com',
             'phone' => '000339812',
             'mobile_phone' => '003876788943',
-            'active' => 1
+            'active' => 1,
+            'created_at' => now(),
         ]);
         DB::table('companies')->insert([
             'user_id' => 2,
@@ -39,7 +40,8 @@ class CompanySeeder extends Seeder
             'email' => 'kompanija@email.com',
             'phone' => '000339812',
             'mobile_phone' => '003876788943',
-            'active' => 1
+            'active' => 1,
+            'created_at' => now(),
         ]);
         DB::table('companies')->insert([
             'user_id' => 2,
@@ -53,7 +55,8 @@ class CompanySeeder extends Seeder
             'email' => 'kompanija@email.com',
             'phone' => '000339812',
             'mobile_phone' => '003876788943',
-            'active' => 0
+            'active' => 0,
+            'created_at' => now(),
         ]);
         DB::table('companies')->insert([
             'user_id' => 2,
@@ -67,7 +70,8 @@ class CompanySeeder extends Seeder
             'email' => 'kompanija@email.com',
             'phone' => '000339812',
             'mobile_phone' => '003876788943',
-            'active' => 1
+            'active' => 1,
+            'created_at' => now(),
         ]);
         DB::table('companies')->insert([
             'user_id' => 2,
@@ -81,7 +85,8 @@ class CompanySeeder extends Seeder
             'email' => 'kompanija@email.com',
             'phone' => '000339812',
             'mobile_phone' => '003876788943',
-            'active' => 0
+            'active' => 0,
+            'created_at' => now(),
         ]);
 
         DB::table('companies')->insert([
@@ -96,7 +101,8 @@ class CompanySeeder extends Seeder
             'email' => 'kompanija@email.com',
             'phone' => '000339812',
             'mobile_phone' => '003876788943',
-            'active' => 1
+            'active' => 1,
+            'created_at' => now(),
         ]);
         DB::table('companies')->insert([
             'user_id' => 3,
@@ -110,7 +116,8 @@ class CompanySeeder extends Seeder
             'email' => 'kompanija@email.com',
             'phone' => '000339812',
             'mobile_phone' => '003876788943',
-            'active' => 1
+            'active' => 1,
+            'created_at' => now(),
         ]);
     }
 }

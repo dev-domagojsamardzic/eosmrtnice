@@ -2,12 +2,16 @@
 
 namespace App\Http\Livewire;
 
+use App\Enums\CompanyType;
 use App\Http\Controllers\CompanyController;
 use App\Models\Company;
 use App\Models\County;
+use Filament\Support\Enums\IconPosition;
+use Filament\Tables\Actions\ActionGroup;
 use Filament\Support\Enums\FontWeight;
 use Filament\Tables\Actions\DeleteAction;
 use Filament\Tables\Actions\EditAction;
+use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Columns\Layout\Split;
 use Filament\Forms\Concerns\InteractsWithForms;
 use Filament\Forms\Contracts\HasForms;
@@ -17,6 +21,8 @@ use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Concerns\InteractsWithTable;
 use Filament\Tables\Contracts\HasTable;
 use Filament\Tables\Filters\SelectFilter;
+use Filament\Tables\Grouping\Group;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Carbon;
 use Livewire\Component;
 use Filament\Tables\Table;
@@ -39,6 +45,14 @@ class CompaniesTable extends Component implements HasTable, HasForms
             ->query(
                 Company::query()
             )
+            ->groups([
+                Group::make('active')
+                    ->titlePrefixedWithLabel(false)
+                    ->orderQueryUsing(fn (Builder $query) => $query->orderBy('active', 'desc'))
+                    ->getTitleFromRecordUsing(fn (Company $company): string => $company->active ? __('common.active_records') : __('common.inactive_records'))
+            ])
+            ->defaultGroup('active')
+            ->groupingSettingsHidden()
             ->actions($this->getActions())
             ->columns($this->getColumns())
             ->filters($this->getFilters());
@@ -56,22 +70,21 @@ class CompaniesTable extends Component implements HasTable, HasForms
     {
         return [
             Split::make([
+                IconColumn::make('type')
+                    ->icon(fn (Company $company): string => match($company->type) {
+                        CompanyType::FUNERAL => 'coffin-outline',
+                        CompanyType::MASONRY => 'tomb-outline',
+                        CompanyType::FLOWERS => 'flowers-outline',
+                        default => 'cross-outline',
+                    })
+                    ->tooltip(fn (Company $company): string => $company->type->translate())
+                    ->grow(false),
                 TextColumn::make('title')
                     ->label(__('admin.company_title'))
+                    ->tooltip(__('admin.company_title'))
                     ->sortable()
                     ->searchable()
                     ->weight(FontWeight::Bold),
-                TextColumn::make('user.full_name')
-                    ->label(__('admin.company_representative'))
-                    ->searchable(['first_name', 'last_name']),
-                TextColumn::make('email')
-                    ->label(__('admin.email'))
-                    ->searchable()
-                    ->sortable(),
-                TextColumn::make('created_at')
-                    ->formatStateUsing(fn (Carbon $date): string => $date->format('d.m.Y.'))
-                    ->label(__('admin.company_created_at'))
-                    ->sortable(),
                 TextColumn::make('active')
                     ->label(__('admin.active'))
                     ->badge()
@@ -84,24 +97,41 @@ class CompaniesTable extends Component implements HasTable, HasForms
                         0 => 'danger',
                     })
                     ->sortable(),
-            ]),
+                TextColumn::make('user.full_name')
+                    ->label(__('admin.company_representative'))
+                    ->tooltip(__('admin.company_representative'))
+                    ->icon('heroicon-m-user')
+                    ->searchable(['first_name', 'last_name']),
+                TextColumn::make('created_at')
+                    ->label(__('admin.company_created_at'))
+                    ->tooltip(__('admin.company_created_at'))
+                    ->formatStateUsing(fn (Carbon $date): string => $date->format('d.m.Y.'))
+                    ->icon('heroicon-m-clock')
+                    ->sortable(),
+            ])->from('md'),
             Panel::make([
                 Stack::make([
                     TextColumn::make('address')
                         ->label(__('admin.address'))
+                        ->icon('heroicon-m-home')
                         ->formatStateUsing(fn(Company $company): string => $company->address . ', ' . $company->zipcode . ' ' . $company->town),
                     TextColumn::make('county.title')
-                        ->label(__('admin.county')),
+                        ->label(__('admin.county'))
+                        ->icon('heroicon-m-map-pin'),
                     TextColumn::make('oib')
-                        ->label(__('admin.oib')),
+                        ->label(__('admin.oib'))
+                        ->icon('heroicon-m-identification'),
                     TextColumn::make('email')
+                        ->label(__('admin.email'))
                         ->icon('heroicon-m-envelope'),
                     TextColumn::make('phone')
+                        ->label(__('admin.phone'))
                         ->icon('heroicon-m-phone'),
                     TextColumn::make('mobile_phone')
+                        ->label(__('admin.mobile_phone'))
                         ->icon('heroicon-m-device-phone-mobile'),
-                ])->space(2),
-            ])->collapsible(),
+                ])->space(3),
+            ])->collapsible()->columnSpanFull(),
         ];
     }
 
@@ -118,8 +148,7 @@ class CompaniesTable extends Component implements HasTable, HasForms
                 ->options([
                     1 => __('admin.is_active'),
                     0 => __('admin.is_inactive'),
-                ])
-            ->default(1),
+                ]),
             SelectFilter::make('county_id')
                 ->label(__('admin.county'))
                 ->options(County::query()->pluck('title', 'id')->toArray())
@@ -133,19 +162,19 @@ class CompaniesTable extends Component implements HasTable, HasForms
     private function getActions(): array
     {
         return [
-            EditAction::make('edit')
-                ->label(__('common.edit'))
-                ->icon('heroicon-s-pencil-square')
-                ->iconButton()
-                ->url(fn (Company $company): string => route(auth_user_type() . '.companies.edit', $company)),
-            DeleteAction::make('delete')
-                ->label(__('common.delete'))
-                ->icon('heroicon-s-trash')
-                ->iconButton()
-                ->requiresConfirmation()
-                ->modalHeading(__('admin.delete_company'))
-                ->modalSubmitActionLabel(__('common.delete'))
-                ->action(function(Company $company) { (new CompanyController())->destroy($company); })
+            ActionGroup::make([
+                EditAction::make('edit')
+                    ->label(__('common.edit'))
+                    ->icon('heroicon-s-pencil-square')
+                    ->url(fn (Company $company): string => route(auth_user_type() . '.companies.edit', $company)),
+                DeleteAction::make('delete')
+                    ->label(__('common.delete'))
+                    ->icon('heroicon-s-trash')
+                    ->requiresConfirmation()
+                    ->modalHeading(__('admin.delete_company'))
+                    ->modalSubmitActionLabel(__('common.delete'))
+                    ->action(function(Company $company) { (new CompanyController())->destroy($company); })
+            ])->iconPosition(IconPosition::Before),
         ];
     }
 }
