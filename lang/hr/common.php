@@ -8,7 +8,7 @@ return [
     'no' => 'Ne',
     'empty' => 'Prazno',
     'view' => 'Pogledaj',
-    'create' => 'Napravi',
+    'create' => 'Novo',
     'show' => 'Prikaži',
     'edit' => 'Uredi',
     'delete' => 'Obriši',
