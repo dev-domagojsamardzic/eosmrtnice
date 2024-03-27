@@ -31,6 +31,7 @@ return [
     'is_active_n_pl' => 'Aktivni',
     'is_inactive_n_pl' => 'Nektivni',
     'by_type' => 'Prema vrsti',
+    'company_type' => 'Vrsta tvrtke',
     'phone' => 'Broj telefona',
     'mobile_phone' => 'Mobitel',
     'county' => 'Županija',

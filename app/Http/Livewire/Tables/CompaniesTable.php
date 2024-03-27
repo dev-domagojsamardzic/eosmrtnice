@@ -145,7 +145,10 @@ class CompaniesTable extends Component implements HasTable, HasForms
                 ]),
             SelectFilter::make('county_id')
                 ->label(__('admin.county'))
-                ->options(County::query()->pluck('title', 'id')->toArray())
+                ->options(County::query()->pluck('title', 'id')->toArray()),
+            SelectFilter::make('type')
+                ->label(__('admin.company_type'))
+                ->options(CompanyType::options())
         ];
     }
 

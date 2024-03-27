@@ -31,6 +31,7 @@ return [
     'is_active_n_pl' => 'Active',
     'is_inactive_n_pl' => 'Inactive',
     'by_type' => 'By Type',
+    'company_type' => 'Company Type',
     'phone' => 'Phone Number',
     'mobile_phone' => 'Mobile Phone Number',
     'county' => 'County',
