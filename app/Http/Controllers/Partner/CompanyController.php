@@ -77,6 +77,7 @@ class CompanyController extends Controller
     private function form(Company $company, string $action): View
     {
         $types = CompanyType::options();
+        $counties = County::query()->orderBy('title')->pluck('title', 'id')->toArray();
 
         $route = match($action) {
             'edit' => route(auth_user_type() . '.companies.update', ['company' => $company]),
@@ -88,6 +89,7 @@ class CompanyController extends Controller
             'partner.companies.form', [
                 'company' => $company,
                 'types' => $types,
+                'counties' => $counties,
                 'action_name' => $action,
                 'action' => $route,
                 'quit' => route(auth_user_type() . '.companies.index'),
