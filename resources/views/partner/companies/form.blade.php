@@ -8,9 +8,10 @@
     <div>
         <form method="POST" action="{{ $action }}">
             @csrf
-            {{ method_field('PUT') }}
+            @if($company->exists)
+                {{ method_field('PUT') }}
+            @endif
             <div class="form-group row">
-
                 <div class="col-lg-6 col-sm-12">
                     <div class="form-group">
                         <x-input-label for="type" :value="__('admin.labels.company_type')" />
@@ -22,6 +23,8 @@
                         <x-input-error :messages="$errors->get('type')" class="mt-2" />
                     </div>
                 </div>
+            </div>
+            <div class="form-group row">
                 <div class="col-lg-6 col-sm-12">
                     <x-input-label for="title" :value="__('admin.labels.company_title')" />
                     <x-text-input
@@ -67,12 +70,23 @@
                 </div>
             </div>
             <div class="form-group row">
+                <div class="col-sm-12 col-lg-6">
+                    <x-input-label for="oib" :value="__('admin.county')" />
+                    <select class="form-control" name="county_id" id="county_id">
+                        @foreach($counties as $id => $county)
+                            <option value="{{ $id }}" {{ $company->county_id === $id ? "selected" : "" }}>{{ $county }}</option>
+                        @endforeach
+                    </select>
+                </div>
+            </div>
+            <div class="form-group row">
                 <div class="col-md-6 col-sm-12 my-2">
                     <x-input-label for="oib" :value="__('admin.oib')" />
                     <x-text-input
                         id="oib"
                         type="text"
                         name="oib"
+                        maxlength="11"
                         :value="old('oib', $company->oib)"
                         required
                         placeholder="{{ __('admin.placeholders.company_oib') }}"/>
