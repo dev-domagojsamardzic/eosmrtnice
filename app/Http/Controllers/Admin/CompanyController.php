@@ -6,6 +6,7 @@ use App\Enums\CompanyType;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\CompanyRequest;
 use App\Models\Company;
+use App\Models\County;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
 use Livewire\Features\SupportRedirects\Redirector;
@@ -68,6 +69,7 @@ class CompanyController extends Controller
     private function form(Company $company, string $action): View
     {
         $types = CompanyType::options();
+        $counties = County::query()->orderBy('title')->pluck('title', 'id')->toArray();
 
         $route = match($action) {
             'edit' => route(auth_user_type() . '.companies.update', ['company' => $company]),
@@ -79,6 +81,7 @@ class CompanyController extends Controller
             'admin.companies.form', [
                 'company' => $company,
                 'types' => $types,
+                'counties' => $counties,
                 'action_name' => $action,
                 'action' => $route,
                 'quit' => route(auth_user_type() . '.companies.index'),
@@ -99,6 +102,7 @@ class CompanyController extends Controller
         $company->address = $request->input('address');
         $company->town = $request->input('town');
         $company->zipcode = $request->input('zipcode');
+        $company->county_id = $request->input('county_id');
         $company->oib = $request->input('oib');
         $company->email = $request->input('email');
         $company->phone = $request->input('phone');

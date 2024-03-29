@@ -13,6 +13,7 @@ use Illuminate\Validation\Rule;
  * @property        string          address
  * @property        string          town
  * @property        string          zipcode
+ * @property        int             county_id
  * @property        string          oib
  * @property        string          email
  * @property        string          phone

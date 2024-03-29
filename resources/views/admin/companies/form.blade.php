@@ -14,14 +14,22 @@
                 <div class="col-lg-6 col-sm-12">
                     <div class="form-group">
                         <x-input-label for="type" :value="__('admin.labels.company_type')" />
-                        <select class="form-control" name="type" id="type" required>
+                        <select class="form-control" name="type" id="type">
                             @foreach($types as $value => $type)
-                                <option value="{{ $value }}" {{ $value === $company->type->value ? "selected" : "" }}>{{ $type }}</option>
+                                @if((int)old('type') === $value)
+                                    <option value="{{ $value }}" selected>{{ $type }}</option>
+                                @elseif($company->type === $value)
+                                    <option value="{{ $value }}" selected>{{ $type }}</option>
+                                @else
+                                    <option value="{{ $value }}">{{ $type }}</option>
+                                @endif
                             @endforeach
                         </select>
                         <x-input-error :messages="$errors->get('type')" class="mt-2" />
                     </div>
                 </div>
+            </div>
+            <div class="form-group row">
                 <div class="col-lg-6 col-sm-12">
                     <x-input-label for="title" :value="__('admin.labels.company_title')" />
                     <x-text-input
@@ -64,6 +72,22 @@
                         :value="old('zipcode', $company->zipcode)"
                         placeholder="{{ __('admin.placeholders.company_zipcode') }}"/>
                     <x-input-error :messages="$errors->get('zipcode')" class="mt-2" />
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-sm-12 col-lg-6">
+                    <x-input-label for="oib" :value="__('admin.county')" />
+                    <select class="form-control" name="county_id" id="county_id">
+                        @foreach($counties as $value => $county)
+                            @if((int)old('county_id') === $value)
+                                <option value="{{ $value }}" selected>{{ $county }}</option>
+                            @elseif($company->county_id === $value)
+                                <option value="{{ $value }}" selected>{{ $county }}</option>
+                            @else
+                                <option value="{{ $value }}">{{ $county }}</option>
+                            @endif
+                        @endforeach
+                    </select>
                 </div>
             </div>
             <div class="form-group row">
