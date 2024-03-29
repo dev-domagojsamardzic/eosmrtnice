@@ -4,8 +4,9 @@ namespace App\Http\Controllers\Partner;
 
 use App\Enums\CompanyType;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Admin\CompanyRequest;
+use App\Http\Requests\Partner\CompanyRequest;
 use App\Models\Company;
+use App\Models\County;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
 use Livewire\Features\SupportRedirects\Redirector;
@@ -48,6 +49,16 @@ class CompanyController extends Controller
     public function update(Company $company, CompanyRequest $request): RedirectResponse
     {
         return $this->apply($company, $request);
+    }
+
+    /**
+     * Store new resource
+     * @param CompanyRequest $request
+     * @return RedirectResponse
+     */
+    public function store(CompanyRequest $request): RedirectResponse
+    {
+        return $this->apply(new Company, $request);
     }
 
     /**
@@ -105,12 +116,14 @@ class CompanyController extends Controller
      */
     private function apply(Company $company, CompanyRequest $request): RedirectResponse
     {
+        $company->user()->associate(auth()->user());
         $company->type = $request->input('type');
         $company->title = $request->input('title');
         $company->address = $request->input('address');
         $company->town = $request->input('town');
         $company->zipcode = $request->input('zipcode');
         $company->oib = $request->input('oib');
+        $company->county_id = $request->input('county_id');
         $company->email = $request->input('email');
         $company->phone = $request->input('phone');
         $company->mobile_phone = $request->input('mobile_phone');
@@ -118,11 +131,11 @@ class CompanyController extends Controller
 
         try{
             $company->save();
-            return redirect()->route('admin.companies.index')
+            return redirect()->route('partner.companies.index')
                 ->with('alert', ['class' => 'success', 'message' => __('common.saved')]);
         }catch (\Exception $e) {
             return redirect()
-                ->route('admin.companies.index')
+                ->route('partner.companies.index')
                 ->with('alert', ['class' => 'danger', 'message' => __('common.something_went_wrong')]);
         }
     }
