@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Auth\Partner;
 
+use App\Enums\CompanyType;
+use App\Enums\Gender;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Partner\RegisterRequest as PartnerRegisterRequest;
 use App\Models\Company;
@@ -26,7 +28,15 @@ class RegisteredUserController extends Controller
             ->pluck('title', 'id')
             ->toArray();
 
-        return view('auth/partner.register', ['counties' => $counties]);
+        $genders = Gender::options();
+        $companyTypes = CompanyType::options();
+
+        return view('auth/partner.register', [
+            'counties' => $counties,
+            'genders' => $genders,
+            'gender_default' => Gender::MALE->value,
+            'companyTypes' => $companyTypes,
+        ]);
     }
 
     /**

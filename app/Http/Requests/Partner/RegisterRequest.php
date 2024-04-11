@@ -3,6 +3,7 @@
 namespace App\Http\Requests\Partner;
 
 use App\Enums\CompanyType;
+use App\Enums\Gender;
 use App\Models\User;
 use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
@@ -20,9 +21,8 @@ use Illuminate\Validation\Rules\Password;
  * @property    int         company_type
  * @property    string      company_title
  * @property    string      company_address
- * @property    string      company_town
- * @property    string      company_zipcode
- * @property    int         county_id
+ * @property    int         company_city_id
+ * @property    int         company_county_id
  * @property    string      company_oib
  * @property    string      company_email
  * @property    string      company_phone
@@ -50,15 +50,14 @@ class RegisterRequest extends FormRequest
             'first_name' => ['required', 'string', 'max:255'],
             'last_name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
-            'gender' => ['required', 'in:m,f'],
+            'gender' => ['required', Rule::enum(Gender::class)],
             'password' => ['required', 'confirmed', Password::defaults()],
 
             'company_type' => ['required', Rule::enum(CompanyType::class)],
             'company_title' => ['required', 'string', 'max:255'],
             'company_address' => ['nullable','string', 'max:512'],
-            'company_town' => ['nullable','string', 'max:255'],
-            'company_zipcode' => ['nullable','numeric'],
-            'county_code' => ['required','exists:counties,id'],
+            'company_city_id' => ['required', 'exists:cities,id'],
+            'company_county_id' => ['required','exists:counties,id'],
             'company_oib' => ['required', 'numeric', 'digits:11'],
             'company_email' => ['nullable','string', 'email', 'max:255'],
             'company_phone' => ['nullable','string', 'max:64'],

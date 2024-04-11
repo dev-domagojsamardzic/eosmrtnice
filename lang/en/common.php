@@ -26,4 +26,5 @@ return [
     'you_are_logged_in' => 'You are logged in.',
     'something_went_wrong' => 'Something went wrong.',
     'deleted' => 'Deleted.',
+    'required_tag' => ' (required)',
 ];

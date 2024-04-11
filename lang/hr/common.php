@@ -29,4 +29,5 @@ return [
     'you_are_logged_in' => 'Prijavljeni ste',
     'something_went_wrong' => 'Nešto nije u redu',
     'deleted' => 'Obrisano',
+    'required_tag' => ' (obaveznoa)',
 ];

@@ -15,61 +15,72 @@
                     </div>
                     <div class="col-lg-7">
                         <div class="p-5">
-                            <div class="text-left">
-                                <h1 class="h4 text-gray-900 mb-4">{{ __('auth.looking_forward_cooperating') }}</h1>
+                            <div class="text-left font-weight-bold mb-3">
+                                <h1 class="mb-4">{{ __('auth.looking_forward_cooperating') }}</h1>
                             </div>
-                            <div class="text-left">
+
+                            <hr class="mb-4">
+
+                            <div class="text-left mb-3">
                                 <h4>{{ __('auth.partner_representative_user') }}</h4>
                             </div>
+
                             <form method="POST" action="{{ route('partner.register') }}">
                                 @csrf
+                                {{-- first_name & last_name --}}
                                 <div class="form-group row">
-                                    <div class="col-sm-6 mb-3 mb-sm-0">
-                                        <x-input-label for="first_name" :value="__('auth.labels.first_name')"/>
+                                    <div class="col-sm-6 mb-3">
+                                        <x-input-label for="first_name" :value="__('auth.labels.first_name')" :required_tag="true"/>
                                         <x-text-input
                                             id="first_name"
                                             type="text"
                                             name="first_name"
                                             :value="old('first_name')"
-                                            required autofocus autocomplete
+                                            required autofocus
                                             placeholder="{{ __('auth.placeholders.first_name') }}"/>
+                                        <x-input-error :messages="$errors->get('first_name')" class="mt-2"/>
                                     </div>
-                                    <div class="col-sm-6 mb-3 mb-sm-0">
-                                        <x-input-label for="last_name" :value="__('auth.labels.last_name')"/>
+                                    <div class="col-sm-6 mb-3">
+                                        <x-input-label for="last_name" :value="__('auth.labels.last_name')" :required_tag="true"/>
                                         <x-text-input
                                             id="last_name"
                                             type="text"
                                             name="last_name"
                                             :value="old('last_name')"
-                                            required autofocus autocomplete
+                                            required
                                             placeholder="{{ __('auth.placeholders.last_name') }}"/>
+                                        <x-input-error :messages="$errors->get('last_name')" class="mt-2"/>
                                     </div>
                                 </div>
+
+                                {{-- gender --}}
                                 <div class="form-group row">
-                                    <div class="col-sm-12 mb-3 mb-sm-0">
+                                    <div class="col-sm-12 mb-3">
                                         <x-input-label class="d-block" for="gender" :value="__('auth.labels.gender')"/>
-                                        @php
-                                            $options = \App\Enums\Gender::options();
-                                        @endphp
-                                        <x-input-radio-inline name="gender" :options="$options"
-                                                              :selected="\App\Enums\Gender::MALE->value"></x-input-radio-inline>
+                                        <x-input-radio-inline name="gender"
+                                                              :options="$genders"
+                                                              :selected="$gender_default">
+                                        </x-input-radio-inline>
                                     </div>
-
-                                </div>
-                                <div class="form-group">
-                                    <x-input-label for="email" :value="__('auth.labels.email')"/>
-                                    <x-text-input
-                                        id="email"
-                                        type="email"
-                                        name="email"
-                                        :value="old('email')"
-                                        required autofocus autocomplete
-                                        placeholder="{{ __('auth.placeholders.email') }}"/>
-                                    <x-input-error :messages="$errors->get('email')" class="mt-2"/>
                                 </div>
 
+                                {{-- email --}}
                                 <div class="form-group row">
-                                    <div class="col-sm-6 mb-3 mb-sm-0">
+                                    <div class="col-sm-12 mb-3">
+                                        <x-input-label for="email" :value="__('auth.labels.email')"/>
+                                        <x-text-input
+                                            id="email"
+                                            type="email"
+                                            name="email"
+                                            :value="old('email')"
+                                            required
+                                            placeholder="{{ __('auth.placeholders.email') }}"/>
+                                        <x-input-error :messages="$errors->get('email')" class="mt-2"/>
+                                    </div>
+                                </div>
+                                {{-- password & confirm_password--}}
+                                <div class="form-group row">
+                                    <div class="col-sm-6 mb-3">
                                         <x-input-label for="password" :value="__('auth.labels.password')"/>
                                         <x-text-input id="password"
                                                       type="password"
@@ -92,75 +103,59 @@
                                 <hr class="my-4">
 
                                 {{-- Company data --}}
-                                <div class="text-left">
+                                <div class="text-left mb-4">
                                     <h4>{{ __('auth.company_data') }}</h4>
                                 </div>
 
-                                <div class="form-group">
-                                    <x-input-label for="company_type" :value="__('auth.labels.company_type')"/>
-                                    <select class="form-control" id="company_type" name="company_type">
-                                        @foreach(App\Enums\CompanyType::options() as $id => $title)
-                                            <option value="{{ $id }}">{{ $title }}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
-
-                                <div class="form-group">
-                                    <x-input-label for="company_title" :value="__('auth.labels.company_title')"/>
-                                    <x-text-input
-                                        id="company_title"
-                                        type="text"
-                                        name="company_title"
-                                        :value="old('company_title')"
-                                        required autofocus
-                                        autocomplete="company_title"
-                                        placeholder="{{ __('auth.placeholders.company_title') }}"/>
-                                    <x-input-error :messages="$errors->get('company_title')" class="mt-2"/>
-                                </div>
-
-                                <div class="form-group">
-                                    <x-input-label for="company_address" :value="__('auth.labels.company_address')"/>
-                                    <x-text-input
-                                        id="company_address"
-                                        type="text"
-                                        name="company_address"
-                                        :value="old('company_address')"
-                                        autocomplete="company_address"
-                                        required
-                                        placeholder="{{ __('auth.placeholders.company_address') }}"/>
-                                    <x-input-error :messages="$errors->get('company_address')" class="mt-2"/>
-                                </div>
-
+                                {{-- company_type --}}
                                 <div class="form-group row">
-                                    <div class="col-sm-8 mb-3 mb-sm-0">
-                                        <x-input-label for="company_town" :value="__('auth.labels.company_town')"/>
-                                        <x-text-input id="company_town"
-                                                      type="text"
-                                                      name="company_town"
-                                                      :value="old('company_town')"
-                                                      placeholder="{{ __('auth.placeholders.company_town') }}"
-                                                      required
-                                                      autocomplete="company_town"/>
-                                        <x-input-error :messages="$errors->get('company_town')" class="mt-2"/>
-                                    </div>
-                                    <div class="col-sm-4">
-                                        <x-input-label for="company_zipcode"
-                                                       :value="__('auth.labels.company_zipcode')"/>
-                                        <x-text-input id="company_zipcode"
-                                                      type="text"
-                                                      name="company_zipcode"
-                                                      :value="old('company_zipcode')"
-                                                      placeholder="{{ __('auth.placeholders.company_zipcode') }}"
-                                                      required
-                                                      autocomplete="company_zipcode"/>
-                                        <x-input-error :messages="$errors->get('company_zipcode')" class="mt-2"/>
+                                    <div class="col-sm-12 mb-3">
+                                        <x-input-label for="company_type" :value="__('auth.labels.company_type')" :required_tag="true"/>
+                                        <select class="form-control border border-dark" id="company_type" name="company_type">
+                                            @foreach($companyTypes as $id => $title)
+                                                <option value="{{ $id }}">{{ $title }}</option>
+                                            @endforeach
+                                        </select>
                                     </div>
                                 </div>
 
+                                {{-- company_title --}}
                                 <div class="form-group row">
-                                    <div class="col-sm-12">
-                                        <x-input-label for="county_id" :value="__('auth.labels.company_county')"/>
-                                        <select class="form-control" id="county_id" name="county_id">
+                                    <div class="col-sm-12 mb-3">
+                                        <x-input-label for="company_title" :value="__('auth.labels.company_title')" :required_tag="true"/>
+                                        <x-text-input
+                                            id="company_title"
+                                            type="text"
+                                            name="company_title"
+                                            :value="old('company_title')"
+                                            required
+                                            autocomplete="company_title"
+                                            placeholder="{{ __('auth.placeholders.company_title') }}"/>
+                                        <x-input-error :messages="$errors->get('company_title')" class="mt-2"/>
+                                    </div>
+                                </div>
+
+                                {{-- company_address --}}
+                                <div class="form-group row">
+                                    <div class="col-sm-12 mb-3">
+                                        <x-input-label for="company_address" :value="__('auth.labels.company_address')"/>
+                                        <x-text-input
+                                            id="company_address"
+                                            type="text"
+                                            name="company_address"
+                                            :value="old('company_address')"
+                                            autocomplete="company_address"
+                                            required
+                                            placeholder="{{ __('auth.placeholders.company_address') }}"/>
+                                        <x-input-error :messages="$errors->get('company_address')" class="mt-2"/>
+                                    </div>
+                                </div>
+
+                                {{-- company_county_id --}}
+                                <div class="form-group row">
+                                    <div class="col-sm-12 mb-3">
+                                        <x-input-label for="company_county_id" :value="__('auth.labels.company_county')" :required_tag="true"/>
+                                        <select class="form-control border border-dark" id="company_county_id" name="company_county_id">
                                             @foreach($counties as $id => $county)
                                                 <option value="{{ $id }}">{{ $county }}</option>
                                             @endforeach
@@ -168,32 +163,39 @@
                                     </div>
                                 </div>
 
-                                <div class="form-group">
-                                    <x-input-label for="company_oib" :value="__('auth.labels.company_oib')"/>
-                                    <x-text-input
-                                        id="company_oib"
-                                        type="text"
-                                        name="company_oib"
-                                        :value="old('company_oib')"
-                                        required
-                                        placeholder="{{ __('auth.placeholders.company_oib') }}"/>
-                                    <x-input-error :messages="$errors->get('company_oib')" class="mt-2"/>
-                                </div>
-
-                                <div class="form-group">
-                                    <x-input-label for="company_email" :value="__('auth.labels.company_email')"/>
-                                    <x-text-input
-                                        id="company_email"
-                                        type="text"
-                                        name="company_email"
-                                        :value="old('company_email')"
-                                        autocomplete
-                                        placeholder="{{ __('auth.placeholders.company_email') }}"/>
-                                    <x-input-error :messages="$errors->get('company_email')" class="mt-2"/>
-                                </div>
-
+                                {{-- company_oib --}}
                                 <div class="form-group row">
-                                    <div class="col-sm-6 mb-3 mb-sm-0">
+                                    <div class="col-sm-12 mb-3">
+                                        <x-input-label for="company_oib" :value="__('auth.labels.company_oib')" :required_tag="true"/>
+                                        <x-text-input
+                                            id="company_oib"
+                                            type="text"
+                                            name="company_oib"
+                                            :value="old('company_oib')"
+                                            required
+                                            placeholder="{{ __('auth.placeholders.company_oib') }}"/>
+                                        <x-input-error :messages="$errors->get('company_oib')" class="mt-2"/>
+                                    </div>
+                                </div>
+
+                                {{-- company_email --}}
+                                <div class="form-group row">
+                                    <div class="col-sm-12 mb-3">
+                                        <x-input-label for="company_email" :value="__('auth.labels.company_email')"/>
+                                        <x-text-input
+                                            id="company_email"
+                                            type="text"
+                                            name="company_email"
+                                            :value="old('company_email')"
+                                            autocomplete="email"
+                                            placeholder="{{ __('auth.placeholders.company_email') }}"/>
+                                        <x-input-error :messages="$errors->get('company_email')" class="mt-2"/>
+                                    </div>
+                                </div>
+
+                                {{-- company_phone --}}
+                                <div class="form-group row">
+                                    <div class="col-sm-6 mb-3">
                                         <x-input-label for="company_phone" :value="__('auth.labels.company_phone')"/>
                                         <x-text-input id="company_phone"
                                                       type="text"
@@ -203,9 +205,8 @@
                                                       autocomplete="company_phone"/>
                                         <x-input-error :messages="$errors->get('company_phone')" class="mt-2"/>
                                     </div>
-                                    <div class="col-sm-6">
-                                        <x-input-label for="company_mobile_phone"
-                                                       :value="__('auth.labels.company_mobile')"/>
+                                    <div class="col-sm-6 mb-3">
+                                        <x-input-label for="company_mobile_phone" :value="__('auth.labels.company_mobile')"/>
                                         <x-text-input id="company_mobile_phone"
                                                       type="text"
                                                       name="company_mobile_phone"
