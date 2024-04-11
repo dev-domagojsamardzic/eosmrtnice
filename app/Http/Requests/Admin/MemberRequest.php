@@ -11,8 +11,8 @@ use Illuminate\Validation\Rule;
  * @property        string          first_name
  * @property        string          last_name
  * @property        string          email
- * @property        string          sex
- * @property        bool          active
+ * @property        string          gender
+ * @property        bool            active
  */
 class MemberRequest extends FormRequest
 {
@@ -37,7 +37,7 @@ class MemberRequest extends FormRequest
             'first_name' => ['required', 'string', 'max:255'],
             'last_name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', Rule::unique(User::class)->ignore($editedMember->id)],
-            'sex' => ['required', 'in:m,f'],
+            'gender' => ['required', 'in:m,f'],
         ];
     }
 }

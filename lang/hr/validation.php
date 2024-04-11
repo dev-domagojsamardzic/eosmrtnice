@@ -190,7 +190,7 @@ return [
         'first_name' => 'ime',
         'last_name' => 'prezime',
         'email' => 'email',
-        'sex' => 'spol',
+        'gender' => 'spol',
         'password' => 'lozinka',
         'password_confirmation' => 'potvrda lozinke',
         'company_title' => 'naziv tvrtke',

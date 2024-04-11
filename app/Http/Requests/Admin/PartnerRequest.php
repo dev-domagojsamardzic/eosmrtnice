@@ -12,7 +12,7 @@ use Illuminate\Validation\Rule;
  * @property        string          first_name
  * @property        string          last_name
  * @property        string          email
- * @property        string          sex
+ * @property        string          gender
  * @property        bool            active
  */
 class PartnerRequest extends FormRequest
@@ -38,7 +38,7 @@ class PartnerRequest extends FormRequest
             'first_name' => ['required', 'string', 'max:255'],
             'last_name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', Rule::unique(Partner::class)->ignore($editedPartner?->id)],
-            'sex' => ['required', 'in:m,f'],
+            'gender' => ['required', 'in:m,f'],
         ];
     }
 }

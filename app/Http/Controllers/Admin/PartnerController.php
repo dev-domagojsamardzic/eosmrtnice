@@ -98,7 +98,7 @@ class PartnerController extends Controller
     {
         $partner->first_name = $request->input('first_name');
         $partner->last_name = $request->input('last_name');
-        $partner->sex = $request->input('sex');
+        $partner->gender = $request->input('gender');
         $partner->email = $request->input('email');
         $partner->active = $request->boolean('active');
 

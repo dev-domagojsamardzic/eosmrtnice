@@ -2,7 +2,7 @@
 
 namespace Database\Seeders;
 
-use App\Enums\UserSex;
+use App\Enums\Gender;
 use App\Enums\UserType;
 use App\Models\User;
 use Illuminate\Database\Seeder;
@@ -23,7 +23,7 @@ class UserSeeder extends Seeder
             'last_name' => 'Administratorović',
             'email' => 'admin@email.com',
             'type' => UserType::ADMIN,
-            'sex' => UserSex::MALE,
+            'gender' => Gender::MALE,
             'email_verified_at' => now(),
             'password' => Hash::make('admin'),
             'remember_token' => null,
@@ -38,7 +38,7 @@ class UserSeeder extends Seeder
             'last_name' => 'Partner',
             'email' => 'partner@email.com',
             'type' => UserType::PARTNER,
-            'sex' => UserSex::MALE,
+            'gender' => Gender::MALE,
             'email_verified_at' => now(),
             'password' => Hash::make('partner'),
             'remember_token' => null,
@@ -52,7 +52,7 @@ class UserSeeder extends Seeder
             'last_name' => 'Partner2',
             'email' => 'partner2@email.com',
             'type' => UserType::PARTNER,
-            'sex' => UserSex::FEMALE,
+            'gender' => Gender::FEMALE,
             'email_verified_at' => now(),
             'password' => Hash::make('partner'),
             'remember_token' => null,
@@ -66,7 +66,7 @@ class UserSeeder extends Seeder
             'last_name' => 'Partner3',
             'email' => 'partnerovski@email.com',
             'type' => UserType::PARTNER,
-            'sex' => UserSex::FEMALE,
+            'gender' => Gender::FEMALE,
             'active' => 0,
             'email_verified_at' => now(),
             'password' => Hash::make('partner'),
@@ -82,7 +82,7 @@ class UserSeeder extends Seeder
             'last_name' => 'Samardžić',
             'email' => 'dokisb1001@gmail.com',
             'type' => UserType::MEMBER,
-            'sex' => 'F',
+            'gender' => Gender::FEMALE,
             'email_verified_at' => now(),
             'password' => Hash::make('user'),
             'remember_token' => null,
@@ -95,7 +95,7 @@ class UserSeeder extends Seeder
             'last_name' => 'Martić',
             'email' => 'user@email.com',
             'type' => UserType::MEMBER,
-            'sex' => UserSex::MALE,
+            'gender' => Gender::MALE,
             'email_verified_at' => now(),
             'password' => Hash::make('user'),
             'remember_token' => null,
@@ -108,7 +108,7 @@ class UserSeeder extends Seeder
             'last_name' => 'Skorupski',
             'email' => 'user2@email.com',
             'type' => UserType::MEMBER,
-            'sex' => 'F',
+            'gender' => Gender::FEMALE,
             'email_verified_at' => now(),
             'password' => Hash::make('user'),
             'remember_token' => null,
@@ -121,7 +121,7 @@ class UserSeeder extends Seeder
             'last_name' => 'Korisniković',
             'email' => 'user3@email.com',
             'type' => UserType::MEMBER,
-            'sex' => UserSex::MALE,
+            'gender' => Gender::MALE,
             'active' => 0,
             'email_verified_at' => now(),
             'password' => Hash::make('user'),
@@ -135,7 +135,7 @@ class UserSeeder extends Seeder
             'last_name' => 'Sivrić',
             'email' => 'user4@email.com',
             'type' => UserType::MEMBER,
-            'sex' => UserSex::MALE,
+            'gender' => Gender::MALE,
             'email_verified_at' => now(),
             'password' => Hash::make('user'),
             'remember_token' => null,

@@ -190,7 +190,7 @@ return [
         'first_name' => 'First Name',
         'last_name' => 'Last Name',
         'email' => 'Email',
-        'sex' => 'Sex',
+        'gender' => 'Sex',
         'password' => 'Password',
         'password_confirmation' => 'Password Confirmation',
         'company_title' => 'Company title',

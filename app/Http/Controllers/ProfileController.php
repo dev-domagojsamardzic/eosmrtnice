@@ -29,7 +29,7 @@ class ProfileController extends Controller
         $user = $request->user();
         $user->first_name = $request->first_name;
         $user->last_name = $request->last_name;
-        $user->sex = $request->sex;
+        $user->gender = $request->gender;
         $user->email = $request->email;
 
         if ($user->isDirty('email')) {

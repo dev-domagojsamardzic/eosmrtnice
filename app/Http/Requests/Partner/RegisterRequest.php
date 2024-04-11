@@ -13,7 +13,7 @@ use Illuminate\Validation\Rules\Password;
  * @property    string      first_name
  * @property    string      last_name
  * @property    string      email
- * @property    string      sex
+ * @property    string      gender
  * @property    string      password
  * @property    string      confirm_password
  * -----------------------------------------
@@ -50,7 +50,7 @@ class RegisterRequest extends FormRequest
             'first_name' => ['required', 'string', 'max:255'],
             'last_name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
-            'sex' => ['required', 'in:m,f'],
+            'gender' => ['required', 'in:m,f'],
             'password' => ['required', 'confirmed', Password::defaults()],
 
             'company_type' => ['required', Rule::enum(CompanyType::class)],

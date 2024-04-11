@@ -97,7 +97,7 @@ class MemberController extends Controller
     {
         $member->first_name = $request->input('first_name');
         $member->last_name = $request->input('last_name');
-        $member->sex = $request->input('sex');
+        $member->gender = $request->input('gender');
         $member->email = $request->input('email');
         $member->active = $request->boolean('active');
 

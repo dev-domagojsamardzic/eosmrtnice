@@ -26,7 +26,7 @@ return [
         'forgot_password' => 'Zaboravili ste lozinku?',
         'name' => 'Ime i prezime',
         'already_have_account_login' => 'Već imate račun? Prijavite se.',
-        'sex' => 'Spol (obavezno)',
+        'gender' => 'Spol (obavezno)',
         'company_title' => 'Naziv (obavezno)',
         'company_address' => 'Adresa (obavezno)',
         'company_town' => 'Grad (obavezno)',

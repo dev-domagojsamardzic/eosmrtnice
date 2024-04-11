@@ -9,7 +9,7 @@ use Illuminate\Validation\Rule;
 /**
  * @property        string          first_name
  * @property        string          last_name
- * @property        string          sex
+ * @property        string          gender
  * @property        string          email
  */
 class ProfileUpdateRequest extends FormRequest
@@ -24,7 +24,7 @@ class ProfileUpdateRequest extends FormRequest
         return [
             'first_name' => ['required', 'string', 'max:255'],
             'last_name' => ['required', 'string', 'max:255'],
-            'sex' => ['required', 'in:m,f'],
+            'gender' => ['required', 'in:m,f'],
             'email' => ['required', 'string', 'lowercase', 'email', 'max:255', Rule::unique(User::class)->ignore($this->user()->id)],
         ];
     }

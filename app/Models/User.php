@@ -19,7 +19,7 @@ use Illuminate\Notifications\Notifiable;
  * @property        string      last_name
  * @property        string      email
  * @property        UserType    type
- * @property        string      sex
+ * @property        string      gender
  * @property        Carbon      email_verified_at
  * @property        string      password
  * @property        string      remember_token

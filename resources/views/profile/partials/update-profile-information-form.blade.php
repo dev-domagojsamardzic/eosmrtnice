@@ -23,36 +23,41 @@
 
         <div class="form-group row">
             <div class="col-md-6 col-sm-12 col-xs-12">
-                <x-input-label for="first_name" :value="__('admin.labels.first_name')" />
-                <x-text-input id="first_name" name="first_name" type="text" class="mt-1 block w-full" :value="old('first_name', $user->first_name)" required autofocus autocomplete="first_name" />
-                <x-input-error class="mt-2" :messages="$errors->get('first_name')" />
+                <x-input-label for="first_name" :value="__('admin.labels.first_name')"/>
+                <x-text-input id="first_name" name="first_name" type="text" class="mt-1 block w-full"
+                              :value="old('first_name', $user->first_name)" required autofocus
+                              autocomplete="first_name"/>
+                <x-input-error class="mt-2" :messages="$errors->get('first_name')"/>
             </div>
             <div class="col-md-6 col-sm-12 col-xs-12">
-                <x-input-label for="last_name" :value="__('admin.labels.last_name')" />
-                <x-text-input id="last_name" name="last_name" type="text" class="mt-1 block w-full" :value="old('last_name', $user->last_name)" required autocomplete="last_name" />
-                <x-input-error class="mt-2" :messages="$errors->get('last_name')" />
+                <x-input-label for="last_name" :value="__('admin.labels.last_name')"/>
+                <x-text-input id="last_name" name="last_name" type="text" class="mt-1 block w-full"
+                              :value="old('last_name', $user->last_name)" required autocomplete="last_name"/>
+                <x-input-error class="mt-2" :messages="$errors->get('last_name')"/>
             </div>
 
             <div class="col-sm-12 mt-4">
-                <x-input-label class="d-block" for="sex" :value="__('admin.labels.sex')" />
+                <x-input-label class="d-block" for="sex" :value="__('admin.labels.sex')"/>
                 @php
-                    $options = \App\Enums\UserSex::options();
+                    $options = \App\Enums\Gender::options();
                 @endphp
                 <x-input-radio-inline name="sex" :options="$options" :selected="$user->sex"></x-input-radio-inline>
             </div>
         </div>
 
         <div>
-            <x-input-label for="email" :value="__('Email')" />
-            <x-text-input id="email" name="email" type="email" class="mt-1 block w-full" :value="old('email', $user->email)" required autocomplete="username" />
-            <x-input-error class="mt-2" :messages="$errors->get('email')" />
+            <x-input-label for="email" :value="__('Email')"/>
+            <x-text-input id="email" name="email" type="email" class="mt-1 block w-full"
+                          :value="old('email', $user->email)" required autocomplete="username"/>
+            <x-input-error class="mt-2" :messages="$errors->get('email')"/>
 
             @if ($user instanceof \Illuminate\Contracts\Auth\MustVerifyEmail && ! $user->hasVerifiedEmail())
                 <div>
                     <p class="text-sm mt-2 text-gray-800 dark:text-gray-200">
                         {{ __('auth.your_email_is_unverified') }}
 
-                        <button form="send-verification" class="underline text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800">
+                        <button form="send-verification"
+                                class="underline text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800">
                             {{ __('auth.click_here_to_resend_verification_email') }}
                         </button>
                     </p>

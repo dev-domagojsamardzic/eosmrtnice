@@ -8,7 +8,7 @@ return [
     'active' => 'Active',
     'inactive' => 'Inactive',
     'created' => 'Created At',
-    'sex' => 'Gender',
+    'gender' => 'Gender',
     'first_name' => 'First Name',
     'last_name' => 'Last Name',
     'companies' => 'Companies',
@@ -48,7 +48,7 @@ return [
         'company_mobile_phone' => 'Mobile Phone',
         'first_name' => 'First Name (required)',
         'last_name' => 'Last Name (required)',
-        'sex' => 'Gender (required)',
+        'gender' => 'Gender (required)',
         'email' => 'Email (required)',
     ],
     'placeholders' => [

@@ -26,7 +26,7 @@ return [
         'forgot_password' => 'Forgot your password?',
         'name' => 'Full Name',
         'already_have_account_login' => 'Already have an account? Login here.',
-        'sex' => 'Gender (required)',
+        'gender' => 'Gender (required)',
         'company_title' => 'Title (required)',
         'company_address' => 'Address (required)',
         'company_town' => 'Town (required)',
