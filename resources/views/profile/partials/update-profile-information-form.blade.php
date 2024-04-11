@@ -37,11 +37,11 @@
             </div>
 
             <div class="col-sm-12 mt-4">
-                <x-input-label class="d-block" for="sex" :value="__('admin.labels.sex')"/>
+                <x-input-label class="d-block" for="gender" :value="__('admin.labels.gender')"/>
                 @php
                     $options = \App\Enums\Gender::options();
                 @endphp
-                <x-input-radio-inline name="sex" :options="$options" :selected="$user->sex"></x-input-radio-inline>
+                <x-input-radio-inline name="gender" :options="$options" :selected="$user->gender"></x-input-radio-inline>
             </div>
         </div>
 

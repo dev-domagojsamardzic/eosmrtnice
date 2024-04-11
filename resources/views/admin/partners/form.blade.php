@@ -34,12 +34,12 @@
             </div>
             <div class="form-group row">
                 <div class="col-sm-12 mb-3 mb-sm-0">
-                    <x-input-label class="d-block" for="sex" :value="__('auth.labels.sex')"/>
+                    <x-input-label class="d-block" for="gender" :value="__('auth.labels.gender')"/>
                     @php
                         $options = \App\Enums\Gender::options();
                     @endphp
-                    <x-input-radio-inline name="sex" :options="$options"
-                                          :selected="$partner->sex"></x-input-radio-inline>
+                    <x-input-radio-inline name="gender" :options="$options"
+                                          :selected="$partner->gender"></x-input-radio-inline>
                 </div>
             </div>
             <div class="form-group row">

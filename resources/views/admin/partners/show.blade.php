@@ -22,7 +22,7 @@
         </div>
         <div class="form-group row">
             <div class="col-sm-12 mb-3 mb-sm-0">
-                <p><b>{{ __('admin.sex') }}</b>: {{ strtoupper($partner->sex) }}</p>
+                <p><b>{{ __('admin.gender') }}</b>: {{ strtoupper($partner->gender) }}</p>
             </div>
         </div>
         <div class="form-group row">
