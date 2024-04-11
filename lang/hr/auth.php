@@ -30,6 +30,7 @@ return [
         'company_title' => 'Naziv',
         'company_address' => 'Adresa',
         'company_town' => 'Grad',
+        'company_city' => 'Grad / Mjesto',
         'company_zipcode' => 'Poštanski broj',
         'company_county' => 'Županija',
         'company_oib' => 'OIB',

@@ -163,6 +163,18 @@
                                     </div>
                                 </div>
 
+                                {{-- company_city_id --}}
+                                <div class="form-group row">
+                                    <div class="col-sm-12 mb-3">
+                                        <x-input-label for="company_city_id" :value="__('auth.labels.company_city')" :required_tag="true"/>
+                                        <select class="form-control border border-dark" id="company_city_id" name="company_city_id">
+                                            @foreach($cities as $id => $city)
+                                                <option value="{{ $id }}">{{ $city }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                </div>
+
                                 {{-- company_oib --}}
                                 <div class="form-group row">
                                     <div class="col-sm-12 mb-3">

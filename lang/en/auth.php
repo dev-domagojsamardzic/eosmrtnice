@@ -30,6 +30,7 @@ return [
         'company_title' => 'Title',
         'company_address' => 'Address',
         'company_town' => 'Town',
+        'company_city' => 'City / Town',
         'company_zipcode' => 'ZipCode',
         'company_county' => 'County',
         'company_oib' => 'OIB',
