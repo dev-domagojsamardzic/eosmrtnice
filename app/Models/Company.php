@@ -15,9 +15,8 @@ use Illuminate\Support\Carbon;
  * @property        int         user_id
  * @property        string      title
  * @property        string      address
- * @property        string      zipcode
  * @property        int         county_id
- * @property        string      town
+ * @property        int         city_id
  * @property        string      oib
  * @property        string      email
  * @property        string      phone
@@ -29,7 +28,7 @@ use Illuminate\Support\Carbon;
  * -------------------------------------------
  * @property        Partner     user
  * @property        County      county
- *
+ * @property        City        city
  */
 
 class Company extends Model
@@ -80,5 +79,14 @@ class Company extends Model
     public function county(): BelongsTo
     {
         return $this->belongsTo(County::class);
+    }
+
+    /**
+     * Company's city
+     * @return BelongsTo
+     */
+    public function city(): BelongsTo
+    {
+        return $this->belongsTo(City::class);
     }
 }
