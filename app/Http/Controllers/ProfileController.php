@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\Gender;
 use App\Http\Requests\ProfileUpdateRequest;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -18,6 +19,7 @@ class ProfileController extends Controller
     {
         return view('profile.edit', [
             'user' => auth()->user(),
+            'genders' => Gender::options(),
         ]);
     }
 
@@ -27,10 +29,10 @@ class ProfileController extends Controller
     public function update(ProfileUpdateRequest $request): RedirectResponse
     {
         $user = $request->user();
-        $user->first_name = $request->first_name;
-        $user->last_name = $request->last_name;
-        $user->gender = $request->gender;
-        $user->email = $request->email;
+        $user->first_name = $request->input('first_name');
+        $user->last_name = $request->input('last_name');
+        $user->gender = $request->input('gender');
+        $user->email = $request->input('email');
 
         if ($user->isDirty('email')) {
             $user->email_verified_at = null;
@@ -38,7 +40,8 @@ class ProfileController extends Controller
 
         $user->save();
 
-        return Redirect::route(auth_user_type() . '.profile.edit')->with('status', 'profile-updated');
+        return redirect()->route(auth_user_type() . '.profile.edit')
+            ->with('alert', ['class' => 'success', 'message' => __('common.updated')]);
     }
 
     /**
