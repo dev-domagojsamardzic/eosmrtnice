@@ -157,6 +157,7 @@ return [
     'url' => 'Polje :attribute mora biti ispravan URL.',
     'ulid' => 'Polje :attribute mora biti ispravan ULID.',
     'uuid' => 'Polje :attribute mora biti ispravan UUID.',
+    'county_in_city' => 'Grad / mjesto ne pripada odabranoj županiji.',
 
     /*
     |--------------------------------------------------------------------------
