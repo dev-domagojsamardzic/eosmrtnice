@@ -145,7 +145,6 @@
                                             name="company_address"
                                             :value="old('company_address')"
                                             autocomplete="company_address"
-                                            required
                                             placeholder="{{ __('auth.placeholders.company_address') }}"/>
                                         <x-input-error :messages="$errors->get('company_address')" class="mt-2"/>
                                     </div>
@@ -160,6 +159,7 @@
                                                 <option value="{{ $id }}">{{ $county }}</option>
                                             @endforeach
                                         </select>
+                                        <x-input-error :messages="$errors->get('company_county_id')" class="mt-2"/>
                                     </div>
                                 </div>
 
@@ -172,6 +172,7 @@
                                                 <option value="{{ $id }}">{{ $city }}</option>
                                             @endforeach
                                         </select>
+                                        <x-input-error :messages="$errors->get('company_city_id')" class="mt-2"/>
                                     </div>
                                 </div>
 
