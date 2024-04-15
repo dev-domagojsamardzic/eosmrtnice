@@ -18,12 +18,15 @@ return new class extends Migration
             $table->id();
 
             $table->foreignIdFor(User::class);
-            $table->foreignIdFor(City::class);
-            $table->foreignIdFor(County::class);
+
 
             $table->unsignedTinyInteger('type')->nullable(false);
             $table->string('title')->nullable(false);
             $table->string('address')->nullable();
+            $table->string('town')->nullable();
+            $table->string('zipcode', 5)->nullable();
+            $table->foreignIdFor(City::class);
+            $table->foreignIdFor(County::class);
             $table->char('oib',11)->nullable(false);
             $table->string('email')->nullable();
             $table->string('phone')->nullable();
