@@ -105,7 +105,7 @@ class CompanyController extends Controller
         $company->address = $request->input('address');
         $company->town = $request->input('town');
         $company->zipcode = $request->input('zipcode');
-        $company->city()->associate($request->input('city_Id'));
+        $company->city()->associate($request->input('city_id'));
         $company->county()->associate($request->input('county_id'));
         $company->oib = $request->input('oib');
         $company->email = $request->input('email');
