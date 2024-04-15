@@ -16,24 +16,18 @@ return new class extends Migration
         Schema::create('cities', static function (Blueprint $table) {
             $table->id();
             $table->foreignIdFor(County::class);
+            $table->unsignedTinyInteger('type');
             $table->string('title');
-            $table->string('zipcode');
-            $table->string('municipality');
         });
 
-        $file = file_get_contents(base_path('docs/RH_naselja_gradovi.json'));
-        $data = json_decode($file, true, 512, JSON_THROW_ON_ERROR);
-
-        $data = array_map(static function ($record) {
-            return [
-                'title' => $record['city'],
-                'zipcode' => $record['zipcode'],
-                'municipality' => $record['municipality'],
-                'county_id' => $record['county_code']
-            ];
-        },$data);
-
-        DB::table('cities')->insert($data);
+        $file = fopen(base_path('docs/RH_opcine_gradovi.csv'), 'rb');
+        while (($row = fgetcsv($file)) !== FALSE) {
+            DB::table('cities')->insert([
+               'county_id' => $row[0],
+               'type' => $row[1],
+               'title' => $row[2],
+            ]);
+        }
     }
 
     /**
