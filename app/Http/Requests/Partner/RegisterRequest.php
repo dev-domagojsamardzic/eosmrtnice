@@ -23,6 +23,8 @@ use Illuminate\Validation\Rules\Password;
  * @property    int         company_type
  * @property    string      company_title
  * @property    string      company_address
+ * @property    string      company_town
+ * @property    string      company_zipcode
  * @property    int         company_city_id
  * @property    int         company_county_id
  * @property    string      company_oib
@@ -48,12 +50,6 @@ class RegisterRequest extends FormRequest
      */
     public function rules(): array
     {
-        $allowedCities = City::query()
-            ->where('county_id', $this->company_county_id)
-            ->get()
-            ->pluck('id')
-            ->toArray();
-
         return [
             'first_name' => ['required', 'string', 'max:255'],
             'last_name' => ['required', 'string', 'max:255'],
@@ -63,6 +59,8 @@ class RegisterRequest extends FormRequest
             'company_type' => ['required', Rule::enum(CompanyType::class)],
             'company_title' => ['required', 'string', 'max:255'],
             'company_address' => ['nullable','string', 'max:512'],
+            'company_town' => ['nullable','string', 'max:256'],
+            'company_zipcode' => ['nullable','numeric', 'digits:5'],
             'company_city_id' => ['required', 'exists:cities,id', new CityBelongsToCounty],
             'company_county_id' => ['required','exists:counties,id'],
             'company_oib' => ['required', 'numeric', 'digits:11'],

@@ -135,21 +135,6 @@
                                     </div>
                                 </div>
 
-                                {{-- company_address --}}
-                                <div class="form-group row">
-                                    <div class="col-sm-12 mb-3">
-                                        <x-input-label for="company_address" :value="__('auth.labels.company_address')"/>
-                                        <x-text-input
-                                            id="company_address"
-                                            type="text"
-                                            name="company_address"
-                                            :value="old('company_address')"
-                                            autocomplete="company_address"
-                                            placeholder="{{ __('auth.placeholders.company_address') }}"/>
-                                        <x-input-error :messages="$errors->get('company_address')" class="mt-2"/>
-                                    </div>
-                                </div>
-
                                 {{-- company_county_id --}}
                                 <div class="form-group row">
                                     <div class="col-sm-12 mb-3">
@@ -168,11 +153,53 @@
                                     <div class="col-sm-12 mb-3">
                                         <x-input-label for="company_city_id" :value="__('auth.labels.company_city')" :required_tag="true"/>
                                         <select class="form-control border border-dark" id="company_city_id" name="company_city_id">
-                                            @foreach($cities as $id => $city)
-                                                <option value="{{ $id }}">{{ $city }}</option>
+                                            @foreach($cities as $city)
+                                                <option data-county="{{ $city->county_id }}" value="{{ $city->id }}">{{ $city->title }}</option>
                                             @endforeach
                                         </select>
                                         <x-input-error :messages="$errors->get('company_city_id')" class="mt-2"/>
+                                    </div>
+                                </div>
+
+                                {{-- company_address --}}
+                                <div class="form-group row">
+                                    <div class="col-sm-12 mb-3">
+                                        <x-input-label for="company_address" :value="__('auth.labels.company_address')"/>
+                                        <x-text-input
+                                            id="company_address"
+                                            type="text"
+                                            name="company_address"
+                                            :value="old('company_address')"
+                                            autocomplete="company_address"
+                                            placeholder="{{ __('auth.placeholders.company_address') }}"/>
+                                        <x-input-error :messages="$errors->get('company_address')" class="mt-2"/>
+                                    </div>
+                                </div>
+
+                                {{-- company_town & company_zipcode --}}
+                                <div class="form-group row">
+                                    <div class="col-sm-8 mb-3">
+                                        <x-input-label for="company_town" :value="__('auth.labels.company_town')" />
+                                        <x-text-input
+                                            id="company_town"
+                                            type="text"
+                                            name="text"
+                                            :value="old('company_town')"
+                                            autocomplete="company_town"
+                                            placeholder="{{ __('auth.placeholders.company_town') }}"></x-text-input>
+                                        <x-input-error :messages="$errors->get('company_town')" class="mt-2"/>
+                                    </div>
+                                    <div class="col-sm-4 mb-3">
+                                        <x-input-label for="company_zipcode" :value="__('auth.labels.company_zipcode')" />
+                                        <x-text-input
+                                            id="company_zipcode"
+                                            type="text"
+                                            maxlength="5"
+                                            name="company_zipcode"
+                                            :value="old('company_zipcode')"
+                                            autocomplete="{{ __('auth.placeholders.company_zipcode') }}"
+                                            placeholder="{{ __('auth.placeholders.company_zipcode') }}"></x-text-input>
+                                        <x-input-error :messages="$errors->get('company_zipcode')" class="mt-2"/>
                                     </div>
                                 </div>
 

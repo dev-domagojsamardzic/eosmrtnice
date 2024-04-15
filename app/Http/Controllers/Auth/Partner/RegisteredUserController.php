@@ -29,13 +29,8 @@ class RegisteredUserController extends Controller
             ->pluck('title', 'id')
             ->toArray();
         $cities = City::query()
-            ->with('county')
             ->orderBy('title')
-            ->get()
-            ->map(function($item, $key) {
-                $item->title = "$item->title ($item->municipality, $item->zipcode)";
-                return $item;
-            })->pluck('title', 'id')->toArray();
+            ->get();
 
         $genders = Gender::options();
         $companyTypes = CompanyType::options();
@@ -68,6 +63,8 @@ class RegisteredUserController extends Controller
         $company->title = $request->input('company_title');
         $company->user()->associate($user);
         $company->address = $request->input('company_address');
+        $company->town = $request->input('company_town');
+        $company->zipcode = $request->input('company_zipcode');
         $company->city()->associate($request->input('company_county_id'));
         $company->county()->associate($request->input('company_city_id'));
         $company->oib = $request->input('company_oib');
