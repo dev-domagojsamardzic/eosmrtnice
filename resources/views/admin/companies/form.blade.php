@@ -27,6 +27,7 @@
                     <x-input-error :messages="$errors->get('type')" class="mt-2" />
                 </div>
             </div>
+
             <div class="form-group row">
                 {{-- title --}}
                 <div class="col-lg-6 mb-3">
@@ -86,7 +87,7 @@
                         placeholder="{{ __('admin.placeholders.company_address') }}"/>
                     <x-input-error :messages="$errors->get('address')" class="mt-2" />
                 </div>
-
+                {{-- town --}}
                 <div class="col-md-8 mb-2">
                     <x-input-label for="town" :value="__('admin.labels.company_town')" />
                     <x-text-input
@@ -97,6 +98,7 @@
                         placeholder="{{ __('admin.placeholders.company_town') }}"/>
                     <x-input-error :messages="$errors->get('town')" class="mt-2" />
                 </div>
+                {{-- zipcode --}}
                 <div class="col-md-4 mb-2">
                     <x-input-label for="zipcode" :value="__('admin.labels.company_zipcode')" />
                     <x-text-input
@@ -133,6 +135,7 @@
                 </div>
                 <x-input-error :messages="$errors->get('email')" class="mt-2" />
             </div>
+
             <div class="form-group row">
                 <div class="col-md-6 col-sm-12 my-2">
                     <x-input-label for="phone" :value="__('admin.labels.company_phone')" />
@@ -155,6 +158,7 @@
                     <x-input-error :messages="$errors->get('mobile_phone')" class="mt-2" />
                 </div>
             </div>
+
             <div class="form-group row">
                 <div class="col-2 my-2">
                     <div class="custom-control custom-switch">
@@ -163,6 +167,7 @@
                     </div>
                 </div>
             </div>
+
             <div class="form-group row mt-5">
                 <div class="col-12">
                     <button type="submit" class="btn btn-primary btn-user">
