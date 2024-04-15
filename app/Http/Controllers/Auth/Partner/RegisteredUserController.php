@@ -65,8 +65,8 @@ class RegisteredUserController extends Controller
         $company->address = $request->input('company_address');
         $company->town = $request->input('company_town');
         $company->zipcode = $request->input('company_zipcode');
-        $company->city()->associate($request->input('company_county_id'));
-        $company->county()->associate($request->input('company_city_id'));
+        $company->city()->associate($request->input('company_city_id'));
+        $company->county()->associate($request->input('company_county_id'));
         $company->oib = $request->input('company_oib');
         $company->email = $request->input('company_email');
         $company->phone = $request->input('company_phone');
