@@ -10,8 +10,6 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @property-read   int         id
  * @property        int         county_id
  * @property        string      title
- * @property        string      zipcode
- * @property        string      municipality
  * ------------------------------------------
  * @property        County      county
  */

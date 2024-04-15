@@ -15,8 +15,10 @@ use Illuminate\Support\Carbon;
  * @property        int         user_id
  * @property        string      title
  * @property        string      address
- * @property        int         county_id
+ * @property        string      town
+ * @property        string      zipcode
  * @property        int         city_id
+ * @property        int         county_id
  * @property        string      oib
  * @property        string      email
  * @property        string      phone
