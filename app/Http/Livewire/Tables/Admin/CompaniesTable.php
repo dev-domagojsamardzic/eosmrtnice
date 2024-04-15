@@ -43,10 +43,11 @@ class CompaniesTable extends Component implements HasTable, HasForms
             ->emptyStateHeading(__('common.empty'))
             ->striped()
             ->query(
-                Company::query()
+                Company::query()->orderBy('type')->orderByDesc('active')
             )
             ->groups($this->getGroups())
-            ->defaultGroup('active')
+            ->defaultGroup('type')
+            ->groupingSettingsHidden()
             ->actions($this->getActions())
             ->columns($this->getColumns())
             ->filters($this->getFilters());
@@ -108,10 +109,16 @@ class CompaniesTable extends Component implements HasTable, HasForms
                     TextColumn::make('address')
                         ->label(__('admin.address'))
                         ->icon('heroicon-m-home')
-                        ->formatStateUsing(fn(Company $company): string => $company->address . ', ' . $company->zipcode . ' ' . $company->town),
+                        ->formatStateUsing(
+                            fn(Company $company): string =>
+                                $company->address . ', ' . $company->zipcode . ' ' . $company->town
+                        ),
                     TextColumn::make('county.title')
                         ->label(__('admin.county'))
-                        ->icon('heroicon-m-map-pin'),
+                        ->icon('heroicon-m-map-pin')
+                        ->formatStateUsing(
+                            fn(Company $company): string => $company->county?->title . ' | ' . $company->city?->title
+                        ),
                     TextColumn::make('oib')
                         ->label(__('admin.oib'))
                         ->icon('heroicon-m-identification'),
@@ -145,7 +152,7 @@ class CompaniesTable extends Component implements HasTable, HasForms
                 ]),
             SelectFilter::make('county_id')
                 ->label(__('admin.county'))
-                ->options(County::query()->pluck('title', 'id')->toArray()),
+                ->options(County::query()->orderBy('title')->pluck('title', 'id')->toArray()),
             SelectFilter::make('type')
                 ->label(__('admin.company_type'))
                 ->options(CompanyType::options())
@@ -182,11 +189,11 @@ class CompaniesTable extends Component implements HasTable, HasForms
     private function getGroups(): array
     {
         return [
-            Group::make('active')
+            /*Group::make('active')
                 ->label(__('admin.is_active_f_pl'))
                 ->titlePrefixedWithLabel(false)
                 ->orderQueryUsing(fn (Builder $query) => $query->orderBy('active', 'desc'))
-                ->getTitleFromRecordUsing(fn (Company $company): string => $company->active ? __('admin.is_active_f_pl') : __('admin.is_inactive_f_pl')),
+                ->getTitleFromRecordUsing(fn (Company $company): string => $company->active ? __('admin.is_active_f_pl') : __('admin.is_inactive_f_pl')),*/
             Group::make('type')
                 ->label(__('admin.by_type'))
                 ->titlePrefixedWithLabel(false)
