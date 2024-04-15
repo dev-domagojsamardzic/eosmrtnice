@@ -1,0 +1,556 @@
+1,2,Bedenica
+1,2,Bistra
+1,2,Brckovljani
+1,2,Brdovec
+1,2,Dubrava
+1,2,Dubravica
+1,1,Dugo Selo
+1,2,Farkaševac
+1,2,Gradec
+1,1,Ivanić-Grad
+1,2,Jakovlje
+1,1,Jastrebarsko
+1,2,Klinča Sela
+1,2,Kloštar Ivanić
+1,2,Krašić
+1,2,Kravarsko
+1,2,Križ
+1,2,Luka
+1,2,Marija Gorica
+1,2,Orle
+1,2,Pisarovina
+1,2,Pokupsko
+1,2,Preseka
+1,2,Pušća
+1,2,Rakovec
+1,2,Rugvica
+1,1,Samobor
+1,2,Stupnik
+1,1,Sveta Nedelja
+1,1,Sveti Ivan Zelina
+1,1,Velika Gorica
+1,1,Vrbovec
+1,1,Zaprešić
+1,2,Žumberak
+2,2,Bedekovčina
+2,2,Budinščina
+2,2,Desinić
+2,1,Donja Stubica
+2,2,Đurmanec
+2,2,Gornja Stubica
+2,2,Hrašćina
+2,2,Hum na Sutli
+2,2,Jesenje
+2,1,Klanjec
+2,2,Konjščina
+2,2,Kraljevec na Sutli
+2,1,Krapina
+2,2,Krapinske Toplice
+2,2,Kumrovec
+2,2,Lobor
+2,2,Mače
+2,2,Marija Bistrica
+2,2,Mihovljan
+2,2,Novi Golubovec
+2,1,Oroslavje
+2,2,Petrovsko
+2,1,Pregrada
+2,2,Radoboj
+2,2,Stubičke Toplice
+2,2,Sveti Križ Začretje
+2,2,Tuhelj
+2,2,Veliko Trgovišće
+2,1,Zabok
+2,2,Zagorska Sela
+2,1,Zlatar
+2,2,Zlatar Bistrica
+3,2,Donji Kukuruzari
+3,2,Dvor
+3,1,Glina
+3,2,Gvozd
+3,2,Hrvatska Dubica
+3,1,Hrvatska Kostajnica
+3,2,Jasenovac
+3,1,Kutina
+3,2,Lekenik
+3,2,Lipovljani
+3,2,Majur
+3,2,Martinska Ves
+3,1,Novska
+3,1,Petrinja
+3,1,Popovača
+3,1,Sisak
+3,2,Sunja
+3,2,Topusko
+3,2,Velika Ludina
+4,2,Barilović
+4,2,Bosiljevo
+4,2,Cetingrad
+4,2,Draganić
+4,2,Generalski Stol
+4,2,Josipdol
+4,2,Kamanje
+4,2,Krnjak
+4,2,Lasinja
+4,2,Netretić
+4,2,Plaški
+4,2,Rakovica
+4,2,Ribnik
+4,2,Saborsko
+4,2,Tounj
+4,2,Vojnić
+4,2,Žakanje
+4,1,Duga Resa
+4,1,Karlovac
+4,1,Ogulin
+4,1,Ozalj
+4,1,Slunj
+9,2,Brinje
+9,2,Donji Lapac
+9,1,Gospić
+9,2,Karlobag
+9,2,Lovinac
+9,1,Novalja
+9,1,Otočac
+9,2,Perušić
+9,2,Plitvička Jezera
+9,1,Senj
+9,2,Udbina
+9,2,Vrhovine
+5,2,Bednja
+5,2,Beretinec
+5,2,Breznica
+5,2,Breznički Hum
+5,2,Cestica
+5,2,Donja Voća
+5,2,Gornji Kneginec
+5,2,Jalžabet
+5,1,Ivanec
+5,2,Klenovnik
+5,2,Ljubešćica
+5,1,Lepoglava
+5,1,Ludbreg
+5,2,Mali Bukovec
+5,2,Martijanec
+5,2,Maruševec
+5,1,Novi Marof
+5,2,Petrijanec
+5,2,Sračinec
+5,2,Sveti Đurđ
+5,2,Sveti Ilija
+5,2,Trnovec Bartolovečki
+5,1,Varaždin
+5,1,Varaždinske Toplice
+5,2,Veliki Bukovec
+5,2,Vidovec
+5,2,Vinica
+5,2,Visoko
+6,2,Drnje
+6,2,Đelekovec
+6,1,Đurđevac
+6,2,Ferdinandovac
+6,2,Gola
+6,2,Gornja Rijeka
+6,2,Hlebine
+6,2,Kalinovac
+6,2,Kalnik
+6,2,Kloštar Podravski
+6,2,Koprivnički Bregi
+6,1,Koprivnica
+6,2,Koprivnički Ivanec
+6,2,Legrad
+6,2,Molve
+6,2,Novigrad Podravski
+6,2,Novo Virje
+6,2,Peteranec
+6,2,Podravske Sesvete
+6,2,Rasinja
+6,2,Sokolovac
+6,2,Sveti Ivan Žabno
+6,2,Sveti Petar Orehovec
+6,2,Virje
+6,1,Križevci
+7,2,Berek
+7,1,Bjelovar
+7,1,Čazma
+7,1,Daruvar
+7,2,Dežanovac
+7,2,Đulovac
+7,1,Garešnica
+7,1,Grubišno Polje
+7,2,Hercegovac
+7,2,Ivanska
+7,2,Kapela
+7,2,Končanica
+7,2,Nova Rača
+7,2,Rovišće
+7,2,Severin
+7,2,Sirač
+7,2,Šandrovac
+7,2,Štefanje
+7,2,Velika Pisanica
+7,2,Velika Trnovitica
+7,2,Veliki Grđevac
+7,2,Veliko Trojstvo
+7,2,Zrinski Topolovac
+8,1,Bakar
+8,2,Baška
+8,2,Brod Moravice
+8,1,Cres
+8,1,Crikvenica
+8,1,Čabar
+8,2,Čavle
+8,1,Delnice
+8,2,Dobrinj
+8,2,Fužine
+8,2,Jelenje
+8,1,Kastav
+8,2,Klana
+8,2,Kostrena
+8,1,Kraljevica
+8,1,Krk
+8,2,Lokve
+8,2,Lopar
+8,2,Lovran
+8,1,Mali Lošinj
+8,2,Malinska-Dubašnica
+8,2,Matulji
+8,2,Mošćenička Draga
+8,2,Mrkopalj
+8,1,Novi Vinodolski
+8,2,Omišalj
+8,1,Opatija
+8,2,Punat
+8,1,Rab
+8,2,Ravna Gora
+8,1,Rijeka
+8,2,Skrad
+8,2,Vinodolska općina
+8,2,Viškovo
+8,2,Vrbnik
+8,1,Vrbovsko
+10,2,Crnac
+10,2,Čačinci
+10,2,Čađavica
+10,2,Gradina
+10,2,Lukač
+10,2,Mikleuš
+10,2,Nova Bukovica
+10,1,Orahovica
+10,2,Pitomača
+10,1,Slatina
+10,2,Sopje
+10,2,Suhopolje
+10,2,Špišić Bukovica
+10,1,Virovitica
+10,2,Voćin
+10,2,Zdenci
+11,2,Brestovac
+11,2,Čaglin
+11,2,Jakšić
+11,2,Kaptol
+11,1,Kutjevo
+11,1,Lipik
+11,1,Pakrac
+11,1,Pleternica
+11,1,Požega
+11,2,Velika
+12,2,Bebrina
+12,2,Brodski Stupnik
+12,2,Bukovlje
+12,2,Cernik
+12,2,Davor
+12,2,Donji Andrijevci
+12,2,Dragalić
+12,2,Garčin
+12,2,Gornja Vrba
+12,2,Gornji Bogićevci
+12,2,Gundinci
+12,2,Klakar
+12,1,Nova Gradiška
+12,2,Nova Kapela
+12,2,Okučani
+12,2,Oprisavci
+12,2,Oriovac
+12,2,Podcrkavlje
+12,2,Rešetari
+12,2,Sibinj
+12,2,Sikirevci
+12,1,Slavonski Brod
+12,2,Slavonski Šamac
+12,2,Stara Gradiška
+12,2,Staro Petrovo Selo
+12,2,Velika Kopanica
+12,2,Vrbje
+12,2,Vrpolje
+13,1,Benkovac
+13,2,Bibinje
+13,1,Biograd na Moru
+13,2,Galovac
+13,2,Gračac
+13,2,Jasenice
+13,2,Kali
+13,2,Kolan
+13,2,Kukljica
+13,2,Lišane Ostrovičke
+13,1,Nin
+13,2,Novigrad
+13,1,Obrovac
+13,1,Pag
+13,2,Pakoštane
+13,2,Pašman
+13,2,Polača
+13,2,Poličnik
+13,2,Posedarje
+13,2,Povljana
+13,2,Preko
+13,2,Privlaka
+13,2,Ražanac
+13,2,Sali
+13,2,Stankovci
+13,2,Starigrad
+13,2,Sukošan
+13,2,Sveti Filip i Jakov
+13,2,Škabrnja
+13,2,Tkon
+13,2,Vir
+13,2,Vrsi
+13,1,Zadar
+13,2,Zemunik Donji
+14,2,Antunovac
+14,1,Beli Manastir
+14,1,Belišće
+14,2,Bilje
+14,2,Bizovac
+14,2,Čeminac
+14,2,Čepin
+14,2,Darda
+14,2,Donja Motičina
+14,1,Donji Miholjac
+14,2,Draž
+14,2,Drenje
+14,1,Đakovo
+14,2,Đurđenovac
+14,2,Erdut
+14,2,Ernestinovo
+14,2,Feričanci
+14,2,Gorjani
+14,2,Jagodnjak
+14,2,Kneževi Vinogradi
+14,2,Koška
+14,2,Levanjska Varoš
+14,2,Magadenovac
+14,2,Marijanci
+14,1,Našice
+14,1,Osijek
+14,2,Petlovac
+14,2,Petrijevci
+14,2,Podgorač
+14,2,Podravska Moslavina
+14,2,Popovac
+14,2,Punitovci
+14,2,Satnica Đakovačka
+14,2,Semeljci
+14,2,Strizivojna
+14,2,Šodolovci
+14,2,Trnava
+14,1,Valpovo
+14,2,Viljevo
+14,2,Viškovci
+14,2,Vladislavci
+14,2,Vuka
+19,2,Blato
+19,2,Dubrovačko primorje
+19,1,Dubrovnik
+19,2,Janjina
+19,2,Konavle
+19,1,Korčula
+19,2,Kula Norinska
+19,2,Lastovo
+19,2,Lumbarda
+19,1,Metković
+19,2,Mljet
+19,1,Opuzen
+19,2,Orebić
+19,1,Ploče
+19,2,Pojezerje
+19,2,Slivno
+19,2,Smokvica
+19,2,Ston
+19,2,Trpanj
+19,2,Vela Luka
+19,2,Zažablje
+19,2,Župa dubrovačka
+15,2,Bilice
+15,2,Biskupija
+15,2,Civljane
+15,1,Drniš
+15,2,Ervenik
+15,2,Kijevo
+15,2,Kistanje
+15,1,Knin
+15,2,Murter-Kornati
+15,2,Pirovac
+15,2,Primošten
+15,2,Promina
+15,2,Rogoznica
+15,2,Ružić
+15,1,Skradin
+15,1,Šibenik
+15,2,Tisno
+15,2,Tribunj
+15,2,Unešić
+15,1,Vodice
+16,2,Andrijaševci
+16,2,Babina Greda
+16,2,Bogdanovci
+16,2,Borovo
+16,2,Bošnjaci
+16,2,Cerna
+16,2,Drenovci
+16,2,Gradište
+16,2,Gunja
+16,1,Ilok
+16,2,Ivankovo
+16,2,Jarmina
+16,2,Lovas
+16,2,Markušica
+16,2,Negoslavci
+16,2,Nijemci
+16,2,Nuštar
+16,1,Otok
+16,2,Privlaka
+16,2,Stari Jankovci
+16,2,Stari Mikanovci
+16,2,Štitar
+16,2,Tompojevci
+16,2,Tordinci
+16,2,Tovarnik
+16,2,Trpinja
+16,1,Vinkovci
+16,2,Vođinci
+16,2,Vrbanja
+16,1,Vukovar
+16,1,Županja
+17,2,Baška Voda
+17,2,Bol
+17,2,Brela
+17,2,Cista Provo
+17,2,Dicmo
+17,2,Dugi Rat
+17,2,Dugopolje
+17,2,Gradac
+17,2,Hrvace
+17,1,Hvar
+17,1,Imotski
+17,2,Jelsa
+17,1,Kaštela
+17,2,Klis
+17,1,Komiža
+17,2,Lećevica
+17,2,Lokvičići
+17,2,Lovreć
+17,1,Makarska
+17,2,Marina
+17,2,Milna
+17,2,Muć
+17,2,Nerežišća
+17,2,Okrug
+17,1,Omiš
+17,2,Otok
+17,2,Podbablje
+17,2,Podgora
+17,2,Podstrana
+17,2,Postira
+17,2,Prgomet
+17,2,Primorski Dolac
+17,2,Proložac
+17,2,Pučišća
+17,2,Runovići
+17,2,Seget
+17,2,Selca
+17,1,Sinj
+17,1,Solin
+17,1,Split
+17,1,Stari Grad
+17,2,Sućuraj
+17,1,Supetar
+17,2,Sutivan
+17,2,Šestanovac
+17,2,Šolta
+17,1,Trilj
+17,1,Trogir
+17,2,Tučepi
+17,1,Vis
+17,1,Vrgorac
+17,1,Vrlika
+17,2,Zadvarje
+17,2,Zagvozd
+17,2,Zmijavci
+18,2,Bale-Valle
+18,2,Barban
+18,2,Brtonigla-Verteneglio
+18,1,Buje-Buie
+18,1,Buzet
+18,2,Cerovlje
+18,2,Fažana-Fasana
+18,2,Funtana-Fontane
+18,2,Gračišće
+18,2,Grožnjan-Grisignana
+18,2,Kanfanar
+18,2,Karojba
+18,2,Kaštelir-Labinci-Castelliere-S. Domenica
+18,2,Kršan
+18,1,Labin
+18,2,Lanišće
+18,2,Ližnjan-Lisignano
+18,2,Lupoglav
+18,2,Marčana
+18,2,Medulin
+18,2,Motovun-Montona
+18,1,Novigrad-Cittanova
+18,2,Oprtalj-Portole
+18,1,Pazin
+18,2,Pićan
+18,1,Poreč-Parenzo
+18,1,Pula-Pola
+18,2,Raša
+18,1,Rovinj-Rovigno
+18,2,Sveta Nedelja
+18,2,Sveti Lovreč
+18,2,Sveti Petar u Šumi
+18,2,Svetvinčenat
+18,2,Tar-Vabriga-Torre Abrega
+18,2,Tinjan
+18,1,Umag-Umago
+18,2,Višnjan-Visignano
+18,2,Vižinada-Visinada
+18,1,Vodnjan-Dignano
+18,2,Vrsar-Orsera
+18,2,Žminj
+20,2,Belica
+20,1,Čakovec
+20,2,Dekanovec
+20,2,Domašinec
+20,2,Donja Dubrava
+20,2,Donji Kraljevec
+20,2,Donji Vidovec
+20,2,Goričan
+20,2,Gornji Mihaljevec
+20,2,Kotoriba
+20,2,Mala Subotica
+20,1,Mursko Središće
+20,2,Nedelišće
+20,2,Orehovica
+20,2,Podturen
+20,1,Prelog
+20,2,Pribislavec
+20,2,Selnica
+20,2,Strahoninec
+20,2,Sveta Marija
+20,2,Sveti Juraj na Bregu
+20,2,Sveti Martin na Muri
+20,2,Šenkovec
+20,2,Štrigova
+20,2,Vratišinec
+21,1,Zagreb
