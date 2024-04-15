@@ -10,28 +10,27 @@
             @csrf
             {{ method_field('PUT') }}
             <div class="form-group row">
-
-                <div class="col-lg-6 col-sm-12">
-                    <div class="form-group">
-                        <x-input-label for="type" :value="__('admin.labels.company_type')" />
-                        <select class="form-control" name="type" id="type">
-                            @foreach($types as $value => $type)
-                                @if((int)old('type') === $value)
-                                    <option value="{{ $value }}" selected>{{ $type }}</option>
-                                @elseif($company->type === $value)
-                                    <option value="{{ $value }}" selected>{{ $type }}</option>
-                                @else
-                                    <option value="{{ $value }}">{{ $type }}</option>
-                                @endif
-                            @endforeach
-                        </select>
-                        <x-input-error :messages="$errors->get('type')" class="mt-2" />
-                    </div>
+                {{-- type --}}
+                <div class="col-lg-6 col-sm-12 mb-3">
+                    <x-input-label for="type" :value="__('admin.labels.company_type')" :required_tag="true"/>
+                    <select class="form-control border border-dark" name="type" id="type">
+                        @foreach($types as $value => $type)
+                            @if((int)old('type') === $value)
+                                <option value="{{ $value }}" selected>{{ $type }}</option>
+                            @elseif($company->type === $value)
+                                <option value="{{ $value }}" selected>{{ $type }}</option>
+                            @else
+                                <option value="{{ $value }}">{{ $type }}</option>
+                            @endif
+                        @endforeach
+                    </select>
+                    <x-input-error :messages="$errors->get('type')" class="mt-2" />
                 </div>
             </div>
             <div class="form-group row">
-                <div class="col-lg-6 col-sm-12">
-                    <x-input-label for="title" :value="__('admin.labels.company_title')" />
+                {{-- title --}}
+                <div class="col-lg-6 mb-3">
+                    <x-input-label for="title" :value="__('admin.labels.company_title')" :required_tag="true"/>
                     <x-text-input
                         id="title"
                         type="text"
@@ -42,8 +41,42 @@
                     <x-input-error :messages="$errors->get('title')" class="mt-2" />
                 </div>
             </div>
+
             <div class="form-group row">
-                <div class="col-lg-6 col-md-8 my-2">
+                {{-- county_id --}}
+                <div class="col-md-6 mb-3">
+                    <x-input-label for="county_id" :value="__('auth.labels.company_county')" :required_tag="true"/>
+                    <select class="form-control border border-dark" id="county_id" name="county_id">
+                        @foreach($counties as $county)
+                            @if((int) old('county_id', $company->county_id) === $county->id)
+                                <option value="{{ $county->id }}" selected>{{ $county->title }}</option>
+                            @else
+                                <option value="{{ $county->id }}">{{ $county->title }}</option>
+                            @endif
+                        @endforeach
+                    </select>
+                    <x-input-error :messages="$errors->get('county_id')" class="mt-2"/>
+                </div>
+
+                {{-- city_id --}}
+                <div class="col-md-6 mb-3">
+                    <x-input-label for="city_id" :value="__('auth.labels.company_city')" :required_tag="true"/>
+                    <select class="form-control border border-dark" id="city_id" name="city_id">
+                        @foreach($cities as $city)
+                            @if((int) old('city_id', $company->city_id) === $city->id)
+                                <option value="{{ $city->id }}" selected>{{ $city->title }}</option>
+                            @else
+                                <option value="{{ $city->id }}">{{ $city->title }}</option>
+                            @endif
+                        @endforeach
+                    </select>
+                    <x-input-error :messages="$errors->get('city_id')" class="mt-2"/>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                {{-- address --}}
+                <div class="col-sm-12 mb-2">
                     <x-input-label for="address" :value="__('admin.labels.company_address')" />
                     <x-text-input
                         id="address"
@@ -53,7 +86,8 @@
                         placeholder="{{ __('admin.placeholders.company_address') }}"/>
                     <x-input-error :messages="$errors->get('address')" class="mt-2" />
                 </div>
-                <div class="col-lg-4 col-md-8 my-2">
+
+                <div class="col-md-8 mb-2">
                     <x-input-label for="town" :value="__('admin.labels.company_town')" />
                     <x-text-input
                         id="town"
@@ -63,36 +97,22 @@
                         placeholder="{{ __('admin.placeholders.company_town') }}"/>
                     <x-input-error :messages="$errors->get('town')" class="mt-2" />
                 </div>
-                <div class="col-lg-2 col-md-4 my-2">
+                <div class="col-md-4 mb-2">
                     <x-input-label for="zipcode" :value="__('admin.labels.company_zipcode')" />
                     <x-text-input
                         id="zipcode"
                         type="text"
                         name="zipcode"
+                        maxlength="5"
                         :value="old('zipcode', $company->zipcode)"
                         placeholder="{{ __('admin.placeholders.company_zipcode') }}"/>
                     <x-input-error :messages="$errors->get('zipcode')" class="mt-2" />
                 </div>
             </div>
+
             <div class="form-group row">
-                <div class="col-sm-12 col-lg-6">
-                    <x-input-label for="oib" :value="__('admin.county')" />
-                    <select class="form-control" name="county_id" id="county_id">
-                        @foreach($counties as $value => $county)
-                            @if((int)old('county_id') === $value)
-                                <option value="{{ $value }}" selected>{{ $county }}</option>
-                            @elseif($company->county_id === $value)
-                                <option value="{{ $value }}" selected>{{ $county }}</option>
-                            @else
-                                <option value="{{ $value }}">{{ $county }}</option>
-                            @endif
-                        @endforeach
-                    </select>
-                </div>
-            </div>
-            <div class="form-group row">
-                <div class="col-md-6 col-sm-12 my-2">
-                    <x-input-label for="oib" :value="__('admin.oib')" />
+                <div class="col-md-6 mb-2">
+                    <x-input-label for="oib" :value="__('admin.oib')" :required_tag="true"/>
                     <x-text-input
                         id="oib"
                         type="text"
@@ -102,7 +122,7 @@
                         placeholder="{{ __('admin.placeholders.company_oib') }}"/>
                     <x-input-error :messages="$errors->get('oib')" class="mt-2" />
                 </div>
-                <div class="col-md-6 col-sm-12 my-2">
+                <div class="col-md-6 mb-2">
                     <x-input-label for="email" :value="__('admin.labels.company_email')" />
                     <x-text-input
                         id="email"

@@ -39,7 +39,7 @@ return [
     'placeholders' => [
         'company_title' => 'Unesite naziv tvrtke',
         'company_address' => 'Unesite adresu tvrtke',
-        'company_town' => 'Gdje se Vaša tvrtka nalazi?',
+        'company_town' => 'Unesite mjesto unutar općine',
         'company_zipcode' => 'Poštanski broj',
         'company_oib' => 'OIB tvrtke',
         'company_email' => 'Unesite poslovni email',
@@ -47,12 +47,12 @@ return [
         'company_mobile_phone' => 'Unesite mobilni broj'
     ],
     'labels' => [
-        'company_type' => 'Vrsta tvrtke (obavezno)',
-        'company_title' => 'Naziv tvrtke (obavezno)',
+        'company_type' => 'Vrsta tvrtke',
+        'company_title' => 'Naziv tvrtke',
         'company_address' => 'Adresa',
-        'company_town' => 'Grad',
+        'company_town' => 'Mjesto (ako se razlikuje od grada / općine)',
         'company_zipcode' => 'Poštanski broj',
-        'company_oib' => 'OIB tvrtke (obavezno)',
+        'company_oib' => 'OIB tvrtke',
         'company_email' => 'Službena email adresa',
         'company_phone' => 'Telefon',
         'company_mobile_phone' => 'Mobilni telefon',

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Enums\CompanyType;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\CompanyRequest;
+use App\Models\City;
 use App\Models\Company;
 use App\Models\County;
 use Illuminate\Http\RedirectResponse;
@@ -69,7 +70,8 @@ class CompanyController extends Controller
     private function form(Company $company, string $action): View
     {
         $types = CompanyType::options();
-        $counties = County::query()->orderBy('title')->pluck('title', 'id')->toArray();
+        $counties = County::query()->orderBy('title')->get();
+        $cities = City::query()->orderBy('title')->get();
 
         $route = match($action) {
             'edit' => route(auth_user_type() . '.companies.update', ['company' => $company]),
@@ -82,6 +84,7 @@ class CompanyController extends Controller
                 'company' => $company,
                 'types' => $types,
                 'counties' => $counties,
+                'cities' => $cities,
                 'action_name' => $action,
                 'action' => $route,
                 'quit' => route(auth_user_type() . '.companies.index'),
