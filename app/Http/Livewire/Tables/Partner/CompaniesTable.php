@@ -50,10 +50,13 @@ class CompaniesTable extends Component implements HasTable, HasForms
             ])
             ->striped()
             ->query(
-                Company::query()->where('user_id', auth()->user()->id)
+                Company::query()
+                    ->where('user_id', auth()->user()->id)
+                    ->orderBy('active', 'desc')
             )
             ->groups($this->getGroups())
             ->defaultGroup('active')
+            ->groupingSettingsHidden()
             ->actions($this->getActions())
             ->columns($this->getColumns())
             ->filters($this->getFilters());
@@ -152,7 +155,7 @@ class CompaniesTable extends Component implements HasTable, HasForms
                 ]),
             SelectFilter::make('county_id')
                 ->label(__('admin.county'))
-                ->options(County::query()->pluck('title', 'id')->toArray()),
+                ->options(County::query()->orderBy('title')->pluck('title', 'id')->toArray()),
             SelectFilter::make('type')
                 ->label(__('admin.company_type'))
                 ->options(CompanyType::options())
@@ -194,11 +197,6 @@ class CompaniesTable extends Component implements HasTable, HasForms
                 ->titlePrefixedWithLabel(false)
                 ->orderQueryUsing(fn (Builder $query) => $query->orderBy('active', 'desc'))
                 ->getTitleFromRecordUsing(fn (Company $company): string => $company->active ? __('admin.is_active_f_pl') : __('admin.is_inactive_f_pl')),
-            Group::make('type')
-                ->label(__('admin.by_type'))
-                ->titlePrefixedWithLabel(false)
-                ->orderQueryUsing(fn (Builder $query) => $query->orderBy('type'))
-                ->getTitleFromRecordUsing(fn (Company $company): string => $company->type->translate())
         ];
     }
 }
