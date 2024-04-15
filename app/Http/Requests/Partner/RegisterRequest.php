@@ -61,7 +61,7 @@ class RegisterRequest extends FormRequest
             'company_address' => ['nullable','string', 'max:512'],
             'company_town' => ['nullable','string', 'max:256'],
             'company_zipcode' => ['nullable','numeric', 'digits:5'],
-            'company_city_id' => ['required', 'exists:cities,id', new CityBelongsToCounty],
+            'company_city_id' => ['required', 'exists:cities,id', new CityBelongsToCounty('company_county_id')],
             'company_county_id' => ['required','exists:counties,id'],
             'company_oib' => ['required', 'numeric', 'digits:11'],
             'company_email' => ['nullable','string', 'email', 'max:255'],
