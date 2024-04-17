@@ -30,4 +30,5 @@ return [
     'something_went_wrong' => 'Nešto nije u redu',
     'deleted' => 'Obrisano',
     'required_tag' => ' (obavezno)',
+    'no_records' => 'Nema zapisa',
 ];

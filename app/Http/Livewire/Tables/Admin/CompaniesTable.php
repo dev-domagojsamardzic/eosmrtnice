@@ -40,7 +40,8 @@ class CompaniesTable extends Component implements HasTable, HasForms
     public function table(Table $table): Table
     {
         return $table
-            ->emptyStateHeading(__('common.empty'))
+            ->emptyStateHeading(__('common.no_records'))
+            ->emptyStateDescription('')
             ->striped()
             ->query(
                 Company::query()

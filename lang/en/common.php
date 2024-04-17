@@ -27,4 +27,5 @@ return [
     'something_went_wrong' => 'Something went wrong.',
     'deleted' => 'Deleted.',
     'required_tag' => ' (required)',
+    'no_records' => 'No Records',
 ];
