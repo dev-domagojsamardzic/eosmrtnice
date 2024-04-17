@@ -73,9 +73,7 @@
                     </select>
                     <x-input-error :messages="$errors->get('city_id')" class="mt-2"/>
                 </div>
-            </div>
 
-            <div class="form-group row">
                 {{-- address --}}
                 <div class="col-sm-12 mb-2">
                     <x-input-label for="address" :value="__('admin.labels.company_address')" />
@@ -113,6 +111,7 @@
             </div>
 
             <div class="form-group row">
+
                 <div class="col-md-6 mb-2">
                     <x-input-label for="oib" :value="__('admin.oib')" :required_tag="true"/>
                     <x-text-input
@@ -121,9 +120,11 @@
                         name="oib"
                         :value="old('oib', $company->oib)"
                         required
+                        maxlength="11"
                         placeholder="{{ __('admin.placeholders.company_oib') }}"/>
                     <x-input-error :messages="$errors->get('oib')" class="mt-2" />
                 </div>
+
                 <div class="col-md-6 mb-2">
                     <x-input-label for="email" :value="__('admin.labels.company_email')" />
                     <x-text-input
@@ -132,11 +133,9 @@
                         name="email"
                         :value="old('email', $company->email)"
                         placeholder="{{ __('admin.placeholders.company_email') }}"/>
+                    <x-input-error :messages="$errors->get('email')" class="mt-2" />
                 </div>
-                <x-input-error :messages="$errors->get('email')" class="mt-2" />
-            </div>
 
-            <div class="form-group row">
                 <div class="col-md-6 col-sm-12 my-2">
                     <x-input-label for="phone" :value="__('admin.labels.company_phone')" />
                     <x-text-input
@@ -147,6 +146,7 @@
                         placeholder="{{ __('admin.placeholders.company_phone') }}"/>
                     <x-input-error :messages="$errors->get('phone')" class="mt-2" />
                 </div>
+
                 <div class="col-md-6 col-sm-12 my-2">
                     <x-input-label for="mobile_phone" :value="__('admin.labels.company_mobile_phone')" />
                     <x-text-input

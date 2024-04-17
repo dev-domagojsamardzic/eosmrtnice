@@ -75,9 +75,7 @@
                     </select>
                     <x-input-error :messages="$errors->get('city_id')" class="mt-2"/>
                 </div>
-            </div>
 
-            <div class="form-group row">
                 {{-- address --}}
                 <div class="col-sm-12 mb-2">
                     <x-input-label for="address" :value="__('admin.labels.company_address')" />
@@ -89,6 +87,7 @@
                         placeholder="{{ __('admin.placeholders.company_address') }}"/>
                     <x-input-error :messages="$errors->get('address')" class="mt-2" />
                 </div>
+
                 {{-- town --}}
                 <div class="col-md-8 mb-2">
                     <x-input-label for="town" :value="__('admin.labels.company_town')" />
@@ -100,6 +99,7 @@
                         placeholder="{{ __('admin.placeholders.company_town') }}"/>
                     <x-input-error :messages="$errors->get('town')" class="mt-2" />
                 </div>
+
                 {{-- zipcode --}}
                 <div class="col-md-4 mb-2">
                     <x-input-label for="zipcode" :value="__('admin.labels.company_zipcode')" />
@@ -115,17 +115,21 @@
             </div>
 
             <div class="form-group row">
+                {{-- oib --}}
                 <div class="col-md-6 mb-2">
                     <x-input-label for="oib" :value="__('admin.oib')" :required_tag="true"/>
                     <x-text-input
                         id="oib"
                         type="text"
                         name="oib"
+                        maxlength="11"
                         :value="old('oib', $company->oib)"
                         required
                         placeholder="{{ __('admin.placeholders.company_oib') }}"/>
                     <x-input-error :messages="$errors->get('oib')" class="mt-2" />
                 </div>
+
+                {{-- email --}}
                 <div class="col-md-6 mb-2">
                     <x-input-label for="email" :value="__('admin.labels.company_email')" />
                     <x-text-input
@@ -134,11 +138,11 @@
                         name="email"
                         :value="old('email', $company->email)"
                         placeholder="{{ __('admin.placeholders.company_email') }}"/>
+                    <x-input-error :messages="$errors->get('email')" class="mt-2" />
                 </div>
-                <x-input-error :messages="$errors->get('email')" class="mt-2" />
-            </div>
 
-            <div class="form-group row">
+
+                {{-- phone --}}
                 <div class="col-md-6 col-sm-12 my-2">
                     <x-input-label for="phone" :value="__('admin.labels.company_phone')" />
                     <x-text-input
@@ -149,6 +153,8 @@
                         placeholder="{{ __('admin.placeholders.company_phone') }}"/>
                     <x-input-error :messages="$errors->get('phone')" class="mt-2" />
                 </div>
+
+                {{-- mobile_phone --}}
                 <div class="col-md-6 col-sm-12 my-2">
                     <x-input-label for="mobile_phone" :value="__('admin.labels.company_mobile_phone')" />
                     <x-text-input
