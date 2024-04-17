@@ -42,11 +42,11 @@ class CompanyRequest extends FormRequest
         return [
             'type' => ['required', Rule::enum(CompanyType::class)],
             'title' => ['required', 'string', 'max:255'],
+            'county_id' => ['required','exists:counties,id'],
+            'city_id' => ['required', 'exists:cities,id', new CityBelongsToCounty('county_id')],
             'address' => ['nullable','string', 'max:512'],
             'town' => ['nullable','string', 'max:255'],
             'zipcode' => ['nullable','numeric', 'digits:5'],
-            'city_id' => ['required', 'exists:cities,id', new CityBelongsToCounty('county_id')],
-            'county_id' => ['required','exists:counties,id'],
             'oib' => ['required','numeric', 'digits:11'],
             'email' => ['nullable','string', 'email', 'max:255'],
             'phone' => ['nullable','string', 'max:64'],
