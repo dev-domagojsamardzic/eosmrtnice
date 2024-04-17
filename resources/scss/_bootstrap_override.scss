@@ -1,6 +1,19 @@
+html {
+    scrollbar-color: $gray-700 $gray-300;
+    scrollbar-width: thin;
+}
+
 body {
     color: $gray-900;
 }
+
+/*body::-webkit-scrollbar {
+    width: 6px;
+}
+
+body::-webkit-scrollbar-track {
+    background-color: $gray-300;
+}*/
 
 .form-control:focus,
 .custom-select:focus,
