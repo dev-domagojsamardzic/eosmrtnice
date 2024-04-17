@@ -43,7 +43,10 @@ class CompaniesTable extends Component implements HasTable, HasForms
             ->emptyStateHeading(__('common.empty'))
             ->striped()
             ->query(
-                Company::query()->orderBy('type')->orderByDesc('active')
+                Company::query()
+                    ->with(['county', 'city', 'user'])
+                    ->orderBy('type')
+                    ->orderByDesc('active')
             )
             ->groups($this->getGroups())
             ->defaultGroup('type')
