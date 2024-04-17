@@ -14,6 +14,11 @@ use Livewire\Features\SupportRedirects\Redirector;
 
 class CompanyController extends Controller
 {
+    public function __construct()
+    {
+        $this->authorizeResource(Company::class);
+    }
+
     /**
      * Display all companies
      */
