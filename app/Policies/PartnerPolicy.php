@@ -26,12 +26,12 @@ class PartnerPolicy
     }
 
     /**
-     * Determine whether the user can create models.
+     *  Determine whether the user can create models.
      *  CORRESPONDING TO create and store
      */
     public function create(User $user): bool
     {
-        dd('Failing on ' . self::class . '::create');
+        return false;
     }
 
     /**
