@@ -137,7 +137,7 @@ class CompanyController extends Controller
         $company->phone = $request->input('phone');
         $company->mobile_phone = $request->input('mobile_phone');
         $company->active = $request->boolean('active');
-
+        $company->website = $request->input('website');
         try{
             $company->save();
             return redirect()->route('partner.companies.index')

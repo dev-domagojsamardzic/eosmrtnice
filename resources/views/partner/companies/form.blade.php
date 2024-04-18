@@ -6,11 +6,14 @@
     </x-slot>
 
     <div>
-        <form method="POST" action="{{ $action }}">
+        <form method="POST" action="{{ $action }}" enctype="multipart/form-data">
             @csrf
             @if($company->exists)
                 {{ method_field('PUT') }}
             @endif
+
+            <input type="file" name="logo" id="logo">
+
             <div class="form-group row">
                 {{-- type --}}
                 <div class="col-lg-6 col-sm-12 mb-3">
@@ -188,5 +191,22 @@
             </div>
         </form>
     </div>
-
+    @push('scripts')
+        <script type="module">
+            document.addEventListener('DOMContentLoaded', function() {
+                const logoInput = document.querySelector('#logo');
+                const pond = FilePond.create(logoInput, {
+                    acceptedFileTypes: ['image/*'],
+                    server: {
+                        process: '{{ route('images.upload') }}',
+                        revert: '{{ route('images.upload.revert') }}',
+                        headers: {
+                            'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                        },
+                        checkValidity: true,
+                    },
+                });
+            })
+        </script>
+    @endpush
 </x-app-layout>

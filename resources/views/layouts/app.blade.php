@@ -75,6 +75,7 @@
 <!-- Scripts -->
 @vite(['resources/js/app.js'])
 @filamentScripts
+@stack('scripts')
 </body>
 {{-- New layout end --}}
 </html>
