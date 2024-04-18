@@ -11,6 +11,8 @@
 // Import admin panel CSS
 // https://startbootstrap.com/theme/sb-admin-2
 @import "_sb_admin_2.scss";
+@import "filepond/dist/filepond.min.css";
+@import "filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css";
 @import "_bootstrap_override";
 @import "_tailwind_filament_override";
 @import "_mobile";
