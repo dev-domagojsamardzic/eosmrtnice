@@ -15,6 +15,7 @@
             <div class="form-group row">
                 <div class="col-lg-6 col-md-12 mb-3">
                     <input type="file" name="logo" id="logo">
+                    <small id="logo-message" class="text-xs font-weight-bold"></small>
                 </div>
             </div>
 
@@ -249,6 +250,13 @@
                                 response = JSON.parse(response);
                                 $('input[type="hidden"][name="logo"]').val(response.image);
                             },
+                            onerror: (response) => {
+                                response = JSON.parse(response);
+                                $('#logo-message').removeClass(['text-success','text-danger'])
+                                    .text('')
+                                    .addClass(response.class)
+                                    .text(response.message);
+                            }
                         },
                         revert: {
                             url: '{{ route('images.upload.revert') }}',
@@ -261,8 +269,6 @@
 
                     },
                 });
-
-                console.log('eee', pond);
             })
         </script>
     @endpush
