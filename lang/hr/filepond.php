@@ -1,0 +1,26 @@
+<?php
+
+return [
+    'labelIdle' => 'Povuci & pusti datoteku ili <span class="filepond--label-action"> Pretraži </span>',
+    'labelInvalidField' => 'Polje sadrži neispravnu datoteku',
+    'labelFileWaitingForSize' => 'Čeka se veličina',
+    'labelFileSizeNotAvailable' => 'Veličina nije dostupna',
+    'labelFileLoading' => 'Učitavanje',
+    'labelFileLoadError' => 'Greška tijekom učitavanja',
+    'labelFileProcessing' => 'Preuzimanje',
+    'labelFileProcessingComplete' => 'Preuzimanje završeno',
+    'labelFileProcessingAborted' => 'Preuzimanje prekinuto',
+    'labelFileProcessingError' => 'Greška tijekom preuzimanja',
+    'labelFileProcessingRevertError' => 'Greška pri vraćanju',
+    'labelFileRemoveError' => 'Greška pri uklanjanju',
+    'labelTapToCancel' => 'Dodirnite za prekid',
+    'labelTapToRetry' => 'Dodirnite za ponovni pokušaj',
+    'labelTapToUndo' => 'Dodirnite za poništenje',
+    'labelButtonRemoveItem' => 'Ukloni',
+    'labelButtonAbortItemLoad' => 'Prekini',
+    'labelButtonRetryItemLoad' => 'Ponovi',
+    'labelButtonAbortItemProcessing' => 'Prekini',
+    'labelButtonUndoItemProcessing' => 'Poništi',
+    'labelButtonRetryItemProcessing' => 'Ponovi',
+    'labelButtonProcessItem' => 'Preuzmi',
+];
