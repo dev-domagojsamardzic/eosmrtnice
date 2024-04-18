@@ -23,6 +23,8 @@ use Illuminate\Support\Carbon;
  * @property        string      email
  * @property        string      phone
  * @property        string      mobile_phone
+ * @property        string      website
+ * @property        string      logo
  * @property        string      active
  * @property        Carbon      created_at
  * @property        Carbon      updated_at
