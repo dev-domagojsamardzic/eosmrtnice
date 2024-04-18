@@ -12,7 +12,12 @@
                 {{ method_field('PUT') }}
             @endif
 
-            <input type="file" name="logo" id="logo">
+            <div class="form-group row">
+                <div class="col-lg-6 col-md-12 mb-3">
+                    <input type="file" name="logo" id="logo">
+                </div>
+            </div>
+
 
             <div class="form-group row">
                 {{-- type --}}
@@ -196,16 +201,68 @@
             document.addEventListener('DOMContentLoaded', function() {
                 const logoInput = document.querySelector('#logo');
                 const pond = FilePond.create(logoInput, {
-                    acceptedFileTypes: ['image/*'],
+                    labelIdle: '{!! __('filepond.labelIdle') !!}',
+                    labelInvalidField: '{{ __('filepond.labelInvalidField') }}',
+                    labelFileWaitingForSize: '{{ __('filepond.labelFileWaitingForSize') }}',
+                    labelFileSizeNotAvailable: '{{ __('filepond.labelFileSizeNotAvailable') }}',
+                    labelFileLoading: '{{ __('filepond.labelFileLoading') }}',
+                    labelFileLoadError: '{{ __('filepond.labelFileLoadError') }}',
+                    labelFileProcessing: '{{ __('filepond.labelFileProcessing') }}',
+                    labelFileProcessingComplete: '{{ __('filepond.labelFileProcessingComplete') }}',
+                    labelFileProcessingAborted: '{{ __('filepond.labelFileProcessingAborted') }}',
+                    labelFileProcessingError: '{{ __('filepond.labelFileProcessingError') }}',
+                    labelFileProcessingRevertError: '{{ __('filepond.labelFileProcessingRevertError') }}',
+                    labelFileRemoveError: '{{ __('filepond.labelFileRemoveError') }}',
+                    labelTapToCancel: '{{ __('filepond.labelTapToCancel') }}',
+                    labelTapToRetry: '{{ __('filepond.labelTapToRetry') }}',
+                    labelTapToUndo: '{{ __('filepond.labelTapToUndo') }}',
+                    labelButtonRemoveItem: '{{ __('filepond.labelButtonRemoveItem') }}',
+                    labelButtonAbortItemLoad: '{{ __('filepond.labelButtonAbortItemLoad') }}',
+                    labelButtonRetryItemLoad: '{{ __('filepond.labelButtonRetryItemLoad') }}',
+                    labelButtonAbortItemProcessing: '{{ __('filepond.labelButtonAbortItemProcessing') }}',
+                    labelButtonUndoItemProcessing: '{{ __('filepond.labelButtonUndoItemProcessing') }}',
+                    labelButtonRetryItemProcessing: '{{ __('filepond.labelButtonRetryItemProcessing') }}',
+                    labelButtonProcessItem: '{{ __('filepond.labelButtonProcessItem') }}',
+                    imageValidateSizeMinWidth: 100,
+                    imageValidateSizeMaxWidth: 1200,
+                    imageValidateSizeMinHeight: 50,
+                    imageValidateSizeMaxHeight: 900,
+                    imageValidateSizeLabelFormatError: '{{ __('filepond.imageValidateSizeLabelFormatError') }}',
+                    imageValidateSizeLabelImageSizeTooSmall: '{{ __('filepond.imageValidateSizeLabelImageSizeTooSmall') }}',
+                    imageValidateSizeLabelImageSizeTooBig: '{{ __('filepond.imageValidateSizeLabelImageSizeTooBig') }}',
+                    imageValidateSizeLabelExpectedMinSize: '{{ __('filepond.imageValidateSizeLabelExpectedMinSize') }}',
+                    imageValidateSizeLabelExpectedMaxSize: '{{ __('filepond.imageValidateSizeLabelExpectedMaxSize') }}',
+                    allowPaste: false,
+                    checkValidity: true,
+                    credits: null,
+                    dropValidation: true,
+                    acceptedFileTypes: ['image/jpeg', 'image/png', 'image/svg+xml', 'image/webp'],
                     server: {
-                        process: '{{ route('images.upload') }}',
-                        revert: '{{ route('images.upload.revert') }}',
-                        headers: {
-                            'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                        process: {
+                            url: '{{ route('images.upload') }}',
+                            method: 'POST',
+                            headers: {
+                                'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                                'Accept': 'application/json',
+                            },
+                            onload: (response) => {
+                                response = JSON.parse(response);
+                                $('input[type="hidden"][name="logo"]').val(response.image);
+                            },
                         },
-                        checkValidity: true,
+                        revert: {
+                            url: '{{ route('images.upload.revert') }}',
+                            method: 'DELETE',
+                            headers: {
+                                'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                                'Accept': 'application/json',
+                            }
+                        },
+
                     },
                 });
+
+                console.log('eee', pond);
             })
         </script>
     @endpush

@@ -23,4 +23,9 @@ return [
     'labelButtonUndoItemProcessing' => 'Undo',
     'labelButtonRetryItemProcessing' => 'Retry',
     'labelButtonProcessItem' => 'Upload',
+    'imageValidateSizeLabelFormatError' => 'Image type not supported',
+    'imageValidateSizeLabelImageSizeTooSmall' => 'Image is too small',
+    'imageValidateSizeLabelImageSizeTooBig' => 'Image is too big',
+    'imageValidateSizeLabelExpectedMinSize' => 'Minimum size is {minWidth} × {minHeight}',
+    'imageValidateSizeLabelExpectedMaxSize' => 'Maximum size is {maxWidth} × {maxHeight}',
 ];

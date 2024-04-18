@@ -23,4 +23,9 @@ return [
     'labelButtonUndoItemProcessing' => 'Poništi',
     'labelButtonRetryItemProcessing' => 'Ponovi',
     'labelButtonProcessItem' => 'Preuzmi',
+    'imageValidateSizeLabelFormatError' => 'Tip slike nije podržan',
+    'imageValidateSizeLabelImageSizeTooSmall' => 'Slika je premala',
+    'imageValidateSizeLabelImageSizeTooBig' => 'Slika je prevelika',
+    'imageValidateSizeLabelExpectedMinSize' => 'Minimalna veličina je {minWidth} × {minHeight}',
+    'imageValidateSizeLabelExpectedMaxSize' => 'Maksimalna veličina je {maxWidth} × {maxHeight}',
 ];
