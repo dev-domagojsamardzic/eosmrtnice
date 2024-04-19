@@ -84,6 +84,6 @@ Route::middleware('auth')->group(function () {
         ->name('logout');
 
     // ImageController
-    Route::post('upload', [ImageController::class, 'images/upload'])->name('images.upload');
-    Route::delete('revert', [ImageController::class, 'images/upload/revert'])->name('images.upload.revert');
+    Route::post('images/upload', [ImageController::class, 'upload'])->name('images.upload');
+    Route::delete('images/upload/revert', [ImageController::class, 'revert'])->name('images.upload.revert');
 });

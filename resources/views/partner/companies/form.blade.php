@@ -242,10 +242,6 @@
                         process: {
                             url: '{{ route('images.upload') }}',
                             method: 'POST',
-                            headers: {
-                                'X-CSRF-TOKEN': '{{ csrf_token() }}',
-                                'Accept': 'application/json',
-                            },
                             onload: (response) => {
                                 response = JSON.parse(response);
                                 return response.image;
@@ -258,6 +254,10 @@
                                     .text(response.message);
                                 return response;
                             }
+                        },
+                        revert: '{{ route('images.upload.revert') }}',
+                        headers: {
+                            'X-CSRF-TOKEN': '{{ csrf_token() }}',
                         },
                     },
                 });

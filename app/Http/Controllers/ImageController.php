@@ -53,9 +53,14 @@ class ImageController extends Controller
         ], 400);
     }
 
-    public function revert(Request $request)
+    /**
+     * Revert image upload / delete image from tmp file
+     * @param Request $request
+     * @return void
+     */
+    public function revert(Request $request):void
     {
-        $image = $request->header('X-Image');
-        Storage::disk('public')->delete($request->get('logo'));
+        $image = $request->getContent();
+        Storage::disk('public')->delete($image);
     }
 }
