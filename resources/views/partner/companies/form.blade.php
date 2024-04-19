@@ -248,7 +248,7 @@
                             },
                             onload: (response) => {
                                 response = JSON.parse(response);
-                                $('input[type="hidden"][name="logo"]').val(response.image);
+                                return response.image;
                             },
                             onerror: (response) => {
                                 response = JSON.parse(response);
@@ -256,17 +256,9 @@
                                     .text('')
                                     .addClass(response.class)
                                     .text(response.message);
+                                return response;
                             }
                         },
-                        revert: {
-                            url: '{{ route('images.upload.revert') }}',
-                            method: 'DELETE',
-                            headers: {
-                                'X-CSRF-TOKEN': '{{ csrf_token() }}',
-                                'Accept': 'application/json',
-                            }
-                        },
-
                     },
                 });
             })

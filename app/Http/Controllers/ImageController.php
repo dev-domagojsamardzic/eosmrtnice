@@ -10,6 +10,12 @@ use Illuminate\Support\Facades\Validator;
 
 class ImageController extends Controller
 {
+    /**
+     * Upload image resource in tmp file
+     *
+     * @param Request $request
+     * @return JsonResponse
+     */
     public function upload(Request $request): JsonResponse
     {
         $validator = Validator::make($request->all(), [
@@ -49,6 +55,7 @@ class ImageController extends Controller
 
     public function revert(Request $request)
     {
-        Storage::disk('public')->delete($request->getContent());
+        $image = $request->header('X-Image');
+        Storage::disk('public')->delete($request->get('logo'));
     }
 }
