@@ -14,6 +14,8 @@
 
             <div class="form-group row">
                 <div class="col-lg-6 col-md-12 mb-3">
+                    <x-input-label for="logo" :value="__('models/company.logo')"></x-input-label>
+                    <x-input-info :content="__('models/company.logo_helper_info')" />
                     <input type="file" name="logo" id="logo">
                     <small id="logo-message" class="text-xs font-weight-bold"></small>
                 </div>
@@ -238,7 +240,23 @@
                     credits: null,
                     dropValidation: true,
                     acceptedFileTypes: ['image/jpeg', 'image/png', 'image/svg+xml', 'image/webp'],
+                    files: [
+                        @if($company->logo)
+                            {
+                                source: '{{ Storage::disk('public')->url('images/partners/logo/' . $company->logo) }}',
+                                options: {
+                                    type: 'local',
+                                },
+                            }
+                        @endif
+                    ],
                     server: {
+                        load: (source, load) => {
+                            fetch(source)
+                                .then(res => res.blob())
+                                .then(load);
+                        },
+                        revert: '{{ route('images.upload.revert') }}',
                         process: {
                             url: '{{ route('images.upload') }}',
                             method: 'POST',
@@ -255,7 +273,6 @@
                                 return response;
                             }
                         },
-                        revert: '{{ route('images.upload.revert') }}',
                         headers: {
                             'X-CSRF-TOKEN': '{{ csrf_token() }}',
                         },
