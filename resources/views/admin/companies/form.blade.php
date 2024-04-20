@@ -9,6 +9,32 @@
         <form method="POST" action="{{ $action }}">
             @csrf
             {{ method_field('PUT') }}
+
+            {{-- Logo --}}
+            <div class="form-group row">
+                <div class="col-lg-6 col-md-12 mb-3">
+                    <x-input-label for="logo" :value="__('models/company.logo')"></x-input-label>
+                    <x-input-info :content="__('models/company.logo_helper_info')" />
+                    <input type="file" name="logo" id="logo">
+                    <small id="logo-message" class="text-xs font-weight-bold"></small>
+                </div>
+            </div>
+
+            {{-- website --}}
+            <div class="form-group row">
+                <div class="col-lg-6 col-md-12 mb-3">
+                    <x-input-label for="website" :value="__('models/company.website')"></x-input-label>
+                    <x-text-input
+                        id="website"
+                        name="website"
+                        type="text"
+                        :value="old('website', $company->website)"
+                        required
+                        placeholder="{{ __('models/company.placeholders.website') }}"/>
+                    <x-input-error :messages="$errors->get('website')" class="mt-2" />
+                </div>
+            </div>
+
             <div class="form-group row">
                 {{-- type --}}
                 <div class="col-lg-6 col-sm-12 mb-3">
@@ -180,5 +206,86 @@
             </div>
         </form>
     </div>
+    @push('scripts')
+        <script type="module">
+            document.addEventListener('DOMContentLoaded', function() {
 
+                const pond = FilePond.create(document.querySelector('#logo'), {
+                    labelIdle: '{!! __('filepond.labelIdle') !!}',
+                    labelInvalidField: '{{ __('filepond.labelInvalidField') }}',
+                    labelFileWaitingForSize: '{{ __('filepond.labelFileWaitingForSize') }}',
+                    labelFileSizeNotAvailable: '{{ __('filepond.labelFileSizeNotAvailable') }}',
+                    labelFileLoading: '{{ __('filepond.labelFileLoading') }}',
+                    labelFileLoadError: '{{ __('filepond.labelFileLoadError') }}',
+                    labelFileProcessing: '{{ __('filepond.labelFileProcessing') }}',
+                    labelFileProcessingComplete: '{{ __('filepond.labelFileProcessingComplete') }}',
+                    labelFileProcessingAborted: '{{ __('filepond.labelFileProcessingAborted') }}',
+                    labelFileProcessingError: '{{ __('filepond.labelFileProcessingError') }}',
+                    labelFileProcessingRevertError: '{{ __('filepond.labelFileProcessingRevertError') }}',
+                    labelFileRemoveError: '{{ __('filepond.labelFileRemoveError') }}',
+                    labelTapToCancel: '{{ __('filepond.labelTapToCancel') }}',
+                    labelTapToRetry: '{{ __('filepond.labelTapToRetry') }}',
+                    labelTapToUndo: '{{ __('filepond.labelTapToUndo') }}',
+                    labelButtonRemoveItem: '{{ __('filepond.labelButtonRemoveItem') }}',
+                    labelButtonAbortItemLoad: '{{ __('filepond.labelButtonAbortItemLoad') }}',
+                    labelButtonRetryItemLoad: '{{ __('filepond.labelButtonRetryItemLoad') }}',
+                    labelButtonAbortItemProcessing: '{{ __('filepond.labelButtonAbortItemProcessing') }}',
+                    labelButtonUndoItemProcessing: '{{ __('filepond.labelButtonUndoItemProcessing') }}',
+                    labelButtonRetryItemProcessing: '{{ __('filepond.labelButtonRetryItemProcessing') }}',
+                    labelButtonProcessItem: '{{ __('filepond.labelButtonProcessItem') }}',
+                    imageValidateSizeMinWidth: 100,
+                    imageValidateSizeMaxWidth: 1200,
+                    imageValidateSizeMinHeight: 50,
+                    imageValidateSizeMaxHeight: 900,
+                    imageValidateSizeLabelFormatError: '{{ __('filepond.imageValidateSizeLabelFormatError') }}',
+                    imageValidateSizeLabelImageSizeTooSmall: '{{ __('filepond.imageValidateSizeLabelImageSizeTooSmall') }}',
+                    imageValidateSizeLabelImageSizeTooBig: '{{ __('filepond.imageValidateSizeLabelImageSizeTooBig') }}',
+                    imageValidateSizeLabelExpectedMinSize: '{{ __('filepond.imageValidateSizeLabelExpectedMinSize') }}',
+                    imageValidateSizeLabelExpectedMaxSize: '{{ __('filepond.imageValidateSizeLabelExpectedMaxSize') }}',
+                    allowPaste: false,
+                    checkValidity: true,
+                    credits: null,
+                    dropValidation: true,
+                    acceptedFileTypes: ['image/jpeg', 'image/png', 'image/svg+xml', 'image/webp'],
+                    files: [
+                            @if($company->logo)
+                        {
+                            source: '{{ Storage::disk('public')->url('images/partners/logo/' . $company->logo) }}',
+                            options: {
+                                type: 'local',
+                            },
+                        }
+                        @endif
+                    ],
+                    server: {
+                        load: (source, load) => {
+                            fetch(source)
+                                .then(res => res.blob())
+                                .then(load);
+                        },
+                        revert: '{{ route('images.upload.revert') }}',
+                        process: {
+                            url: '{{ route('images.upload') }}',
+                            method: 'POST',
+                            onload: (response) => {
+                                response = JSON.parse(response);
+                                return response.image;
+                            },
+                            onerror: (response) => {
+                                response = JSON.parse(response);
+                                $('#logo-message').removeClass(['text-success','text-danger'])
+                                    .text('')
+                                    .addClass(response.class)
+                                    .text(response.message);
+                                return response;
+                            }
+                        },
+                        headers: {
+                            'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                        },
+                    },
+                });
+            })
+        </script>
+    @endpush
 </x-app-layout>
