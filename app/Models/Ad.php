@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Enums\AdType;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Carbon;
@@ -34,7 +35,7 @@ class Ad extends Model
      * @var array
      */
     protected $attributes = [
-        // TODO: Add default type when you create Enum class
+        'type' => AdType::STANDARD,
         'approved' => false,
     ];
 
@@ -44,7 +45,7 @@ class Ad extends Model
      * @var array<string, string>
      */
     protected $casts = [
-        // TODO: Add cats to Enum class for type attr
+        'type' => AdType::class,
         'valid_from' => 'datetime',
         'valid_until' => 'datetime',
     ];
