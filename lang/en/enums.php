@@ -15,4 +15,8 @@ return [
     // App\Enums\CityType.php
     'city' => 'City',
     'municipality' => 'Municipality',
+    // App\Enums\AdType.php
+    'standard' => 'Standard',
+    'premium' => 'Premium',
+    'gold' => 'Gold',
 ];

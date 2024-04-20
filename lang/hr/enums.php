@@ -15,4 +15,8 @@ return [
     // App\Enums\CityType.php
     'city' => 'Grad',
     'municipality' => 'Općina',
+    // App\Enums\AdType.php
+    'standard' => 'Standard',
+    'premium' => 'Premium',
+    'gold' => 'Gold',
 ];
