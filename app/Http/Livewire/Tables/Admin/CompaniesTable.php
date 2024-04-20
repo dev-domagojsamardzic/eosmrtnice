@@ -126,6 +126,10 @@ class CompaniesTable extends Component implements HasTable, HasForms
                     TextColumn::make('oib')
                         ->label(__('admin.oib'))
                         ->icon('heroicon-m-identification'),
+                    TextColumn::make('website')
+                        ->label(__('models/companies.website'))
+                        ->icon('heroicon-m-globe-alt')
+                        ->url(fn(Company $c):string|null => $c->website, true),
                     TextColumn::make('email')
                         ->label(__('admin.email'))
                         ->icon('heroicon-m-envelope'),
