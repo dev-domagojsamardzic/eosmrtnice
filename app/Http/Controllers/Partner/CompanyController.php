@@ -134,11 +134,13 @@ class CompanyController extends Controller
         {
             $originalLogo = $company->getOriginal('logo');
             // Delete old logo if present
-            if($originalLogo) {
+            if ($originalLogo) {
                 Storage::disk('public')->delete('images/partners/logo/' . $originalLogo);
             }
-            // Store new logo
-            Storage::disk('public')->move($logo, 'images/partners/logo/' . $filename);
+            // Store new logo if exists
+            if ($logo) {
+                Storage::disk('public')->move($logo, 'images/partners/logo/' . $filename);
+            }
         }
 
         $company->user()->associate(auth()->user());
