@@ -135,7 +135,7 @@ class CompaniesTable extends Component implements HasTable, HasForms
                     TextColumn::make('mobile_phone')
                         ->label(__('admin.mobile_phone'))
                         ->icon('heroicon-m-device-phone-mobile'),
-                ])->space(3),
+                ]),
             ])->collapsible()->columnSpanFull(),
         ];
     }
