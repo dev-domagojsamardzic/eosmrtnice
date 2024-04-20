@@ -21,6 +21,20 @@
                 </div>
             </div>
 
+            <div class="form-group row">
+                <div class="col-lg-6 col-md-12 mb-3">
+                    <x-input-label for="website" :value="__('models/company.website')"></x-input-label>
+                    <x-text-input
+                        id="website"
+                        name="website"
+                        type="text"
+                        :value="old('website', $company->website)"
+                        required
+                        placeholder="{{ __('models/company.placeholders.website') }}"/>
+                    <x-input-error :messages="$errors->get('website')" class="mt-2" />
+                </div>
+            </div>
+
 
             <div class="form-group row">
                 {{-- type --}}
@@ -202,8 +216,8 @@
     @push('scripts')
         <script type="module">
             document.addEventListener('DOMContentLoaded', function() {
-                const logoInput = document.querySelector('#logo');
-                const pond = FilePond.create(logoInput, {
+
+                const pond = FilePond.create(document.querySelector('#logo'), {
                     labelIdle: '{!! __('filepond.labelIdle') !!}',
                     labelInvalidField: '{{ __('filepond.labelInvalidField') }}',
                     labelFileWaitingForSize: '{{ __('filepond.labelFileWaitingForSize') }}',

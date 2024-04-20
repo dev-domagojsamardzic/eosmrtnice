@@ -23,6 +23,8 @@ use Illuminate\Validation\Rule;
  * @property        string          phone
  * @property        string          mobile_phone
  * @property        bool            active
+ * @property        string          logo
+ * @property        string          website
  */
 class CompanyRequest extends FormRequest
 {
@@ -52,7 +54,8 @@ class CompanyRequest extends FormRequest
             'oib' => ['required','numeric', 'digits:11'],
             'email' => ['nullable','string', 'email', 'max:255'],
             'phone' => ['nullable','string', 'max:64'],
-            'mobile_phone' => ['nullable','string', 'max:64']
+            'mobile_phone' => ['nullable','string', 'max:64'],
+            'website' => ['string', 'url:https', 'active_url'],
         ];
     }
 }
