@@ -12,6 +12,7 @@
                 {{ method_field('PUT') }}
             @endif
 
+            {{-- Logo --}}
             <div class="form-group row">
                 <div class="col-lg-6 col-md-12 mb-3">
                     <x-input-label for="logo" :value="__('models/company.logo')"></x-input-label>
@@ -21,6 +22,7 @@
                 </div>
             </div>
 
+            {{-- website --}}
             <div class="form-group row">
                 <div class="col-lg-6 col-md-12 mb-3">
                     <x-input-label for="website" :value="__('models/company.website')"></x-input-label>
