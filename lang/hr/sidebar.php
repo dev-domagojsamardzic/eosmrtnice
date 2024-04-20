@@ -6,4 +6,5 @@ return [
     'users' => 'Korisnici',
     'partners' => 'Partneri',
     'companies' => 'Tvrtke',
+    'ads' => 'Oglasi',
 ];

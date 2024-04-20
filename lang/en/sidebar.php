@@ -6,4 +6,5 @@ return [
     'users' => 'Users',
     'partners' => 'Partners',
     'companies' => 'Companies',
+    'ads' => 'Ads',
 ];
