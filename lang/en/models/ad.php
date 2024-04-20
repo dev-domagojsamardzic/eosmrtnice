@@ -1,5 +1,6 @@
 <?php
 
 return [
-    'ads' => 'Oglasi',
+    'ads' => 'Ads',
+    'new_ad' => 'New Ad',
 ];
