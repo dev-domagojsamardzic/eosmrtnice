@@ -9,6 +9,7 @@ use App\Models\City;
 use App\Models\Company;
 use App\Models\County;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\View\View;
 use Livewire\Features\SupportRedirects\Redirector;
 
@@ -124,6 +125,22 @@ class CompanyController extends Controller
      */
     private function apply(Company $company, CompanyRequest $request): RedirectResponse
     {
+        $logo = $request->input('logo');
+        $filename = pathinfo($logo, PATHINFO_BASENAME);
+
+        $company->logo = $filename;
+
+        if ($company->isDirty('logo'))
+        {
+            $originalLogo = $company->getOriginal('logo');
+            // Delete old logo if present
+            if($originalLogo) {
+                Storage::disk('public')->delete('images/partners/logo/' . $originalLogo);
+            }
+            // Store new logo
+            Storage::disk('public')->move($logo, 'images/partners/logo/' . $filename);
+        }
+
         $company->user()->associate(auth()->user());
         $company->type = $request->input('type');
         $company->title = $request->input('title');
@@ -138,6 +155,7 @@ class CompanyController extends Controller
         $company->mobile_phone = $request->input('mobile_phone');
         $company->active = $request->boolean('active');
         $company->website = $request->input('website');
+
         try{
             $company->save();
             return redirect()->route('partner.companies.index')
