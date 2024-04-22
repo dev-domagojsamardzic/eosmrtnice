@@ -82,12 +82,14 @@ class AdController extends Controller
             'create' => route(auth_user_type() . '.ads.store'),
             default => ''
         };
+        $quit = route(auth_user_type() . '.ads.index');
 
         return view('partner.ads.form',[
             'ad' => $ad,
             'types' => $types,
             'action_name' => $action,
             'action' => $route,
+            'quit' => $quit,
         ]);
     }
 }

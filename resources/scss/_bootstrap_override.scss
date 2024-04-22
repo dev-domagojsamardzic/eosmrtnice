@@ -45,6 +45,12 @@ body::-webkit-scrollbar-track {
     border-color: $black;
 }
 
+.btn-secondary:not(:disabled):not(.disabled):active,.btn-secondary:not(:disabled):not(.disabled).active,.show>.btn-secondary.dropdown-toggle {
+    color: $white;
+    background-color: $black;
+    border-color: $black;
+}
+
 a {
     color: $black;
 }
