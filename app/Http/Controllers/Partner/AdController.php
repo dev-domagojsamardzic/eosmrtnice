@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Partner;
 
+use App\Enums\AdType;
 use App\Http\Controllers\Controller;
 use App\Models\Ad;
 use Illuminate\Http\Request;
@@ -19,10 +20,11 @@ class AdController extends Controller
 
     /**
      * Show the form for creating a new resource.
+     * @return View
      */
-    public function create()
+    public function create(): View
     {
-        //
+        return $this->form(new Ad, 'create');
     }
 
     /**
@@ -63,5 +65,29 @@ class AdController extends Controller
     public function destroy(Ad $ad)
     {
         //
+    }
+
+    /**
+     * Display resource's form
+     * @param Ad $ad
+     * @param string $action
+     * @return View
+     */
+    private function form(Ad $ad, string $action): View
+    {
+        $types = AdType::options();
+
+        $route = match($action) {
+            'edit' => route(auth_user_type() . '.ads.update', ['ad' => $ad]),
+            'create' => route(auth_user_type() . '.ads.store'),
+            default => ''
+        };
+
+        return view('partner.ads.form',[
+            'ad' => $ad,
+            'types' => $types,
+            'action_name' => $action,
+            'action' => $route,
+        ]);
     }
 }
