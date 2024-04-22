@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Partner;
 
 use App\Enums\AdType;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Partner\AdRequest;
 use App\Models\Ad;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
@@ -30,7 +31,7 @@ class AdController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(AdRequest $request)
     {
         //
     }
