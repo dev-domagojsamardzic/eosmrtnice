@@ -6,8 +6,10 @@ use App\Enums\AdType;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Partner\AdRequest;
 use App\Models\Ad;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
+use Exception;
 
 class AdController extends Controller
 {
@@ -29,11 +31,13 @@ class AdController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Store new resource
+     * @param AdRequest $request
+     * @return RedirectResponse
      */
-    public function store(AdRequest $request)
+    public function store(AdRequest $request):RedirectResponse
     {
-        //
+        return $this->apply(new Ad, $request);
     }
 
     /**
@@ -77,6 +81,7 @@ class AdController extends Controller
     private function form(Ad $ad, string $action): View
     {
         $types = AdType::options();
+        $companies = auth()->user()->companies ?? collect();
 
         $route = match($action) {
             'edit' => route(auth_user_type() . '.ads.update', ['ad' => $ad]),
@@ -88,9 +93,31 @@ class AdController extends Controller
         return view('partner.ads.form',[
             'ad' => $ad,
             'types' => $types,
+            'companies' => $companies,
             'action_name' => $action,
             'action' => $route,
             'quit' => $quit,
         ]);
+    }
+
+    /**
+     * Apply changes on resource
+     * @param Ad $ad
+     * @param AdRequest $request
+     * @return RedirectResponse
+     */
+    private function apply(Ad $ad, AdRequest $request): RedirectResponse
+    {
+        $ad->company()->associate($request->input('company_id'));
+        $ad->months_valid = $request->input('months_valid');
+
+        try {
+            $ad->save();
+            return redirect()->route('partner.ads.index')
+                ->with('alert', ['class' => 'success', 'message' => __('common.saved')]);
+        } catch(Exception $e) {
+           return redirect()->route('partner.ads.index')
+                ->with('alert', ['class' => 'danger', 'message' => __('common.something_went_wrong')]);
+        }
     }
 }
