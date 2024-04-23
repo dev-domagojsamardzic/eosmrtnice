@@ -30,4 +30,5 @@ return [
     'no_records' => 'No Records',
     'approved' => 'Approved',
     'not_approved' => 'Not Approved',
+    'months' => 'Month/s',
 ];

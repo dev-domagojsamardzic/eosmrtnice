@@ -33,4 +33,5 @@ return [
     'no_records' => 'Nema zapisa',
     'approved' => 'Odobreno',
     'not_approved' => 'Nije odobreno',
+    'months' => 'mjeseci',
 ];

@@ -7,6 +7,8 @@ return [
     'months_valid' => 'Ad duration',
     'months_valid_info' => 'How long will your Ad be active?',
     'company_id' => 'Company',
+    'valid_from' => 'Valid From',
+    'valid_until' => 'Valid Until',
     'info' => [
         'standard' => [
             'title' => '"STANDARD" Ad',

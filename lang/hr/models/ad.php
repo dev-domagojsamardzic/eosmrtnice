@@ -7,6 +7,8 @@ return [
     'months_valid' => 'Trajanje oglasa',
     'months_valid_info' => 'Koliko dugo će Vaš oglas biti aktivan?',
     'company_id' => 'Tvrtka',
+    'valid_from' => 'Vrijedi od',
+    'valid_until' => 'Vrijedi do',
     'info' => [
         'standard' => [
             'title' => '"STANDARD" oglas',
