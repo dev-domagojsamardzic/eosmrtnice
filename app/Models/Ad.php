@@ -13,7 +13,7 @@ use Illuminate\Support\Carbon;
  * @property            int         company_id
  * @property            int         type
  * @property            bool        approved
- * @property            int         days_valid
+ * @property            int         months_valid
  * @property            Carbon      valid_from
  * @property            Carbon      valid_until
  * @property            Carbon      created_at
