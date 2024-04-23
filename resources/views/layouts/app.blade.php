@@ -17,7 +17,7 @@
 </head>
 
 {{-- New layout --}}
-<body id="page-top">
+<body class="sidebar-toggled" id="page-top">
 
 <div id="wrapper">
     <!-- Sidebar -->
