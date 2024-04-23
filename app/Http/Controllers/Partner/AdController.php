@@ -86,7 +86,7 @@ class AdController extends Controller
     private function form(Ad $ad, string $action): View
     {
         $types = AdType::options();
-        $companies = auth()->user()->companies ?? collect();
+        $companies = auth()->user()->companies()->has('ad', '=', 0)->get() ?? collect();
 
         $route = match($action) {
             'edit' => route(auth_user_type() . '.ads.update', ['ad' => $ad]),
