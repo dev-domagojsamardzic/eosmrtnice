@@ -98,10 +98,10 @@ class Company extends Model
 
 
     /**
-     * Ads that belong to Company
+     * Ad that belongs to Company
      * @return HasOne
      */
-    public function ads(): HasOne
+    public function ad(): HasOne
     {
         return $this->hasOne(Ad::class);
     }
