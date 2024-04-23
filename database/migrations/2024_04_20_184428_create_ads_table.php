@@ -18,9 +18,10 @@ return new class extends Migration
             $table->unsignedTinyInteger('type')->default(1);
             $table->boolean('approved')->default(false);
             $table->unsignedInteger('months_valid')->nullable(false)->default(1);
-            $table->dateTime('valid_from');
-            $table->dateTime('valid_until');
+            $table->dateTime('valid_from')->nullable();
+            $table->dateTime('valid_until')->nullable();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
