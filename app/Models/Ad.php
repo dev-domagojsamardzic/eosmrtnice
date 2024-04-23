@@ -40,7 +40,7 @@ class Ad extends Model
      */
     protected $attributes = [
         'type' => AdType::STANDARD,
-        'days_valid' => 30,
+        'months_valid' => 1,
         'approved' => false,
     ];
 
