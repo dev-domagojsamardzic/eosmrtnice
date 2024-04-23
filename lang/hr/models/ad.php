@@ -6,6 +6,7 @@ return [
     'type' => 'Vrsta oglasa',
     'months_valid' => 'Trajanje oglasa',
     'months_valid_info' => 'Koliko dugo će Vaš oglas biti aktivan?',
+    'company_id' => 'Tvrtka',
     'info' => [
         'standard' => [
             'title' => '"STANDARD" oglas',

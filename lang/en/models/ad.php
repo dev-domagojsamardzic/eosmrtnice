@@ -6,6 +6,7 @@ return [
     'type' => 'Ad Type',
     'months_valid' => 'Ad duration',
     'months_valid_info' => 'How long will your Ad be active?',
+    'company_id' => 'Company',
     'info' => [
         'standard' => [
             'title' => '"STANDARD" Ad',

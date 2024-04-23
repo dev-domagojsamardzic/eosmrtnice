@@ -53,9 +53,20 @@
             </div>
 
             <div class="form-group row">
-                <div class="col-md-6">
+                <div class="col-lg-4 col-md-6 col-sm-12 mb-3">
+                    <x-input-label for="company_id" :value="__('models/ad.company_id')"/>
+                    <select class="form-control border border-dark" id="company_id" name="company_id">
+                        @foreach($companies as $company)
+                            <option value="{{ $company->id }}">{{ $company->title }}</option>
+                        @endforeach
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <div class="col-md-6 mb-3">
                     <x-input-label class="d-block" :value="__('models/ad.months_valid')" />
-                    <x-input-info :content="__('models/ad.months_valid_info')"></x-input-info>
+                    <x-input-info class="mb-3" :content="__('models/ad.months_valid_info')"></x-input-info>
                     <div class="custom-control custom-radio custom-control-inline">
                         <input class="custom-control-input" type="radio" name="months_valid" id="months_valid_1" value="1" checked>
                         <label class="custom-control-label" for="months_valid_1">{{ __('models/ad.months_1') }}</label>
@@ -72,7 +83,9 @@
                         <input class="custom-control-input" type="radio" name="months_valid" id="months_valid_12" value="12">
                         <label class="custom-control-label" for="months_valid_12">{{ __('models/ad.months_12') }}</label>
                     </div>
+                    <x-input-error :messages="$errors->get('months_valid')" class="mt-2" />
                 </div>
+
             </div>
 
             <div class="form-group row mt-5">
