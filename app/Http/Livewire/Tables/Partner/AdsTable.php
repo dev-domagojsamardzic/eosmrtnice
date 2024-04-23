@@ -28,6 +28,7 @@ class AdsTable extends Component implements HasForms, HasTable
                     ->label(__('models/ad.new_ad'))
                     ->icon('heroicon-m-plus')
                     ->url(route(auth_user_type() . '.ads.create'))
+                    ->disabled(!auth()->user()->can('create', Ad::class ))
             ])
             ->query(Ad::query())
             ->columns($this->getColumns())

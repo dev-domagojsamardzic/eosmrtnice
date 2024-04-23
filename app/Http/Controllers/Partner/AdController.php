@@ -13,6 +13,11 @@ use Exception;
 
 class AdController extends Controller
 {
+    public function __construct()
+    {
+        $this->authorizeResource(Ad::class);
+    }
+
     /**
      * Display a listing of the resource.
      */
