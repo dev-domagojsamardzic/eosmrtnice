@@ -30,7 +30,7 @@ class AdRequest extends FormRequest
     {
         return [
             'type' => ['required', Rule::enum(AdType::class)],
-            'months_valid' => ['required', 'integer', 'in:3,6,9,12'],
+            'months_valid' => ['required', 'integer', 'in:1,3,6,12'],
         ];
     }
 }
