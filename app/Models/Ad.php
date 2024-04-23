@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Enums\AdType;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Support\Carbon;
 
 /**
@@ -18,6 +19,8 @@ use Illuminate\Support\Carbon;
  * @property            Carbon      created_at
  * @property            Carbon      updated_at
  * @property            Carbon      deleted_at
+ * --------------------------------------------
+ * @property            Company     company
  */
 class Ad extends Model
 {
@@ -51,4 +54,13 @@ class Ad extends Model
         'valid_from' => 'datetime',
         'valid_until' => 'datetime',
     ];
+
+    /**
+     * Company that Ad belongs to
+     * @return BelongsTo
+     */
+    public function company(): BelongsTo
+    {
+        return $this->belongsTo(Company::class);
+    }
 }
