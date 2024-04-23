@@ -3,11 +3,10 @@
 namespace App\Models;
 
 use App\Enums\CompanyType;
-use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Carbon;
 
@@ -35,7 +34,7 @@ use Illuminate\Support\Carbon;
  * @property        Partner         user
  * @property        County          county
  * @property        City            city
- * @property        Collection|Ad   ads
+ * @property        Ad              ad
  */
 
 class Company extends Model
@@ -100,10 +99,10 @@ class Company extends Model
 
     /**
      * Ads that belong to Company
-     * @return HasMany
+     * @return HasOne
      */
-    public function ads(): HasMany
+    public function ads(): HasOne
     {
-        return $this->hasMany(Ad::class);
+        return $this->hasOne(Ad::class);
     }
 }
