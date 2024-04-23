@@ -31,4 +31,6 @@ return [
     'deleted' => 'Obrisano',
     'required_tag' => ' (obavezno)',
     'no_records' => 'Nema zapisa',
+    'approved' => 'Odobreno',
+    'not_approved' => 'Nije odobreno',
 ];

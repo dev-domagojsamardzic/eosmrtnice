@@ -28,4 +28,6 @@ return [
     'deleted' => 'Deleted.',
     'required_tag' => ' (required)',
     'no_records' => 'No Records',
+    'approved' => 'Approved',
+    'not_approved' => 'Not Approved',
 ];

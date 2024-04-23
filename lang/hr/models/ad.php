@@ -49,4 +49,5 @@ return [
     'months_3' => '3 mjeseca',
     'months_6' => '6 mjeseci',
     'months_12' => '12 mjeseci',
+    'approved' => 'Odobreno',
 ];

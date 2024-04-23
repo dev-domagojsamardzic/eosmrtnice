@@ -49,4 +49,5 @@ return [
     'months_3' => '3 Months',
     'months_6' => '6 Months',
     'months_12' => '12 Months',
+    'approved' => 'Approved',
 ];
