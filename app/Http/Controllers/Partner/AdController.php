@@ -6,6 +6,7 @@ use App\Enums\AdType;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Partner\AdRequest;
 use App\Models\Ad;
+use App\Models\Company;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
@@ -28,11 +29,12 @@ class AdController extends Controller
 
     /**
      * Show the form for creating a new resource.
+     * @param Company $company
      * @return View
      */
-    public function create(): View
+    public function create(Company $company): View
     {
-        return $this->form(new Ad, 'create');
+        return $this->form($company, new Ad, 'create');
     }
 
     /**
@@ -79,18 +81,19 @@ class AdController extends Controller
 
     /**
      * Display resource's form
+     * @param Company $company
      * @param Ad $ad
      * @param string $action
      * @return View
      */
-    private function form(Ad $ad, string $action): View
+    private function form(Company $company, Ad $ad, string $action): View
     {
         $types = AdType::options();
         $companies = auth()->user()->companies()->has('ad', '=', 0)->get() ?? collect();
 
         $route = match($action) {
-            'edit' => route(auth_user_type() . '.ads.update', ['ad' => $ad]),
-            'create' => route(auth_user_type() . '.ads.store'),
+            'edit' => route(auth_user_type() . '.ads.update', ['company' => $company, 'ad' => $ad]),
+            'create' => route(auth_user_type() . '.ads.store', ['company' => $company]),
             default => ''
         };
         $quit = route(auth_user_type() . '.ads.index');
