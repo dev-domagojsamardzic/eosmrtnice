@@ -38,7 +38,7 @@ class AdsTable extends Component implements HasForms, HasTable
                     ->disabled(!auth()->user()->can('create', Ad::class ))
                     ->form([
                         Select::make('company_id')
-                            ->label('Odaberite tvrtku za koju želite stvoriti reklamu')
+                            ->label(__('models/ad.select_company_for_new_ad'))
                             ->options(auth()->user()->companies()->has('ad', '=', 0)->pluck('title', 'id'))
                             ->required(),
                     ])

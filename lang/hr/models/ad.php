@@ -52,4 +52,5 @@ return [
     'months_6' => '6 mjeseci',
     'months_12' => '12 mjeseci',
     'approved' => 'Odobreno',
+    'select_company_for_new_ad' => 'Odaberite tvrtku za koju želite stvoriti oglas',
 ];

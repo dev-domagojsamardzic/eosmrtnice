@@ -52,4 +52,5 @@ return [
     'months_6' => '6 Months',
     'months_12' => '12 Months',
     'approved' => 'Approved',
+    'select_company_for_new_ad' => 'Select Company for whom you would like to create new ad',
 ];
