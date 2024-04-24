@@ -16,10 +16,8 @@ return new class extends Migration
     {
         Schema::create('companies', static function (Blueprint $table) {
             $table->id();
-
             $table->foreignIdFor(User::class);
-
-
+            $table->string('logo')->nullable();
             $table->unsignedTinyInteger('type')->nullable(false);
             $table->string('title')->nullable(false);
             $table->string('address')->nullable();
@@ -31,6 +29,7 @@ return new class extends Migration
             $table->string('email')->nullable();
             $table->string('phone')->nullable();
             $table->string('mobile_phone')->nullable();
+            $table->string('website')->nullable();
             $table->boolean('active')->default(true);
             $table->timestamps();
             $table->softDeletes();
