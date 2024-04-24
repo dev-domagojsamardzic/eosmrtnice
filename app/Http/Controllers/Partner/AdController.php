@@ -39,12 +39,13 @@ class AdController extends Controller
 
     /**
      * Store new resource
+     * @param Company $company
      * @param AdRequest $request
      * @return RedirectResponse
      */
-    public function store(AdRequest $request):RedirectResponse
+    public function store(Company $company, AdRequest $request):RedirectResponse
     {
-        return $this->apply(new Ad, $request);
+        return $this->apply($company, new Ad, $request);
     }
 
     /**
@@ -89,7 +90,7 @@ class AdController extends Controller
     private function form(Company $company, Ad $ad, string $action): View
     {
         $types = AdType::options();
-        $companies = auth()->user()->companies()->has('ad', '=', 0)->get() ?? collect();
+        //$companies = auth()->user()->companies()->has('ad', '=', 0)->get() ?? collect();
 
         $route = match($action) {
             'edit' => route(auth_user_type() . '.ads.update', ['company' => $company, 'ad' => $ad]),
@@ -99,9 +100,9 @@ class AdController extends Controller
         $quit = route(auth_user_type() . '.ads.index');
 
         return view('partner.ads.form',[
+            'company' => $company,
             'ad' => $ad,
             'types' => $types,
-            'companies' => $companies,
             'action_name' => $action,
             'action' => $route,
             'quit' => $quit,
@@ -110,14 +111,18 @@ class AdController extends Controller
 
     /**
      * Apply changes on resource
+     * @param Company $company
      * @param Ad $ad
      * @param AdRequest $request
      * @return RedirectResponse
      */
-    private function apply(Ad $ad, AdRequest $request): RedirectResponse
+    private function apply(Company $company, Ad $ad, AdRequest $request): RedirectResponse
     {
-        $ad->company()->associate($request->input('company_id'));
-        $ad->months_valid = $request->input('months_valid');
+        if ($ad->company()->doesntExist()) {
+            $ad->company()->associate($company);
+        }
+        $ad->type = $request->input('type', 1);
+        $ad->months_valid = $request->input('months_valid', 1);
 
         try {
             $ad->save();
