@@ -123,6 +123,7 @@ class AdController extends Controller
         }
         $ad->type = $request->input('type', 1);
         $ad->months_valid = $request->input('months_valid', 1);
+        $ad->caption = $request->input('caption');
 
         try {
             $ad->save();
