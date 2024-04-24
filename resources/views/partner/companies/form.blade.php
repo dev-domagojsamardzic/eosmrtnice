@@ -31,7 +31,6 @@
                         name="website"
                         type="text"
                         :value="old('website', $company->website)"
-                        required
                         placeholder="{{ __('models/company.placeholders.website') }}"/>
                     <x-input-error :messages="$errors->get('website')" class="mt-2" />
                 </div>
