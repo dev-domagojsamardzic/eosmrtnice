@@ -53,4 +53,8 @@ return [
     'months_12' => '12 mjeseci',
     'approved' => 'Odobreno',
     'select_company_for_new_ad' => 'Odaberite tvrtku za koju želite stvoriti oglas',
+    'banner' => 'Naslovna slika oglasa',
+    'banner_helper_info' => 'U Gold verziji oglasa, naslovna slika je obavezna. Podržani tipovi su: jpeg,jpg,png,svg,webp.',
+    'caption' => 'Naslov',
+    'caption_helper_info' => 'Napiši nešto kratko i upečatljivo što će privući pažnju korisnika.',
 ];

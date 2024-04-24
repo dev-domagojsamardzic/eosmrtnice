@@ -53,4 +53,8 @@ return [
     'months_12' => '12 Months',
     'approved' => 'Approved',
     'select_company_for_new_ad' => 'Select Company for whom you would like to create new ad',
+    'banner' => 'Banner Image',
+    'logo_helper_info' => 'Banner image is mandatory in Gold version. Supported types: jpeg,jpg,png,svg,webp.',
+    'caption' => 'Caption',
+    'caption_helper_info' => 'Write a striking Ad caption that will catch user\'s attention',
 ];
