@@ -247,7 +247,7 @@
                     dropValidation: true,
                     acceptedFileTypes: ['image/jpeg', 'image/png', 'image/svg+xml', 'image/webp'],
                     files: [
-                            @if($company->logo)
+                        @if($company->logo)
                         {
                             source: '{{ Storage::disk('public')->url('images/partners/logo/' . $company->logo) }}',
                             options: {
