@@ -8,8 +8,9 @@ use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
 /**
- * @property        int     type
- * @property        int     months_valid
+ * @property        int         type
+ * @property        int         months_valid
+ * @property        string      caption
  */
 class AdRequest extends FormRequest
 {
@@ -31,6 +32,17 @@ class AdRequest extends FormRequest
         return [
             'type' => ['required', Rule::enum(AdType::class)],
             'months_valid' => ['required', 'integer', 'in:1,3,6,12'],
+            'caption' => ['required_if:type,3','string','max:255'],
+        ];
+    }
+
+    /**
+     * @return string[]
+     */
+    public function messages(): array
+    {
+        return [
+            'caption.required_if' => 'Naslov je obavezan ako je vrsta oglasa: Gold',
         ];
     }
 }
