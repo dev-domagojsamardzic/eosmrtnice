@@ -65,14 +65,13 @@ class AdsTable extends Component implements HasForms, HasTable
     {
         return [
             Split::make([
-                TextColumn::make('company.title')
-                    ->label(__('models/ad.company_id'))
-                    ->sortable()
-                    ->searchable()
-                    ->weight(FontWeight::Bold),
                 ViewColumn::make('type')
                     ->view('filament.tables.columns.ad-type-icon')
                     ->label(__('models/ad.type')),
+                TextColumn::make('company.title')
+                    ->label(__('models/ad.company_id'))
+                    ->sortable()
+                    ->searchable(),
                 TextColumn::make('approved')
                     ->label(__('models/ad.approved'))
                     ->badge()
@@ -87,17 +86,6 @@ class AdsTable extends Component implements HasForms, HasTable
             ])->from('md'),
             ViewLayout::make('partner.table.ads-table-collapsible-panel')
                 ->collapsible(),
-            /*Panel::make([
-                TextColumn::make('months_valid')
-                    ->label(__('models/ad.months_valid'))
-                    ->formatStateUsing(fn (Ad $ad) => $ad->months_valid . ' ' .__('common.months')),
-                TextColumn::make('valid_from')
-                    ->label(__('models/ad.valid_from'))
-                    ->formatStateUsing(fn (Carbon $date): string => $date->format('d.m.Y.')),
-                TextColumn::make('valid_until')
-                    ->label(__('models/ad.valid_until'))
-                    ->formatStateUsing(fn (Carbon $date): string => $date->format('d.m.Y.'))
-            ])->collapsible()->columnSpanFull(),*/
         ];
     }
 
