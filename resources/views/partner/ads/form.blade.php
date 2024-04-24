@@ -16,35 +16,35 @@
                 <div class="col-12 mb-3">
                     <x-input-label class="d-block" :value="__('models/ad.type')"></x-input-label>
                     <div class="btn-group btn-group-lg btn-group-toggle w-100" data-toggle="buttons">
-                        <label class="btn rounded-0 btn-secondary {{ old('type', $ad->type) === \App\Enums\AdType::STANDARD ? 'active' : '' }}">
+                        <label class="btn rounded-0 btn-secondary {{ (int)old('type', $ad->type->value) === (int)\App\Enums\AdType::STANDARD->value ? 'active' : '' }}">
                             <i class="fas fa-check-circle"></i>
                             <br>
-                            <input role="tab" type="radio" name="type" value="{{ \App\Enums\AdType::STANDARD }}" {{ old('type', $ad->type) === \App\Enums\AdType::STANDARD ? 'checked' : '' }} data-target="{{ strtolower(\App\Enums\AdType::STANDARD->name) }}">
+                            <input role="tab" type="radio" name="type" value="{{ \App\Enums\AdType::STANDARD }}" {{ (int)old('type', $ad->type->value) === (int)\App\Enums\AdType::STANDARD->value ? 'checked' : '' }} data-target="{{ strtolower(\App\Enums\AdType::STANDARD->name) }}">
                             {{ \App\Enums\AdType::STANDARD->translate() }}
                         </label>
-                        <label class="btn rounded-0 btn-secondary {{ old('type', $ad->type) === \App\Enums\AdType::PREMIUM ? 'active' : '' }}">
+                        <label class="btn rounded-0 btn-secondary {{ (int)old('type', $ad->type->value) === (int)\App\Enums\AdType::PREMIUM->value ? 'active' : '' }}">
                             <i class="fas fa-medal"></i>
                             <br>
-                            <input type="radio" name="type" value="{{ \App\Enums\AdType::PREMIUM }}" {{ old('type', $ad->type) === \App\Enums\AdType::PREMIUM ? 'checked' : '' }} data-target="{{ strtolower(\App\Enums\AdType::PREMIUM->name) }}">
+                            <input type="radio" name="type" value="{{ \App\Enums\AdType::PREMIUM }}" {{ (int)old('type', $ad->type->value) === (int)\App\Enums\AdType::PREMIUM->value ? 'checked' : '' }} data-target="{{ strtolower(\App\Enums\AdType::PREMIUM->name) }}">
                             {{ \App\Enums\AdType::PREMIUM->translate() }}
                         </label>
-                        <label class="btn rounded-0 btn-secondary {{ old('type', $ad->type) === \App\Enums\AdType::GOLD ? 'active' : '' }}">
+                        <label class="btn rounded-0 btn-secondary {{ (int)old('type', $ad->type->value) === (int)\App\Enums\AdType::GOLD->value ? 'active' : '' }}">
                             <i class="fas fa-gem"></i>
                             <br>
-                            <input type="radio" name="type" value="{{ \App\Enums\AdType::GOLD }}" {{ old('type', $ad->type) === \App\Enums\AdType::GOLD ? 'checked' : '' }} data-target="{{ strtolower(\App\Enums\AdType::GOLD->name) }}">
+                            <input type="radio" name="type" value="{{ \App\Enums\AdType::GOLD }}" {{ (int)old('type', $ad->type->value) === (int)\App\Enums\AdType::GOLD->value ? 'checked' : '' }} data-target="{{ strtolower(\App\Enums\AdType::GOLD->name) }}">
                             {{ \App\Enums\AdType::GOLD->translate() }}
                         </label>
                     </div>
                     <div class="tab-content">
-                        <div class="tab-pane fade py-3 show active" id="{{ strtolower(\App\Enums\AdType::STANDARD->name) }}" role="tabpanel">
+                        <div class="tab-pane fade py-3 {{ (int)old('type', $ad->type->value) === (int)\App\Enums\AdType::STANDARD->value ? 'show active' : '' }}" id="{{ strtolower(\App\Enums\AdType::STANDARD->name) }}" role="tabpanel">
                             <h1 class="text-md font-weight-bold mt-2 mb-4">{{ __('models/ad.info.standard.title') }}</h1>
                             {!! __('models/ad.info.standard.text') !!}
                         </div>
-                        <div class="tab-pane fade py-3" id="{{ strtolower(\App\Enums\AdType::PREMIUM->name) }}" role="tabpanel">
+                        <div class="tab-pane fade py-3 {{ (int)old('type', $ad->type->value) === (int)\App\Enums\AdType::PREMIUM->value ? 'show active' : '' }}" id="{{ strtolower(\App\Enums\AdType::PREMIUM->name) }}" role="tabpanel">
                             <h1 class="text-md font-weight-bold mt-2 mb-4">{{ __('models/ad.info.premium.title') }}</h1>
                             {!! __('models/ad.info.premium.text') !!}
                         </div>
-                        <div class="tab-pane fade py-3" id="{{ strtolower(\App\Enums\AdType::GOLD->name) }}" role="tabpanel">
+                        <div class="tab-pane fade py-3 {{ (int)old('type', $ad->type->value) === (int)\App\Enums\AdType::GOLD->value ? 'show active' : '' }}" id="{{ strtolower(\App\Enums\AdType::GOLD->name) }}" role="tabpanel">
                             <h1 class="text-md font-weight-bold mt-2 mb-4">{{ __('models/ad.info.gold.title') }}</h1>
                             {!! __('models/ad.info.gold.text') !!}
                         </div>
@@ -122,11 +122,19 @@
     </div>
     @push('scripts')
         <script type="module">
+            const typeMap = {
+                '1': 'standard',
+                '2': 'premium',
+                '3': 'gold',
+            }
             /**
              * Toggle logo and/or banner panel
              * @param target
              */
             function toggleFormPanel(target) {
+
+                target = (target === null) ? typeMap['{{ old('type', $ad->type->value) }}'] : target;
+
                 if (target === 'premium') {
                     $('#form-panel-logo').show();
                     $('#form-panel-banner,#form-panel-caption').hide();
@@ -278,7 +286,7 @@
             });
 
             $(document).ready(function() {
-                toggleFormPanel('standard');
+                toggleFormPanel(null);
                 $('input[name="type"]').click(function() {
                     const target = $(this).data('target');
                     $('.tab-content .tab-pane').removeClass('active show');
