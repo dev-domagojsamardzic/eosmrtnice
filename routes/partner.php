@@ -11,8 +11,16 @@ Route::get('/dashboard', static function () {
 
 Route::resource('companies', CompanyController::class)
     ->only(['index', 'create', 'edit', 'update', 'store']);
-Route::resource('ads', AdController::class)
-    ->only(['index', 'create', 'edit', 'update', 'store']);
+
+Route::get('ads', [AdController::class, 'index'])->name('ads.index');
+
+Route::prefix('companies/{company}')->group(function () {
+    Route::get('ads/create', [AdController::class, 'create'])->name('ads.create');
+    Route::get('ads/{id}/edit', [AdController::class, 'edit'])->name('ads.edit');
+    Route::post('ads', [AdController::class, 'store'])->name('ads.store');
+    Route::put('ads/{id}', [AdController::class, 'update'])->name('ads.update');
+    Route::delete('ads/{id}', [AdController::class, 'destroy'])->name('ads.destroy');
+});
 
 Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
 Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
