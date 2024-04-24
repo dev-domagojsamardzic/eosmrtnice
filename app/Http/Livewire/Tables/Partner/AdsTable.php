@@ -3,11 +3,11 @@
 namespace App\Http\Livewire\Tables\Partner;
 
 use App\Models\Ad;
+use Filament\Tables\Actions\Action;
 use Filament\Tables\Columns\Layout\Split;
 use Filament\Forms\Concerns\InteractsWithForms;
 use Filament\Forms\Contracts\HasForms;
 use Filament\Support\Enums\FontWeight;
-use Filament\Tables\Actions\CreateAction;
 use Filament\Tables\Columns\Layout\View as ViewLayout;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Columns\ViewColumn;
@@ -16,6 +16,9 @@ use Filament\Tables\Contracts\HasTable;
 use Filament\Tables\Table;
 use Illuminate\Contracts\View\View;
 use Livewire\Component;
+use Filament\Forms\Components\Select;
+use Livewire\Features\SupportRedirects\Redirector;
+
 
 class AdsTable extends Component implements HasForms, HasTable
 {
@@ -29,11 +32,19 @@ class AdsTable extends Component implements HasForms, HasTable
             ->emptyStateHeading(__('common.no_records'))
             ->emptyStateDescription('')
             ->headerActions([
-                CreateAction::make('create')
+                Action::make('create_ad')
                     ->label(__('models/ad.new_ad'))
                     ->icon('heroicon-m-plus')
-                    ->url(route(auth_user_type() . '.ads.create'))
                     ->disabled(!auth()->user()->can('create', Ad::class ))
+                    ->form([
+                        Select::make('company_id')
+                            ->label('Odaberite tvrtku za koju želite stvoriti reklamu')
+                            ->options(auth()->user()->companies()->has('ad', '=', 0)->pluck('title', 'id'))
+                            ->required(),
+                    ])
+                    ->action(function (array $data, Ad $ad): Redirector {
+                        return redirect()->route(auth_user_type() . '.ads.create',$data['company_id']);
+                    })
             ])
             ->query(Ad::query())
             ->columns($this->getColumns())
