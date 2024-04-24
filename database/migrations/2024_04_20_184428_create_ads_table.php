@@ -20,6 +20,8 @@ return new class extends Migration
             $table->unsignedInteger('months_valid')->nullable(false)->default(1);
             $table->dateTime('valid_from')->nullable();
             $table->dateTime('valid_until')->nullable();
+            $table->string('banner',256)->nullable();
+            $table->string('caption', 256)->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

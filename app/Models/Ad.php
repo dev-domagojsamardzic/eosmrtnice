@@ -16,6 +16,8 @@ use Illuminate\Support\Carbon;
  * @property            int         months_valid
  * @property            Carbon      valid_from
  * @property            Carbon      valid_until
+ * @property            string      banner
+ * @property            string      caption
  * @property            Carbon      created_at
  * @property            Carbon      updated_at
  * @property            Carbon      deleted_at
