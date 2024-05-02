@@ -55,7 +55,7 @@ class CompanyRequest extends FormRequest
             'email' => ['nullable','string', 'email', 'max:255'],
             'phone' => ['nullable','string', 'max:64'],
             'mobile_phone' => ['nullable','string', 'max:64'],
-            'website' => ['string', 'url:https', 'active_url'],
+            'website' => ['nullable', 'string', 'url:https', 'active_url'],
         ];
     }
 }
