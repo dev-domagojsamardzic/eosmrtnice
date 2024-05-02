@@ -273,7 +273,7 @@
                         },
                         revert: '{{ route('images.upload.revert') }}',
                         process: {
-                            url: '{{ route('images.upload') }}',
+                            url: '{{ route('images.upload', ['field' => 'logo']) }}',
                             method: 'POST',
                             onload: (response) => {
                                 response = JSON.parse(response);

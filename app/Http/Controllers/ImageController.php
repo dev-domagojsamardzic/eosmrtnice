@@ -18,8 +18,18 @@ class ImageController extends Controller
      */
     public function upload(Request $request): JsonResponse
     {
+        $field = $request->get('field');
+
+        if (!$field) {
+            return response()->json([
+                'message' => __('common.upload_failed'),
+                'class' => 'text-danger',
+                'image' => null
+            ], 400);
+        }
+
         $validator = Validator::make($request->all(), [
-            'image' => ['image', 'mimes:jpeg,jpg,png,svg+xml,webp', 'max:2048'], // Max 2MB
+            $field => ['image', 'mimes:jpeg,jpg,png,svg+xml,webp', 'max:2048'], // Max 2MB
         ]);
 
         if ($validator->fails()) {
@@ -30,9 +40,9 @@ class ImageController extends Controller
             ], 422);
         }
 
-        if ($request->file('logo')) {
+        if ($request->file($field)) {
             try {
-                $image = $request->file('logo')->store('tmp', 'public');
+                $image = $request->file($field)->store('tmp', 'public');
                 return response()->json([
                     'message' => __('common.upload_successful'),
                     'class' => 'text-success',
