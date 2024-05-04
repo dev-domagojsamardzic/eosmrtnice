@@ -40,7 +40,7 @@ class AdPolicy
      */
     public function update(User $user, Ad $ad): bool
     {
-        return true;
+        return is_admin() || (is_partner() && $this->userOwnsAdRelatedCompany($user, $ad));
     }
 
     /**

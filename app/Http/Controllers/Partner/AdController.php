@@ -9,7 +9,6 @@ use App\Models\Ad;
 use App\Models\Company;
 use App\Services\ImageService;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
 use Illuminate\View\View;
 use Exception;
 
@@ -72,9 +71,9 @@ class AdController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Ad $ad)
+    public function update(AdRequest $request, Company $company, Ad $ad): RedirectResponse
     {
-        //
+        return $this->apply($company, $ad, $request);
     }
 
     /**
