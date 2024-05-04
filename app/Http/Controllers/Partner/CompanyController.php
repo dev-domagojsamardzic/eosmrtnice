@@ -118,7 +118,7 @@ class CompanyController extends Controller
     }
 
     /**
-     * Apply changes on resourceeosmrtnice
+     * Apply changes on resource
      * @param Company $company
      * @param CompanyRequest $request
      * @return RedirectResponse
