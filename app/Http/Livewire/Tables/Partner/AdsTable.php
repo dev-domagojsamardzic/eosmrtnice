@@ -41,7 +41,7 @@ class AdsTable extends Component implements HasForms, HasTable
                     ->form([
                         Select::make('company_id')
                             ->label(__('models/ad.select_company_for_new_ad'))
-                            ->options(auth()->user()->companies()->has('ad', '=', 0)->pluck('title', 'id'))
+                            ->options(auth()->user()->companies()->has('ads', '=', 0)->pluck('title', 'id'))
                             ->required(),
                     ])
                     ->action(function (array $data, Ad $ad): Redirector {
