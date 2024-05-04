@@ -79,7 +79,7 @@
                 <div class="col-12 mb-3">
                     <x-input-label for="caption" :value="__('models/ad.caption')" />
                     <x-input-info :content="__('models/ad.caption_helper_info')" />
-                    <textarea id="caption" name="caption" class="form-control" rows="3"></textarea>
+                    <textarea id="caption" name="caption" class="form-control" rows="3">{{ old('caption', $ad->caption) }}</textarea>
                     <x-input-error :messages="$errors->get('caption')" class="mt-2" />
                 </div>
             </div>
