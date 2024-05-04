@@ -4,9 +4,11 @@ namespace App\Policies;
 
 use App\Models\Ad;
 use App\Models\User;
+use App\Traits\AuthorizationPolicyHelper;
 
 class AdPolicy
 {
+    use AuthorizationPolicyHelper;
     /**
      * Determine whether the user can view any models.
      */
@@ -20,8 +22,7 @@ class AdPolicy
      */
     public function view(User $user, Ad $ad): bool
     {
-        $userOwnsCompany = auth()->user()->companies()->where('id', $ad->company_id)->exists();
-        return is_admin() || (is_partner() && $userOwnsCompany);
+        return is_admin() || (is_partner() && $this->userOwnsAdRelatedCompany($user, $ad));
     }
 
     /**
@@ -29,13 +30,9 @@ class AdPolicy
      */
     public function create(User $user): bool
     {
-        $companies = auth()->user()->companies();
-        // How many companies user own?
-        $companiesCount = $companies->count();
-        // How many companies user owns has no ads?
-        $availableCompaniesCount = $companies->has('ad', '=' ,0)->count();
-
-        return is_partner() || $companiesCount > 0 || $availableCompaniesCount > 0;
+        return is_partner() &&
+            $this->userOwnsAtLeastOneCompany($user) &&
+            $this->userOwnsCompaniesWithoutAds($user);
     }
 
     /**
@@ -43,7 +40,7 @@ class AdPolicy
      */
     public function update(User $user, Ad $ad): bool
     {
-        return false;
+        return true;
     }
 
     /**
