@@ -58,11 +58,15 @@ class AdController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
+     *  Show the form for editing the specified resource.
+     *
+     * @param Company $company
+     * @param Ad $ad
+     * @return View
      */
-    public function edit(Ad $ad)
+    public function edit(Company $company, Ad $ad): View
     {
-        //
+        return $this->form($company, $ad, 'edit');
     }
 
     /**
