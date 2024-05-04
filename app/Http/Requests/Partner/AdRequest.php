@@ -29,11 +29,7 @@ class AdRequest extends FormRequest
      */
     public function rules(): array
     {
-        return [
-            'type' => ['required', Rule::enum(AdType::class)],
-            'months_valid' => ['required', 'integer', 'in:1,3,6,12'],
-            'caption' => ['required_if:type,3','string','max:256'],
-        ];
+        return array_merge($this->getBaseRules(), $this->getAdTypeRules());
     }
 
     /**
@@ -42,7 +38,42 @@ class AdRequest extends FormRequest
     public function messages(): array
     {
         return [
-            'caption.required_if' => 'Naslov je obavezan ako je vrsta oglasa: Gold',
+            'logo.required' => 'Postavite logo ako ste odabrali vrstu oglasa: Premium ili Gold.',
+            'banner.required' => 'Postavite naslovnu sliku ako ste odabrali vrstu oglasa: Gold.',
+            'caption.required' => 'Postavite naslov ako ste odabrali vrstu oglasa: Gold.',
         ];
+    }
+
+    /**
+     * Return rules applicable to all ad types
+     *
+     * @return array
+     */
+    private function getBaseRules(): array
+    {
+        return [
+            'type' => ['required', Rule::enum(AdType::class)],
+            'months_valid' => ['required', 'integer', 'in:1,3,6,12'],
+        ];
+    }
+
+    /**
+     * Return rules applicable only to specific AdType
+     *
+     * @return array|array[]
+     */
+    private function getAdTypeRules(): array
+    {
+        return match ((int)$this->type) {
+            2 => [
+                'logo' => ['required'],
+            ],
+            3 => [
+                'logo' => ['required'],
+                'banner' => ['required'],
+                'caption' => ['required','string','max:256'],
+            ],
+            default => []
+        };
     }
 }
