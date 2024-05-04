@@ -59,6 +59,7 @@
                     <x-input-info :content="__('models/company.logo_helper_info')" />
                     <input type="file" name="logo" id="logo">
                     <small id="logo-message" class="text-xs font-weight-bold"></small>
+                    <x-input-error :messages="$errors->get('logo')" class="mt-2" />
                 </div>
             </div>
 
@@ -69,6 +70,7 @@
                     <x-input-info :content="__('models/ad.banner_helper_info')" />
                     <input type="file" name="banner" id="banner">
                     <small id="banner-message" class="text-xs font-weight-bold"></small>
+                    <x-input-error :messages="$errors->get('banner')" class="mt-2" />
                 </div>
             </div>
 
@@ -202,7 +204,7 @@
                     },
                     revert: '{{ route('images.upload.revert') }}',
                     process: {
-                        url: '{{ route('images.upload') }}',
+                        url: '{{ route('images.upload', ['field' => 'logo']) }}',
                         method: 'POST',
                         onload: (response) => {
                             response = JSON.parse(response);
@@ -260,11 +262,25 @@
                 credits: null,
                 dropValidation: true,
                 acceptedFileTypes: ['image/jpeg', 'image/png', 'image/svg+xml', 'image/webp'],
-                files: [],
+                files: [
+                        @if($ad?->banner)
+                    {
+                        source: '{{ Storage::disk('public')->url('images/ads/banner/' . $ad->banner) }}',
+                        options: {
+                            type: 'local',
+                        },
+                    }
+                    @endif
+                ],
                 server: {
+                    load: (source, load) => {
+                        fetch(source)
+                            .then(res => res.blob())
+                            .then(load);
+                    },
                     revert: '{{ route('images.upload.revert') }}',
                     process: {
-                        url: '{{ route('images.upload') }}',
+                        url: '{{ route('images.upload', ['field' => 'banner']) }}',
                         method: 'POST',
                         onload: (response) => {
                             response = JSON.parse(response);

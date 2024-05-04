@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Partner\AdRequest;
 use App\Models\Ad;
 use App\Models\Company;
+use App\Services\ImageService;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
@@ -14,7 +15,7 @@ use Exception;
 
 class AdController extends Controller
 {
-    public function __construct()
+    public function __construct(protected ImageService  $imageService)
     {
         $this->authorizeResource(Ad::class);
     }
@@ -118,12 +119,19 @@ class AdController extends Controller
      */
     private function apply(Company $company, Ad $ad, AdRequest $request): RedirectResponse
     {
+        $companyLogo = $this->imageService->storeCompanyLogo($request, $company);
+        $company->logo = $companyLogo;
+        $company->save();
+
         if ($ad->company()->doesntExist()) {
             $ad->company()->associate($company);
         }
-        $ad->type = $request->input('type', 1);
+        $ad->type = $request->input('type', AdType::STANDARD);
         $ad->months_valid = $request->input('months_valid', 1);
         $ad->caption = $request->input('caption');
+
+        $adBanner = $this->imageService->storeAdBanner($request, $ad);
+        $ad->banner = $adBanner;
 
         try {
             $ad->save();

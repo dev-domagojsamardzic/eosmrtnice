@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Models\Ad;
 use App\Models\Company;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -28,6 +29,29 @@ class ImageService
         }
 
         $moved = Storage::disk('public')->move($logo, 'images/partners/logo/' . $filename);
+        return $moved ? $filename : null;
+    }
+
+    /**
+     * Store ad banner image
+     *
+     * @param Request $request
+     * @param Ad $ad
+     * @return string|null
+     */
+    public function storeAdBanner(Request $request, Ad $ad): string|null
+    {
+        $banner = $request->input('banner');
+        if(!$banner) {
+            return $banner;
+        }
+        $filename = pathinfo($banner, PATHINFO_BASENAME);
+
+        if (!is_null($ad->banner)) {
+            Storage::disk('public')->delete('images/ads/banner/' . $ad->banner);
+        }
+
+        $moved = Storage::disk('public')->move($banner, 'images/ads/banner/' . $filename);
         return $moved ? $filename : null;
     }
 }
