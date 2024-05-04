@@ -31,4 +31,5 @@ return [
     'approved' => 'Approved',
     'not_approved' => 'Not Approved',
     'months' => 'Month/s',
+    'upload_failed' => 'Upload failed.',
 ];

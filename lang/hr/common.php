@@ -34,4 +34,5 @@ return [
     'approved' => 'Odobreno',
     'not_approved' => 'Nije odobreno',
     'months' => 'mjeseci',
+    'upload_failed' => 'Učitavanje neuspješno.',
 ];
