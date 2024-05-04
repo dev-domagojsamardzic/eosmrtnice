@@ -2,9 +2,11 @@
 
 namespace App\Providers;
 
+use App\Models\Ad;
 use App\Models\Company;
 use App\Models\Member;
 use App\Models\Partner;
+use App\Policies\AdPolicy;
 use App\Policies\CompanyPolicy;
 use App\Policies\MemberPolicy;
 use App\Policies\PartnerPolicy;
@@ -21,6 +23,7 @@ class AuthServiceProvider extends ServiceProvider
         Partner::class => PartnerPolicy::class,
         Member::class => MemberPolicy::class,
         Company::class => CompanyPolicy::class,
+        Ad::class => AdPolicy::class,
     ];
 
     /**
