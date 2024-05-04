@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Carbon;
+use Illuminate\Database\Eloquent\Builder;
 
 /**
  * @property        int         id
@@ -34,7 +35,7 @@ use Illuminate\Support\Carbon;
  * @property        Partner         user
  * @property        County          county
  * @property        City            city
- * @property        Ad              ad
+ * @property        Ad              ads
  */
 
 class Company extends Model
@@ -98,11 +99,24 @@ class Company extends Model
 
 
     /**
+     * IMPORTANT!
+     * -----------------------------------------
+     * Although relationship is one to one, keep the name in plural (ads)
+     * because of implicit scope binding
+     * -----------------------------------------
      * Ad that belongs to Company
      * @return HasOne
      */
-    public function ad(): HasOne
+    public function ads(): HasOne
     {
         return $this->hasOne(Ad::class);
+    }
+
+    /**
+     * Scope a query to only include active companies.
+     */
+    public function scopeActive(Builder $query): void
+    {
+        $query->where('active', 1);
     }
 }
