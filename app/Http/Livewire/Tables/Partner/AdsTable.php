@@ -3,11 +3,13 @@
 namespace App\Http\Livewire\Tables\Partner;
 
 use App\Models\Ad;
+use Filament\Support\Enums\IconPosition;
 use Filament\Tables\Actions\Action;
+use Filament\Tables\Actions\ActionGroup;
+use Filament\Tables\Actions\EditAction;
 use Filament\Tables\Columns\Layout\Split;
 use Filament\Forms\Concerns\InteractsWithForms;
 use Filament\Forms\Contracts\HasForms;
-use Filament\Support\Enums\FontWeight;
 use Filament\Tables\Columns\Layout\View as ViewLayout;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Columns\ViewColumn;
@@ -104,7 +106,16 @@ class AdsTable extends Component implements HasForms, HasTable
      */
     private function getActions(): array
     {
-        return  [];
+        return  [
+            ActionGroup::make([
+                EditAction::make('edit')
+                    ->label(__('common.edit'))
+                    ->icon('heroicon-s-pencil-square')
+                    ->url(fn (Ad $ad): string => route(
+                        auth_user_type() . '.ads.edit',
+                        ['company' => $ad->company_id, 'ad' => $ad->id])),
+            ])->iconPosition(IconPosition::Before),
+        ];
     }
 
     /**
