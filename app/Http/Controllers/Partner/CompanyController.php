@@ -8,14 +8,14 @@ use App\Http\Requests\Partner\CompanyRequest;
 use App\Models\City;
 use App\Models\Company;
 use App\Models\County;
+use App\Services\ImageService;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Support\Facades\Storage;
 use Illuminate\View\View;
 use Livewire\Features\SupportRedirects\Redirector;
 
 class CompanyController extends Controller
 {
-    public function __construct()
+    public function __construct(protected ImageService $imageService)
     {
         $this->authorizeResource(Company::class);
     }
@@ -118,30 +118,15 @@ class CompanyController extends Controller
     }
 
     /**
-     * Apply changes on resource
+     * Apply changes on resourceeosmrtnice
      * @param Company $company
      * @param CompanyRequest $request
      * @return RedirectResponse
      */
     private function apply(Company $company, CompanyRequest $request): RedirectResponse
     {
-        $logo = $request->input('logo');
-        $filename = pathinfo($logo, PATHINFO_BASENAME);
-
-        $company->logo = $filename;
-
-        if ($company->isDirty('logo'))
-        {
-            $originalLogo = $company->getOriginal('logo');
-            // Delete old logo if present
-            if ($originalLogo) {
-                Storage::disk('public')->delete('images/partners/logo/' . $originalLogo);
-            }
-            // Store new logo if exists
-            if ($logo) {
-                Storage::disk('public')->move($logo, 'images/partners/logo/' . $filename);
-            }
-        }
+        $companyLogo = $this->imageService->storeCompanyLogo($request, $company);
+        $company->logo = $companyLogo;
 
         $company->user()->associate(auth()->user());
         $company->type = $request->input('type');
