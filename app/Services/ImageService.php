@@ -9,6 +9,8 @@ use Illuminate\Support\Facades\Storage;
 
 class ImageService
 {
+    public const LOGO_PATH = 'images/partners/logo/';
+    public const BANNER_PATH = 'images/ads/banner/';
     /**
      * Store company logo
      *
@@ -18,18 +20,19 @@ class ImageService
      */
     public function storeCompanyLogo(Request $request, Company $company): string|null
     {
-        $logo = $request->input('logo');
-        if(!$logo) {
-            return $logo;
+        $tmpLogoPath = $request->input('logo');
+        if(!$tmpLogoPath) {
+            return null;
         }
-        $filename = pathinfo($logo, PATHINFO_BASENAME);
+        $filename = pathinfo($tmpLogoPath, PATHINFO_BASENAME);
 
         if (!is_null($company->logo)) {
-            Storage::disk('public')->delete('images/partners/logo/' . $company->logo);
+            Storage::disk('public')->delete($company->logo);
         }
 
-        $moved = Storage::disk('public')->move($logo, 'images/partners/logo/' . $filename);
-        return $moved ? $filename : null;
+        $logoPath = self::LOGO_PATH . $filename;
+        $moved = Storage::disk('public')->move($tmpLogoPath, $logoPath);
+        return $moved ? $logoPath : null;
     }
 
     /**

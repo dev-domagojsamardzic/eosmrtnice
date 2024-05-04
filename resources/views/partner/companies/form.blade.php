@@ -258,7 +258,7 @@
                     files: [
                         @if($company->logo)
                             {
-                                source: '{{ Storage::disk('public')->url('images/partners/logo/' . $company->logo) }}',
+                                source: '{{ public_storage_asset($company->logo) }}',
                                 options: {
                                     type: 'local',
                                 },
