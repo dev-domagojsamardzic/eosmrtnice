@@ -15,7 +15,7 @@ use Filament\Tables\Actions\ActionGroup;
 use Filament\Tables\Actions\CreateAction;
 use Filament\Tables\Actions\DeleteAction;
 use Filament\Tables\Actions\EditAction;
-use Filament\Tables\Columns\IconColumn;
+use Filament\Tables\Columns\ImageColumn;
 use Filament\Tables\Columns\Layout\Panel;
 use Filament\Tables\Columns\Layout\Split;
 use Filament\Tables\Columns\Layout\Stack;
@@ -75,12 +75,12 @@ class CompaniesTable extends Component implements HasTable, HasForms
     {
         return [
             Split::make([
-                IconColumn::make('type')
-                    ->icon(fn (Company $company): string => match($company->type) {
-                        CompanyType::FUNERAL => 'coffin-outline',
-                        CompanyType::MASONRY => 'tomb-outline',
-                        CompanyType::FLOWERS => 'flowers-outline',
-                        default => 'cross-outline',
+                ImageColumn::make('logo')
+                    ->circular()
+                    ->defaultImageUrl(function(Company $company): string {
+                        return $company->logo ?
+                            public_storage_asset($company->logo) :
+                            asset($company->alternative_logo);
                     })
                     ->tooltip(fn (Company $company): string => $company->type->translate())
                     ->grow(false),
