@@ -3,7 +3,6 @@
 namespace App\Http\Livewire\Tables\Partner;
 
 use App\Models\Ad;
-use App\Models\Company;
 use Filament\Support\Enums\IconPosition;
 use Filament\Tables\Actions\Action;
 use Filament\Tables\Actions\ActionGroup;
@@ -12,8 +11,10 @@ use Filament\Tables\Columns\ImageColumn;
 use Filament\Tables\Columns\Layout\Split;
 use Filament\Forms\Concerns\InteractsWithForms;
 use Filament\Forms\Contracts\HasForms;
+use Filament\Tables\Columns\Layout\Stack;
 use Filament\Tables\Columns\Layout\View as ViewLayout;
 use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Columns\ToggleColumn;
 use Filament\Tables\Columns\ViewColumn;
 use Filament\Tables\Concerns\InteractsWithTable;
 use Filament\Tables\Contracts\HasTable;
@@ -96,7 +97,15 @@ class AdsTable extends Component implements HasForms, HasTable
                         1 => 'success',
                         0 => 'danger',
                     }),
+                Stack::make([
+                    TextColumn::make('active')
+                        ->badge()
+                        ->formatStateUsing(fn () => __('admin.is_active_m'))
+                        ->color('secondary'),
+                    ToggleColumn::make('active'),
+                ])->grow(false)->alignStart()
             ])->from('md'),
+
             ViewLayout::make('partner.table.ads-table-collapsible-panel')
                 ->collapsible(),
         ];
