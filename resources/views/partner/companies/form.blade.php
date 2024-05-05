@@ -258,7 +258,7 @@
                     files: [
                         @if($company->logo)
                             {
-                                source: '{{ public_storage_asset($company->logo) }}',
+                                source: '{{ old('logo', $company->logo) }}',
                                 options: {
                                     type: 'local',
                                 },
@@ -267,6 +267,8 @@
                     ],
                     server: {
                         load: (source, load) => {
+                            // Override img path with img asset URL
+                            source = '{{ public_storage_asset($company->logo ?? '') }}';
                             fetch(source)
                                 .then(res => res.blob())
                                 .then(load);
