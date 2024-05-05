@@ -57,18 +57,30 @@ class ImageService
      */
     public function storeAdBanner(Request $request, Ad $ad): string|null
     {
-        $banner = $request->input('banner');
-        if(!$banner) {
-            return $banner;
+        $source = $request->input('banner');
+        if(!$source) {
+            // Maybe user is removing logo, check if logo existed and delete
+            if ($ad->banner) {
+                Storage::disk('public')->delete($ad->banner);
+            }
+            return null;
         }
-        $filename = pathinfo($banner, PATHINFO_BASENAME);
+
+        $isTmpPath = $this->isTmpImagePath($source);
+        // return original soruce if it is not tmp source
+        if (!$isTmpPath) {
+            return $source;
+        }
+
+        $filename = pathinfo($source, PATHINFO_BASENAME);
+        $destination = self::BANNER_PATH . $filename;
 
         if (!is_null($ad->banner)) {
-            Storage::disk('public')->delete('images/ads/banner/' . $ad->banner);
+            Storage::disk('public')->delete($ad->banner);
         }
 
-        $moved = Storage::disk('public')->move($banner, 'images/ads/banner/' . $filename);
-        return $moved ? $filename : null;
+        $moved = Storage::disk('public')->move($source, $destination);
+        return $moved ? $destination : null;
     }
 
     /**
