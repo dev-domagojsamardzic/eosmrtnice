@@ -189,7 +189,7 @@
                 files: [
                         @if($company?->logo)
                     {
-                        source: '{{ Storage::disk('public')->url('images/partners/logo/' . $company->logo) }}',
+                        source: '{{ old('logo', $company->logo) }}',
                         options: {
                             type: 'local',
                         },
@@ -198,6 +198,8 @@
                 ],
                 server: {
                     load: (source, load) => {
+                        // Override img path with img asset URL
+                        source = '{{ public_storage_asset($company->logo ?? '') }}';
                         fetch(source)
                             .then(res => res.blob())
                             .then(load);
@@ -263,9 +265,9 @@
                 dropValidation: true,
                 acceptedFileTypes: ['image/jpeg', 'image/png', 'image/svg+xml', 'image/webp'],
                 files: [
-                        @if($ad?->banner)
+                    @if($ad?->banner)
                     {
-                        source: '{{ Storage::disk('public')->url('images/ads/banner/' . $ad->banner) }}',
+                        source: '{{ old('banner', $ad->banner) }}',
                         options: {
                             type: 'local',
                         },
@@ -274,6 +276,8 @@
                 ],
                 server: {
                     load: (source, load) => {
+                        // Override img path with img asset URL
+                        source = '{{ public_storage_asset($ad->banner ?? '') }}';
                         fetch(source)
                             .then(res => res.blob())
                             .then(load);
