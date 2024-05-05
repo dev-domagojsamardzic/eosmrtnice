@@ -13,6 +13,7 @@ use Illuminate\Support\Carbon;
  * @property            int         company_id
  * @property            int         type
  * @property            bool        approved
+ * @property            bool        active
  * @property            int         months_valid
  * @property            Carbon      valid_from
  * @property            Carbon      valid_until
@@ -44,6 +45,7 @@ class Ad extends Model
         'type' => AdType::STANDARD,
         'months_valid' => 1,
         'approved' => false,
+        'active' => false,
     ];
 
     /**

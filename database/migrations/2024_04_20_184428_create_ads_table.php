@@ -17,6 +17,7 @@ return new class extends Migration
             $table->foreignIdFor(Company::class);
             $table->unsignedTinyInteger('type')->default(1);
             $table->boolean('approved')->default(false);
+            $table->boolean('active')->default(false);
             $table->unsignedInteger('months_valid')->nullable(false)->default(1);
             $table->dateTime('valid_from')->nullable();
             $table->dateTime('valid_until')->nullable();
