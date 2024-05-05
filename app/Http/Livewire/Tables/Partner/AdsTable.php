@@ -3,10 +3,12 @@
 namespace App\Http\Livewire\Tables\Partner;
 
 use App\Models\Ad;
+use App\Models\Company;
 use Filament\Support\Enums\IconPosition;
 use Filament\Tables\Actions\Action;
 use Filament\Tables\Actions\ActionGroup;
 use Filament\Tables\Actions\EditAction;
+use Filament\Tables\Columns\ImageColumn;
 use Filament\Tables\Columns\Layout\Split;
 use Filament\Forms\Concerns\InteractsWithForms;
 use Filament\Forms\Contracts\HasForms;
@@ -70,6 +72,15 @@ class AdsTable extends Component implements HasForms, HasTable
                 ViewColumn::make('type')
                     ->view('filament.tables.columns.ad-type-icon')
                     ->label(__('models/ad.type')),
+                ImageColumn::make('logo')
+                    ->circular()
+                    ->defaultImageUrl(function(Ad $ad): string {
+                        return $ad->company?->logo ?
+                            public_storage_asset($ad->company->logo) :
+                            asset($ad->company->alternative_logo);
+                    })
+                    ->tooltip(fn (Ad $ad): string => $ad->company?->type?->translate())
+                    ->grow(false),
                 TextColumn::make('company.title')
                     ->label(__('models/ad.company_id'))
                     ->sortable()
