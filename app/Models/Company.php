@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Carbon;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 
 /**
  * @property        int         id
@@ -32,10 +33,12 @@ use Illuminate\Database\Eloquent\Builder;
  * @property        Carbon      updated_at
  * @property        Carbon      deleted_at
  * -------------------------------------------
- * @property        Partner         user
- * @property        County          county
- * @property        City            city
- * @property        Ad              ads
+ * @property        string      alternative_logo
+ * -------------------------------------------
+ * @property        Partner     user
+ * @property        County      county
+ * @property        City        city
+ * @property        Ad          ads
  */
 
 class Company extends Model
@@ -118,5 +121,21 @@ class Company extends Model
     public function scopeActive(Builder $query): void
     {
         $query->where('active', 1);
+    }
+
+
+    /**
+     * Get alternative logo based on company type
+     */
+    protected function alternativeLogo(): Attribute
+    {
+        return Attribute::make(
+            get: fn() => match($this->type) {
+                CompanyType::FUNERAL => 'graphics/svg/coffin-outline.svg',
+                CompanyType::MASONRY => 'graphics/svg/tomb-outline.svg',
+                CompanyType::FLOWERS => 'graphics/svg/flowers-outline.svg',
+                default => 'graphics/svg/cross-outline.svg',
+            },
+        );
     }
 }
