@@ -4,4 +4,5 @@
             {{ __('models/ad.ads') }}
         </h2>
     </x-slot>
+    @livewire('tables.admin.ads-table')
 </x-app-layout>
