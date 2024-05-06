@@ -22,9 +22,9 @@
     <hr class="sidebar-divider">
 
     <!-- Heading -->
-    <div class="sidebar-heading">
+    {{--<div class="sidebar-heading">
         {{ __('sidebar.management') }}
-    </div>
+    </div>--}}
 
     <!-- Nav Item - Partners -->
     <li class="nav-item">
@@ -45,6 +45,16 @@
         <a class="nav-link" href="{{ route(auth_user_type() . '.companies.index') }}">
             <i class="fas fa-building"></i>
             <span>{{ __('sidebar.companies') }}</span></a>
+    </li>
+
+    <!-- Divider -->
+    <hr class="sidebar-divider">
+
+    <!-- Nav Item - Ads -->
+    <li class="nav-item">
+        <a class="nav-link" href="{{ route(auth_user_type() . '.ads.index') }}">
+            <i class="fas fa-ad"></i>
+            <span>{{ __('sidebar.ads') }}</span></a>
     </li>
 
     <!-- Divider -->
