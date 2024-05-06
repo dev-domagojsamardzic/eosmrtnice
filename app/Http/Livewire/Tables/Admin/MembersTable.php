@@ -72,8 +72,8 @@ class MembersTable extends Component implements HasTable, HasForms
                 ->label(__('admin.active'))
                 ->badge()
                 ->formatStateUsing(fn(int $state): string => match($state) {
-                    1 => __('admin.is_active_m'),
-                    0 => __('admin.is_inactive_m'),
+                    1 => __('common.is_active_m'),
+                    0 => __('common.is_inactive_m'),
                 })
                 ->color(fn(int $state): string => match($state) {
                     1 => 'success',

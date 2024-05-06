@@ -188,7 +188,7 @@
                 <div class="col-2 my-2">
                     <div class="custom-control custom-switch">
                         <input name="active" type="checkbox" class="custom-control-input" id="activeSwitch" {{ $company->active ? "checked" : "" }}>
-                        <label class="custom-control-label" for="activeSwitch">{{ __('admin.is_active_f') }}</label>
+                        <label class="custom-control-label" for="activeSwitch">{{ __('common.is_active_f') }}</label>
                     </div>
                 </div>
             </div>

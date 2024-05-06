@@ -94,8 +94,8 @@ class CompaniesTable extends Component implements HasTable, HasForms
                     ->label(__('admin.active'))
                     ->badge()
                     ->formatStateUsing(fn(int $state): string => match($state) {
-                        1 => __('admin.is_active_f'),
-                        0 => __('admin.is_inactive_f'),
+                        1 => __('common.is_active_f'),
+                        0 => __('common.is_inactive_f'),
                     })
                     ->color(fn(int $state): string => match($state) {
                         1 => 'success',
@@ -155,8 +155,8 @@ class CompaniesTable extends Component implements HasTable, HasForms
             SelectFilter::make('active')
                 ->label(__('admin.active'))
                 ->options([
-                    1 => __('admin.is_active_f_pl'),
-                    0 => __('admin.is_inactive_f_pl'),
+                    1 => __('common.is_active_f_pl'),
+                    0 => __('common.is_inactive_f_pl'),
                 ]),
             SelectFilter::make('county_id')
                 ->label(__('admin.county'))
@@ -198,10 +198,10 @@ class CompaniesTable extends Component implements HasTable, HasForms
     {
         return [
             Group::make('active')
-                ->label(__('admin.is_active_f_pl'))
+                ->label(__('common.is_active_f_pl'))
                 ->titlePrefixedWithLabel(false)
                 ->orderQueryUsing(fn (Builder $query) => $query->orderBy('active', 'desc'))
-                ->getTitleFromRecordUsing(fn (Company $company): string => $company->active ? __('admin.is_active_f_pl') : __('admin.is_inactive_f_pl')),
+                ->getTitleFromRecordUsing(fn (Company $company): string => $company->active ? __('common.is_active_f_pl') : __('common.is_inactive_f_pl')),
         ];
     }
 }
