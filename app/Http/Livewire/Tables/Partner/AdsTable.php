@@ -20,6 +20,7 @@ use Filament\Tables\Concerns\InteractsWithTable;
 use Filament\Tables\Contracts\HasTable;
 use Filament\Tables\Table;
 use Illuminate\Contracts\View\View;
+use Illuminate\Database\Eloquent\Builder;
 use Livewire\Component;
 use Filament\Forms\Components\Select;
 use Livewire\Features\SupportRedirects\Redirector;
@@ -51,7 +52,7 @@ class AdsTable extends Component implements HasForms, HasTable
                         return redirect()->route(auth_user_type() . '.ads.create',$data['company_id']);
                     })
             ])
-            ->query(Ad::query())
+            ->query($this->getQuery())
             ->columns($this->getColumns())
             ->filters($this->getFilters())
             ->actions($this->getActions());
@@ -60,6 +61,17 @@ class AdsTable extends Component implements HasForms, HasTable
     public function render(): View
     {
         return view('livewire.ads-table');
+    }
+
+    /**
+     * Return query builder
+     * @return Builder
+     */
+    private function getQuery(): Builder
+    {
+        return Ad::query()->whereHas('company', function (Builder $query) {
+            $query->where('user_id', auth()->id());
+        });
     }
 
     /**
@@ -100,7 +112,7 @@ class AdsTable extends Component implements HasForms, HasTable
                 Stack::make([
                     TextColumn::make('active')
                         ->badge()
-                        ->formatStateUsing(fn () => __('admin.is_active_m'))
+                        ->formatStateUsing(fn () => __('common.is_active_m'))
                         ->color('secondary'),
                     ToggleColumn::make('active'),
                 ])->grow(false)->alignStart()
