@@ -49,14 +49,6 @@ class AdController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     */
-    public function show(Ad $ad)
-    {
-        //
-    }
-
-    /**
      *  Show the form for editing the specified resource.
      *
      * @param Company $company
@@ -77,14 +69,6 @@ class AdController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Ad $ad)
-    {
-        //
-    }
-
-    /**
      * Display resource's form
      * @param Company $company
      * @param Ad $ad
@@ -94,7 +78,6 @@ class AdController extends Controller
     private function form(Company $company, Ad $ad, string $action): View
     {
         $types = AdType::options();
-        //$companies = auth()->user()->companies()->has('ad', '=', 0)->get() ?? collect();
 
         $route = match($action) {
             'edit' => route(auth_user_type() . '.ads.update', ['company' => $company, 'ad' => $ad]),

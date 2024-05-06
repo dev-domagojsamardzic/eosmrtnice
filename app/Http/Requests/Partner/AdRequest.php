@@ -19,7 +19,7 @@ class AdRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return is_partner();
+        return is_admin() || is_partner();
     }
 
     /**

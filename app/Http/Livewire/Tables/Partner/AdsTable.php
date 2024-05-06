@@ -149,15 +149,4 @@ class AdsTable extends Component implements HasForms, HasTable
             ])->iconPosition(IconPosition::Before),
         ];
     }
-
-    /**
-     * Return table groups
-     * @return array
-     */
-    private function getGroups(): array
-    {
-        return [];
-    }
-
-
 }
