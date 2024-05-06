@@ -47,4 +47,6 @@ return [
     'is_inactive_f_pl' => 'Neaktivne',
     'is_active_n_pl' => 'Aktivni',
     'is_inactive_n_pl' => 'Nektivni',
+    'approve' => 'Odobri',
+    'disapprove' => 'Ukloni odobrenje',
 ];

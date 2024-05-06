@@ -6,6 +6,7 @@ use App\Models\Ad;
 use Filament\Forms\Concerns\InteractsWithForms;
 use Filament\Forms\Contracts\HasForms;
 use Filament\Support\Enums\IconPosition;
+use Filament\Tables\Actions\Action;
 use Filament\Tables\Actions\ActionGroup;
 use Filament\Tables\Actions\EditAction;
 use Filament\Tables\Columns\ImageColumn;
@@ -107,6 +108,16 @@ class AdsTable extends Component implements HasForms, HasTable
     private function getActions(): array
     {
         return  [
+            Action::make('approve')
+                ->label(fn (Ad $ad): string => $ad->approved ? __('common.disapprove') : __('common.approve'))
+                ->button()
+                ->action(function(Ad $ad): void {
+                    $ad->approved = !$ad->approved;
+                    $ad->save();
+                })
+                ->icon(fn (Ad $ad): string => $ad->approved ? 'heroicon-m-x-circle' : 'heroicon-m-check-circle')
+                ->color(fn(Ad $ad): string => $ad->approved ? 'danger' : 'success')
+                ->requiresConfirmation(),
             ActionGroup::make([
                 EditAction::make('edit')
                     ->label(__('common.edit'))
@@ -114,6 +125,7 @@ class AdsTable extends Component implements HasForms, HasTable
                     ->url(fn (Ad $ad): string => route(
                         auth_user_type() . '.ads.edit',
                         ['company' => $ad->company_id, 'ad' => $ad->id])),
+
             ])->iconPosition(IconPosition::Before),
         ];
     }

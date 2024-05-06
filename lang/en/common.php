@@ -44,4 +44,6 @@ return [
     'is_inactive_f_pl' => 'Inactive',
     'is_active_n_pl' => 'Active',
     'is_inactive_n_pl' => 'Inactive',
+    'approve' => 'Approve',
+    'disapprove' => 'Disapprove',
 ];
