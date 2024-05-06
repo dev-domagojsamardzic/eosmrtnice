@@ -1,6 +1,7 @@
 <?php
 
 use App\Enums\UserType;
+use App\Models\User;
 
 if (!function_exists('auth_user_type')) {
     /**
@@ -56,5 +57,16 @@ if (!function_exists('public_storage_asset')) {
     function public_storage_asset(string $path = ''): string
     {
         return asset('storage/' . $path);
+    }
+}
+
+if (!function_exists('admin')) {
+    /**
+     * Return admin user
+     * @return User
+     */
+    function admin(): User
+    {
+        return User::where('type', UserType::ADMIN)->first();
     }
 }
