@@ -36,11 +36,13 @@ trait AuthorizationPolicyHelper
             ->exists();
     }
 
-    protected function userOwnsCompaniesWithoutAds(User $user): bool
+    protected function userOwnsCompaniesAvailableForAds(User $user): bool
     {
         return $user->companies()
             ->where('active', 1)
-            ->has('ads', '=' ,0)
+            ->whereDoesntHave('ads', function ($query) {
+                $query->where('expired', false);
+            })
             ->exists();
     }
 }

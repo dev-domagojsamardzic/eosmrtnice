@@ -32,7 +32,7 @@ class AdPolicy
     {
         return is_partner() &&
             $this->userOwnsAtLeastOneCompany($user) &&
-            $this->userOwnsCompaniesWithoutAds($user);
+            $this->userOwnsCompaniesAvailableForAds($user);
     }
 
     /**
