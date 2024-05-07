@@ -6,6 +6,7 @@ use App\Enums\AdType;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasOneThrough;
 use Illuminate\Support\Carbon;
 
 /**
@@ -23,7 +24,8 @@ use Illuminate\Support\Carbon;
  * @property            Carbon      updated_at
  * @property            Carbon      deleted_at
  * --------------------------------------------
- * @property            Company     company
+ * @property            Company|null    company
+ * @property            User|null       user
  */
 class Ad extends Model
 {
@@ -66,5 +68,15 @@ class Ad extends Model
     public function company(): BelongsTo
     {
         return $this->belongsTo(Company::class);
+    }
+
+    /**
+     * Owner of company owning the ad
+     *
+     * @return HasOneThrough
+     */
+    public function user(): HasOneThrough
+    {
+        return $this->hasOneThrough(User::class, Company::class, 'id', 'id', 'company_id', 'user_id');
     }
 }

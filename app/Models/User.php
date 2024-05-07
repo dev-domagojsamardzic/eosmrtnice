@@ -7,8 +7,10 @@ use Carbon\Carbon;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Casts\Attribute;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -30,7 +32,8 @@ use Illuminate\Notifications\Notifiable;
  * -------------------------------------------
  * @property-read   string      full_name
  * -------------------------------------------
- * @property        Company     $companies
+ * @property        Company             companies
+ * @property        Ad<Collection>      ads
  */
 
 class User extends Authenticatable implements MustVerifyEmail
@@ -94,6 +97,16 @@ class User extends Authenticatable implements MustVerifyEmail
     public function companies(): HasMany
     {
         return $this->hasMany(Company::class);
+    }
+
+    /**
+     * Return ads of a user (for partner)
+     *
+     * @return HasManyThrough
+     */
+    public function ads(): HasManyThrough
+    {
+        return $this->hasManyThrough(Ad::class, Company::class);
     }
 
     /**
