@@ -84,6 +84,8 @@ return [
     */
 
     'locale' => env('APP_LOCALE','hr'),
+    'currency' => env('APP_CURRENCY', 'EUR'),
+    'currency_symbol' => env('APP_CURRENCY_SYMBOL', '€'),
 
     /*
     |--------------------------------------------------------------------------
