@@ -57,6 +57,13 @@
             <span>{{ __('sidebar.ads') }}</span></a>
     </li>
 
+    <!-- Nav Item - Services -->
+    <li class="nav-item">
+        <a class="nav-link" href="{{ route(auth_user_type() . '.services.index') }}">
+            <i class="fas fa-tag"></i>
+            <span>{{ __('sidebar.services') }}</span></a>
+    </li>
+
     <!-- Divider -->
     <hr class="sidebar-divider">
 
