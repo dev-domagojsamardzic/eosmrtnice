@@ -7,4 +7,5 @@ return [
     'partners' => 'Partneri',
     'companies' => 'Tvrtke',
     'ads' => 'Oglasi',
+    'services' => 'Usluge',
 ];

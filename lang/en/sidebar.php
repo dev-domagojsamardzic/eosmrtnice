@@ -7,4 +7,5 @@ return [
     'partners' => 'Partners',
     'companies' => 'Companies',
     'ads' => 'Ads',
+    'services' => 'Services',
 ];
