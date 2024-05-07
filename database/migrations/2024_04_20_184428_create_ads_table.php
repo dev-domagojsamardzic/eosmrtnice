@@ -23,6 +23,7 @@ return new class extends Migration
             $table->dateTime('valid_until')->nullable();
             $table->string('banner',256)->nullable();
             $table->string('caption', 256)->nullable();
+            $table->boolean('expired')->default(false);
             $table->timestamps();
             $table->softDeletes();
         });
