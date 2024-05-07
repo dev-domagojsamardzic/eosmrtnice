@@ -3,6 +3,7 @@
 namespace App\Http\Livewire\Tables\Partner;
 
 use App\Models\Ad;
+use App\Models\Company;
 use Filament\Support\Enums\IconPosition;
 use Filament\Tables\Actions\Action;
 use Filament\Tables\Actions\ActionGroup;
@@ -45,7 +46,14 @@ class AdsTable extends Component implements HasForms, HasTable
                     ->form([
                         Select::make('company_id')
                             ->label(__('models/ad.select_company_for_new_ad'))
-                            ->options(auth()->user()->companies()->has('ads', '=', 0)->pluck('title', 'id'))
+                            ->options(
+                                Company::query()
+                                    ->where('user_id', auth()->id())
+                                    ->availableForAd()
+                                    ->get()
+                                    ->pluck('title', 'id')
+                                    ->toArray()
+                            )
                             ->required(),
                     ])
                     ->action(function (array $data, Ad $ad): Redirector {
