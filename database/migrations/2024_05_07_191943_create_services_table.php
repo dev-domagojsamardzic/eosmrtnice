@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('title');
             $table->string('description', 512)->nullable();
             $table->decimal('price');
+            $table->boolean('active')->default(true);
             $table->timestamps();
         });
     }

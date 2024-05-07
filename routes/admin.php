@@ -30,4 +30,5 @@ Route::prefix('companies/{company}')->group(function () {
     Route::put('ads/{ad}', [AdController::class, 'update'])->name('ads.update');
 });
 
-Route::resource('services', ServiceController::class);
+Route::resource('services', ServiceController::class)
+    ->only(['index']);

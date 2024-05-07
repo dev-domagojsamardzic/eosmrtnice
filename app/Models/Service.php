@@ -9,7 +9,9 @@ use Illuminate\Database\Eloquent\Model;
 /**
  * @property-read       int         id
  * @property            string      title
+ * @property            string      description
  * @property            float       price
+ * @property            bool        active
  * @property            Carbon      created_at
  * @property            Carbon      updated_at
  */
