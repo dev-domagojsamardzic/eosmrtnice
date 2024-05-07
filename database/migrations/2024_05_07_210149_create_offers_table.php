@@ -19,10 +19,13 @@ return new class extends Migration
             $table->foreignIdFor(User::class)->constrained()
                 ->onUpdate('cascade')
                 ->onDelete('restrict');
+            $table->morphs('offerable');
             $table->unsignedDecimal('net_total')->nullable(false);
             $table->unsignedDecimal('taxes')->nullable(false);
             $table->unsignedDecimal('total')->nullable(false);
             $table->timestamps();
+
+            $table->index(['offerable_id', 'offerable_type']);
         });
     }
 
