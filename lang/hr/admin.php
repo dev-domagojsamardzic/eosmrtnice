@@ -12,6 +12,7 @@ return [
     'first_name' => 'Ime',
     'last_name' => 'Prezime',
     'companies' => 'Tvrtke',
+    'services' => 'Usluge',
     'company_title' => 'Naziv tvrtke',
     'company_created_at' => 'Stvoreno',
     'address' => 'Adresa',

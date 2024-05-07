@@ -12,6 +12,7 @@ return [
     'first_name' => 'First Name',
     'last_name' => 'Last Name',
     'companies' => 'Companies',
+    'services' => 'Services',
     'company_title' => 'Company Title',
     'company_created_at' => 'Created At',
     'address' => 'Address',
