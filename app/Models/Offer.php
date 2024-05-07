@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\MorphTo;
 
 /**
  * @property-read       int         id
@@ -23,4 +24,12 @@ class Offer extends Model
         'taxes' => 'decimal:2',
         'total' => 'decimal:2',
     ];
+
+    /**
+     * Get the parent offerable model (ad).
+     */
+    public function offerable(): MorphTo
+    {
+        return $this->morphTo();
+    }
 }

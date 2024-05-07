@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasOneThrough;
+use Illuminate\Database\Eloquent\Relations\MorphOne;
 use Illuminate\Support\Carbon;
 
 /**
@@ -27,6 +28,7 @@ use Illuminate\Support\Carbon;
  * --------------------------------------------
  * @property            Company|null    company
  * @property            User|null       user
+ * @property            Offer|null      offer
  */
 class Ad extends Model
 {
@@ -80,5 +82,15 @@ class Ad extends Model
     public function user(): HasOneThrough
     {
         return $this->hasOneThrough(User::class, Company::class, 'id', 'id', 'company_id', 'user_id');
+    }
+
+    /**
+     * Get the ad's offer
+     *
+     * @return MorphOne
+     */
+    public function offer(): MorphOne
+    {
+        return $this->morphOne(Offer::class, 'offerable');
     }
 }
