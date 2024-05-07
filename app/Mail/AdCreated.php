@@ -30,7 +30,7 @@ class AdCreated extends Mailable
     {
         return new Envelope(
             from: env('MAIL_FROM_ADDRESS'),
-            subject: 'Ad Created',
+            subject: __('mail.ad_created.subject'),
         );
     }
 

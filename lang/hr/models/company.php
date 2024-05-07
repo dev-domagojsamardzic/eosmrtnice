@@ -7,4 +7,5 @@ return [
     'placeholders' => [
         'website' => 'npr: https://example.com'
     ],
+    'no_logo' => 'Nema logotipa',
 ];

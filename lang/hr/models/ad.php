@@ -57,4 +57,6 @@ return [
     'banner_helper_info' => 'U Gold verziji oglasa, naslovna slika je obavezna. Podržani tipovi su: jpeg,jpg,png,svg,webp.',
     'caption' => 'Naslov',
     'caption_helper_info' => 'Napiši nešto kratko i upečatljivo što će privući pažnju korisnika.',
+    'no_banner' => 'Naslovna slika nije postavljena',
+    'no_caption' => 'Naslov nije postavljen',
 ];

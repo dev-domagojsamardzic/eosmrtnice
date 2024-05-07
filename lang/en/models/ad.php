@@ -57,4 +57,6 @@ return [
     'logo_helper_info' => 'Banner image is mandatory in Gold version. Supported types: jpeg,jpg,png,svg,webp.',
     'caption' => 'Caption',
     'caption_helper_info' => 'Write a striking Ad caption that will catch user\'s attention',
+    'no_banner' => 'No Logo set.',
+    'no_caption' => 'No Caption set.',
 ];
