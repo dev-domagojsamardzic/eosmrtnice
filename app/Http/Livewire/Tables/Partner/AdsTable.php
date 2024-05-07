@@ -77,9 +77,11 @@ class AdsTable extends Component implements HasForms, HasTable
      */
     private function getQuery(): Builder
     {
-        return Ad::query()->whereHas('company', function (Builder $query) {
-            $query->where('user_id', auth()->id());
-        });
+        return Ad::query()
+            ->where('expired', 0)
+            ->whereHas('company', function (Builder $query) {
+                $query->where('user_id', auth()->id());
+            });
     }
 
     /**
