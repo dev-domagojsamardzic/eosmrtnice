@@ -33,6 +33,9 @@ use Illuminate\Database\Eloquent\Casts\Attribute;
  * @property        Carbon      updated_at
  * @property        Carbon      deleted_at
  * -------------------------------------------
+ * @method          static      active(Builder $query)
+ * @method          static      availableForAd(Builder $query)
+ * -------------------------------------------
  * @property        string      alternative_logo
  * -------------------------------------------
  * @property        Partner     user
@@ -121,6 +124,16 @@ class Company extends Model
     public function scopeActive(Builder $query): void
     {
         $query->where('active', 1);
+    }
+
+    /**
+     * Scope a query to only include companies available for ads
+     */
+    public function scopeAvailableForAd(Builder $query): void
+    {
+        $query->whereDoesntHave('ads', static function ($query) {
+            $query->where('expired', false);
+        });
     }
 
 
