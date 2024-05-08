@@ -85,6 +85,8 @@ class AdsTable extends Component implements HasForms, HasTable
                         1 => 'success',
                         0 => 'danger',
                     }),
+                ViewColumn::make('offer_sent')
+                    ->view('filament.tables.columns.offer-sent-badge'),
             ])->from('md'),
 
             ViewLayout::make('partner.table.ads-table-collapsible-panel')
@@ -108,16 +110,6 @@ class AdsTable extends Component implements HasForms, HasTable
     private function getActions(): array
     {
         return  [
-            Action::make('approve')
-                ->label(fn (Ad $ad): string => $ad->approved ? __('common.disapprove') : __('common.approve'))
-                ->button()
-                ->action(function(Ad $ad): void {
-                    $ad->approved = !$ad->approved;
-                    $ad->save();
-                })
-                ->icon(fn (Ad $ad): string => $ad->approved ? 'heroicon-m-x-circle' : 'heroicon-m-check-circle')
-                ->color(fn(Ad $ad): string => $ad->approved ? 'danger' : 'success')
-                ->requiresConfirmation(),
             ActionGroup::make([
                 EditAction::make('edit')
                     ->label(__('common.edit'))
@@ -125,7 +117,20 @@ class AdsTable extends Component implements HasForms, HasTable
                     ->url(fn (Ad $ad): string => route(
                         auth_user_type() . '.ads.edit',
                         ['company' => $ad->company_id, 'ad' => $ad->id])),
-
+                Action::make('approve')
+                    ->label(fn (Ad $ad): string => $ad->approved ? __('common.disapprove') : __('common.approve'))
+                    ->action(function(Ad $ad): void {
+                        $ad->approved = !$ad->approved;
+                        $ad->save();
+                    })
+                    ->icon(fn (Ad $ad): string => $ad->approved ? 'heroicon-m-x-circle' : 'heroicon-m-check-circle')
+                    ->color(fn(Ad $ad): string => $ad->approved ? 'danger' : 'success')
+                    ->requiresConfirmation(),
+                Action::make('send_offer')
+                    ->label(__('models/offer.send'))
+                    ->disabled(fn(Ad $ad): bool => !is_null($ad->offer))
+                    ->icon('heroicon-s-paper-airplane')
+                    ->color(fn(Ad $ad): string => is_null($ad->offer) ? 'black' : 'danger')
             ])->iconPosition(IconPosition::Before),
         ];
     }
