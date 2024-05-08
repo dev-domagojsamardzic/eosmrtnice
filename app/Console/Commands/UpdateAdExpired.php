@@ -34,6 +34,7 @@ class UpdateAdExpired extends Command
 
         foreach ($ads as $ad) {
             $ad->expired = true;
+            $ad->expired_at = now();
             $ad->active = false;
             $ad->save();
         }

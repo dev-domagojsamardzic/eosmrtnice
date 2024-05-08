@@ -22,6 +22,7 @@ use Illuminate\Support\Carbon;
  * @property            string      banner
  * @property            string      caption
  * @property            bool        expired
+ * @property            Carbon      expired_at
  * @property            Carbon      created_at
  * @property            Carbon      updated_at
  * @property            Carbon      deleted_at
@@ -52,6 +53,7 @@ class Ad extends Model
         'approved' => false,
         'active' => false,
         'expired' => false,
+        'expired_at' => null,
     ];
 
     /**

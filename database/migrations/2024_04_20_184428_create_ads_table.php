@@ -24,6 +24,7 @@ return new class extends Migration
             $table->string('banner',256)->nullable();
             $table->string('caption', 256)->nullable();
             $table->boolean('expired')->default(false);
+            $table->dateTime('expired_at')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });
