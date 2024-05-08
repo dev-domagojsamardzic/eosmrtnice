@@ -87,6 +87,17 @@ class AdsTable extends Component implements HasForms, HasTable
                     }),
                 ViewColumn::make('offer_sent')
                     ->view('filament.tables.columns.offer-sent-badge'),
+                TextColumn::make('expired')
+                    ->label(__('models/ad.expired'))
+                    ->badge()
+                    ->formatStateUsing(fn(int $state): string => match($state) {
+                        1 => __('models/ad.expired'),
+                        default => ''
+                    })
+                    ->color(fn(int $state): string => match($state) {
+                        1 => 'danger',
+                        default => '',
+                    }),
             ])->from('md'),
 
             ViewLayout::make('partner.table.ads-table-collapsible-panel')

@@ -59,4 +59,5 @@ return [
     'caption_helper_info' => 'Write a striking Ad caption that will catch user\'s attention',
     'no_banner' => 'No Logo set.',
     'no_caption' => 'No Caption set.',
+    'expired' => 'Ad expired',
 ];

@@ -59,4 +59,5 @@ return [
     'caption_helper_info' => 'Napiši nešto kratko i upečatljivo što će privući pažnju korisnika.',
     'no_banner' => 'Naslovna slika nije postavljena',
     'no_caption' => 'Naslov nije postavljen',
+    'expired' => 'Oglas je istekao',
 ];
