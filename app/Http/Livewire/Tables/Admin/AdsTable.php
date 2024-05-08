@@ -120,7 +120,12 @@ class AdsTable extends Component implements HasForms, HasTable
                 Action::make('approve')
                     ->label(fn (Ad $ad): string => $ad->approved ? __('common.disapprove') : __('common.approve'))
                     ->action(function(Ad $ad): void {
+                        $approved = !$ad->approved;
                         $ad->approved = !$ad->approved;
+                        if ($approved) {
+                            $ad->valid_from = now();
+                            $ad->valid_until = now()->addMonths($ad->months_valid);
+                        }
                         $ad->save();
                     })
                     ->icon(fn (Ad $ad): string => $ad->approved ? 'heroicon-m-x-circle' : 'heroicon-m-check-circle')
