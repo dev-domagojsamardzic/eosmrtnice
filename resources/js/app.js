@@ -10,9 +10,14 @@ import './bootstrap/bootstrap.bundle.js';
 
 import '@popperjs/core';
 
+import 'jquery-ui';
+import 'jquery-ui-dist/jquery-ui.js';
+
 import './sb-admin/sb-admin-2.min.js';
 
 import './filepond/filepond.js';
+
+import 'bootstrap-datepicker';
 
 
 /**
