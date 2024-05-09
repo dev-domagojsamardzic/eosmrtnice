@@ -3,6 +3,7 @@
 namespace App\Http\Livewire\Tables\Admin;
 
 use App\Models\Ad;
+use Exception;
 use Filament\Forms\Concerns\InteractsWithForms;
 use Filament\Forms\Contracts\HasForms;
 use Filament\Support\Enums\IconPosition;
@@ -16,6 +17,7 @@ use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Columns\ViewColumn;
 use Filament\Tables\Concerns\InteractsWithTable;
 use Filament\Tables\Contracts\HasTable;
+use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
 use Illuminate\Contracts\View\View;
 use Illuminate\Database\Eloquent\Builder;
@@ -35,7 +37,8 @@ class AdsTable extends Component implements HasForms, HasTable
             ->emptyStateDescription('')
             ->columns($this->getColumns())
             ->filters($this->getFilters())
-            ->actions($this->getActions());
+            ->actions($this->getActions())
+            ->groups($this->getGroups());
     }
 
     public function render(): View
@@ -108,10 +111,18 @@ class AdsTable extends Component implements HasForms, HasTable
     /**
      * Return table filters
      * @return array
+     * @throws Exception
      */
     private function getFilters(): array
     {
-        return [];
+        return [
+            SelectFilter::make('expired')
+                ->label(__('models/ad.actuality'))
+                ->options([
+                    0 => __('models/ad.ongoing_group'),
+                    1 => __('models/ad.expired_group'),
+                ])
+        ];
     }
 
     /**
@@ -157,6 +168,11 @@ class AdsTable extends Component implements HasForms, HasTable
      */
     private function getQuery(): Builder
     {
-        return Ad::query();
+        return Ad::query()->orderByDesc('created_at');
+    }
+
+    private function getGroups(): array
+    {
+        return [];
     }
 }

@@ -60,4 +60,7 @@ return [
     'no_banner' => 'No Logo set.',
     'no_caption' => 'No Caption set.',
     'expired' => 'Ad expired',
+    'ongoing_group' => 'Ongoing Ads',
+    'expired_group' => 'Expired Ads',
+    'actuality' => 'Actuality',
 ];

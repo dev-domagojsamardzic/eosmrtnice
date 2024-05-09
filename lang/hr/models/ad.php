@@ -60,4 +60,7 @@ return [
     'no_banner' => 'Naslovna slika nije postavljena',
     'no_caption' => 'Naslov nije postavljen',
     'expired' => 'Oglas je istekao',
+    'ongoing_group' => 'Oglasi u toku',
+    'expired_group' => 'Istekli oglasi',
+    'actuality' => 'Aktualnost oglasa',
 ];
