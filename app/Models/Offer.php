@@ -9,11 +9,12 @@ use Illuminate\Database\Eloquent\Relations\MorphTo;
 /**
  * @property-read       int         id
  * @property            string      number
- * @property            Carbon      for_date
- * @property            int         user_id
+ * @property            int         company_id
  * @property            float       net_total
  * @property            float       taxes
  * @property            float       total
+ * @property            Carbon      valid_from
+ * @property            Carbon      valid_until
  * @property            Carbon      created_at
  * @property            Carbon      updated_at
  */
