@@ -13,9 +13,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('offer_service', function (Blueprint $table) {
+        Schema::create('item_offer', function (Blueprint $table) {
             $table->foreignIdFor(Offer::class)->constrained();
-            $table->foreignIdFor(Service::class)->constrained();
+            $table->morphs('itemable');
+            $table->unsignedInteger('quantity')->default(1);
             $table->decimal('price');
         });
     }
@@ -25,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('offer_service');
+        Schema::dropIfExists('item_offer');
     }
 };
