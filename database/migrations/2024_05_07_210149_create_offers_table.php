@@ -15,9 +15,7 @@ return new class extends Migration
         Schema::create('offers', static function (Blueprint $table) {
             $table->id();
             $table->string('number')->nullable(false);
-            $table->foreignIdFor(Company::class)->constrained()
-                ->onUpdate('cascade')
-                ->onDelete('restrict');
+            $table->foreignIdFor(Company::class)->constrained();
             $table->unsignedDecimal('net_total')->nullable(false);
             $table->unsignedDecimal('taxes')->nullable(false);
             $table->unsignedDecimal('total')->nullable(false);

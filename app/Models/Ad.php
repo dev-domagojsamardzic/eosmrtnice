@@ -3,33 +3,34 @@
 namespace App\Models;
 
 use App\Enums\AdType;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasOneThrough;
-use Illuminate\Database\Eloquent\Relations\MorphOne;
+use Illuminate\Database\Eloquent\Relations\MorphToMany;
 use Illuminate\Support\Carbon;
 
 /**
- * @property-read       int         id
- * @property            int         company_id
- * @property            int         type
- * @property            bool        approved
- * @property            bool        active
- * @property            int         months_valid
- * @property            Carbon      valid_from
- * @property            Carbon      valid_until
- * @property            string      banner
- * @property            string      caption
- * @property            bool        expired
- * @property            Carbon      expired_at
- * @property            Carbon      created_at
- * @property            Carbon      updated_at
- * @property            Carbon      deleted_at
- * --------------------------------------------
- * @property            Company|null    company
- * @property            User|null       user
- * @property            Offer|null      offer
+ * @property-read       int                     id
+ * @property            int                     company_id
+ * @property            int                     type
+ * @property            bool                    approved
+ * @property            bool                    active
+ * @property            int                     months_valid
+ * @property            Carbon                  valid_from
+ * @property            Carbon                  valid_until
+ * @property            string                  banner
+ * @property            string                  caption
+ * @property            bool                    expired
+ * @property            Carbon                  expired_at
+ * @property            Carbon                  created_at
+ * @property            Carbon                  updated_at
+ * @property            Carbon                  deleted_at
+ * --------------------------------------------------------
+ * @property            Company|null                company
+ * @property            User|null                   user
+ * @property            Collection|Offer            offers
  */
 class Ad extends Model
 {
@@ -89,10 +90,10 @@ class Ad extends Model
     /**
      * Get the ad's offer
      *
-     * @return MorphOne
+     * @return MorphToMany
      */
-    public function offer(): MorphOne
+    public function offers(): MorphToMany
     {
-        return $this->morphOne(Offer::class, 'offerable');
+        return $this->morphToMany(Offer::class, 'offerable');
     }
 }
