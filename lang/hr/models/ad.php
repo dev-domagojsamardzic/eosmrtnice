@@ -1,6 +1,7 @@
 <?php
 
 return [
+    'ad' => 'Oglas',
     'ads' => 'Oglasi',
     'new_ad' => 'Novi oglas',
     'type' => 'Vrsta oglasa',

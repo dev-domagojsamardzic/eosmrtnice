@@ -1,6 +1,7 @@
 <?php
 
 return [
+    'ad' => 'Ad',
     'ads' => 'Ads',
     'new_ad' => 'New Ad',
     'type' => 'Ad Type',
