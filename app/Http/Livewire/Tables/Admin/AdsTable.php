@@ -155,9 +155,9 @@ class AdsTable extends Component implements HasForms, HasTable
                     ->requiresConfirmation(),
                 Action::make('send_offer')
                     ->label(__('models/offer.send'))
-                    ->disabled(fn(Ad $ad): bool => !is_null($ad->offer))
+                    ->disabled(fn(Ad $ad): bool => $ad->offers()->valid()->exists())
                     ->icon('heroicon-s-paper-airplane')
-                    ->color(fn(Ad $ad): string => is_null($ad->offer) ? 'black' : 'danger')
+                    ->color(fn(Ad $ad): string => $ad->offers()->valid()->exists() ? 'danger' : 'black')
                     ->url(fn(Ad $ad): string => route('admin.offers.create', ['ad' => $ad])),
             ])->iconPosition(IconPosition::Before),
         ];
