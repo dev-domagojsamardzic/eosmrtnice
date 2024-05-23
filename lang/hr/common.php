@@ -49,4 +49,5 @@ return [
     'is_inactive_n_pl' => 'Nektivni',
     'approve' => 'Odobri',
     'disapprove' => 'Ukloni odobrenje',
+    'unknown' => 'Nepoznato',
 ];
