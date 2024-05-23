@@ -3,10 +3,9 @@
 use App\Http\Controllers\Admin\AdController;
 use App\Http\Controllers\Admin\CompanyController;
 use App\Http\Controllers\Admin\MemberController;
-use App\Http\Controllers\Admin\OfferController;
+use App\Http\Controllers\Admin\Offers\AdOfferController;
 use App\Http\Controllers\Admin\PartnerController;
 use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\ServiceController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/dashboard', static function () {
@@ -31,7 +30,4 @@ Route::prefix('companies/{company}')->group(function () {
     Route::put('ads/{ad}', [AdController::class, 'update'])->name('ads.update');
 });
 
-/*Route::resource('services', ServiceController::class)
-    ->only(['index']);*/
-
-Route::resource('ads/{ad}/offers', OfferController::class);
+Route::resource('ads/{ad}/offers', AdOfferController::class);
