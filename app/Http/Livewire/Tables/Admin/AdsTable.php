@@ -158,7 +158,7 @@ class AdsTable extends Component implements HasForms, HasTable
                     ->disabled(fn(Ad $ad): bool => $ad->offers()->valid()->exists())
                     ->icon('heroicon-s-paper-airplane')
                     ->color(fn(Ad $ad): string => $ad->offers()->valid()->exists() ? 'danger' : 'black')
-                    ->url(fn(Ad $ad): string => route('admin.offers.create', ['ad' => $ad])),
+                    ->url(fn(Ad $ad): string => route('admin.ads.offers.create', ['ad' => $ad])),
             ])->iconPosition(IconPosition::Before),
         ];
     }
