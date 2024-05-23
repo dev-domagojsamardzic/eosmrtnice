@@ -204,6 +204,8 @@ return [
         'company_mobile_phone' => 'mobilni telefon',
         'current_password' => 'trenutna lozinka',
         'title' => 'naziv',
+        'valid_from' => 'vrijedi od',
+        'valid_until' => 'vrijedi do',
     ],
 
 ];

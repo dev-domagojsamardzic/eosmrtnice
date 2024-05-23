@@ -38,17 +38,19 @@
                             <i class="fas fa-calendar-alt"></i>
                         </span>
                     </div>
+                    <x-input-error :messages="$errors->get('valid_from')" class="mt-2"/>
                 </div>
 
                 <div class="col-lg-3 col-md-4 col-sm-12">
                     <x-input-label for="valid_until" :value="__('models/offer.valid_until')"></x-input-label>
                     <div class="input-group input-group-joined date">
-                        <input id="valid_until" type="text" class="form-control"
+                        <input name="valid_until" id="valid_until" type="text" class="form-control"
                                value="{{ old('valid_until', $offer->valid_until) ? \Illuminate\Support\Carbon::parse(old('valid_until', $offer->valid_until))->format('d.m.Y.') : now()->addMonth()->format('d.m.Y.') }}">
                         <span class="input-group-text">
                             <i class="fas fa-calendar-alt"></i>
                         </span>
                     </div>
+                    <x-input-error :messages="$errors->get('valid_until')" class="mt-2"/>
                 </div>
             </div>
 
@@ -75,7 +77,7 @@
                                type="number"
                                min="1"
                                step="1"
-                               value="1"
+                               value="{{ old('quantity', $offer->offerables?->first()) ?? "1" }}"
                                required>
                     </div>
                     <x-input-error :messages="$errors->get('quantity')" class="mt-2"/>
@@ -90,10 +92,11 @@
                                type="number"
                                min="0.00"
                                step=".01"
-                               value="0.00" required>
+                               value="{{ old('price', $offer->offerables?->first()?->price)  ?? "0.00" }}"
+                               required>
                         <span class="input-group-text">{{ config('app.currency_symbol') }}</span>
                     </div>
-                    <x-input-error :messages="$errors->get('net_total')" class="mt-2"/>
+                    <x-input-error :messages="$errors->get('price')" class="mt-2"/>
                 </div>
             </div>
 

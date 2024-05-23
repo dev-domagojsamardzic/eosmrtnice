@@ -3,10 +3,10 @@
 namespace App\Http\Controllers\Admin\Offers;
 
 use App\Http\Controllers\Admin\OfferController;
+use App\Http\Requests\Admin\Offers\AdOfferRequest;
 use App\Models\Ad;
 use App\Models\Offer;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
 use Illuminate\View\View;
 
 class AdOfferController extends OfferController
@@ -55,10 +55,10 @@ class AdOfferController extends OfferController
      * Store new resource
      *
      * @param Offer $offer
-     * @param Request $request
+     * @param AdOfferRequest $request
      * @return RedirectResponse
      */
-    public function store(Offer $offer, Request $request): RedirectResponse
+    public function store(Offer $offer, AdOfferRequest $request): RedirectResponse
     {
         return $this->apply($offer, $request);
     }
@@ -66,10 +66,10 @@ class AdOfferController extends OfferController
     /**
      * Apply changes on resource
      * @param Offer $offer
-     * @param Request $request
+     * @param AdOfferRequest $request
      * @return RedirectResponse
      */
-    protected function apply(Offer $offer, Request $request): RedirectResponse
+    protected function apply(Offer $offer, AdOfferRequest $request): RedirectResponse
     {
         dd($offer, $request);
         try{
