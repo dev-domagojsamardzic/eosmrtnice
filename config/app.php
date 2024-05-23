@@ -86,7 +86,7 @@ return [
     'locale' => env('APP_LOCALE','hr'),
     'currency' => env('APP_CURRENCY', 'EUR'),
     'currency_symbol' => env('APP_CURRENCY_SYMBOL', '€'),
-    'tax_percentage' => env('APP_TAX_PERCENTAGE', '25'),
+    'tax_percentage' => env('APP_TAX_PERCENTAGE', 25),
 
     /*
     |--------------------------------------------------------------------------
