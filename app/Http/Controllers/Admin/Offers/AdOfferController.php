@@ -6,6 +6,8 @@ use App\Http\Controllers\Admin\OfferController;
 use App\Http\Requests\Admin\Offers\AdOfferRequest;
 use App\Models\Ad;
 use App\Models\Offer;
+use App\Models\Offerable;
+use Carbon\Carbon;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
 
@@ -46,7 +48,7 @@ class AdOfferController extends OfferController
                 'ad' => $ad,
                 'action_name' => $action,
                 'action' => $route,
-                'quit' => route(auth_user_type() . '.ads.offers.index', ['ad' => $ad]),
+                'quit' => route(auth_user_type() . '.ads.index', ['ad' => $ad]),
             ]
         );
     }
@@ -71,9 +73,29 @@ class AdOfferController extends OfferController
      */
     protected function apply(Offer $offer, AdOfferRequest $request): RedirectResponse
     {
-        dd($offer, $request);
+        if (!$offer->exists) {
+            $offer->number = now()->timestamp . '-' . now()->format('m/Y');
+        }
+
+        $offer->company()->associate($request->input('company_id'));
+        $total = (float)$request->input('quantity') * $request->input('price');
+        $taxes = (float)($total * (config('app.tax_percentage') / 100));
+        $offer->total = $total;
+        $offer->taxes = $taxes;
+        $offer->net_total = $total - $taxes;
+        $offer->valid_from = Carbon::parse($request->input('valid_from'))->format('Y-m-d');
+        $offer->valid_until = Carbon::parse($request->input('valid_until'))->format('Y-m-d');
+
         try{
             $offer->save();
+
+            $offerable = new Offerable();
+            $offerable->offer_id = $offer->id;
+            $offerable->offerable_type = $request->input('offerable_type');
+            $offerable->offerable_id = $request->input('offerable_id');
+            $offerable->quantity = $request->input('quantity');
+            $offerable->price = $request->input('price');
+            $offerable->save();
             return redirect()->route('admin.ads.index')
                 ->with('alert', ['class' => 'success', 'message' => __('models/offer.messages.offer_sent')]);
         }catch (\Exception $e) {
