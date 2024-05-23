@@ -30,4 +30,6 @@ Route::prefix('companies/{company}')->group(function () {
     Route::put('ads/{ad}', [AdController::class, 'update'])->name('ads.update');
 });
 
-Route::resource('ads/{ad}/offers', AdOfferController::class)->names('ads.offers');
+Route::resource('ads/{ad}/offers', AdOfferController::class)
+    ->except(['index'])
+    ->names('ads.offers');
