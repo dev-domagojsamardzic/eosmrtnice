@@ -50,4 +50,5 @@ return [
     'approve' => 'Odobri',
     'disapprove' => 'Ukloni odobrenje',
     'unknown' => 'Nepoznato',
+    'save_and_send_offer' => 'Spremi i pošalji ponudu',
 ];

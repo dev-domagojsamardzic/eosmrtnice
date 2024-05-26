@@ -117,7 +117,10 @@
 
             <div class="form-group row mt-5">
                 <div class="col-12">
-                    <button type="submit" class="btn btn-primary btn-user">
+                    <button name="submit" type="submit" value="save_and_send" class="btn btn-primary btn-user">
+                        {{ __('common.save_and_send_offer') }}
+                    </button>
+                    <button name="submit" type="submit" value="save" class="btn btn-primary btn-user">
                         {{ __('common.save') }}
                     </button>
                     <a class="btn btn-link btn-user ml-5" href="{{ $quit }}">

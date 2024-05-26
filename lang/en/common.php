@@ -47,4 +47,5 @@ return [
     'approve' => 'Approve',
     'disapprove' => 'Disapprove',
     'unknown' => 'Unknown',
+    'save_and_send_offer' => 'Save and Send Offer',
 ];
