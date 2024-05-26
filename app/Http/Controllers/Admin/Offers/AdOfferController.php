@@ -96,8 +96,15 @@ class AdOfferController extends OfferController
             $offerable->quantity = $request->input('quantity');
             $offerable->price = $request->input('price');
             $offerable->save();
+
+            if ($request->submit === 'save_and_send') {
+                $this->sendMailWithAttachment($offer);
+                return redirect()->route('admin.ads.index')
+                    ->with('alert', ['class' => 'success', 'message' => __('models/offer.messages.offer_sent')]);
+            }
+
             return redirect()->route('admin.ads.index')
-                ->with('alert', ['class' => 'success', 'message' => __('models/offer.messages.offer_sent')]);
+                ->with('alert', ['class' => 'success', 'message' => __('models/common.saved')]);
         }catch (\Exception $e) {
             return redirect()
                 ->route('admin.ads.index')
@@ -105,4 +112,15 @@ class AdOfferController extends OfferController
         }
     }
 
+    protected function sendMailWithAttachment(Offer $offer): void
+    {
+        // Create PDF document
+        $pdf = $this->createPdf($offer);
+        // send email with document as attachment
+    }
+
+    protected function createPdf(Offer $offer): View
+    {
+
+    }
 }
