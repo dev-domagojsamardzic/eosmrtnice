@@ -5,6 +5,16 @@ namespace App\Http\Requests\Admin\Offers;
 use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
 
+/**
+ * @property            int             company_id
+ * @property            string          offerable_type
+ * @property            int             offerable_id
+ * @property            string          valid_from
+ * @property            string          valid_until
+ * @property            int             quantity
+ * @property            float           price
+ * @property            string          submit
+ */
 class AdOfferRequest extends FormRequest
 {
     /**
