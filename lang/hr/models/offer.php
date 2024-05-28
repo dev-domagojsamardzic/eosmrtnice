@@ -15,6 +15,10 @@ return [
     'total' => 'Ukupno',
     'item' => 'Stavka',
     'buyer' => 'Kupac',
+    'issue_date' => 'Datum izdavanja',
+    'issue_town' => 'Mjesto izdavanja',
+    'issue_time' => 'Vrijeme izdavanja',
+    'pdv' => 'PDV',
     'messages' => [
         'offer_sent' => 'Ponuda je poslana.',
     ],

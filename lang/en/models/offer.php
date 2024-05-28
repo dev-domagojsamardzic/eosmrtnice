@@ -15,6 +15,10 @@ return [
     'total' => 'Total',
     'item' => 'Item',
     'buyer' => 'Buyer',
+    'issue_date' => 'Issue Date',
+    'issue_town' => 'Issue Town',
+    'issue_time' => 'Issue Time',
+    'pdv' => 'PDV',
     'messages' => [
         'offer_sent' => 'Offer sent.',
     ],
