@@ -46,7 +46,7 @@ class Offer extends Model
     ];
 
     protected $attributes = [
-        'number' => 'O',
+        'number' => 'P',
     ];
 
     /**
@@ -92,12 +92,6 @@ class Offer extends Model
      */
     public function generateOfferNumber(): string
     {
-        $prefix = "O";
-
-        if ($this->ads->isNotEmpty()) {
-            $prefix = "OA";
-        }
-
-        return $prefix . "-" . str_pad($this->id + 1, 5, '0', STR_PAD_LEFT) . "-" . $this->created_at->format("m/Y");
+        return "P-" . str_pad($this->id + 1, 5, '0', STR_PAD_LEFT) . "-" . $this->created_at->format("m/Y");
     }
 }
