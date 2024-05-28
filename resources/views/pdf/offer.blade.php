@@ -2,61 +2,7 @@
 <head>
     <meta charset="UTF-8">
     <title>{{ __('models/offer.offer') }} {{ $offer->number }}</title>
-    <style>
-        @font-face {
-            font-family: 'Montserrat';
-            font-weight: normal;
-            src: url({{ storage_path('fonts/Montserrat-Medium.ttf') }}) format('truetype');
-        }
-        @font-face {
-            font-family: 'Montserrat';
-            font-weight: bold;
-            src: url({{ storage_path('fonts/Montserrat-Bold.ttf') }}) format('truetype');
-        }
-
-        *{font-family: Montserrat, sans-serif; font-size: 16px;}
-
-        table.items-table, .items-table th, .items-table td {
-            border: 1px solid #333333;
-            border-collapse: collapse;
-        }
-
-        .items-table th, .items-table td {
-            padding: 8px;
-        }
-
-        .w-100 {
-            width: 100%;
-        }
-
-        .text-align-left {
-            text-align: left;
-        }
-
-        .text-align-right {
-            text-align: right;
-        }
-
-        .mt-16 {
-            margin-top: 16px;
-        }
-
-        .mt-32 {
-            margin-top: 32px;
-        }
-
-        .font-size-md {
-            font-size: 22px;
-        }
-
-        .h-72 {
-            height: 72px;
-        }
-
-        .background-lightgrey {
-            background: #D3D3D3FF;
-        }
-    </style>
+    <link rel="stylesheet" href="{{ resource_path('css/pdf.css') }}">
 </head>
 <body>
 
