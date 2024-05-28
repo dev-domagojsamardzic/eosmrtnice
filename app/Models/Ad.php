@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Enums\AdType;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -28,9 +29,11 @@ use Illuminate\Support\Carbon;
  * @property            Carbon                  updated_at
  * @property            Carbon                  deleted_at
  * --------------------------------------------------------
- * @property            Company|null                company
- * @property            User|null                   user
- * @property            Collection|Offer            offers
+ * @property            string                  title
+ * --------------------------------------------------------
+ * @property            Company|null            company
+ * @property            User|null               user
+ * @property            Collection|Offer        offers
  */
 class Ad extends Model
 {
@@ -67,6 +70,16 @@ class Ad extends Model
         'valid_from' => 'datetime',
         'valid_until' => 'datetime',
     ];
+
+    /**
+     * Get ad title
+     */
+    protected function title(): Attribute
+    {
+        return Attribute::make(
+            get: fn () => __('models/ad.ad') . ' ' . $this->type?->name
+        );
+    }
 
     /**
      * Company that Ad belongs to
