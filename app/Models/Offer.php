@@ -2,7 +2,9 @@
 
 namespace App\Models;
 
+use App\Observers\OfferObserver;
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Attributes\ObservedBy;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
@@ -32,6 +34,7 @@ use Illuminate\Database\Eloquent\Relations\MorphToMany;
  * $offer->offerables->pluck('offerable');
  */
 
+#[ObservedBy([OfferObserver::class])]
 class Offer extends Model
 {
     protected $casts = [
@@ -40,6 +43,10 @@ class Offer extends Model
         'net_total' => 'decimal:2',
         'taxes' => 'decimal:2',
         'total' => 'decimal:2',
+    ];
+
+    protected $attributes = [
+        'number' => 'O',
     ];
 
     /**
@@ -76,5 +83,21 @@ class Offer extends Model
     {
         $query->where('valid_from', '<=', now()->toDateString())
             ->where('valid_until', '>=', now()->toDateString());
+    }
+
+    /**
+     * Generate offer number
+     *
+     * @return string
+     */
+    public function generateOfferNumber(): string
+    {
+        $prefix = "O";
+
+        if ($this->ads->isNotEmpty()) {
+            $prefix = "OA";
+        }
+
+        return $prefix . "-" . str_pad($this->id + 1, 5, '0', STR_PAD_LEFT) . "-" . $this->created_at->format("m/Y");
     }
 }
