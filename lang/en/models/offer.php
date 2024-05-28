@@ -13,6 +13,8 @@ return [
     'net_total' => 'Net Total',
     'taxes' => 'Taxes',
     'total' => 'Total',
+    'item' => 'Item',
+    'buyer' => 'Buyer',
     'messages' => [
         'offer_sent' => 'Offer sent.',
     ],

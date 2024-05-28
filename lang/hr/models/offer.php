@@ -13,6 +13,8 @@ return [
     'net_total' => 'Neto ukupno',
     'taxes' => 'Porez',
     'total' => 'Ukupno',
+    'item' => 'Stavka',
+    'buyer' => 'Kupac',
     'messages' => [
         'offer_sent' => 'Ponuda je poslana.',
     ],
