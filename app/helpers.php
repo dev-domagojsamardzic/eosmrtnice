@@ -70,3 +70,41 @@ if (!function_exists('admin')) {
         return User::where('type', UserType::ADMIN)->first();
     }
 }
+
+if (!function_exists('company_data')) {
+    function company_data(string $property = null): array|string|null
+    {
+        $key = 'eosmrtnice.company';
+        if ($property) {
+            $key .= '.' . $property;
+        }
+
+        return config($key);
+    }
+}
+
+if (!function_exists('currency')) {
+    /**
+     * Return amount with currency symbol
+     *
+     * @param int|float $amount
+     * @return string
+     */
+    function currency(int|float $amount): string
+    {
+        return number_format($amount, 2, '.', '') . config('app.currency_symbol');
+    }
+}
+
+if (!function_exists('percentage')) {
+    /**
+     * Return number with percentage symbol
+     *
+     * @param int|float $amount
+     * @return string
+     */
+    function percentage(int|float $amount): string
+    {
+        return $amount . '%';
+    }
+}
