@@ -8,6 +8,7 @@ use App\Mail\OfferCreated;
 use App\Models\Ad;
 use App\Models\Offer;
 use Carbon\Carbon;
+use Exception;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\View\View;
@@ -86,7 +87,7 @@ class AdOfferController extends OfferController
         $offer->valid_from = Carbon::parse($request->input('valid_from'))->format('Y-m-d');
         $offer->valid_until = Carbon::parse($request->input('valid_until'))->format('Y-m-d');
 
-        try{
+        try {
             $offer->save();
 
             $offer->offerables()->create([
@@ -101,7 +102,10 @@ class AdOfferController extends OfferController
                 return redirect()->route('admin.ads.index')
                     ->with('alert', ['class' => 'success', 'message' => __('models/offer.messages.offer_sent')]);
             }
-        } catch (\Exception $e) {
+
+            return redirect()->route('admin.ads.index')
+                ->with('alert', ['class' => 'success', 'message' => __('common/saved')]);
+        } catch (Exception $e) {
             return redirect()
                 ->route('admin.ads.index')
                 ->with('alert', ['class' => 'danger', 'message' => __('common.something_went_wrong')]);
