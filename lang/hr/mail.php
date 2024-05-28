@@ -11,6 +11,10 @@ return [
         'outro' => 'Pošaljite korisniku ponudu, a nakon uplate ne zaboravite odobriti oglas kako bi postao spreman za prikazivanje.',
     ],
     'offer_created' => [
-        'subject' => 'Ponuda :offer'
+        'subject' => 'Ponuda br. :offer',
+        'greetings' => 'Poštovani',
+        'intro' => 'U privitku ove poruke šaljemo Vam ponudu za uslugu',
+        'payment' => 'Nakon što platite, usluga će Vam se aktivirati.',
+        'contact_info' => 'Za bilo kakva pitanja, molimo Vas da kontaktirate naš tim.'
     ],
 ];
