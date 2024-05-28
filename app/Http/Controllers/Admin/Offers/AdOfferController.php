@@ -6,7 +6,6 @@ use App\Http\Controllers\Admin\OfferController;
 use App\Http\Requests\Admin\Offers\AdOfferRequest;
 use App\Models\Ad;
 use App\Models\Offer;
-use App\Models\Offerable;
 use Barryvdh\Snappy\Facades\SnappyPdf;
 use Carbon\Carbon;
 use Illuminate\Http\Response;
