@@ -10,4 +10,7 @@ return [
         'ad_properties' => 'Svojstva',
         'outro' => 'Pošaljite korisniku ponudu, a nakon uplate ne zaboravite odobriti oglas kako bi postao spreman za prikazivanje.',
     ],
+    'offer_created' => [
+        'subject' => 'Ponuda :offer'
+    ],
 ];

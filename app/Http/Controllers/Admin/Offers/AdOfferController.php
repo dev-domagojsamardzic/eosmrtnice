@@ -4,16 +4,16 @@ namespace App\Http\Controllers\Admin\Offers;
 
 use App\Http\Controllers\Admin\OfferController;
 use App\Http\Requests\Admin\Offers\AdOfferRequest;
+use App\Mail\OfferCreated;
 use App\Models\Ad;
 use App\Models\Offer;
-use Barryvdh\Snappy\Facades\SnappyPdf;
 use Carbon\Carbon;
-use Illuminate\Http\Response;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\View\View;
 
 class AdOfferController extends OfferController
 {
-
     /**
      * Display create form
      *
@@ -58,9 +58,9 @@ class AdOfferController extends OfferController
      *
      * @param Offer $offer
      * @param AdOfferRequest $request
-     * @return Response
+     * @return RedirectResponse
      */
-    public function store(Offer $offer, AdOfferRequest $request): Response
+    public function store(Offer $offer, AdOfferRequest $request): RedirectResponse
     {
         return $this->apply($offer, $request);
     }
@@ -69,9 +69,9 @@ class AdOfferController extends OfferController
      * Apply changes on resource
      * @param Offer $offer
      * @param AdOfferRequest $request
-     * @return Response
+     * @return RedirectResponse
      */
-    protected function apply(Offer $offer, AdOfferRequest $request): Response
+    protected function apply(Offer $offer, AdOfferRequest $request): RedirectResponse
     {
         if (!$offer->exists) {
             $offer->number = now()->timestamp . '-' . now()->format('m/Y');
@@ -97,31 +97,14 @@ class AdOfferController extends OfferController
             ]);
 
             if ($request->submit === 'save_and_send') {
-
-                return $this->sendMailWithAttachment($offer);
-                //return redirect()->route('admin.ads.index')
-                    //->with('alert', ['class' => 'success', 'message' => __('models/offer.messages.offer_sent')]);
+                Mail::to($offer->company->user)->send(new OfferCreated($offer));
+                return redirect()->route('admin.ads.index')
+                    ->with('alert', ['class' => 'success', 'message' => __('models/offer.messages.offer_sent')]);
             }
-
-            /*return redirect()->route('admin.ads.index')
-                ->with('alert', ['class' => 'success', 'message' => __('models/common.saved')]);*/
-        }catch (\Exception $e) {
-            /*return redirect()
+        } catch (\Exception $e) {
+            return redirect()
                 ->route('admin.ads.index')
-                ->with('alert', ['class' => 'danger', 'message' => __('common.something_went_wrong')]);*/
+                ->with('alert', ['class' => 'danger', 'message' => __('common.something_went_wrong')]);
         }
-    }
-
-    protected function sendMailWithAttachment(Offer $offer): Response
-    {
-        // Create PDF document
-        return $this->createPdf($offer);
-        // send email with document as attachment
-    }
-
-    protected function createPdf(Offer $offer): Response
-    {
-        return SnappyPdf::loadView('pdf.offer', ['offer' => $offer])
-            ->download($offer->number.'.pdf');
     }
 }

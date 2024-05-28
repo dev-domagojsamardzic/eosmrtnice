@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Observers\OfferObserver;
+use Barryvdh\Snappy\Facades\SnappyPdf;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Attributes\ObservedBy;
 use Illuminate\Database\Eloquent\Builder;
@@ -25,6 +26,7 @@ use Illuminate\Database\Eloquent\Relations\MorphToMany;
  * @property            Carbon                  updated_at
  * ------------------------------------------------------------
  * ------------------------------------------------------------
+ * @property            Company                     company
  * @property            Collection|Ad               ads
  * @property            Collection|Offerable        offerables
  *
@@ -93,5 +95,15 @@ class Offer extends Model
     public function generateOfferNumber(): string
     {
         return "P-" . str_pad($this->id + 1, 5, '0', STR_PAD_LEFT) . "-" . $this->created_at->format("m/Y");
+    }
+
+    /**
+     * Transform offer to raw pdf
+     *
+     * @return string
+     */
+    public function toRawPdf(): string
+    {
+        return SnappyPdf::loadView('pdf.offer', ['offer' => $this])->output();
     }
 }
