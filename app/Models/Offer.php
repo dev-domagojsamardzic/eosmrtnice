@@ -25,7 +25,13 @@ use Illuminate\Database\Eloquent\Relations\MorphToMany;
  * ------------------------------------------------------------
  * @property            Collection|Ad               ads
  * @property            Collection|Offerable        offerables
+ *
+ * ---------------------------------------------------------------
+ * !IMPORTANT
+ * Example on how to get the collection of offerables no matter the type
+ * $offer->offerables->pluck('offerable');
  */
+
 class Offer extends Model
 {
     protected $casts = [
@@ -55,14 +61,13 @@ class Offer extends Model
     }
 
     /**
-     * Return offerables that belong to
+     * Return offerables that belong to an offer
      * @return HasMany
      */
     public function offerables(): HasMany
     {
-        return $this->hasMany(Offerable::class)->with('offerables');
+        return $this->hasMany(Offerable::class)->with('offerable');
     }
-
 
     /**
      * Scope a query to only include valid offers

@@ -34,7 +34,7 @@ class Offerable extends Pivot
      * Define polymorphic relationship
      * @return MorphTo
      */
-    public function offerables(): MorphTo
+    public function offerable(): MorphTo
     {
         return $this->morphTo();
     }

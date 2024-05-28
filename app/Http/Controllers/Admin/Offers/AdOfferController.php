@@ -90,13 +90,12 @@ class AdOfferController extends OfferController
         try{
             $offer->save();
 
-            $offerable = new Offerable();
-            $offerable->offer_id = $offer->id;
-            $offerable->offerable_type = $request->input('offerable_type');
-            $offerable->offerable_id = $request->input('offerable_id');
-            $offerable->quantity = $request->input('quantity');
-            $offerable->price = $request->input('price');
-            $offerable->save();
+            $offer->offerables()->create([
+                'offerable_id' => $request->input('offerable_id'),
+                'offerable_type' => $request->input('offerable_type'),
+                'quantity' => $request->input('quantity'),
+                'price' => $request->input('price'),
+            ]);
 
             if ($request->submit === 'save_and_send') {
 
