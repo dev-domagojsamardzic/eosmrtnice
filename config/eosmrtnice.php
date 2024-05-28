@@ -12,4 +12,6 @@ return [
         'phone' => env('COMPANY_PHONE', '+38523414999'),
         'mobile_phone' => env('COMPANY_MOBILE_PHONE', '+385923419912'),
     ],
+
+    'mail_from_address' => env('MAIL_FROM_ADDRESS', 'info@eosmrtnice.com'),
 ];

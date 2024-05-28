@@ -29,7 +29,7 @@ class AdCreated extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            from: env('MAIL_FROM_ADDRESS'),
+            from: config('eosmrtnice.mail_from_address'),
             subject: __('mail.ad_created.subject'),
         );
     }
