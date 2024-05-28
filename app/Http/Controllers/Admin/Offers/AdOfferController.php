@@ -92,7 +92,7 @@ class AdOfferController extends OfferController
 
             $offer->offerables()->create([
                 'offerable_id' => $request->input('offerable_id'),
-                'offerable_type' => $request->input('offerable_type'),
+                'offerable_type' => Ad::class,
                 'quantity' => $request->input('quantity'),
                 'price' => $request->input('price'),
             ]);
