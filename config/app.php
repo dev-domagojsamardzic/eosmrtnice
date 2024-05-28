@@ -84,9 +84,31 @@ return [
     */
 
     'locale' => env('APP_LOCALE','hr'),
+
+    /*
+    |--------------------------------------------------------------------------
+    | Application Money Configuration
+    |--------------------------------------------------------------------------
+    |
+    | The application locale determines the default locale that will be used
+    | by the translation service provider. You are free to set this value
+    | to any of the locales which will be supported by the application.
+    |
+    */
+
     'currency' => env('APP_CURRENCY', 'EUR'),
     'currency_symbol' => env('APP_CURRENCY_SYMBOL', '€'),
     'tax_percentage' => env('APP_TAX_PERCENTAGE', 25),
+
+
+    /*
+    |--------------------------------------------------------------------------
+    | Other configuration
+    |--------------------------------------------------------------------------
+    */
+
+    'country' => env('APP_COUNTRY', 'Republika Hrvatska'),
+    'country_code' => env('APP_COUNTRY_CODE', 'RH'),
 
     /*
     |--------------------------------------------------------------------------
