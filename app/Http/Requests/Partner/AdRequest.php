@@ -51,8 +51,11 @@ class AdRequest extends FormRequest
      */
     private function getBaseRules(): array
     {
+        $typeValidation = $this->isMethod('PUT') ?
+            [Rule::enum(AdType::class)] : ['required', Rule::enum(AdType::class)];
+
         return [
-            'type' => ['required', Rule::enum(AdType::class)],
+            'type' => $typeValidation,
             'months_valid' => ['required', 'integer', 'in:1,3,6,12'],
         ];
     }

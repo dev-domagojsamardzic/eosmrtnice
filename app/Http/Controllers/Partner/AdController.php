@@ -112,7 +112,10 @@ class AdController extends Controller
         if ($ad->company()->doesntExist()) {
             $ad->company()->associate($company);
         }
-        $ad->type = $request->input('type', AdType::STANDARD);
+        // Prevent type changing when editing ad
+        if (!$ad->exists) {
+            $ad->type = $request->input('type', AdType::STANDARD);
+        }
         $ad->months_valid = $request->input('months_valid', 1);
         $ad->caption = $request->input('caption');
 
