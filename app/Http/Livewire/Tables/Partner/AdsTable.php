@@ -2,11 +2,14 @@
 
 namespace App\Http\Livewire\Tables\Partner;
 
+use App\Http\Controllers\Partner\AdController;
 use App\Models\Ad;
 use App\Models\Company;
+use App\Services\ImageService;
 use Filament\Support\Enums\IconPosition;
 use Filament\Tables\Actions\Action;
 use Filament\Tables\Actions\ActionGroup;
+use Filament\Tables\Actions\DeleteAction;
 use Filament\Tables\Actions\EditAction;
 use Filament\Tables\Columns\ImageColumn;
 use Filament\Tables\Columns\Layout\Split;
@@ -156,6 +159,13 @@ class AdsTable extends Component implements HasForms, HasTable
                     ->url(fn (Ad $ad): string => route(
                         auth_user_type() . '.ads.edit',
                         ['company' => $ad->company_id, 'ad' => $ad->id])),
+                DeleteAction::make('delete')
+                    ->label(__('common.delete'))
+                    ->icon('heroicon-s-trash')
+                    ->requiresConfirmation()
+                    ->modalHeading(__('partner.delete_ad'))
+                    ->modalSubmitActionLabel(__('common.delete'))
+                    ->action(fn (Ad $ad) => (new AdController(new ImageService()))->destroy($ad->company, $ad))
             ])->iconPosition(IconPosition::Before),
         ];
     }

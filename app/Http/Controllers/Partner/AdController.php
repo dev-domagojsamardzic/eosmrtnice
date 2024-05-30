@@ -11,6 +11,7 @@ use App\Services\ImageService;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
 use Exception;
+use Livewire\Features\SupportRedirects\Redirector;
 
 class AdController extends Controller
 {
@@ -128,6 +129,26 @@ class AdController extends Controller
                 ->with('alert', ['class' => 'success', 'message' => __('common.saved')]);
         } catch(Exception $e) {
            return redirect()->route('partner.ads.index')
+                ->with('alert', ['class' => 'danger', 'message' => __('common.something_went_wrong')]);
+        }
+    }
+
+    /**
+     * @param Company $company
+     * @param Ad $ad
+     * @return RedirectResponse|Redirector
+     */
+    public function destroy(Company $company, Ad $ad): RedirectResponse|Redirector
+    {
+        try {
+            $ad->delete();
+            return redirect()
+                ->route('partner.ads.index')
+                ->with('alert', ['class' => 'success', 'message' => __('common.deleted')]);
+        }
+        catch (Exception $e) {
+            return redirect()
+                ->route('partner.ads.index')
                 ->with('alert', ['class' => 'danger', 'message' => __('common.something_went_wrong')]);
         }
     }
