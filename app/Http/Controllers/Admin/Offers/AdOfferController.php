@@ -9,6 +9,7 @@ use App\Models\Ad;
 use App\Models\Offer;
 use Carbon\Carbon;
 use Exception;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\View\View;
@@ -79,10 +80,6 @@ class AdOfferController extends OfferController
      */
     protected function apply(Offer $offer, AdOfferRequest $request): RedirectResponse
     {
-        if (!$offer->exists) {
-            $offer->number = now()->timestamp . '-' . now()->format('m/Y');
-        }
-
         $offer->company()->associate($request->input('company_id'));
         $total = (float)$request->input('quantity') * $request->input('price');
         $taxes = (float)($total * (config('app.tax_percentage') / 100));
