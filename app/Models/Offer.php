@@ -22,6 +22,7 @@ use Illuminate\Database\Eloquent\Relations\MorphToMany;
  * @property            float                   total
  * @property            Carbon                  valid_from
  * @property            Carbon                  valid_until
+ * @property            Carbon                  sent_at
  * @property            Carbon                  created_at
  * @property            Carbon                  updated_at
  * ------------------------------------------------------------
@@ -42,6 +43,7 @@ class Offer extends Model
     protected $casts = [
         'valid_from' => 'datetime',
         'valid_until' => 'datetime',
+        'sent_at' => 'datetime',
         'net_total' => 'decimal:2',
         'taxes' => 'decimal:2',
         'total' => 'decimal:2',

@@ -100,7 +100,12 @@ class AdOfferController extends OfferController
             ]);
 
             if ($request->submit === 'save_and_send') {
+
                 Mail::to($offer->company->user)->send(new OfferCreated($offer));
+
+                $offer->sent_at = now();
+                $offer->save();
+
                 return redirect()->route('admin.ads.index')
                     ->with('alert', ['class' => 'success', 'message' => __('models/offer.messages.offer_sent')]);
             }

@@ -3,6 +3,7 @@
 return [
     'send' => 'Send Offer',
     'sent' => 'Sent',
+    'create' => 'Create Offer',
     'not_sent' => 'Not sent',
     'offer' => 'Offer',
     'valid_from' => 'Valid from',
