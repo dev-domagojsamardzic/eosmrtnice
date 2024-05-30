@@ -153,11 +153,11 @@ class AdsTable extends Component implements HasForms, HasTable
                     ->icon(fn (Ad $ad): string => $ad->approved ? 'heroicon-m-x-circle' : 'heroicon-m-check-circle')
                     ->color(fn(Ad $ad): string => $ad->approved ? 'danger' : 'success')
                     ->requiresConfirmation(),
-                Action::make('send_offer')
-                    ->label(__('models/offer.send'))
-                    ->disabled(fn(Ad $ad): bool => $ad->offers()->valid()->exists())
-                    ->icon('heroicon-s-paper-airplane')
-                    ->color(fn(Ad $ad): string => $ad->offers()->valid()->exists() ? 'danger' : 'black')
+                Action::make('create_offer')
+                    ->label(__('models/offer.create'))
+                    ->visible(fn(Ad $ad): bool => !$ad->offers()->valid()->exists())
+                    ->icon('heroicon-s-plus')
+                    ->color('black')
                     ->url(fn(Ad $ad): string => route('admin.ads.offers.create', ['ad' => $ad])),
             ])->iconPosition(IconPosition::Before),
         ];
