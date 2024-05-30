@@ -19,10 +19,15 @@ class AdOfferController extends OfferController
      * Display create form
      *
      * @param Ad $ad
-     * @return View
+     * @return View|RedirectResponse
      */
-    public function create(Ad $ad): View
+    public function create(Ad $ad): View|RedirectResponse
     {
+        if (!Gate::allows('create-ad-offer', [$ad])) {
+            return redirect()->route('admin.ads.show', ['ad' => $ad])
+                ->with('alert', ['class' => 'danger', 'message' => __('models/offer.messages.offer_for_ad_exists')]);
+        }
+
         return $this->form(new Offer, $ad, 'create');
     }
 

@@ -7,12 +7,14 @@ use App\Models\Company;
 use App\Models\Member;
 use App\Models\Offer;
 use App\Models\Partner;
+use App\Models\User;
 use App\Policies\AdPolicy;
 use App\Policies\CompanyPolicy;
 use App\Policies\MemberPolicy;
 use App\Policies\OfferPolicy;
 use App\Policies\PartnerPolicy;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
+use Illuminate\Support\Facades\Gate;
 
 class AuthServiceProvider extends ServiceProvider
 {
@@ -34,6 +36,9 @@ class AuthServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+        // Check if ad has valid offers
+        Gate::define('create-ad-offer', static function (User $user, Ad $ad) {
+            return is_admin() && $ad->offers()->valid()->count() === 0;
+        });
     }
 }
