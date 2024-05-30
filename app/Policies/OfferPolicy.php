@@ -4,7 +4,6 @@ namespace App\Policies;
 
 use App\Models\Offer;
 use App\Models\User;
-use Illuminate\Auth\Access\Response;
 
 class OfferPolicy
 {
@@ -13,7 +12,7 @@ class OfferPolicy
      */
     public function viewAny(User $user): bool
     {
-        return is_admin();
+        return is_admin() || is_partner();
     }
 
     /**
@@ -45,7 +44,7 @@ class OfferPolicy
      */
     public function delete(User $user, Offer $offer): bool
     {
-        return is_admin();
+        return false;
     }
 
     /**
