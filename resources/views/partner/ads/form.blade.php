@@ -96,19 +96,19 @@
                     <x-input-label class="d-block" :value="__('models/ad.months_valid')" />
                     <x-input-info class="mb-3" :content="__('models/ad.months_valid_info')"></x-input-info>
                     <div class="custom-control custom-radio custom-control-inline">
-                        <input class="custom-control-input" type="radio" name="months_valid" id="months_valid_1" value="1" checked>
+                        <input class="custom-control-input" type="radio" name="months_valid" id="months_valid_1" value="1" @checked(old('months_valid', $ad->months_valid) == "1")>
                         <label class="custom-control-label" for="months_valid_1">{{ __('models/ad.months_1') }}</label>
                     </div>
                     <div class="custom-control custom-radio custom-control-inline">
-                        <input class="custom-control-input" type="radio" name="months_valid" id="months_valid_3" value="3">
+                        <input class="custom-control-input" type="radio" name="months_valid" id="months_valid_3" value="3" @checked(old('months_valid', $ad->months_valid) == "3")>
                         <label class="custom-control-label" for="months_valid_3">{{ __('models/ad.months_3') }}</label>
                     </div>
                     <div class="custom-control custom-radio custom-control-inline">
-                        <input class="custom-control-input" type="radio" name="months_valid" id="months_valid_6" value="6">
+                        <input class="custom-control-input" type="radio" name="months_valid" id="months_valid_6" value="6" @checked(old('months_valid', $ad->months_valid) == "6")>
                         <label class="custom-control-label" for="months_valid_6">{{ __('models/ad.months_6') }}</label>
                     </div>
                     <div class="custom-control custom-radio custom-control-inline">
-                        <input class="custom-control-input" type="radio" name="months_valid" id="months_valid_12" value="12">
+                        <input class="custom-control-input" type="radio" name="months_valid" id="months_valid_12" value="12" @checked(old('months_valid', $ad->months_valid) == "12")>
                         <label class="custom-control-label" for="months_valid_12">{{ __('models/ad.months_12') }}</label>
                     </div>
                     <x-input-error :messages="$errors->get('months_valid')" class="mt-2" />
