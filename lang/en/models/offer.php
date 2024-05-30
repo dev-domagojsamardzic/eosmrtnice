@@ -21,5 +21,6 @@ return [
     'pdv' => 'PDV',
     'messages' => [
         'offer_sent' => 'Offer sent.',
+        'offer_for_ad_exists' => 'Offer for this Ad already exists.',
     ],
 ];
