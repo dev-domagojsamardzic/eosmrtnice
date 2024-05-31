@@ -40,5 +40,9 @@ class AuthServiceProvider extends ServiceProvider
         Gate::define('create-ad-offer', static function (User $user, Ad $ad) {
             return is_admin() && $ad->offers()->valid()->count() === 0;
         });
+
+        Gate::define('set-ad-type', static function (User $user, Ad $ad) {
+            return is_admin() || (is_partner() && !$ad->exists);
+        });
     }
 }
