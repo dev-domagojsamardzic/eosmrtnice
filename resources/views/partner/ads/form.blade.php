@@ -16,7 +16,7 @@
             @endif
 
             {{-- Prevent user from editing ad_type --}}
-            @if(!$ad->exists)
+            @can('set-ad-type', [$ad])
                 <div class="form-group row">
                     <div class="col-12 mb-3">
                         <x-input-label class="d-block" :value="__('models/ad.type')"></x-input-label>
@@ -56,7 +56,21 @@
                         </div>
                     </div>
                 </div>
-            @endif
+            @endcan
+
+            {{-- Title --}}
+            <div class="form-group row">
+                <div class="col-lg-6 col-md-12 mb-3">
+                    <x-input-label for="title" :value="__('models/ad.title')"></x-input-label>
+                    <x-input-info :content="__('models/ad.title_helper_info')" />
+                    <x-text-input id="title"
+                                  name="title"
+                                  :value="old('title', $ad->title)"
+                                  placeholder="{{ __('models/ad.title_placeholder') }}"
+                    />
+                    <x-input-error :messages="$errors->get('title')" class="mt-2" />
+                </div>
+            </div>
 
             {{-- Logo --}}
             <div class="form-group row" id="form-panel-logo">
@@ -80,7 +94,7 @@
                 </div>
             </div>
 
-            {{-- Banner --}}
+            {{-- Caption --}}
             <div class="form-group row" id="form-panel-caption">
                 <div class="col-12 mb-3">
                     <x-input-label for="caption" :value="__('models/ad.caption')" />

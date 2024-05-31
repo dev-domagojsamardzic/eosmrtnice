@@ -64,4 +64,7 @@ return [
     'ongoing_group' => 'Ongoing Ads',
     'expired_group' => 'Expired Ads',
     'actuality' => 'Actuality',
+    'title' => 'Title',
+    'title_helper_info' => 'This title will not be publicly visible',
+    'title_placeholder' => 'Write something to differentiate your ad from other ads',
 ];

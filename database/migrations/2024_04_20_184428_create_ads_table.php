@@ -1,5 +1,6 @@
 <?php
 
+use App\Enums\AdType;
 use App\Models\Company;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
@@ -15,7 +16,8 @@ return new class extends Migration
         Schema::create('ads', static function (Blueprint $table) {
             $table->id();
             $table->foreignIdFor(Company::class);
-            $table->unsignedTinyInteger('type')->default(1);
+            $table->string('title')->nullable();
+            $table->unsignedTinyInteger('type')->default(AdType::STANDARD);
             $table->boolean('approved')->default(false);
             $table->boolean('active')->default(false);
             $table->unsignedInteger('months_valid')->nullable(false)->default(1);

@@ -64,4 +64,7 @@ return [
     'ongoing_group' => 'Oglasi u toku',
     'expired_group' => 'Istekli oglasi',
     'actuality' => 'Aktualnost oglasa',
+    'title' => 'Naslov',
+    'title_helper_info' => 'Naslov neće biti javno vidljiv',
+    'title_placeholder' => 'Nešto po čemu ćete razlikovati ovaj oglas od ostalih',
 ];

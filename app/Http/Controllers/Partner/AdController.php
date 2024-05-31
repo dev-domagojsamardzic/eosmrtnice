@@ -114,9 +114,10 @@ class AdController extends Controller
             $ad->company()->associate($company);
         }
         // Prevent type changing when editing ad
-        if (!$ad->exists) {
+        if ($request->user()->can('set-ad-type', [$ad])) {
             $ad->type = $request->input('type', AdType::STANDARD);
         }
+        $ad->title = $request->input('title');
         $ad->months_valid = $request->input('months_valid', 1);
         $ad->caption = $request->input('caption');
 

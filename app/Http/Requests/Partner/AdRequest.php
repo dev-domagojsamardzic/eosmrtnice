@@ -56,6 +56,7 @@ class AdRequest extends FormRequest
 
         return [
             'type' => $typeValidation,
+            'title' => ['nullable', 'string:255'],
             'months_valid' => ['required', 'integer', 'in:1,3,6,12'],
         ];
     }
