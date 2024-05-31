@@ -68,7 +68,7 @@
         <tbody>
         @foreach($offer->ads as $item)
             <tr>
-                <td class="text-align-left">{{ $item->title }}</td>
+                <td class="text-align-left">{{ $item->title ?? $item->fallbackTitle }}</td>
                 <td class="text-align-right">{{ $item->pivot?->quantity }}</td>
                 <td class="text-align-right">{{ $item->pivot?->price . config('app.currency_symbol') }}</td>
                 <td class="text-align-right">

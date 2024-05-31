@@ -16,6 +16,7 @@ use Illuminate\Support\Carbon;
 /**
  * @property-read       int                     id
  * @property            int                     company_id
+ * @property            string                  title
  * @property            int                     type
  * @property            bool                    approved
  * @property            bool                    active
@@ -30,7 +31,7 @@ use Illuminate\Support\Carbon;
  * @property            Carbon                  updated_at
  * @property            Carbon                  deleted_at
  * --------------------------------------------------------
- * @property            string                  title
+ * @property-read       string                  fallbackTitle
  * --------------------------------------------------------
  * @property            Company|null            company
  * @property            User|null               user
@@ -74,9 +75,9 @@ class Ad extends Model
     ];
 
     /**
-     * Get ad title
+     * Get fallback ad title
      */
-    protected function title(): Attribute
+    protected function fallbackTitle(): Attribute
     {
         return Attribute::make(
             get: fn () => __('models/ad.ad') . ' ' . $this->type?->name
