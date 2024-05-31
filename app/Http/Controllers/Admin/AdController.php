@@ -11,6 +11,7 @@ use App\Http\Requests\Partner\AdRequest;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
 use Exception;
+use Livewire\Features\SupportRedirects\Redirector;
 
 class AdController extends Controller
 {
@@ -50,6 +51,26 @@ class AdController extends Controller
     public function edit(Company $company, Ad $ad): View
     {
         return $this->form($company, $ad, 'edit');
+    }
+
+    /**
+     * @param Company $company
+     * @param Ad $ad
+     * @return RedirectResponse|Redirector
+     */
+    public function destroy(Company $company, Ad $ad): RedirectResponse|Redirector
+    {
+        try {
+            $ad->delete();
+            return redirect()
+                ->route('admin.ads.index')
+                ->with('alert', ['class' => 'success', 'message' => __('common.deleted')]);
+        }
+        catch (Exception $e) {
+            return redirect()
+                ->route('admin.ads.index')
+                ->with('alert', ['class' => 'danger', 'message' => __('common.something_went_wrong')]);
+        }
     }
 
     /**

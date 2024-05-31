@@ -2,13 +2,16 @@
 
 namespace App\Http\Livewire\Tables\Admin;
 
+use App\Http\Controllers\Admin\AdController;
 use App\Models\Ad;
+use App\Services\ImageService;
 use Exception;
 use Filament\Forms\Concerns\InteractsWithForms;
 use Filament\Forms\Contracts\HasForms;
 use Filament\Support\Enums\IconPosition;
 use Filament\Tables\Actions\Action;
 use Filament\Tables\Actions\ActionGroup;
+use Filament\Tables\Actions\DeleteAction;
 use Filament\Tables\Actions\EditAction;
 use Filament\Tables\Columns\ImageColumn;
 use Filament\Tables\Columns\Layout\Split;
@@ -133,12 +136,12 @@ class AdsTable extends Component implements HasForms, HasTable
     {
         return  [
             ActionGroup::make([
-                EditAction::make('edit')
-                    ->label(__('common.edit'))
-                    ->icon('heroicon-s-pencil-square')
-                    ->url(fn (Ad $ad): string => route(
-                        auth_user_type() . '.ads.edit',
-                        ['company' => $ad->company_id, 'ad' => $ad->id])),
+                Action::make('create_offer')
+                    ->label(__('models/offer.create'))
+                    ->visible(fn(Ad $ad): bool => !$ad->offers()->valid()->exists())
+                    ->icon('heroicon-s-plus')
+                    ->color('black')
+                    ->url(fn(Ad $ad): string => route('admin.ads.offers.create', ['ad' => $ad])),
                 Action::make('approve')
                     ->label(fn (Ad $ad): string => $ad->approved ? __('common.disapprove') : __('common.approve'))
                     ->action(function(Ad $ad): void {
@@ -153,12 +156,20 @@ class AdsTable extends Component implements HasForms, HasTable
                     ->icon(fn (Ad $ad): string => $ad->approved ? 'heroicon-m-x-circle' : 'heroicon-m-check-circle')
                     ->color(fn(Ad $ad): string => $ad->approved ? 'danger' : 'success')
                     ->requiresConfirmation(),
-                Action::make('create_offer')
-                    ->label(__('models/offer.create'))
-                    ->visible(fn(Ad $ad): bool => !$ad->offers()->valid()->exists())
-                    ->icon('heroicon-s-plus')
-                    ->color('black')
-                    ->url(fn(Ad $ad): string => route('admin.ads.offers.create', ['ad' => $ad])),
+                EditAction::make('edit')
+                    ->label(__('common.edit'))
+                    ->icon('heroicon-s-pencil-square')
+                    ->url(fn (Ad $ad): string => route(
+                        auth_user_type() . '.ads.edit',
+                        ['company' => $ad->company_id, 'ad' => $ad->id])),
+                DeleteAction::make('delete')
+                    ->label(__('common.delete'))
+                    ->icon('heroicon-s-trash')
+                    ->requiresConfirmation()
+                    ->modalHeading(__('admin.delete_ad'))
+                    ->modalSubmitActionLabel(__('common.delete'))
+                    ->action(fn (Ad $ad) => (new AdController(new ImageService()))->destroy($ad->company, $ad)),
+
             ])->iconPosition(IconPosition::Before),
         ];
     }
