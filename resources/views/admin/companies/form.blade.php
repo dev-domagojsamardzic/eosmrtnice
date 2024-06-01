@@ -152,11 +152,13 @@
 
                 <div class="col-md-6 mb-2">
                     <x-input-label for="email" :value="__('admin.labels.company_email')" />
+                    <x-input-info style="display:inline-block;" :content="__('models/company.logo_helper_info')" inline/>
                     <x-text-input
                         id="email"
                         type="email"
                         name="email"
                         :value="old('email', $company->email)"
+                        required
                         placeholder="{{ __('admin.placeholders.company_email') }}"/>
                     <x-input-error :messages="$errors->get('email')" class="mt-2" />
                 </div>

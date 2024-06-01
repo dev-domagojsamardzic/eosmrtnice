@@ -3,6 +3,7 @@
 namespace App\Http\Requests\Admin;
 
 use App\Enums\CompanyType;
+use App\Models\Company;
 use App\Rules\CityBelongsToCounty;
 use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
@@ -50,7 +51,7 @@ class CompanyRequest extends FormRequest
             'town' => ['nullable','string', 'max:255'],
             'zipcode' => ['nullable','numeric', 'digits:5'],
             'oib' => ['required','numeric', 'digits:11'],
-            'email' => ['nullable','string', 'email', 'max:255'],
+            'email' => ['required','string', 'email', 'max:255', Rule::unique(Company::class)->ignore($this->route('company')->id)],
             'phone' => ['nullable','string', 'max:64'],
             'mobile_phone' => ['nullable','string', 'max:64'],
             'website' => ['nullable', 'string', 'url:https', 'active_url'],

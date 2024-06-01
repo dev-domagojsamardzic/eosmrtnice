@@ -4,7 +4,7 @@ namespace App\Http\Requests\Partner;
 
 use App\Enums\CompanyType;
 use App\Enums\Gender;
-use App\Models\City;
+use App\Models\Company;
 use App\Models\User;
 use App\Rules\CityBelongsToCounty;
 use Illuminate\Contracts\Validation\ValidationRule;
@@ -64,7 +64,7 @@ class RegisterRequest extends FormRequest
             'company_city_id' => ['required', 'exists:cities,id', new CityBelongsToCounty('company_county_id')],
             'company_county_id' => ['required','exists:counties,id'],
             'company_oib' => ['required', 'numeric', 'digits:11'],
-            'company_email' => ['nullable','string', 'email', 'max:255'],
+            'company_email' => ['required', 'string', 'email', 'max:255', 'unique:'.Company::class],
             'company_phone' => ['nullable','string', 'max:64'],
             'company_mobile_phone' => ['nullable','string', 'max:64']
         ];

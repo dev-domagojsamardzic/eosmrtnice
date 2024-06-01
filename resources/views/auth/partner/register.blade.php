@@ -221,7 +221,8 @@
                                 {{-- company_email --}}
                                 <div class="form-group row">
                                     <div class="col-sm-12 mb-3">
-                                        <x-input-label for="company_email" :value="__('auth.labels.company_email')"/>
+                                        <x-input-label for="company_email" :value="__('auth.labels.company_email')" :required_tag="true"/>
+                                        <x-input-info :content="__('auth.company_email_info')" />
                                         <x-text-input
                                             id="company_email"
                                             type="text"
