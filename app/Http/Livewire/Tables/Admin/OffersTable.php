@@ -3,6 +3,9 @@
 namespace App\Http\Livewire\Tables\Admin;
 
 use App\Models\Offer;
+use Exception;
+use Filament\Forms\Components\DatePicker;
+use Filament\Support\Enums\MaxWidth;
 use Filament\Tables\Columns\Layout\Panel;
 use Filament\Tables\Columns\Layout\Split;
 use Filament\Forms\Concerns\InteractsWithForms;
@@ -14,8 +17,12 @@ use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Columns\ViewColumn;
 use Filament\Tables\Concerns\InteractsWithTable;
 use Filament\Tables\Contracts\HasTable;
+use Filament\Tables\Enums\FiltersLayout;
+use Filament\Tables\Filters\Filter;
+use Filament\Tables\Filters\TernaryFilter;
 use Filament\Tables\Table;
 use Illuminate\Contracts\View\View;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Carbon;
 use Livewire\Component;
 
@@ -24,6 +31,11 @@ class OffersTable extends Component implements HasForms, HasTable
     use InteractsWithForms;
     use InteractsWithTable;
 
+    /**
+     * @param Table $table
+     * @return Table
+     * @throws Exception
+     */
     public function table(Table $table): Table
     {
         return $table
@@ -33,8 +45,58 @@ class OffersTable extends Component implements HasForms, HasTable
             ->query(Offer::query()->orderBy('created_at'))
             ->columns($this->getColumns())
             ->filters([
-                //
-            ])
+                Filter::make('valid_from')
+                    ->form([
+                        DatePicker::make('valid_from')
+                            ->native(false)
+                            ->label(__('models/offer.valid_from'))
+                            ->format('Y-m-d')
+                            ->displayFormat('d.m.Y.')
+                            ->timezone('Europe/Zagreb'),
+                    ])
+                    ->indicateUsing(function (array $data): ?string {
+                        if (! $data['valid_from']) {
+                            return null;
+                        }
+                        return __('models/offer.valid_from').': '.Carbon::parse($data['valid_from'])->format('d.m.Y.');
+                    })
+                    ->query(function (Builder $query, array $data): Builder {
+                        return $query
+                            ->when(
+                                $data['valid_from'],
+                                fn (Builder $query, $date): Builder => $query->whereDate('valid_from', '>=', $date),
+                            );
+                    }),
+                Filter::make('valid_until')
+                    ->form([
+                        DatePicker::make('valid_until')
+                            ->native(false)
+                            ->label(__('models/offer.valid_until'))
+                            ->format('Y-m-d')
+                            ->displayFormat('d.m.Y.')
+                            ->timezone('Europe/Zagreb'),
+                    ])
+                    ->indicateUsing(function (array $data): ?string {
+                        if (! $data['valid_until']) {
+                            return null;
+                        }
+                        return __('models/offer.valid_until').': '.Carbon::parse($data['valid_until'])->format('d.m.Y.');
+                    })
+                    ->query(function (Builder $query, array $data): Builder {
+                        return $query
+                            ->when(
+                                $data['valid_until'],
+                                fn (Builder $query, $date): Builder => $query->whereDate('valid_until', '<=', $date),
+                            );
+                    }),
+                TernaryFilter::make('sent_at')
+                    ->label(__('models/offer.sent_at'))
+                    ->nullable()
+                    ->trueLabel(__('models/offer.sent_offers'))
+                    ->falseLabel(__('models/offer.not_sent_offers'))
+            ], layout: FiltersLayout::AboveContent)
+            ->filtersFormColumns(4)
+            ->filtersFormWidth(MaxWidth::FourExtraLarge)
             ->actions([
                 //
             ]);
@@ -56,10 +118,10 @@ class OffersTable extends Component implements HasForms, HasTable
                 Stack::make([
                     TextColumn::make('valid_from')
                         ->label(__('models/offer.valid_from'))
-                        ->formatStateUsing(fn(Carbon $validFrom):string => __('models/offer.valid_from').': '.$validFrom->format('d.m.Y.')),
+                        ->formatStateUsing(fn(Offer $o):string => __('models/offer.valid_from').': '.$o->valid_from->format('d.m.Y.')),
                     TextColumn::make('valid_until')
                         ->label(__('models/offer.valid_until'))
-                        ->formatStateUsing(fn(Carbon $validUntil):string => __('models/offer.valid_until').': '.$validUntil->format('d.m.Y.')),
+                        ->formatStateUsing(fn(Offer $o):string => __('models/offer.valid_until').': '.$o->valid_until->format('d.m.Y.')),
                 ]),
                 ViewColumn::make('offer_sent')
                     ->view('filament.tables.columns.offer-sent-badge'),
@@ -83,9 +145,6 @@ class OffersTable extends Component implements HasForms, HasTable
                             ->searchable(),
                         TextColumn::make('company.oib')
                             ->label(__('models/offer.oib')),
-                        TextColumn::make('company.owner.full_name')
-                            ->label(__('models/offer.owner'))
-                            ->searchable()
                     ]),
                     Stack::make([
                         TextColumn::make('offerables')

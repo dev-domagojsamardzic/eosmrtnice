@@ -26,4 +26,7 @@ return [
     ],
     'number' => 'Broj ponude',
     'items_count' => 'Broj stavki',
+    'sent_at' => 'Ponuda poslana',
+    'sent_offers' => 'Poslano',
+    'not_sent_offers' => 'Nije poslano',
 ];
