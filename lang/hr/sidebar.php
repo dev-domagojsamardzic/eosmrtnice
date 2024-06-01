@@ -8,4 +8,5 @@ return [
     'companies' => 'Tvrtke',
     'ads' => 'Oglasi',
     'services' => 'Usluge',
+    'offers' => 'Ponude',
 ];

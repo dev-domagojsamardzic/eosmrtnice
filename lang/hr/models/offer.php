@@ -24,4 +24,6 @@ return [
         'offer_sent' => 'Ponuda je poslana.',
         'offer_for_ad_exists' => 'Ponuda za ovaj oglas već postoji.',
     ],
+    'number' => 'Broj ponude',
+    'items_count' => 'Broj stavki',
 ];

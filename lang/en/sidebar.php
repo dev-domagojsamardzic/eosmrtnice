@@ -8,4 +8,5 @@ return [
     'companies' => 'Companies',
     'ads' => 'Ads',
     'services' => 'Services',
+    'offers' => 'Offers',
 ];

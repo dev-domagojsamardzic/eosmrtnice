@@ -54,4 +54,5 @@ return [
     'delete_memeber' => 'Obriši korisnika',
     'delete_company' => 'Obriši tvrtku',
     'delete_ad' => 'Obriši oglas',
+    'offers' => 'Ponude',
 ];

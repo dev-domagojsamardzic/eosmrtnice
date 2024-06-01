@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\AdController;
 use App\Http\Controllers\Admin\CompanyController;
 use App\Http\Controllers\Admin\MemberController;
+use App\Http\Controllers\Admin\OfferController;
 use App\Http\Controllers\Admin\Offers\AdOfferController;
 use App\Http\Controllers\Admin\PartnerController;
 use App\Http\Controllers\ProfileController;
@@ -33,3 +34,5 @@ Route::prefix('companies/{company}')->group(function () {
 Route::resource('ads/{ad}/offers', AdOfferController::class)
     ->except(['index'])
     ->names('ads.offers');
+
+Route::resource('offers', OfferController::class);

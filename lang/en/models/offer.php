@@ -24,4 +24,6 @@ return [
         'offer_sent' => 'Offer sent.',
         'offer_for_ad_exists' => 'Offer for this Ad already exists.',
     ],
+    'number' => 'Offer number',
+    'items_count' => 'Items Count',
 ];

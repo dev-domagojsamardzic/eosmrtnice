@@ -54,4 +54,5 @@ return [
     'delete_member' => 'Delete member',
     'delete_company' => 'Delete company',
     'delete_ad' => 'Delete ad',
+    'offers' => 'Offers',
 ];
