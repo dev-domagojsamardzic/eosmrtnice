@@ -92,7 +92,7 @@ class AdsTable extends Component implements HasForms, HasTable
                         0 => 'danger',
                     }),
                 ViewColumn::make('offer_sent')
-                    ->view('filament.tables.columns.offer-sent-badge'),
+                    ->view('filament.tables.columns.ad-offer-sent-badge'),
                 TextColumn::make('expired')
                     ->label(__('models/ad.expired'))
                     ->badge()
