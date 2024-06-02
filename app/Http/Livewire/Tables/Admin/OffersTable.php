@@ -8,6 +8,7 @@ use Exception;
 use Filament\Forms\Components\DatePicker;
 use Filament\Support\Enums\IconPosition;
 use Filament\Support\Enums\MaxWidth;
+use Filament\Tables\Actions\Action;
 use Filament\Tables\Actions\ActionGroup;
 use Filament\Tables\Actions\EditAction;
 use Filament\Tables\Actions\DeleteAction;
@@ -106,11 +107,15 @@ class OffersTable extends Component implements HasForms, HasTable
             ->filtersFormWidth(MaxWidth::FourExtraLarge)
             ->actions([
                 ActionGroup::make([
-                    Tables\Actions\Action::make('send_offer')
+                    Action::make('send_offer')
                         ->label(__('models/offer.send'))
                         ->icon('heroicon-o-paper-airplane')
                         ->visible(fn(Offer $offer): bool => is_null($offer->sent_at))
                         ->url(fn(Offer $offer): string => route('admin.offers.send', ['offer' => $offer->id])),
+                    Action::make('download_offer_pdf')
+                        ->label(__('models/offer.download_pdf'))
+                        ->icon('heroicon-o-arrow-down-tray')
+                        ->url(fn(Offer $offer) => route('admin.offers.download', ['offer' => $offer->id])),
                     EditAction::make('view')
                         ->label(__('common.edit'))
                         ->icon('heroicon-s-pencil-square')

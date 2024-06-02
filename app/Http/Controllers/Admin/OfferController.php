@@ -4,12 +4,12 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\OfferRequest;
-use App\Http\Requests\Admin\Offers\AdOfferRequest;
 use App\Mail\OfferCreated;
 use App\Models\Offer;
 use Carbon\Carbon;
 use Exception;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\View\View;
 use Livewire\Features\SupportRedirects\Redirector;
@@ -90,6 +90,17 @@ class OfferController extends Controller
                 ->route('admin.offers.index')
                 ->with('alert', ['class' => 'danger', 'message' => __('common.something_went_wrong')]);
         }
+    }
+
+    /**
+     * Download offer as PDF document
+     *
+     * @param Offer $offer
+     * @return Response
+     */
+    public function download(Offer $offer): Response
+    {
+        return $offer->downloadPdf();
     }
 
     /**

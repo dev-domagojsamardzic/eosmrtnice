@@ -29,4 +29,5 @@ return [
     'sent_at' => 'Sent At',
     'sent_offers' => 'Sent',
     'not_sent_offers' => 'Not sent',
+    'download_pdf' => 'Download PDF',
 ];

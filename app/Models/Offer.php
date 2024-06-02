@@ -13,6 +13,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Http\Response;
 
 /**
  * @property-read       int                     id
@@ -109,6 +110,20 @@ class Offer extends Model
      */
     public function toRawPdf(): string
     {
-        return SnappyPdf::loadView('pdf.offer', ['offer' => $this])->output();
+        return SnappyPdf::loadView('pdf.offer', ['offer' => $this])
+            ->setOption('encoding', 'UTF-8')
+            ->output();
+    }
+
+    /**
+     * Return offer pdf as response
+     *
+     * @return Response
+     */
+    public function downloadPdf(): Response
+    {
+        return SnappyPdf::loadView('pdf.offer', ['offer' => $this])
+            ->setOption('encoding', 'UTF-8')
+            ->download($this->number . '.pdf');
     }
 }

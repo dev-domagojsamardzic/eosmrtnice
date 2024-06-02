@@ -29,4 +29,5 @@ return [
     'sent_at' => 'Ponuda poslana',
     'sent_offers' => 'Poslano',
     'not_sent_offers' => 'Nije poslano',
+    'download_pdf' => 'Preuzmi PDF',
 ];

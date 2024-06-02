@@ -38,3 +38,4 @@ Route::resource('ads/{ad}/offers', AdOfferController::class)
 Route::resource('offers', OfferController::class)
     ->only(['index', 'edit', 'update', 'delete']);
 Route::get('offers/{offer}/send', [OfferController::class, 'send'])->name('offers.send');
+Route::get('offers/{offer}/download', [OfferController::class, 'download'])->name('offers.download');
