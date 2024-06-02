@@ -14,12 +14,15 @@ class OfferCreated extends Mailable
 {
     use Queueable, SerializesModels;
 
+    public Offer $offer;
+    public bool $edited;
     /**
      * Create a new message instance.
      */
-    public function __construct(public Offer $offer)
+    public function __construct(Offer $offer, bool $edited = false)
     {
-        //
+        $this->offer = $offer;
+        $this->key = $edited ? 'offer_edited' : 'offer_created';
     }
 
     /**
@@ -29,7 +32,7 @@ class OfferCreated extends Mailable
     {
         return new Envelope(
             from: config('eosmrtnice.mail_from_address'),
-            subject: __('mail.offer_created.subject', ['offer' => $this->offer->number]),
+            subject: __("mail.$this->key.subject", ['offer' => $this->offer->number]),
         );
     }
 
@@ -40,6 +43,7 @@ class OfferCreated extends Mailable
     {
         return new Content(
             view: 'mail.offer-created',
+            with: ['key' => $this->key],
         );
     }
 
