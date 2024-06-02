@@ -36,4 +36,5 @@ Route::resource('ads/{ad}/offers', AdOfferController::class)
     ->names('ads.offers');
 
 Route::resource('offers', OfferController::class)
-    ->only(['index', 'edit', 'update']);
+    ->only(['index', 'edit', 'update', 'delete']);
+Route::get('offers/{offer}/send', [OfferController::class, 'send'])->name('offers.send');

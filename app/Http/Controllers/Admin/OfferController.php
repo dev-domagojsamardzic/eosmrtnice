@@ -75,6 +75,23 @@ class OfferController extends Controller
         }
     }
 
+    public function send(Offer $offer): RedirectResponse
+    {
+        try {
+            Mail::to($offer->company)->send(new OfferCreated($offer, true));
+
+            $offer->sent_at = now();
+            $offer->save();
+
+            return redirect()->route('admin.offers.index')
+                ->with('alert', ['class' => 'success', 'message' => __('models/offer.messages.offer_sent')]);
+        } catch (Exception $e) {
+            return redirect()
+                ->route('admin.offers.index')
+                ->with('alert', ['class' => 'danger', 'message' => __('common.something_went_wrong')]);
+        }
+    }
+
     /**
      * Display resource form
      *

@@ -106,6 +106,11 @@ class OffersTable extends Component implements HasForms, HasTable
             ->filtersFormWidth(MaxWidth::FourExtraLarge)
             ->actions([
                 ActionGroup::make([
+                    Tables\Actions\Action::make('send_offer')
+                        ->label(__('models/offer.send'))
+                        ->icon('heroicon-o-paper-airplane')
+                        ->visible(fn(Offer $offer): bool => is_null($offer->sent_at))
+                        ->url(fn(Offer $offer): string => route('admin.offers.send', ['offer' => $offer->id])),
                     EditAction::make('view')
                         ->label(__('common.edit'))
                         ->icon('heroicon-s-pencil-square')
