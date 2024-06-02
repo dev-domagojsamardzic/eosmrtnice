@@ -12,6 +12,7 @@ use Exception;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\View\View;
+use Livewire\Features\SupportRedirects\Redirector;
 
 class OfferController extends Controller
 {
@@ -21,23 +22,66 @@ class OfferController extends Controller
     }
 
     /**
-     * Display all offers
+     * Show all resources
+     *
+     * @return View
      */
     public function index(): View
     {
         return view('admin.offers.index');
     }
 
+    /**
+     * Show resource edit form
+     *
+     * @param Offer $offer
+     * @return View
+     */
     public function edit(Offer $offer): View
     {
         return $this->form($offer, 'edit');
     }
 
+    /**
+     * Update resource
+     *
+     * @param Offer $offer
+     * @param OfferRequest $request
+     * @return RedirectResponse
+     */
     public function update(Offer $offer, OfferRequest $request): RedirectResponse
     {
         return $this->apply($offer, $request);
     }
 
+    /**
+     * Delete the resource
+     *
+     * @param Offer $offer
+     * @return RedirectResponse|Redirector
+     */
+    public function destroy(Offer $offer): RedirectResponse|Redirector
+    {
+        try {
+            $offer->delete();
+            return redirect()
+                ->route('admin.offers.index')
+                ->with('alert', ['class' => 'success', 'message' => __('common.deleted')]);
+        }
+        catch (Exception $e) {
+            return redirect()
+                ->route('admin.offers.index')
+                ->with('alert', ['class' => 'danger', 'message' => __('common.something_went_wrong')]);
+        }
+    }
+
+    /**
+     * Display resource form
+     *
+     * @param Offer $offer
+     * @param string $action
+     * @return View
+     */
     private function form(Offer $offer, string $action): View
     {
         $route = match ($action) {
@@ -53,6 +97,13 @@ class OfferController extends Controller
         ]);
     }
 
+    /**
+     * Apply changes on resource
+     *
+     * @param Offer $offer
+     * @param OfferRequest $request
+     * @return RedirectResponse
+     */
     private function apply(Offer $offer, OfferRequest $request): RedirectResponse
     {
         $offer->valid_from = Carbon::parse($request->input('valid_from'))->format('Y-m-d');
@@ -78,8 +129,5 @@ class OfferController extends Controller
                 ->route('admin.offers.index')
                 ->with('alert', ['class' => 'danger', 'message' => __('common.something_went_wrong')]);
         }
-
-
-
     }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\Tables\Admin;
 
+use App\Http\Controllers\Admin\OfferController;
 use App\Models\Offer;
 use Exception;
 use Filament\Forms\Components\DatePicker;
@@ -9,6 +10,7 @@ use Filament\Support\Enums\IconPosition;
 use Filament\Support\Enums\MaxWidth;
 use Filament\Tables\Actions\ActionGroup;
 use Filament\Tables\Actions\EditAction;
+use Filament\Tables\Actions\DeleteAction;
 use Filament\Tables\Columns\Layout\Panel;
 use Filament\Tables\Columns\Layout\Split;
 use Filament\Forms\Concerns\InteractsWithForms;
@@ -26,8 +28,10 @@ use Filament\Tables\Filters\TernaryFilter;
 use Filament\Tables\Table;
 use Illuminate\Contracts\View\View;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Carbon;
 use Livewire\Component;
+use Livewire\Features\SupportRedirects\Redirector;
 
 class OffersTable extends Component implements HasForms, HasTable
 {
@@ -106,6 +110,13 @@ class OffersTable extends Component implements HasForms, HasTable
                         ->label(__('common.edit'))
                         ->icon('heroicon-s-pencil-square')
                         ->url(fn(Offer $offer) => route('admin.offers.edit', $offer)),
+                    DeleteAction::make('delete')
+                        ->label(__('common.delete'))
+                        ->icon('heroicon-s-trash')
+                        ->requiresConfirmation()
+                        ->modalHeading(__('admin.delete_offer'))
+                        ->modalSubmitActionLabel(__('common.delete'))
+                        ->action(fn (Offer $offer): RedirectResponse|Redirector => (new OfferController)->destroy($offer))
                 ])->iconPosition(IconPosition::Before),
 
             ]);

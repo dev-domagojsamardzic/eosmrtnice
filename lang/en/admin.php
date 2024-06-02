@@ -55,4 +55,5 @@ return [
     'delete_company' => 'Delete company',
     'delete_ad' => 'Delete ad',
     'offers' => 'Offers',
+    'delete_offer' => 'Delete offer',
 ];

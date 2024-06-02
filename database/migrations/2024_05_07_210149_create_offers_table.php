@@ -23,6 +23,7 @@ return new class extends Migration
             $table->date('valid_until')->nullable(false);
             $table->dateTime('sent_at')->nullable();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
