@@ -5,7 +5,10 @@ namespace App\Http\Livewire\Tables\Admin;
 use App\Models\Offer;
 use Exception;
 use Filament\Forms\Components\DatePicker;
+use Filament\Support\Enums\IconPosition;
 use Filament\Support\Enums\MaxWidth;
+use Filament\Tables\Actions\ActionGroup;
+use Filament\Tables\Actions\EditAction;
 use Filament\Tables\Columns\Layout\Panel;
 use Filament\Tables\Columns\Layout\Split;
 use Filament\Forms\Concerns\InteractsWithForms;
@@ -98,7 +101,13 @@ class OffersTable extends Component implements HasForms, HasTable
             ->filtersFormColumns(4)
             ->filtersFormWidth(MaxWidth::FourExtraLarge)
             ->actions([
-                //
+                ActionGroup::make([
+                    EditAction::make('view')
+                        ->label(__('common.edit'))
+                        ->icon('heroicon-s-pencil-square')
+                        ->url(fn(Offer $offer) => route('admin.offers.edit', $offer)),
+                ])->iconPosition(IconPosition::Before),
+
             ]);
     }
 

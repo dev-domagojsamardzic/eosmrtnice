@@ -35,4 +35,5 @@ Route::resource('ads/{ad}/offers', AdOfferController::class)
     ->except(['index'])
     ->names('ads.offers');
 
-Route::resource('offers', OfferController::class);
+Route::resource('offers', OfferController::class)
+    ->only(['index', 'edit', 'update']);
