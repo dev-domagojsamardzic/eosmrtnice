@@ -7,6 +7,7 @@ use Barryvdh\Snappy\Facades\SnappyPdf;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Attributes\ObservedBy;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -28,6 +29,7 @@ use Illuminate\Http\Response;
  * @property            Carbon                  created_at
  * @property            Carbon                  updated_at
  * ------------------------------------------------------------
+ * @property-read       bool                    is_valid
  * ------------------------------------------------------------
  * @property            Company                     company
  * @property            Collection|Ad               ads
@@ -94,13 +96,25 @@ class Offer extends Model
     }
 
     /**
+     * Is offer valid
+     */
+    protected function isValid(): Attribute
+    {
+        return Attribute::make(
+            get: fn () => $this->valid_from->startOfDay()->lt(now()) &&
+                $this->valid_until->endOfDay()->gt(now())
+        );
+    }
+
+    /**
      * Generate offer number
      *
      * @return string
      */
     public function generateOfferNumber(): string
     {
-        return "P-" . str_pad($this->id + 1, 5, '0', STR_PAD_LEFT) . "-" . $this->created_at->format("m/Y");
+        $date = $this->created_at ?? now();
+        return "P-" . str_pad($this->id + 1, 5, '0', STR_PAD_LEFT) . "-" . $date->format("m/Y");
     }
 
     /**
