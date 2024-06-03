@@ -16,13 +16,14 @@
                     <div class="col-lg-7">
                         <div class="p-5">
                             <div class="text-left font-weight-bold mb-3">
-                                <h1 class="mb-4">{{ __('auth.looking_forward_cooperating') }}</h1>
+                                <h1 class="mb-2">{{ __('auth.become_our_partner') }}</h1>
+                                <h5 class="mb-4">{{ __('auth.looking_forward_cooperating') }}</h5>
                             </div>
 
                             <hr class="mb-4">
 
                             <div class="text-left mb-3">
-                                <h4>{{ __('auth.partner_representative_user') }}</h4>
+                                <h5>{{ __('auth.partner_representative_user') }}</h5>
                             </div>
 
                             <form method="POST" action="{{ route('partner.register') }}">
@@ -104,7 +105,7 @@
 
                                 {{-- Company data --}}
                                 <div class="text-left mb-4">
-                                    <h4>{{ __('auth.company_data') }}</h4>
+                                    <h5>{{ __('auth.company_data') }}</h5>
                                 </div>
 
                                 {{-- company_type --}}

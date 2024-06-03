@@ -54,6 +54,7 @@ return [
         'company_phone' => 'Unesite broj fiksne linije',
         'company_mobile' => 'Unesite broj mobilne linije',
     ],
+    'become_our_partner' => 'Postanite naš partner',
     'looking_forward_cooperating' => 'Veselimo se suradnji s vama',
     'welcome' => 'Welcome',
     'log_in' => 'Prijava',

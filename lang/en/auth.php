@@ -54,6 +54,7 @@ return [
         'company_phone' => 'Enter the Landline Phone Number',
         'company_mobile' => 'Enter the Mobile Phone Number',
     ],
+    'become_our_partner' => 'Become our partner',
     'looking_forward_cooperating' => 'We are looking forward to cooperating with you',
     'welcome' => 'Dobrodošli',
     'log_in' => 'Log in',
