@@ -5,9 +5,20 @@
 .bg-login-image img,
 .bg-forgot-password-image img {
     min-height: 60px;
-    max-height: 150px;
+    max-height: 120px;
     max-width: 320px;
     width: auto;
+}
+
+@media screen and (max-width: 768px) {
+    .bg-register-image img,
+    .bg-login-image img,
+    .bg-forgot-password-image img {
+        min-height: 60px;
+        max-height: 150px;
+        max-width: 320px;
+        width: auto;
+    }
 }
 
 form.user {
