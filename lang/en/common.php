@@ -48,5 +48,7 @@ return [
     'disapprove' => 'Disapprove',
     'unknown' => 'Unknown',
     'save_and_send_offer' => 'Save and send offer',
-    'save_and_resend_offer' => 'Save and resend offer'
+    'save_and_resend_offer' => 'Save and resend offer',
+    'ongoing' => 'Ongoing',
+    'expired' => 'Expired',
 ];

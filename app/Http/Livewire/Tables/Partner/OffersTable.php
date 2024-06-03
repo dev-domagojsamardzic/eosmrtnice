@@ -78,6 +78,9 @@ class OffersTable extends Component implements HasForms, HasTable
                     ->label(__('models/offer.number'))
                     ->searchable()
                     ->weight(FontWeight::Bold),
+                TextColumn::make('company.title')
+                    ->label(__('models/offer.company'))
+                    ->searchable(),
                 Stack::make([
                     TextColumn::make('valid_from')
                         ->label(__('models/offer.valid_from'))
@@ -86,6 +89,10 @@ class OffersTable extends Component implements HasForms, HasTable
                         ->label(__('models/offer.valid_until'))
                         ->formatStateUsing(fn(Offer $o):string => __('models/offer.valid_until').': '.$o->valid_until->format('d.m.Y.')),
                 ]),
+                TextColumn::make('is_valid')
+                    ->badge()
+                    ->formatStateUsing(fn(Offer $o): string => $o->is_valid ? __('common.ongoing') : __('common.expired'))
+                    ->color(fn(Offer $o): string => $o->is_valid ? 'success' : 'danger'),
                 TextColumn::make('created_at')
                     ->label(__('models/offer.created_at'))
                     ->icon('heroicon-m-clock')
@@ -117,6 +124,7 @@ class OffersTable extends Component implements HasForms, HasTable
                 Action::make('download_offer_pdf')
                     ->label(__('models/offer.download_pdf'))
                     ->icon('heroicon-o-arrow-down-tray')
+                    ->visible(fn(Offer $offer): bool => $offer->is_valid && !is_null($offer->sent_at))
                     ->url(fn(Offer $offer) => route('partner.offers.download', ['offer' => $offer->id])),
                 ViewAction::make('view')
                     ->label(__('common.view'))

@@ -52,4 +52,6 @@ return [
     'unknown' => 'Nepoznato',
     'save_and_send_offer' => 'Spremi i pošalji ponudu',
     'save_and_resend_offer' => 'Spremi i ponovno pošalji ponudu',
+    'ongoing' => 'U toku',
+    'expired' => 'Isteklo',
 ];
