@@ -1,6 +1,6 @@
 <x-app-layout>
     <x-slot name="header">
-        <h1 class="font-weight-bolder mb-4">
+        <h1 class="font-semibold text-gray-800 mb-4 dark:text-gray-200">
             {{ __('models/offer.offer') }} - {{ __("common.{$action_name}") }}
         </h1>
     </x-slot>

@@ -1,10 +1,10 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-weight-bolder mb-4">
+        <h2 class="font-semibold text-gray-800 mb-4 dark:text-gray-200">
             {{ __('models/ad.ads') }} - {{ __("common.{$action_name}") }} ({{ $company->title }})
         </h2>
         @if($ad->exists)
-            <h3 class="font-weight-bolder mb-4">{{ __('models/ad.type') . ': ' . $ad->type->name }}</h3>
+            <h3 class="font-weight-bold mb-4">{{ __('models/ad.type') . ': ' . $ad->type->name }}</h3>
         @endif
     </x-slot>
 
