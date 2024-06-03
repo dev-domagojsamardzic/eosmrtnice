@@ -52,84 +52,10 @@ class OffersTable extends Component implements HasForms, HasTable
             ->striped()
             ->query(Offer::query()->orderBy('created_at'))
             ->columns($this->getColumns())
-            ->filters([
-                Filter::make('valid_from')
-                    ->form([
-                        DatePicker::make('valid_from')
-                            ->native(false)
-                            ->label(__('models/offer.valid_from'))
-                            ->format('Y-m-d')
-                            ->displayFormat('d.m.Y.')
-                            ->timezone('Europe/Zagreb'),
-                    ])
-                    ->indicateUsing(function (array $data): ?string {
-                        if (! $data['valid_from']) {
-                            return null;
-                        }
-                        return __('models/offer.valid_from').': '.Carbon::parse($data['valid_from'])->format('d.m.Y.');
-                    })
-                    ->query(function (Builder $query, array $data): Builder {
-                        return $query
-                            ->when(
-                                $data['valid_from'],
-                                fn (Builder $query, $date): Builder => $query->whereDate('valid_from', '>=', $date),
-                            );
-                    }),
-                Filter::make('valid_until')
-                    ->form([
-                        DatePicker::make('valid_until')
-                            ->native(false)
-                            ->label(__('models/offer.valid_until'))
-                            ->format('Y-m-d')
-                            ->displayFormat('d.m.Y.')
-                            ->timezone('Europe/Zagreb'),
-                    ])
-                    ->indicateUsing(function (array $data): ?string {
-                        if (! $data['valid_until']) {
-                            return null;
-                        }
-                        return __('models/offer.valid_until').': '.Carbon::parse($data['valid_until'])->format('d.m.Y.');
-                    })
-                    ->query(function (Builder $query, array $data): Builder {
-                        return $query
-                            ->when(
-                                $data['valid_until'],
-                                fn (Builder $query, $date): Builder => $query->whereDate('valid_until', '<=', $date),
-                            );
-                    }),
-                TernaryFilter::make('sent_at')
-                    ->label(__('models/offer.sent_at'))
-                    ->nullable()
-                    ->trueLabel(__('models/offer.sent_offers'))
-                    ->falseLabel(__('models/offer.not_sent_offers'))
-            ], layout: FiltersLayout::AboveContent)
+            ->filters($this->getFilters(), layout: FiltersLayout::AboveContent)
             ->filtersFormColumns(4)
             ->filtersFormWidth(MaxWidth::FourExtraLarge)
-            ->actions([
-                ActionGroup::make([
-                    Action::make('send_offer')
-                        ->label(__('models/offer.send'))
-                        ->icon('heroicon-o-paper-airplane')
-                        ->visible(fn(Offer $offer): bool => is_null($offer->sent_at))
-                        ->url(fn(Offer $offer): string => route('admin.offers.send', ['offer' => $offer->id])),
-                    Action::make('download_offer_pdf')
-                        ->label(__('models/offer.download_pdf'))
-                        ->icon('heroicon-o-arrow-down-tray')
-                        ->url(fn(Offer $offer) => route('admin.offers.download', ['offer' => $offer->id])),
-                    EditAction::make('view')
-                        ->label(__('common.edit'))
-                        ->icon('heroicon-s-pencil-square')
-                        ->url(fn(Offer $offer) => route('admin.offers.edit', $offer)),
-                    DeleteAction::make('delete')
-                        ->label(__('common.delete'))
-                        ->icon('heroicon-s-trash')
-                        ->requiresConfirmation()
-                        ->modalHeading(__('admin.delete_offer'))
-                        ->modalSubmitActionLabel(__('common.delete'))
-                        ->action(fn (Offer $offer): RedirectResponse|Redirector => (new OfferController)->destroy($offer))
-                ])->iconPosition(IconPosition::Before),
-
-            ]);
+            ->actions($this->getActions());
     }
 
     public function render(): View
@@ -137,6 +63,11 @@ class OffersTable extends Component implements HasForms, HasTable
         return view('livewire.offers-table');
     }
 
+    /**
+     * Get table columns
+     *
+     * @return array
+     */
     private function getColumns(): array
     {
         return [
@@ -190,6 +121,99 @@ class OffersTable extends Component implements HasForms, HasTable
                 ])
 
             ])->collapsible()->columnSpanFull(),
+        ];
+    }
+
+    /**
+     * Return table filters
+     *
+     * @throws Exception
+     */
+    private function getFilters(): array
+    {
+        return [
+            Filter::make('valid_from')
+                ->form([
+                    DatePicker::make('valid_from')
+                        ->native(false)
+                        ->label(__('models/offer.valid_from'))
+                        ->format('Y-m-d')
+                        ->displayFormat('d.m.Y.')
+                        ->timezone('Europe/Zagreb'),
+                ])
+                ->indicateUsing(function (array $data): ?string {
+                    if (! $data['valid_from']) {
+                        return null;
+                    }
+                    return __('models/offer.valid_from').': '.Carbon::parse($data['valid_from'])->format('d.m.Y.');
+                })
+                ->query(function (Builder $query, array $data): Builder {
+                    return $query
+                        ->when(
+                            $data['valid_from'],
+                            fn (Builder $query, $date): Builder => $query->whereDate('valid_from', '>=', $date),
+                        );
+                }),
+            Filter::make('valid_until')
+                ->form([
+                    DatePicker::make('valid_until')
+                        ->native(false)
+                        ->label(__('models/offer.valid_until'))
+                        ->format('Y-m-d')
+                        ->displayFormat('d.m.Y.')
+                        ->timezone('Europe/Zagreb'),
+                ])
+                ->indicateUsing(function (array $data): ?string {
+                    if (! $data['valid_until']) {
+                        return null;
+                    }
+                    return __('models/offer.valid_until').': '.Carbon::parse($data['valid_until'])->format('d.m.Y.');
+                })
+                ->query(function (Builder $query, array $data): Builder {
+                    return $query
+                        ->when(
+                            $data['valid_until'],
+                            fn (Builder $query, $date): Builder => $query->whereDate('valid_until', '<=', $date),
+                        );
+                }),
+            TernaryFilter::make('sent_at')
+                ->label(__('models/offer.sent_at'))
+                ->nullable()
+                ->trueLabel(__('models/offer.sent_offers'))
+                ->falseLabel(__('models/offer.not_sent_offers'))
+        ];
+    }
+
+    /**
+     * Get table actions
+     *
+     * @return array
+     */
+    private function getActions(): array
+    {
+        return [
+            ActionGroup::make([
+                Action::make('send_offer')
+                    ->label(__('models/offer.send'))
+                    ->icon('heroicon-o-paper-airplane')
+                    ->visible(fn(Offer $offer): bool => is_null($offer->sent_at))
+                    ->url(fn(Offer $offer): string => route('admin.offers.send', ['offer' => $offer->id])),
+                Action::make('download_offer_pdf')
+                    ->label(__('models/offer.download_pdf'))
+                    ->icon('heroicon-o-arrow-down-tray')
+                    ->url(fn(Offer $offer) => route('admin.offers.download', ['offer' => $offer->id])),
+                EditAction::make('view')
+                    ->label(__('common.edit'))
+                    ->icon('heroicon-s-pencil-square')
+                    ->url(fn(Offer $offer) => route('admin.offers.edit', $offer)),
+                DeleteAction::make('delete')
+                    ->label(__('common.delete'))
+                    ->icon('heroicon-s-trash')
+                    ->requiresConfirmation()
+                    ->modalHeading(__('admin.delete_offer'))
+                    ->modalSubmitActionLabel(__('common.delete'))
+                    ->action(fn (Offer $offer): RedirectResponse|Redirector => (new OfferController)->destroy($offer))
+            ])->iconPosition(IconPosition::Before),
         ];
     }
 }

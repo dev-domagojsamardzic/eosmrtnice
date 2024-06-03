@@ -6,6 +6,7 @@ return [
     'create' => 'Create Offer',
     'not_sent' => 'Not sent',
     'offer' => 'Offer',
+    'offers' => 'Offers',
     'valid_from' => 'Valid from',
     'valid_until' => 'Valid until',
     'offer_items' => 'Items',

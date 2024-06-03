@@ -5,6 +5,7 @@ return [
     'sent' => 'Ponuda poslana',
     'not_sent' => 'Ponuda nije poslana',
     'offer' => 'Ponuda',
+    'offers' => 'Ponude',
     'create' => 'Napravi ponudu',
     'valid_from' => 'Vrijedi od',
     'valid_until' => 'Vrijedi do',
