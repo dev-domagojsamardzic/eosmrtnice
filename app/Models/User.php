@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Enums\Gender;
 use App\Enums\UserType;
 use Carbon\Carbon;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
@@ -21,7 +22,7 @@ use Illuminate\Notifications\Notifiable;
  * @property        string      last_name
  * @property        string      email
  * @property        UserType    type
- * @property        string      gender
+ * @property        Gender      gender
  * @property        Carbon      email_verified_at
  * @property        string      password
  * @property        string      remember_token
