@@ -55,7 +55,7 @@
 
             <div class="row">
                 <div class="col-lg-12 mt-4">
-                    <h2 class="font-weight-bold">{{ __('models/offer.offer_items') }}</h2>
+                    <h5>{{ __('models/offer.offer_items') }}</h5>
                     <hr class="sidebar-divider">
                 </div>
             </div>

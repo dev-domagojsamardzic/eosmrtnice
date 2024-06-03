@@ -42,15 +42,15 @@
                         </div>
                         <div class="tab-content">
                             <div class="tab-pane fade py-3 {{ (int)old('type', $ad->type->value) === (int)\App\Enums\AdType::STANDARD->value ? 'show active' : '' }}" id="{{ strtolower(\App\Enums\AdType::STANDARD->name) }}" role="tabpanel">
-                                <h1 class="text-md font-weight-bold mt-2 mb-4">{{ __('models/ad.info.standard.title') }}</h1>
+                                <h4 class="text-md font-weight-bold mt-2 mb-4">{{ __('models/ad.info.standard.title') }}</h4>
                                 {!! __('models/ad.info.standard.text') !!}
                             </div>
                             <div class="tab-pane fade py-3 {{ (int)old('type', $ad->type->value) === (int)\App\Enums\AdType::PREMIUM->value ? 'show active' : '' }}" id="{{ strtolower(\App\Enums\AdType::PREMIUM->name) }}" role="tabpanel">
-                                <h1 class="text-md font-weight-bold mt-2 mb-4">{{ __('models/ad.info.premium.title') }}</h1>
+                                <h4 class="text-md font-weight-bold mt-2 mb-4">{{ __('models/ad.info.premium.title') }}</h4>
                                 {!! __('models/ad.info.premium.text') !!}
                             </div>
                             <div class="tab-pane fade py-3 {{ (int)old('type', $ad->type->value) === (int)\App\Enums\AdType::GOLD->value ? 'show active' : '' }}" id="{{ strtolower(\App\Enums\AdType::GOLD->name) }}" role="tabpanel">
-                                <h1 class="text-md font-weight-bold mt-2 mb-4">{{ __('models/ad.info.gold.title') }}</h1>
+                                <h4 class="text-md font-weight-bold mt-2 mb-4">{{ __('models/ad.info.gold.title') }}</h4>
                                 {!! __('models/ad.info.gold.text') !!}
                             </div>
                         </div>
