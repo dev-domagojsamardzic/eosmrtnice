@@ -2,6 +2,7 @@
 
 use App\Models\City;
 use App\Models\County;
+use App\Models\User;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -22,6 +23,7 @@ return new class extends Migration
             $table->enum('gender',['m', 'f'])->nullable(false);
             $table->date('date_of_birth')->nullable(false);
             $table->date('date_of_death')->nullable(false);
+            $table->foreignIdFor(User::class)->nullable(false);
             $table->foreignIdFor(County::class, 'death_county_id')->nullable(false);
             $table->foreignIdFor(City::class, 'death_city_id')->nullable(false);
             $table->string('image')->nullable();
