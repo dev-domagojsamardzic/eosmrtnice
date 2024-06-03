@@ -67,4 +67,5 @@ return [
     'title' => 'Title',
     'title_helper_info' => 'This title will not be publicly visible',
     'title_placeholder' => 'Write something to differentiate your ad from other ads',
+    'download_offer_pdf' => 'Download PDF offer',
 ];

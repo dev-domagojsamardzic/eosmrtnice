@@ -67,4 +67,5 @@ return [
     'title' => 'Naslov',
     'title_helper_info' => 'Naslov neće biti javno vidljiv',
     'title_placeholder' => 'Nešto po čemu ćete razlikovati ovaj oglas od ostalih',
+    'download_offer_pdf' => 'Preuzmi PDF ponudu',
 ];

@@ -4,6 +4,7 @@ namespace App\Http\Livewire\Tables\Admin;
 
 use App\Http\Controllers\Admin\AdController;
 use App\Models\Ad;
+use App\Models\Offer;
 use App\Services\ImageService;
 use Exception;
 use Filament\Forms\Concerns\InteractsWithForms;
@@ -142,6 +143,11 @@ class AdsTable extends Component implements HasForms, HasTable
                     ->icon('heroicon-s-plus')
                     ->color('black')
                     ->url(fn(Ad $ad): string => route('admin.ads.offers.create', ['ad' => $ad])),
+                Action::make('download_offer_pdf')
+                    ->label(__('models/ad.download_offer_pdf'))
+                    ->icon('heroicon-o-arrow-down-tray')
+                    ->visible(fn(Ad $ad): bool => $ad->offers()->valid()->exists())
+                    ->url(fn(Ad $ad) => route('admin.offers.download', ['offer' => $ad->offers()->valid()->first()->id])),
                 Action::make('approve')
                     ->label(fn (Ad $ad): string => $ad->approved ? __('common.disapprove') : __('common.approve'))
                     ->action(function(Ad $ad): void {
