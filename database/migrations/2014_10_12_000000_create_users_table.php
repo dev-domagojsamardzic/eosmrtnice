@@ -1,8 +1,11 @@
 <?php
 
+use App\Enums\Gender;
 use App\Enums\UserType;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
@@ -26,6 +29,21 @@ return new class extends Migration
             $table->timestamps();
             $table->softDeletes();
         });
+
+        // Create default Administrator
+        DB::table('users')->insert([
+            'id' => 1,
+            'first_name' => 'Admin',
+            'last_name' => 'Admin',
+            'email' => 'admin@email.com',
+            'type' => UserType::ADMIN,
+            'gender' => Gender::MALE,
+            'email_verified_at' => now(),
+            'password' => Hash::make('admin'),
+            'remember_token' => null,
+            'created_at' => now(),
+            'updated_at' => null,
+        ]);
     }
 
     /**
