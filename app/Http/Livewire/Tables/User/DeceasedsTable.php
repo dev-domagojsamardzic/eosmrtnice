@@ -10,6 +10,7 @@ use Filament\Tables\Concerns\InteractsWithTable;
 use Filament\Tables\Contracts\HasTable;
 use Filament\Tables\Table;
 use Illuminate\Contracts\View\View;
+use Illuminate\Database\Eloquent\Builder;
 use Livewire\Component;
 
 class DeceasedsTable extends Component implements HasForms, HasTable
@@ -20,7 +21,7 @@ class DeceasedsTable extends Component implements HasForms, HasTable
     public function table(Table $table): Table
     {
         return $table
-            ->query(Deceased::query())
+            ->query($this->getQuery())
             ->columns([
                 //
             ])
@@ -39,6 +40,16 @@ class DeceasedsTable extends Component implements HasForms, HasTable
 
     public function render(): View
     {
-        return view('livewire.user.deceaseds-table');
+        return view('livewire.deceaseds-table');
+    }
+
+    /**
+     * Return table's query builder
+     *
+     * @return Builder
+     */
+    private function getQuery(): Builder
+    {
+        return Deceased::query();
     }
 }
