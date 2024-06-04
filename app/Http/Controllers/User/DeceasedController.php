@@ -18,7 +18,7 @@ use Livewire\Features\SupportRedirects\Redirector;
 class DeceasedController extends Controller
 {
     public function __construct(protected ImageService $imageService) {
-
+        $this->authorizeResource(Deceased::class);
     }
 
     /**
@@ -143,7 +143,12 @@ class DeceasedController extends Controller
         $deceasedImage = $this->imageService->storeDeceasedImage($request, $deceased);
         $deceased->image = $deceasedImage;
 
-        $deceased->user()->associate($request->user());
+        // Associate user ONLY WHEN creating model
+        // Only user can create
+        if (!$deceased->exists) {
+            $deceased->user()->associate($request->user());
+        }
+
         $deceased->gender = $request->input('gender');
         $deceased->first_name = $request->input('first_name');
         $deceased->last_name = $request->input('last_name');
@@ -155,11 +160,11 @@ class DeceasedController extends Controller
 
         try {
             $deceased->save();
-            return redirect()->route('user.deceaseds.index')
+            return redirect()->route(auth_user_type() . '.deceaseds.index')
                 ->with('alert', ['class' => 'success', 'message' => __('common.saved')]);
         } catch (\Exception $e) {
             return redirect()
-                ->route('user.deceaseds.index')
+                ->route(auth_user_type() . '.deceaseds.index')
                 ->with('alert', ['class' => 'danger', 'message' => __('common.something_went_wrong')]);
         }
     }
