@@ -17,10 +17,12 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property            Gender          gender
  * @property            Carbon          date_of_birth
  * @property            Carbon          date_of_death
- * @property            int             county_id
- * @property            int             city_id
+ * @property            int             death_county_id
+ * @property            int             death_city_id
  * @property            string          image
- *
+ * @property            Carbon          created_at
+ * @property            Carbon          updated_at
+ * @property            Carbon          deleted_at
  */
 class Deceased extends Model
 {
