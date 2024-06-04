@@ -6,6 +6,7 @@ use App\Models\Deceased;
 use Filament\Forms\Concerns\InteractsWithForms;
 use Filament\Forms\Contracts\HasForms;
 use Filament\Tables;
+use Filament\Tables\Actions\CreateAction;
 use Filament\Tables\Concerns\InteractsWithTable;
 use Filament\Tables\Contracts\HasTable;
 use Filament\Tables\Table;
@@ -21,6 +22,15 @@ class DeceasedsTable extends Component implements HasForms, HasTable
     public function table(Table $table): Table
     {
         return $table
+            ->emptyStateHeading(__('common.no_records'))
+            ->emptyStateDescription('')
+            ->headerActions([
+                CreateAction::make('create')
+                    ->label(__('models/deceased.add_deceased'))
+                    ->icon('heroicon-m-plus')
+                    ->url(route(auth_user_type() . '.deceaseds.create'))
+            ])
+            ->striped()
             ->query($this->getQuery())
             ->columns([
                 //
