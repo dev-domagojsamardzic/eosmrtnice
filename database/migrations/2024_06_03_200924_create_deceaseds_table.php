@@ -16,6 +16,7 @@ return new class extends Migration
     {
         Schema::create('deceaseds', static function (Blueprint $table) {
             $table->id();
+            $table->foreignIdFor(User::class)->constrained()->onDelete('cascade')->onUpdate('cascade');
             $table->string('first_name')->nullable(false);
             $table->string('last_name')->nullable(false);
             $table->string('maiden_name')->nullable();
@@ -23,7 +24,6 @@ return new class extends Migration
             $table->enum('gender',['m', 'f'])->nullable(false);
             $table->date('date_of_birth')->nullable(false);
             $table->date('date_of_death')->nullable(false);
-            $table->foreignIdFor(User::class)->nullable(false);
             $table->foreignIdFor(County::class, 'death_county_id')->nullable(false);
             $table->foreignIdFor(City::class, 'death_city_id')->nullable(false);
             $table->string('image')->nullable();
