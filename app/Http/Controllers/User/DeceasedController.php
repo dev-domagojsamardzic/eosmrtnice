@@ -134,7 +134,7 @@ class DeceasedController extends Controller
             $deceased->save();
             return redirect()->route('user.deceaseds.index')
                 ->with('alert', ['class' => 'success', 'message' => __('common.saved')]);
-        }catch (\Exception $e) {
+        } catch (\Exception $e) {
             return redirect()
                 ->route('user.deceaseds.index')
                 ->with('alert', ['class' => 'danger', 'message' => __('common.something_went_wrong')]);
