@@ -16,8 +16,8 @@ use Illuminate\Validation\Rule;
  * @property        string          maiden_name
  * @property        string          date_of_birth
  * @property        string          date_of_death
- * @property        int             county_id
- * @property        int             city_id
+ * @property        int             death_county_id
+ * @property        int             death_city_id
  */
 class DeceasedRequest extends FormRequest
 {
@@ -41,8 +41,8 @@ class DeceasedRequest extends FormRequest
             'first_name' => ['required', 'string', 'max:255'],
             'last_name' => ['required', 'string', 'max:255'],
             'maiden_name' => ['nullable', 'string', 'max:255'],
-            'date_of_birth' => ['required', 'date_format:d.m.Y.', 'before:' . today()->toDateString()],
-            'date_of_death' => ['required', 'date_format:d.m.Y.', 'before:' . today()->toDateString()],
+            'date_of_birth' => ['required', 'before:' . today()->toDateString()],
+            'date_of_death' => ['required', 'before:' . today()->addDay()->toDateString()],
             'city_id' => ['required', 'exists:cities,id', new CityBelongsToCounty('county_id')],
             'county_id' => ['required','exists:counties,id'],
         ];
