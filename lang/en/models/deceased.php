@@ -17,4 +17,7 @@ return [
     'city' => 'City',
     'image' => 'Deceased image',
     'image_helper_info' => 'Add image that will be showing in posts',
+    'maiden_name_prefix' => 'born',
+    'full_name' => 'Full Name',
+    'born_died' => 'Born/Died',
 ];

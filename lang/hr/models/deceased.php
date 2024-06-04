@@ -17,4 +17,7 @@ return [
     'city' => 'Grad smrti',
     'image' => 'Slika pokojnika',
     'image_helper_info' => 'Dodajte sliku pokojnika koja će se prikazivati u objavama',
+    'maiden_name_prefix' => 'rođ.',
+    'full_name' => 'Ime i prezime',
+    'born_died' => 'Rođen/a - Preminuo/la',
 ];

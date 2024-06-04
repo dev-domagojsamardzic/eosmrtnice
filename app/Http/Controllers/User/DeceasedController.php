@@ -40,6 +40,17 @@ class DeceasedController extends Controller
     }
 
     /**
+     * Show resource's edit form
+     *
+     * @param Deceased $deceased
+     * @return View
+     */
+    public function edit(Deceased $deceased): View
+    {
+        return $this->form($deceased, 'edit');
+    }
+
+    /**
      * Store new resource
      *
      * @param Deceased $deceased
@@ -47,6 +58,18 @@ class DeceasedController extends Controller
      * @return RedirectResponse
      */
     public function store(Deceased $deceased, DeceasedRequest $request): RedirectResponse
+    {
+        return $this->apply($deceased, $request);
+    }
+
+    /**
+     * Update resource
+     *
+     * @param Deceased $deceased
+     * @param DeceasedRequest $request
+     * @return RedirectResponse
+     */
+    public function update(Deceased $deceased, DeceasedRequest $request): RedirectResponse
     {
         return $this->apply($deceased, $request);
     }
@@ -61,7 +84,7 @@ class DeceasedController extends Controller
     {
         $route = match ($action) {
             'create' => route(auth_user_type() . '.deceaseds.store'),
-            'update' => route(auth_user_type() . '.deceaseds.update', ['deceased' => $deceased->id]),
+            'edit' => route(auth_user_type() . '.deceaseds.update', ['deceased' => $deceased->id]),
             default => '',
         };
 

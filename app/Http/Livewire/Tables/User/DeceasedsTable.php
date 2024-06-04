@@ -3,10 +3,16 @@
 namespace App\Http\Livewire\Tables\User;
 
 use App\Models\Deceased;
+use Filament\Actions\EditAction;
+use Filament\Support\Enums\FontWeight;
+use Filament\Tables\Actions\ActionGroup;
+use Filament\Tables\Columns\Layout\Split;
 use Filament\Forms\Concerns\InteractsWithForms;
 use Filament\Forms\Contracts\HasForms;
-use Filament\Tables;
 use Filament\Tables\Actions\CreateAction;
+use Filament\Tables\Columns\ImageColumn;
+use Filament\Tables\Columns\Layout\Stack;
+use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Concerns\InteractsWithTable;
 use Filament\Tables\Contracts\HasTable;
 use Filament\Tables\Table;
@@ -32,20 +38,12 @@ class DeceasedsTable extends Component implements HasForms, HasTable
             ])
             ->striped()
             ->query($this->getQuery())
-            ->columns([
-                //
-            ])
+            ->columns($this->getColumns())
             ->filters([
                 //
             ])
-            ->actions([
-                //
-            ])
-            ->bulkActions([
-                Tables\Actions\BulkActionGroup::make([
-                    //
-                ]),
-            ]);
+            ->actions($this->getActions())
+            ->bulkActions([]);
     }
 
     public function render(): View
@@ -60,6 +58,49 @@ class DeceasedsTable extends Component implements HasForms, HasTable
      */
     private function getQuery(): Builder
     {
-        return Deceased::query();
+        return Deceased::query()->where('user_id', auth()->id());
+    }
+
+    /**
+     * Return table's columns
+     *
+     * @return array
+     */
+    private function getColumns(): array
+    {
+        return [
+            Split::make([
+                ImageColumn::make('image')
+                    ->label(__('models/deceased.image'))
+                    ->square()
+                    ->size(60)
+                    ->grow(false),
+                TextColumn::make('full_name')
+                    ->weight(FontWeight::Bold)
+                    ->label(__('models/deceased.full_name'))
+                    ->sortable(['first_name','last_name'])
+                    ->searchable(['first_name','last_name']),
+                TextColumn::make('lifespan')
+                    ->label(__('models/deceased.born_died')),
+                Stack::make([
+                    TextColumn::make('city.title')
+                        ->searchable(),
+                    TextColumn::make('county.title')
+                        ->searchable(),
+                ])
+            ])->from('md'),
+        ];
+    }
+
+    private function getActions(): array
+    {
+        return [
+            ActionGroup::make([
+                EditAction::make('edit')
+                    ->label(__('common.edit'))
+                    ->icon('heroicon-m-edit')
+                    ->url(fn(Deceased $d) => route(auth_user_type().'.deceaseds.edit', ['deceased' => $d->id])),
+            ]),
+        ];
     }
 }
