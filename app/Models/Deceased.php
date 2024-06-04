@@ -104,9 +104,12 @@ class Deceased extends Model
     protected function fullName(): Attribute
     {
         return Attribute::make(
-            get: fn() => "$this->first_name $this->last_name ".__(
-                    'models/deceased.maiden_name_prefix'
-                )." $this->maiden_name"
+            get: function() {
+                if ($this->gender === Gender::FEMALE && $this->maiden_name) {
+                    return "$this->first_name $this->last_name ".__('models/deceased.maiden_name_prefix')." $this->maiden_name";
+                }
+                return "$this->first_name $this->last_name";
+            }
         );
     }
 
