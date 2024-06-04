@@ -21,7 +21,7 @@
     <!-- Divider -->
     <hr class="sidebar-divider">
 
-    <!-- Nav Item - Users -->
+    <!-- Nav Item - Deceaseds -->
     <li class="nav-item">
         <a class="nav-link" href="{{ route(auth_user_type() . '.deceaseds.index') }}">
             <i class="fas fa-cross"></i>

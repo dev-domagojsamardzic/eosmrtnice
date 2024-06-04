@@ -26,7 +26,7 @@ class DeceasedRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return is_member();
+        return is_admin() || is_member();
     }
 
     /**

@@ -28,7 +28,7 @@ class DeceasedController extends Controller
      */
     public function index(): View
     {
-        return view('user.deceaseds.index');
+        return view(auth_user_type() . '.deceaseds.index');
     }
 
     /**
