@@ -8,12 +8,17 @@ use App\Http\Requests\User\DeceasedRequest;
 use App\Models\City;
 use App\Models\County;
 use App\Models\Deceased;
+use App\Services\ImageService;
 use Carbon\Carbon;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
 
 class DeceasedController extends Controller
 {
+    public function __construct(protected ImageService $imageService) {
+
+    }
+
     /**
      * Show all resources
      *
@@ -89,11 +94,27 @@ class DeceasedController extends Controller
      */
     private function apply(Deceased $deceased, DeceasedRequest $request): RedirectResponse
     {
+        $deceasedImage = $this->imageService->storeDeceasedImage($request, $deceased);
+        $deceased->image = $deceasedImage;
+
+        $deceased->user()->associate($request->user());
         $deceased->gender = $request->input('gender');
         $deceased->first_name = $request->input('first_name');
         $deceased->last_name = $request->input('last_name');
         $deceased->maiden_name = $request->input('maiden_name');
         $deceased->date_of_birth = Carbon::parse($request->input('date_of_birth'))->format('Y-m-d');
         $deceased->date_of_death = Carbon::parse($request->input('date_of_death'))->format('Y-m-d');
+        $deceased->city()->associate($request->input('city_id'));
+        $deceased->county()->associate($request->input('county_id'));
+
+        try {
+            $deceased->save();
+            return redirect()->route('user.deceaseds.index')
+                ->with('alert', ['class' => 'success', 'message' => __('common.saved')]);
+        }catch (\Exception $e) {
+            return redirect()
+                ->route('user.deceaseds.index')
+                ->with('alert', ['class' => 'danger', 'message' => __('common.something_went_wrong')]);
+        }
     }
 }
