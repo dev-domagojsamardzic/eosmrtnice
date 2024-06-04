@@ -134,8 +134,16 @@
         @include('partials.filepond.image')
         @push('scripts')
             <script type="module">
-                $('#date_of_birth,#date_of_death').datepicker({
+                $('#date_of_birth').datepicker({
                     dateFormat: "dd.mm.yy.",
+                    changeYear: true,
+                    autoSize: true,
+                    yearRange: "1900:" + new Date().getFullYear()
+                });
+                $('#date_of_death').datepicker({
+                    dateFormat: "dd.mm.yy.",
+                    changeYear: true,
+                    autoSize: true,
                 });
             </script>
         @endpush

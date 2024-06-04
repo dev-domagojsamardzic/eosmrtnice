@@ -17,8 +17,6 @@ import './sb-admin/sb-admin-2.min.js';
 
 import './filepond/filepond.js';
 
-import 'bootstrap-datepicker';
-
 
 /**
  * Handle bootstrap alert
