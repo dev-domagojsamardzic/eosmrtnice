@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Enums\Gender;
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -26,6 +27,8 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property            Carbon          updated_at
  * @property            Carbon          deleted_at
  * ------------------------------------------------------
+ * @property-read       string          full_name
+ * @property-read       string          lifespan
  * ------------------------------------------------------
  * @property            User            user
  * @property            City            city
@@ -91,5 +94,31 @@ class Deceased extends Model
     public function county(): BelongsTo
     {
         return $this->belongsTo(County::class, 'death_county_id');
+    }
+
+    /**
+     * Get the deceased's full name.
+     *
+     * @return Attribute
+     */
+    protected function fullName(): Attribute
+    {
+        return Attribute::make(
+            get: fn() => "$this->first_name $this->last_name ".__(
+                    'models/deceased.maiden_name_prefix'
+                )." $this->maiden_name"
+        );
+    }
+
+    /**
+     * Return from when to when a person lived
+     *
+     * @return Attribute
+     */
+    protected function lifespan(): Attribute
+    {
+        return Attribute::make(
+            get: fn() => $this->date_of_birth->format('d.m.Y.') . ' - ' . $this->date_of_death->format('d.m.Y.')
+        );
     }
 }
