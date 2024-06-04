@@ -4,6 +4,7 @@ namespace App\Services;
 
 use App\Models\Ad;
 use App\Models\Company;
+use App\Models\Deceased;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -11,6 +12,7 @@ class ImageService
 {
     public const LOGO_PATH = 'images/partners/logo/';
     public const BANNER_PATH = 'images/ads/banner/';
+    public const DECEASED_IMAGE_PATH = 'images/deceaseds/';
     /**
      * Store company logo
      *
@@ -77,6 +79,42 @@ class ImageService
 
         if (!is_null($ad->banner)) {
             Storage::disk('public')->delete($ad->banner);
+        }
+
+        $moved = Storage::disk('public')->move($source, $destination);
+        return $moved ? $destination : null;
+    }
+
+    /**
+     * Store deceased image
+     *
+     * @param Request $request
+     * @param Deceased $deceased
+     * @return string|null
+     */
+    public function storeDeceasedImage(Request $request, Deceased $deceased): string|null
+    {
+        $source = $request->input('image');
+
+        if(!$source) {
+            // Maybe user is removing image, check if image existed and delete
+            if ($deceased->image) {
+                Storage::disk('public')->delete($deceased->image);
+            }
+            return null;
+        }
+
+        $isTmpPath = $this->isTmpImagePath($source);
+        // return original soruce if it is not tmp source
+        if (!$isTmpPath) {
+            return $source;
+        }
+
+        $filename = pathinfo($source, PATHINFO_BASENAME);
+        $destination = self::DECEASED_IMAGE_PATH . $filename;
+
+        if (!is_null($deceased->image)) {
+            Storage::disk('public')->delete($deceased->image);
         }
 
         $moved = Storage::disk('public')->move($source, $destination);
