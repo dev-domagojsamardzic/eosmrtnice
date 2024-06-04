@@ -80,7 +80,7 @@ class Deceased extends Model
      */
     public function city(): BelongsTo
     {
-        return $this->belongsTo(City::class);
+        return $this->belongsTo(City::class, 'death_city_id');
     }
 
     /**
@@ -90,6 +90,6 @@ class Deceased extends Model
      */
     public function county(): BelongsTo
     {
-        return $this->belongsTo(County::class);
+        return $this->belongsTo(County::class, 'death_county_id');
     }
 }
