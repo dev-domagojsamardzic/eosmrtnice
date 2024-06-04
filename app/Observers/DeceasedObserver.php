@@ -12,7 +12,7 @@ class DeceasedObserver
      */
     public function saving(Deceased $deceased): void
     {
-        if ($deceased->isDirty(['first_name', 'last_name'])) {
+        if ($deceased->isDirty(['first_name', 'last_name', 'maiden_name'])) {
             // generate slug from first_name and last_name
             $slug = Str::slug($deceased->first_name.' '.$deceased->last_name.' '.$deceased->maiden_name);
             // find deceaseds with similar slugs
