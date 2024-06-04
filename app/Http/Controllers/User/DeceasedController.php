@@ -10,8 +10,10 @@ use App\Models\County;
 use App\Models\Deceased;
 use App\Services\ImageService;
 use Carbon\Carbon;
+use Exception;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
+use Livewire\Features\SupportRedirects\Redirector;
 
 class DeceasedController extends Controller
 {
@@ -72,6 +74,27 @@ class DeceasedController extends Controller
     public function update(Deceased $deceased, DeceasedRequest $request): RedirectResponse
     {
         return $this->apply($deceased, $request);
+    }
+
+    /**
+     * Delete resource
+     *
+     * @param Deceased $deceased
+     * @return RedirectResponse|Redirector
+     */
+    public function destroy(Deceased $deceased): RedirectResponse|Redirector
+    {
+        try {
+            $deceased->delete();
+            return redirect()
+                ->route(auth_user_type() . '.deceaseds.index')
+                ->with('alert', ['class' => 'success', 'message' => __('common.deleted')]);
+        }
+        catch (Exception $e) {
+            return redirect()
+                ->route(auth_user_type() . '.deceaseds.index')
+                ->with('alert', ['class' => 'danger', 'message' => __('common.something_went_wrong')]);
+        }
     }
 
     /**

@@ -2,8 +2,11 @@
 
 namespace App\Http\Livewire\Tables\User;
 
+use App\Http\Controllers\User\DeceasedController;
 use App\Models\Deceased;
-use Filament\Actions\EditAction;
+use App\Services\ImageService;
+use Filament\Tables\Actions\DeleteAction;
+use Filament\Tables\Actions\EditAction;
 use Filament\Support\Enums\FontWeight;
 use Filament\Tables\Actions\ActionGroup;
 use Filament\Tables\Columns\Layout\Split;
@@ -98,8 +101,15 @@ class DeceasedsTable extends Component implements HasForms, HasTable
             ActionGroup::make([
                 EditAction::make('edit')
                     ->label(__('common.edit'))
-                    ->icon('heroicon-m-edit')
+                    ->icon('heroicon-s-pencil-square')
                     ->url(fn(Deceased $d) => route(auth_user_type().'.deceaseds.edit', ['deceased' => $d->id])),
+                DeleteAction::make('delete')
+                    ->label(__('common.delete'))
+                    ->icon('heroicon-m-trash')
+                    ->requiresConfirmation()
+                    ->modalHeading(__('admin.delete_deceased'))
+                    ->modalSubmitActionLabel(__('common.delete'))
+                    ->action(function(Deceased $deceased) { (new DeceasedController(new ImageService()))->destroy($deceased); }),
             ]),
         ];
     }
