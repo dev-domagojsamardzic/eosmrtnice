@@ -102,7 +102,7 @@
                     <x-input-label for="county_id" :value="__('models/deceased.county')" :required_tag="true"/>
                     <select class="form-control border border-dark" id="county_id" name="county_id">
                         @foreach($counties as $id => $county)
-                            <option value="{{ $id }}">{{ $county }}</option>
+                            <option value="{{ $id }}" @selected($id === old('county_id', $deceased->death_county_id ))>{{ $county }}</option>
                         @endforeach
                     </select>
                     <x-input-error :messages="$errors->get('county_id')" class="mt-2"/>
@@ -113,7 +113,7 @@
                     <x-input-label for="city_id" :value="__('models/deceased.city')" :required_tag="true"/>
                     <select class="form-control border border-dark" id="city_id" name="city_id">
                         @foreach($cities as $city)
-                            <option data-county="{{ $city->county_id }}" value="{{ $city->id }}">{{ $city->title }}</option>
+                            <option data-county="{{ $city->county_id }}" value="{{ $city->id }}" @selected($city->id === old('city_id', $deceased->death_city_id))>{{ $city->title }}</option>
                         @endforeach
                     </select>
                     <x-input-error :messages="$errors->get('city_id')" class="mt-2"/>
