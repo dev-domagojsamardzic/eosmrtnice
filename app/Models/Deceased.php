@@ -6,10 +6,12 @@ use App\Enums\Gender;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
  * @property-read       int             id
+ * @property            int             user_id
  * @property            string          first_name
  * @property            string          last_name
  * @property            string          maiden_name
@@ -23,6 +25,11 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property            Carbon          created_at
  * @property            Carbon          updated_at
  * @property            Carbon          deleted_at
+ * ------------------------------------------------------
+ * ------------------------------------------------------
+ * @property            User            user
+ * @property            City            city
+ * @property            County          county
  */
 class Deceased extends Model
 {
@@ -55,4 +62,34 @@ class Deceased extends Model
         'date_of_birth' => 'date',
         'date_of_death' => 'date',
     ];
+
+    /**
+     * Return model's user
+     *
+     * @return BelongsTo
+     */
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    /**
+     * Return model's city
+     *
+     * @return BelongsTo
+     */
+    public function city(): BelongsTo
+    {
+        return $this->belongsTo(City::class);
+    }
+
+    /**
+     * Return model's county
+     *
+     * @return BelongsTo
+     */
+    public function county(): BelongsTo
+    {
+        return $this->belongsTo(County::class);
+    }
 }
