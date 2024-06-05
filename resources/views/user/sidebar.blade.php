@@ -28,6 +28,13 @@
             <span>{{ __('sidebar.deceaseds') }}</span></a>
     </li>
 
+    <!-- Nav Item - Deceaseds -->
+    <li class="nav-item">
+        <a class="nav-link" href="{{ route(auth_user_type() . '.posts.index') }}">
+            <i class="fas fa-address-card"></i>
+            <span>{{ __('sidebar.posts') }}</span></a>
+    </li>
+
     <!-- Divider -->
     <hr class="sidebar-divider d-none d-md-block">
 
