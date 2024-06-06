@@ -10,4 +10,5 @@ return [
     'services' => 'Usluge',
     'offers' => 'Ponude',
     'deceaseds' => 'Pokojnici',
+    'posts' => 'Objave',
 ];

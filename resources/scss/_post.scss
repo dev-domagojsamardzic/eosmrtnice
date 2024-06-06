@@ -1,0 +1,87 @@
+.post {
+    border: 1px solid $black;
+    padding: .2rem;
+    position: relative;
+    width: 100%;
+    max-width: 420px;
+}
+
+.post .header {
+    background-color: $black;
+    color: $white;
+    padding: 8px;
+    font-size: 1rem;
+    line-height: 1.25rem;
+    text-align: center;
+}
+
+.post .body .deceased_name {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    font-size: 22px;
+    font-weight: 600;
+    margin: 1rem;
+}
+
+.post .body .deceased_lifespan {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    margin: 1rem 0;
+}
+
+.post .body .deceased_image_wrapper {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin: 1rem 0;
+}
+
+.post .body .deceased_image_wrapper .deceased_image {
+    height: 130px;
+    width: 100px;
+    overflow: hidden;
+}
+
+.post .body .deceased_image_wrapper .deceased_image img {
+    height: 100%;
+    width: auto;
+    object-fit: cover;
+    object-position: center;
+}
+
+.post .body .deceased_image_wrapper .deceased_symbol {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 1.25rem;
+}
+
+.post .body .deceased_image_wrapper .deceased_symbol img{
+    height: 60px;
+    width: auto;
+}
+
+.post .body .deceased_intro_message {
+    padding: 0 15%;
+    text-align: center;
+    font-size: 1rem;
+    line-height: 1.75rem;
+    margin-top: 2rem;
+}
+
+.post .body .deceased_mid_message_name {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-transform: uppercase
+}
+
+.post .body .deceased_signature {
+    text-align: center;
+    margin-top: 2rem;
+    font-size: 16px;
+}
