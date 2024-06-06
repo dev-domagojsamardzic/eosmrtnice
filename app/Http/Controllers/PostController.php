@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\PostSize;
+use App\Enums\PostType;
 use App\Models\Deceased;
 use App\Models\Post;
 use Illuminate\View\View;
@@ -40,8 +42,14 @@ class PostController extends Controller
             default => '',
         };
 
+        $postTypes = PostType::options();
+        $postSizes = PostSize::options();
+
         return view('user.posts.form', [
             'post' => $post,
+            'deceased' => $deceased,
+            'types' => $postTypes,
+            'sizes' => $postSizes,
             'action' => $route,
         ]);
     }
