@@ -14,6 +14,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('posts', static function (Blueprint $table) {
+
             $table->id();
 
             $table->foreignIdFor(User::class);
@@ -24,12 +25,17 @@ return new class extends Migration
             $table->unsignedInteger('size');
             $table->date('starts_at')->nullable(false);
             $table->date('ends_at')->nullable(false);
-            $table->string('symbol')->nullable();
             $table->boolean('is_framed')->default(false);
             $table->string('image')->nullable();
+            $table->string('symbol')->nullable();
+            $table->string('deceased_full_name_lg');
+            $table->string('deceased_full_name_sm');
+            $table->string('lifespan');
             $table->string('intro_message')->nullable();
             $table->string('main_message')->nullable();
             $table->string('signature')->nullable();
+
+
 
             $table->timestamps();
             $table->softDeletes();

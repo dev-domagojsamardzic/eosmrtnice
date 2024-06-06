@@ -21,6 +21,9 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property            string          symbol
  * @property            bool            is_framed
  * @property            string          image
+ * @property            string          deceased_full_name_lg
+ * @property            string          deceased_full_name_sm
+ * @property            string          lifespan
  * @property            string          intro_message
  * @property            string          main_message
  * @property            string          signature
@@ -60,9 +63,9 @@ class Post extends Model
      * @var array
      */
     protected $attributes = [
+        'is_framed' => false,
         'type' => PostType::DEATH_NOTICE,
         'size' => PostSize::SMALL,
-        'is_framed' => false,
     ];
 
     /**
