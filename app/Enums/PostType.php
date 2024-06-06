@@ -12,4 +12,19 @@ enum PostType: int
     case LAST_GOODBYE = 3;
     /* Zahvala */
     case THANK_YOU = 4;
+
+    /**
+     * Return select box options array
+     *
+     * @return array
+     */
+    public static function options(): array
+    {
+        $options = [];
+
+        foreach (self::cases() as $case) {
+            $options[$case->value] = trans('enums.' . strtolower($case->name));
+        }
+        return $options;
+    }
 }
