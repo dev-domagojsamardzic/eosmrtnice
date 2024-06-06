@@ -19,7 +19,9 @@ return new class extends Migration
             $table->foreignIdFor(User::class);
             $table->foreignIdFor(Deceased::class);
 
+            // TODO: transform this into table
             $table->unsignedInteger('type');
+            $table->unsignedInteger('size');
             $table->date('starts_at')->nullable(false);
             $table->date('ends_at')->nullable(false);
             $table->string('symbol')->nullable();
@@ -28,7 +30,6 @@ return new class extends Migration
             $table->string('intro_message')->nullable();
             $table->string('main_message')->nullable();
             $table->string('signature')->nullable();
-            $table->string('size')->nullable();
 
             $table->timestamps();
             $table->softDeletes();
