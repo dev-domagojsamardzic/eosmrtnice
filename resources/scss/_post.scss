@@ -15,7 +15,7 @@
     text-align: center;
 }
 
-.post .body .deceased_name {
+.post .body .deceased_full_name_lg {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -25,7 +25,7 @@
     margin: 1rem;
 }
 
-.post .body .deceased_lifespan {
+.post .body .lifespan {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -33,55 +33,61 @@
     margin: 1rem 0;
 }
 
-.post .body .deceased_image_wrapper {
+.post .body .images_wrapper {
     display: flex;
     flex-direction: row;
     justify-content: center;
     margin: 1rem 0;
 }
 
-.post .body .deceased_image_wrapper .deceased_image {
+.post .body .images_wrapper .image {
     height: 130px;
     width: 100px;
     overflow: hidden;
 }
 
-.post .body .deceased_image_wrapper .deceased_image img {
+.post .body .images_wrapper .image img {
     height: 100%;
     width: auto;
     object-fit: cover;
     object-position: center;
 }
 
-.post .body .deceased_image_wrapper .deceased_symbol {
+.post .body .images_wrapper .symbol {
     display: flex;
     align-items: center;
     justify-content: center;
     margin-left: 1.25rem;
 }
 
-.post .body .deceased_image_wrapper .deceased_symbol img{
+.post .body .images_wrapper .symbol img{
     height: 60px;
     width: auto;
 }
 
-.post .body .deceased_intro_message {
-    padding: 0 15%;
+.post .body .intro_message {
     text-align: center;
+    overflow-wrap: break-word;
     font-size: 1rem;
     line-height: 1.75rem;
-    margin-top: 2rem;
 }
 
-.post .body .deceased_mid_message_name {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+.post .body .deceased_full_name_sm {
+    text-align: center;
     text-transform: uppercase
 }
 
-.post .body .deceased_signature {
+.post .body .deceased_main_message {
     text-align: center;
-    margin-top: 2rem;
-    font-size: 16px;
+    overflow-wrap: break-word;
+    font-size: 1rem;
+    line-height: 1.75rem;
+}
+
+.post .body .signature {
+    text-align: center;
+    overflow-wrap: break-word;
+    font-size: 1rem;
+    line-height: 1.75rem;
+    font-weight: bold;
 }
