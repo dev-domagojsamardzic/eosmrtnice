@@ -19,4 +19,13 @@ return [
     'standard' => 'Standard',
     'premium' => 'Premium',
     'gold' => 'Gold',
+    // App\Enums\PostType
+    'death_notice' => 'Death Notice',
+    'memory' => 'Memory',
+    'last_goodbye' => 'Last Goodbye',
+    'thank_you' => 'Thank You',
+    // App\Enums\PostSize
+    'small' => 'Up to 40 words',
+    'medium' => 'Up to 80 words',
+    'large' => 'Up to 180 words',
 ];
