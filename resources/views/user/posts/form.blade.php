@@ -105,7 +105,7 @@
                 <div class="form-group row">
                     <div class="col-12">
                         <x-input-label for="intro_message" :value="__('models/post.intro_message')" />
-                        <textarea id="intro_message" name="intro_message" class="form-control" rows="2">{{ old('intro_message', $post->intro_message) }}</textarea>
+                        <textarea id="intro_message" name="intro_message" class="form-control" rows="2" placeholder="{{ __('models/post.intro_message_placeholder') }}">{{ old('intro_message', $post->intro_message) }}</textarea>
                         <x-input-error :messages="$errors->get('intro_message')" class="mt-2" />
                     </div>
                 </div>
@@ -128,7 +128,7 @@
                 <div class="form-group row">
                     <div class="col-12">
                         <x-input-label for="main_message" :value="__('models/post.main_message')" />
-                        <textarea id="main_message" name="main_message" class="form-control" rows="5">{{ old('main_message', $post->main_message) }}</textarea>
+                        <textarea id="main_message" name="main_message" class="form-control" rows="5" placeholder="{{ __('models/post.main_message_placeholder') }}">{{ old('main_message', $post->main_message) }}</textarea>
                         <x-input-error :messages="$errors->get('main_message')" class="mt-2" />
                     </div>
                 </div>
@@ -137,13 +137,7 @@
                 <div class="form-group row">
                     <div class="col-12">
                         <x-input-label for="signature" :value="__('models/post.signature')" />
-                        <textarea id="signature"
-                                  name="signature"
-                                  class="form-control"
-                                  rows="3"
-                                  placeholder="{{ __('models/post.signature_placeholder') }}">
-                            {!! $post->signature !!}
-                        </textarea>
+                        <textarea id="signature" name="signature" class="form-control" rows="3" placeholder="{{ __('models/post.signature_placeholder') }}">{!! old('signature', $post->signature) !!}</textarea>
                         <x-input-error :messages="$errors->get('signature')" class="mt-2" />
                     </div>
                 </div>
