@@ -35,6 +35,7 @@
                 <div class="form-group row">
                     <div class="col-sm-12">
                         <x-input-label for="size" :value="__('models/post.size')" :required_tag="true"/>
+                        <x-input-info :content="__('models/post.size_info')"/>
                         <select class="form-control border border-dark" id="size" name="size">
                             @foreach($sizes as $key => $size)
                                 <option
