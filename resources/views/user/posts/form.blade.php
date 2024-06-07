@@ -9,7 +9,7 @@
     <div class="row">
         {{-- Preview --}}
         <div class="col-lg-6 col-sm-12 d-flex align-items-start justify-content-center">
-                @include('partials/post-preview')
+            @include('partials/post-preview')
         </div>
         {{-- Form --}}
         <div class="col-lg-6 col-sm-12 border">
@@ -37,7 +37,8 @@
                         <x-input-label for="size" :value="__('models/post.size')" :required_tag="true"/>
                         <select class="form-control border border-dark" id="size" name="size">
                             @foreach($sizes as $key => $size)
-                                <option value="{{ $key }}" @selected($key === old('type', $post->size->value))>{{ $size }}</option>
+                                <option
+                                    value="{{ $key }}" @selected($key === old('type', $post->size->value))>{{ $size }}</option>
                             @endforeach
                         </select>
                     </div>
@@ -82,7 +83,7 @@
                                       value="{{ $deceased->full_name }}"
                                       placeholder="{{ __('models/post.deceased_full_name_lg_placeholder') }}"
                                       required/>
-                        <x-input-error :messages="$errors->get('deceased_full_name_lg')" class="mt-2" />
+                        <x-input-error :messages="$errors->get('deceased_full_name_lg')" class="mt-2"/>
                     </div>
                 </div>
 
@@ -104,9 +105,10 @@
                 {{-- Intro message --}}
                 <div class="form-group row">
                     <div class="col-12">
-                        <x-input-label for="intro_message" :value="__('models/post.intro_message')" />
-                        <textarea id="intro_message" name="intro_message" class="form-control" rows="2" placeholder="{{ __('models/post.intro_message_placeholder') }}">{{ old('intro_message', $post->intro_message) }}</textarea>
-                        <x-input-error :messages="$errors->get('intro_message')" class="mt-2" />
+                        <x-input-label for="intro_message" :value="__('models/post.intro_message')"/>
+                        <textarea id="intro_message" name="intro_message" class="form-control" rows="2"
+                                  placeholder="{{ __('models/post.intro_message_placeholder') }}">{{ old('intro_message', $post->intro_message) }}</textarea>
+                        <x-input-error :messages="$errors->get('intro_message')" class="mt-2"/>
                     </div>
                 </div>
 
@@ -120,25 +122,27 @@
                                       name="deceased_full_name_sm"
                                       value="{{ $deceased->full_name }}"
                                       placeholder="{{ __('models/post.deceased_full_name_sm_placeholder') }}"/>
-                        <x-input-error :messages="$errors->get('deceased_full_name_sm')" class="mt-2" />
+                        <x-input-error :messages="$errors->get('deceased_full_name_sm')" class="mt-2"/>
                     </div>
                 </div>
 
                 {{-- Main message --}}
                 <div class="form-group row">
                     <div class="col-12">
-                        <x-input-label for="main_message" :value="__('models/post.main_message')" />
-                        <textarea id="main_message" name="main_message" class="form-control" rows="5" placeholder="{{ __('models/post.main_message_placeholder') }}">{{ old('main_message', $post->main_message) }}</textarea>
-                        <x-input-error :messages="$errors->get('main_message')" class="mt-2" />
+                        <x-input-label for="main_message" :value="__('models/post.main_message')"/>
+                        <textarea id="main_message" name="main_message" class="form-control" rows="5"
+                                  placeholder="{{ __('models/post.main_message_placeholder') }}">{{ old('main_message', $post->main_message) }}</textarea>
+                        <x-input-error :messages="$errors->get('main_message')" class="mt-2"/>
                     </div>
                 </div>
 
                 {{-- Signature --}}
                 <div class="form-group row">
                     <div class="col-12">
-                        <x-input-label for="signature" :value="__('models/post.signature')" />
-                        <textarea id="signature" name="signature" class="form-control" rows="3" placeholder="{{ __('models/post.signature_placeholder') }}">{!! old('signature', $post->signature) !!}</textarea>
-                        <x-input-error :messages="$errors->get('signature')" class="mt-2" />
+                        <x-input-label for="signature" :value="__('models/post.signature')"/>
+                        <textarea id="signature" name="signature" class="form-control" rows="3"
+                                  placeholder="{{ __('models/post.signature_placeholder') }}">{!! old('signature', $post->signature) !!}</textarea>
+                        <x-input-error :messages="$errors->get('signature')" class="mt-2"/>
                     </div>
                 </div>
 
@@ -161,23 +165,33 @@
                 language: "hr",
             });
 
-            document.getElementById('deceased_full_name_lg').addEventListener('input', function(event) {
+            const types = @json($types, JSON_THROW_ON_ERROR);
+
+            document.getElementById('type').addEventListener('change', function (event) {
+                document.getElementById('type_preview').textContent = types[event.target.value];
+            })
+
+            document.getElementById('deceased_full_name_lg').addEventListener('input', function (event) {
                 document.getElementById('deceased_full_name_lg_preview').innerHTML = event.target.value.replace(/\n/g, "<br>");
             })
 
-            document.getElementById('lifespan').addEventListener('input', function(event) {
+            document.getElementById('lifespan').addEventListener('input', function (event) {
                 document.getElementById('lifespan_preview').innerHTML = event.target.value.replace(/\n/g, "<br>");
             })
 
-            document.getElementById('intro_message').addEventListener('input', function(event) {
+            document.getElementById('intro_message').addEventListener('input', function (event) {
                 document.getElementById('intro_message_preview').innerHTML = event.target.value.replace(/\n/g, "<br>");
             })
 
-            document.getElementById('main_message').addEventListener('input', function(event) {
+            document.getElementById('deceased_full_name_sm').addEventListener('input', function (event) {
+                document.getElementById('deceased_full_name_sm_preview').innerHTML = event.target.value.replace(/\n/g, "<br>");
+            })
+
+            document.getElementById('main_message').addEventListener('input', function (event) {
                 document.getElementById('main_message_preview').innerHTML = event.target.value.replace(/\n/g, "<br>");
             });
 
-            document.getElementById('signature').addEventListener('input', function(event) {
+            document.getElementById('signature').addEventListener('input', function (event) {
                 document.getElementById('signature_preview').innerHTML = event.target.value.replace(/\n/g, "<br>");
             });
         </script>

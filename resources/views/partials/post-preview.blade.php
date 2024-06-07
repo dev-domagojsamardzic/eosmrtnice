@@ -1,5 +1,5 @@
 <div class="post">
-    <div class="header">Obavijest o smrti</div>
+    <div id="type_preview" class="header">{{ $post->type->translate() }}</div>
     <div class="body">
 
         <div id="deceased_full_name_lg_preview" class="deceased_full_name_lg">
