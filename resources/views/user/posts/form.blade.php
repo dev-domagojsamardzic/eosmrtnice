@@ -107,6 +107,7 @@
                 <div class="form-group row">
                     <div class="col-12">
                         <x-input-label for="intro_message" :value="__('models/post.intro_message')"/>
+                        <span id="intro_message_counter" class="text-success font-weight-bold">0/40</span>
                         <textarea id="intro_message" name="intro_message" class="form-control" rows="2"
                                   placeholder="{{ __('models/post.intro_message_placeholder') }}">{{ old('intro_message', $post->intro_message) }}</textarea>
                         <x-input-error :messages="$errors->get('intro_message')" class="mt-2"/>
@@ -131,6 +132,7 @@
                 <div class="form-group row">
                     <div class="col-12">
                         <x-input-label for="main_message" :value="__('models/post.main_message')"/>
+                        <span id="main_message_counter" class="text-success font-weight-bold">0/40</span>
                         <textarea id="main_message" name="main_message" class="form-control" rows="5"
                                   placeholder="{{ __('models/post.main_message_placeholder') }}">{{ old('main_message', $post->main_message) }}</textarea>
                         <x-input-error :messages="$errors->get('main_message')" class="mt-2"/>
@@ -168,6 +170,8 @@
 
             const types = @json($types, JSON_THROW_ON_ERROR);
 
+            let TOTAL_WORDS = 0;
+
             document.getElementById('type').addEventListener('change', function (event) {
                 document.getElementById('type_preview').textContent = types[event.target.value];
             })
@@ -182,6 +186,7 @@
 
             document.getElementById('intro_message').addEventListener('input', function (event) {
                 document.getElementById('intro_message_preview').innerHTML = event.target.value.replace(/\n/g, "<br>");
+                handleCounter();
             })
 
             document.getElementById('deceased_full_name_sm').addEventListener('input', function (event) {
@@ -190,11 +195,52 @@
 
             document.getElementById('main_message').addEventListener('input', function (event) {
                 document.getElementById('main_message_preview').innerHTML = event.target.value.replace(/\n/g, "<br>");
+                handleCounter();
             });
 
             document.getElementById('signature').addEventListener('input', function (event) {
                 document.getElementById('signature_preview').innerHTML = event.target.value.replace(/\n/g, "<br>");
             });
+
+            /**
+             * Count words from element
+             *
+             * @param textarea
+             * @returns int
+             */
+            function countWords(textarea) {
+                return textarea.value.split(' ')
+                    .filter(function(n) { return n != '' })
+                    .length;
+            }
+
+            /**
+             * Handle word (message) counter
+             */
+            function handleCounter() {
+                const intro_msg_count = countWords(document.getElementById('intro_message'));
+                const main_msg_count = countWords(document.getElementById('main_message'));
+                const treshold = 40;
+                let total_words = intro_msg_count + main_msg_count;
+                updateCounter(total_words, treshold)
+            }
+
+            /**
+             * Update counter labels
+             *
+             * @param total_words
+             * @param threshold
+             */
+            function updateCounter(total_words, threshold) {
+                const counters = [document.getElementById('intro_message_counter'), document.getElementById('main_message_counter')];
+
+                counters.forEach(counter => {
+                    counter.textContent = `${total_words} / ${threshold}`;
+                    counter.classList.toggle('text-danger', total_words > threshold);
+                    counter.classList.toggle('text-success', total_words <= threshold);
+                });
+            }
+
         </script>
     @endpush
 </x-app-layout>
