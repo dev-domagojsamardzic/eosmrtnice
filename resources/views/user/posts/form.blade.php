@@ -29,6 +29,7 @@
                                 <option value="{{ $key }}" @selected($key === old('type', $post->type->value))>{{ $type }}</option>
                             @endforeach
                         </select>
+                        <x-input-error :messages="$errors->get('type')" class="mt-2"/>
                     </div>
                 </div>
 
@@ -43,6 +44,7 @@
                                     value="{{ $key }}" @selected($key === old('type', $post->size->value))>{{ $size }}</option>
                             @endforeach
                         </select>
+                        <x-input-error :messages="$errors->get('size')" class="mt-2"/>
                         <hr>
                         <p class="mt-2 font-weight-bold">{{ __('models/post.current_word_count') }}: <span id="message_counter" class="text-counter-success font-weight-bold">0 / 40</span></p>
                     </div>
