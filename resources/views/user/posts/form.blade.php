@@ -1,4 +1,5 @@
 @inject('carbon', 'Illuminate\Support\Carbon')
+@inject('Str', 'Illuminate\Support\Str')
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-gray-800 mb-4 dark:text-gray-200">
@@ -167,11 +168,22 @@
                     autoSize: true,
                     language: "hr",
                 });
+
+                TOTAL_WORDS = {{ Str::of($post->intro_message)->wordCount() + Str::of($post->main_message)->wordCount() }}
+                TRESHOLD = parseInt(document.getElementById('size').value);
+
+                updateCounter()
             })
 
             const types = @json($types, JSON_THROW_ON_ERROR);
 
             let TOTAL_WORDS = 0;
+            let TRESHOLD = 40;
+
+            document.getElementById('size').addEventListener('change', function(event) {
+                TRESHOLD = parseInt(event.target.value);
+                updateCounter();
+            })
 
             document.getElementById('type').addEventListener('change', function (event) {
                 document.getElementById('type_preview').textContent = types[event.target.value];
@@ -221,22 +233,18 @@
             function handleCounter() {
                 const intro_msg_count = countWords(document.getElementById('intro_message'));
                 const main_msg_count = countWords(document.getElementById('main_message'));
-                const treshold = 40;
-                let total_words = intro_msg_count + main_msg_count;
-                updateCounter(total_words, treshold)
+                TOTAL_WORDS = intro_msg_count + main_msg_count;
+                updateCounter()
             }
 
             /**
              * Update counter labels
-             *
-             * @param total_words
-             * @param threshold
              */
-            function updateCounter(total_words, threshold) {
+            function updateCounter() {
                 const counter = document.getElementById('message_counter');
-                counter.textContent = `${total_words} / ${threshold}`;
-                counter.classList.toggle('text-counter-danger', total_words > threshold);
-                counter.classList.toggle('text-counter-success', total_words <= threshold);
+                counter.textContent = `${TOTAL_WORDS} / ${TRESHOLD}`;
+                counter.classList.toggle('text-counter-danger', TOTAL_WORDS > TRESHOLD);
+                counter.classList.toggle('text-counter-success', TOTAL_WORDS <= TRESHOLD);
             }
 
         </script>
