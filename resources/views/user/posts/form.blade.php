@@ -42,6 +42,8 @@
                                     value="{{ $key }}" @selected($key === old('type', $post->size->value))>{{ $size }}</option>
                             @endforeach
                         </select>
+                        <hr>
+                        <p class="mt-2 font-weight-bold">{{ __('models/post.current_word_count') }}: <span id="message_counter" class="text-counter-success font-weight-bold">0 / 40</span></p>
                     </div>
                 </div>
 
@@ -107,7 +109,6 @@
                 <div class="form-group row">
                     <div class="col-12">
                         <x-input-label for="intro_message" :value="__('models/post.intro_message')"/>
-                        <span id="intro_message_counter" class="text-success font-weight-bold">0/40</span>
                         <textarea id="intro_message" name="intro_message" class="form-control" rows="2"
                                   placeholder="{{ __('models/post.intro_message_placeholder') }}">{{ old('intro_message', $post->intro_message) }}</textarea>
                         <x-input-error :messages="$errors->get('intro_message')" class="mt-2"/>
@@ -132,7 +133,6 @@
                 <div class="form-group row">
                     <div class="col-12">
                         <x-input-label for="main_message" :value="__('models/post.main_message')"/>
-                        <span id="main_message_counter" class="text-success font-weight-bold">0/40</span>
                         <textarea id="main_message" name="main_message" class="form-control" rows="5"
                                   placeholder="{{ __('models/post.main_message_placeholder') }}">{{ old('main_message', $post->main_message) }}</textarea>
                         <x-input-error :messages="$errors->get('main_message')" class="mt-2"/>
@@ -159,14 +159,15 @@
 
             </form>
         </div>
-    </div>
-    @push('scripts')
         <script type="module">
-            $('#starts_at').datepicker({
-                dateFormat: "dd.mm.yy.",
-                autoSize: true,
-                language: "hr",
-            });
+
+            document.addEventListener('DOMContentLoaded', function () {
+                $('#starts_at').datepicker({
+                    dateFormat: "dd.mm.yy.",
+                    autoSize: true,
+                    language: "hr",
+                });
+            })
 
             const types = @json($types, JSON_THROW_ON_ERROR);
 
@@ -232,15 +233,14 @@
              * @param threshold
              */
             function updateCounter(total_words, threshold) {
-                const counters = [document.getElementById('intro_message_counter'), document.getElementById('main_message_counter')];
-
-                counters.forEach(counter => {
-                    counter.textContent = `${total_words} / ${threshold}`;
-                    counter.classList.toggle('text-danger', total_words > threshold);
-                    counter.classList.toggle('text-success', total_words <= threshold);
-                });
+                const counter = document.getElementById('message_counter');
+                counter.textContent = `${total_words} / ${threshold}`;
+                counter.classList.toggle('text-counter-danger', total_words > threshold);
+                counter.classList.toggle('text-counter-success', total_words <= threshold);
             }
 
         </script>
+    </div>
+@push('scripts')
     @endpush
 </x-app-layout>

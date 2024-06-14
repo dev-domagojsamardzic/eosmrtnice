@@ -22,5 +22,6 @@ return [
     'main_message' => 'Glavna poruka',
     'main_message_placeholder' => 'blago u Gospodinu preminuo u nedjelju, 07.04.2024. u 72. godini života. Pogreb dragog nam pokojnika održat će u srijedu, 10.04.2024. u 15.00 sati na gradskom groblju Mirogoj u Zagrebu.',
     'signature' => 'Potpis',
-    'signature_placeholder' => 'Ožalošćeni: rodbina, prijatelji ...'
+    'signature_placeholder' => 'Ožalošćeni: rodbina, prijatelji ...',
+    'current_word_count' => 'Trenutan broj riječi',
 ];

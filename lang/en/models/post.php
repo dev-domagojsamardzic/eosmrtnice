@@ -18,4 +18,5 @@ return [
     'deceased_full_name_sm_info' => 'Read post carefully and adjust this name if necessary',
     'main_message' => 'Main message',
     'signature' => 'Signature',
+    'current_word_count' => 'Current word count',
 ];
