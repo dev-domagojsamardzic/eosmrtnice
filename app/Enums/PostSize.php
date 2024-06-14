@@ -5,13 +5,13 @@ namespace App\Enums;
 enum PostSize: int
 {
     /* to 40 words */
-    case SMALL = 1;
+    case SMALL = 40;
 
     /* to 80 words */
-    case MEDIUM = 2;
+    case MEDIUM = 80;
 
     /* to 180 words */
-    case LARGE = 3;
+    case LARGE = 180;
 
     public static function options(): array
     {
