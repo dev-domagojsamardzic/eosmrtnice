@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Enums\PostSize;
+use App\Enums\PostSymbol;
 use App\Enums\PostType;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -18,7 +19,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property            PostSize        size
  * @property            Carbon          starts_at
  * @property            Carbon          ends_at
- * @property            string          symbol
+ * @property            PostSymbol      symbol
  * @property            bool            is_framed
  * @property            string          image
  * @property            string          deceased_full_name_lg
@@ -46,6 +47,7 @@ class Post extends Model
     protected $casts = [
         'type' => PostType::class,
         'size' => PostSize::class,
+        'symbol' => PostSymbol::class,
         'starts_at' => 'date',
         'ends_at' => 'date',
     ];
@@ -66,6 +68,7 @@ class Post extends Model
         'is_framed' => false,
         'type' => PostType::DEATH_NOTICE,
         'size' => PostSize::SMALL,
+        'symbol' => PostSymbol::NONE
     ];
 
     /**
