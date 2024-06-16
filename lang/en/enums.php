@@ -28,4 +28,11 @@ return [
     'small' => 'Up to 40 words',
     'medium' => 'Up to 80 words',
     'large' => 'Up to 180 words',
+    // App\Enums\PostSymbol
+    'none' => 'No symbol',
+    'cross' => 'Cross',
+    'dove' => 'Dove',
+    'moon_star' => 'Moon and star',
+    'olive_branch' => 'Olive branch',
+    'star_of_david' => 'Star of David',
 ];

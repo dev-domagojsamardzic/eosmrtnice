@@ -28,4 +28,11 @@ return [
     'small' => 'Mali oglas (do 40 riječi)',
     'medium' => 'Srednji oglas (do 80 riječi)',
     'large' => 'Veliki oglas (do 180 riječi)',
+    // App\Enums\PostSymbol
+    'none' => 'Bez simbola',
+    'cross' => 'Križ',
+    'dove' => 'Golubica',
+    'moon_star' => 'Mjesec i zvijezda',
+    'olive_branch' => 'Maslinova grančica',
+    'star_of_david' => 'Davidova zvijezda',
 ];
