@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Storage;
 class ImageService
 {
     public const LOGO_PATH = 'images/partners/logo/';
-    public const BANNER_PATH = 'images/ads/banner/';
+    public const BANNER_PATH = 'images/ads/banners/';
     public const DECEASED_IMAGE_PATH = 'images/deceaseds/';
     /**
      * Store company logo
