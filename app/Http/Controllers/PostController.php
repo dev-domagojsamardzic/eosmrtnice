@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Enums\PostSize;
+use App\Enums\PostSymbol;
 use App\Enums\PostType;
 use App\Http\Requests\PostRequest;
 use App\Models\Deceased;
@@ -58,12 +59,14 @@ class PostController extends Controller
 
         $postTypes = PostType::options();
         $postSizes = PostSize::options();
+        $postSymbols = PostSymbol::options();
 
         return view('user.posts.form', [
             'post' => $post,
             'deceased' => $deceased,
             'types' => $postTypes,
             'sizes' => $postSizes,
+            'symbols' => $postSymbols,
             'action' => $route,
         ]);
     }
@@ -84,6 +87,7 @@ class PostController extends Controller
         $post->starts_at = Carbon::parse($request->input('starts_at'))->format('Y-m-d');
         // TODO: post lasts for 2 weeks, change that
         $post->ends_at = Carbon::parse($request->input('ends_at'))->addWeeks(2)->format('Y-m-d');
+        // TODO: need to add frame img
         $post->is_framed = $request->input('is_framed');
         $post->image = $deceased->image;
         // TODO: symbol

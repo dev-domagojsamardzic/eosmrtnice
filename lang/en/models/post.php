@@ -19,4 +19,6 @@ return [
     'main_message' => 'Main message',
     'signature' => 'Signature',
     'current_word_count' => 'Current word count',
+    'symbol' => 'Symbol',
+    'symbol_info' => 'Select a symbol that will be displayed next to the deceased\'s image',
 ];

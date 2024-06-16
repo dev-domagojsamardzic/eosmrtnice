@@ -24,4 +24,6 @@ return [
     'signature' => 'Potpis',
     'signature_placeholder' => 'Ožalošćeni: rodbina, prijatelji ...',
     'current_word_count' => 'Trenutan broj riječi',
+    'symbol' => 'Simbol',
+    'symbol_info' => 'Odaberite simbol koji će biti prikazan pokraj pokojnikove slike.',
 ];

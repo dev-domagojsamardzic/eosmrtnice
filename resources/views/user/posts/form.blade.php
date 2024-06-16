@@ -93,6 +93,21 @@
                     </div>
                 </div>
 
+                {{-- Symbol --}}
+                <div class="form-group row">
+                    <div class="col-sm-12">
+                        <x-input-label for="symbol" :value="__('models/post.symbol')"/>
+                        <x-input-info :content="__('models/post.symbol_info')"/>
+                        <select class="form-control border border-dark" id="symbol" name="symbol">
+                            @foreach($symbols as $key => $value)
+                                <option
+                                    value="{{ $key }}" @selected($key === old('type', $post->symbol->value))>{{ $value }}</option>
+                            @endforeach
+                        </select>
+                        <x-input-error :messages="$errors->get('symbol')" class="mt-2"/>
+                    </div>
+                </div>
+
                 {{-- Lifespan --}}
                 <div class="form-group row">
                     <div class="col-sm-12 col-lg-6">
@@ -165,6 +180,7 @@
         <script type="module">
 
             document.addEventListener('DOMContentLoaded', function () {
+
                 $('#starts_at').datepicker({
                     dateFormat: "dd.mm.yy.",
                     autoSize: true,
@@ -173,14 +189,18 @@
 
                 TOTAL_WORDS = {{ Str::of($post->intro_message)->wordCount() + Str::of($post->main_message)->wordCount() }}
                 TRESHOLD = parseInt(document.getElementById('size').value);
-
                 updateCounter()
+
+                SYMBOL = '{{ $post?->symbol ?? '' }}'
+                updateSymbol();
             })
 
             const types = @json($types, JSON_THROW_ON_ERROR);
 
             let TOTAL_WORDS = 0;
             let TRESHOLD = 40;
+
+            let SYMBOL = '';
 
             document.getElementById('size').addEventListener('change', function(event) {
                 TRESHOLD = parseInt(event.target.value);
@@ -193,6 +213,11 @@
 
             document.getElementById('deceased_full_name_lg').addEventListener('input', function (event) {
                 document.getElementById('deceased_full_name_lg_preview').innerHTML = event.target.value.replace(/\n/g, "<br>");
+            })
+
+            document.getElementById('symbol').addEventListener('change', function(event) {
+                SYMBOL = event.target.value;
+                updateSymbol();
             })
 
             document.getElementById('lifespan').addEventListener('input', function (event) {
@@ -247,6 +272,16 @@
                 counter.textContent = `${TOTAL_WORDS} / ${TRESHOLD}`;
                 counter.classList.toggle('text-counter-danger', TOTAL_WORDS > TRESHOLD);
                 counter.classList.toggle('text-counter-success', TOTAL_WORDS <= TRESHOLD);
+            }
+
+            function updateSymbol() {
+                if(SYMBOL === '') {
+                    $('#symbol_wrapper').hide();
+                }
+                else {
+                    $('#symbol_wrapper').show();
+                    $('#symbol_image').attr('src', `${window.location.origin}/images/posts/symbols/${SYMBOL}.svg`)
+                }
             }
 
         </script>
