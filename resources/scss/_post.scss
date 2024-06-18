@@ -1,9 +1,22 @@
 .post {
-    border: 1px solid $black;
+
     padding: .2rem;
     position: relative;
     width: 100%;
     max-width: 420px;
+
+}
+
+.post.border_special {
+    border: solid;
+    border-image: url(./../img/border_vector.svg);
+    border-image-slice: 35;
+    border-image-width: 30px;
+    border-image-repeat: round;
+}
+
+.post.border_classic {
+    border: 1px solid $black;
 }
 
 .post .header {
@@ -13,6 +26,17 @@
     font-size: 1rem;
     line-height: 1.25rem;
     text-align: center;
+}
+
+.post.border_classic .header {
+
+}
+
+.post.border_special .header {
+    max-width: 60%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: -8px;
 }
 
 .post .body {

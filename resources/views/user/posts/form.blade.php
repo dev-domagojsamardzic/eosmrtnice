@@ -193,6 +193,7 @@
             const main_message_preview = document.getElementById('main_message_preview');
             const deceased_full_name_lg = document.getElementById('deceased_full_name_lg');
             const deceased_full_name_lg_preview = document.getElementById('deceased_full_name_lg_preview');
+            const is_framed = document.getElementById('is_framed');
             const symbol = document.getElementById('symbol');
             const lifespan = document.getElementById('lifespan');
             const lifespan_preview = document.getElementById('lifespan_preview');
@@ -200,6 +201,7 @@
             const deceased_full_name_sm_preview = document.getElementById('deceased_full_name_sm_preview');
             const signature = document.getElementById('signature');
             const signature_preview = document.getElementById('signature_preview');
+            const post_preview_wrapper = document.getElementById('post-preview-wrapper');
 
             const intro_msg_placeholders = @json(__('models/post.intro_message_placeholders'), JSON_THROW_ON_ERROR);
             const main_msg_placeholders = @json(__('models/post.main_message_placeholders'), JSON_THROW_ON_ERROR);
@@ -235,6 +237,17 @@
                 type_preview.textContent = types[event.target.value];
                 intro_message.placeholder = intro_msg_placeholders[event.target.value];
                 main_message.placeholder = main_msg_placeholders[event.target.value];
+            })
+
+            is_framed.addEventListener('change', function(event) {
+                if (event.target.checked) {
+                    post_preview_wrapper.classList.add('border_special');
+                    post_preview_wrapper.classList.remove('border_classic');
+                }
+                else {
+                    post_preview_wrapper.classList.add('border_classic');
+                    post_preview_wrapper.classList.remove('border_special');
+                }
             })
 
             deceased_full_name_lg.addEventListener('input', function (event) {
@@ -298,6 +311,10 @@
                 counter.textContent = `${CURRENT_WORDS_COUNT} / ${WORDS_COUNT_TRESHOLD}`;
                 counter.classList.toggle('text-counter-danger', CURRENT_WORDS_COUNT > WORDS_COUNT_TRESHOLD);
                 counter.classList.toggle('text-counter-success', CURRENT_WORDS_COUNT <= WORDS_COUNT_TRESHOLD);
+            }
+
+            function toggleFrame() {
+
             }
 
             function updateSymbol() {

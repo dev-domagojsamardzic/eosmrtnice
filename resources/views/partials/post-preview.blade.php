@@ -1,4 +1,4 @@
-<div class="post">
+<div id="post-preview-wrapper" class="post border_classic">
     <div id="type_preview" class="header">{{ $post->type->translate() }}</div>
     <div class="body">
 
