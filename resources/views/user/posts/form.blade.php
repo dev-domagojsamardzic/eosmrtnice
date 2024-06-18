@@ -26,7 +26,8 @@
                         <x-input-label for="type" :value="__('models/post.type')" :required_tag="true"/>
                         <select class="form-control border border-dark" id="type" name="type">
                             @foreach($types as $key => $type)
-                                <option value="{{ $key }}" @selected($key === old('type', $post->type->value))>{{ $type }}</option>
+                                <option
+                                    value="{{ $key }}" @selected($key === old('type', $post->type->value))>{{ $type }}</option>
                             @endforeach
                         </select>
                         <x-input-error :messages="$errors->get('type')" class="mt-2"/>
@@ -46,14 +47,16 @@
                         </select>
                         <x-input-error :messages="$errors->get('size')" class="mt-2"/>
                         <hr>
-                        <p class="mt-2 font-weight-bold">{{ __('models/post.current_word_count') }}: <span id="message_counter" class="text-counter-success font-weight-bold">0 / 40</span></p>
+                        <p class="mt-2 font-weight-bold">{{ __('models/post.current_word_count') }}: <span
+                                id="message_counter" class="text-counter-success font-weight-bold">0 / 40</span></p>
                     </div>
                 </div>
 
                 {{-- Starts at --}}
                 <div class="form-group row">
                     <div class="col-lg-4 col-sm-12">
-                        <x-input-label for="starts_at" :value="__('models/post.starts_at')" :required_tag="true"></x-input-label>
+                        <x-input-label for="starts_at" :value="__('models/post.starts_at')"
+                                       :required_tag="true"></x-input-label>
                         <div class="input-group input-group-joined date">
                             <input name="starts_at"
                                    id="starts_at"
@@ -81,7 +84,8 @@
                 {{-- Deceased full_name - LG --}}
                 <div class="form-group row">
                     <div class="col-sm-12 col-lg-12">
-                        <x-input-label for="deceased_full_name_lg" :value="__('models/deceased.full_name')" :required_tag="true"/>
+                        <x-input-label for="deceased_full_name_lg" :value="__('models/deceased.full_name')"
+                                       :required_tag="true"/>
                         <x-input-info :content="__('models/post.deceased_full_name_lg_info')"/>
                         <x-text-input id="deceased_full_name_lg"
                                       type="text"
@@ -119,7 +123,7 @@
                                       value="{{ $deceased->lifespan }}"
                                       placeholder="{{ __('models/post.lifespan_placeholder') }}"
                                       required/>
-                        <x-input-error :messages="$errors->get('lifespan')" class="mt-2" />
+                        <x-input-error :messages="$errors->get('lifespan')" class="mt-2"/>
                     </div>
                 </div>
 
@@ -128,7 +132,7 @@
                     <div class="col-12">
                         <x-input-label for="intro_message" :value="__('models/post.intro_message')"/>
                         <textarea id="intro_message" name="intro_message" class="form-control" rows="2"
-                                  placeholder="{{ __('models/post.intro_message_placeholder') }}">{{ old('intro_message', $post->intro_message) }}</textarea>
+                                  placeholder="{{ __('models/post.intro_message_placeholders.' . $post->type->value) }}">{{ old('intro_message', $post->intro_message) }}</textarea>
                         <x-input-error :messages="$errors->get('intro_message')" class="mt-2"/>
                     </div>
                 </div>
@@ -152,7 +156,7 @@
                     <div class="col-12">
                         <x-input-label for="main_message" :value="__('models/post.main_message')"/>
                         <textarea id="main_message" name="main_message" class="form-control" rows="5"
-                                  placeholder="{{ __('models/post.main_message_placeholder') }}">{{ old('main_message', $post->main_message) }}</textarea>
+                                  placeholder="{{ __('models/post.main_message_placeholders.' . $post->type->value) }}">{{ old('main_message', $post->main_message) }}</textarea>
                         <x-input-error :messages="$errors->get('main_message')" class="mt-2"/>
                     </div>
                 </div>
@@ -179,6 +183,33 @@
         </div>
         <script type="module">
 
+            // Elements
+            const size = document.getElementById('size');
+            const type = document.getElementById('type');
+            const type_preview = document.getElementById('type_preview');
+            const intro_message = document.getElementById('intro_message');
+            const intro_message_preview = document.getElementById('intro_message_preview');
+            const main_message = document.getElementById('main_message');
+            const main_message_preview = document.getElementById('main_message_preview');
+            const deceased_full_name_lg = document.getElementById('deceased_full_name_lg');
+            const deceased_full_name_lg_preview = document.getElementById('deceased_full_name_lg_preview');
+            const symbol = document.getElementById('symbol');
+            const lifespan = document.getElementById('lifespan');
+            const lifespan_preview = document.getElementById('lifespan_preview');
+            const deceased_full_name_sm = document.getElementById('deceased_full_name_sm');
+            const deceased_full_name_sm_preview = document.getElementById('deceased_full_name_sm_preview');
+            const signature = document.getElementById('signature');
+            const signature_preview = document.getElementById('signature_preview');
+
+            const intro_msg_placeholders = @json(__('models/post.intro_message_placeholders'), JSON_THROW_ON_ERROR);
+            const main_msg_placeholders = @json(__('models/post.main_message_placeholders'), JSON_THROW_ON_ERROR);
+            const types = @json($types, JSON_THROW_ON_ERROR);
+
+
+            let CURRENT_WORDS_COUNT = 0;
+            let WORDS_COUNT_TRESHOLD = 40;
+            let CURRENT_SYMBOL = '';
+
             document.addEventListener('DOMContentLoaded', function () {
 
                 $('#starts_at').datepicker({
@@ -187,59 +218,54 @@
                     language: "hr",
                 });
 
-                TOTAL_WORDS = {{ Str::of($post->intro_message)->wordCount() + Str::of($post->main_message)->wordCount() }}
-                TRESHOLD = parseInt(document.getElementById('size').value);
+                CURRENT_WORDS_COUNT = {{ Str::of($post->intro_message)->wordCount() + Str::of($post->main_message)->wordCount() }}
+                WORDS_COUNT_TRESHOLD = parseInt(size.value);
                 updateCounter()
 
-                SYMBOL = '{{ $post?->symbol ?? '' }}'
+                CURRENT_SYMBOL = '{{ $post?->symbol ?? '' }}'
                 updateSymbol();
             })
 
-            const types = @json($types, JSON_THROW_ON_ERROR);
-
-            let TOTAL_WORDS = 0;
-            let TRESHOLD = 40;
-
-            let SYMBOL = '';
-
-            document.getElementById('size').addEventListener('change', function(event) {
-                TRESHOLD = parseInt(event.target.value);
+            size.addEventListener('change', function (event) {
+                WORDS_COUNT_TRESHOLD = parseInt(event.target.value);
                 updateCounter();
             })
 
-            document.getElementById('type').addEventListener('change', function (event) {
-                document.getElementById('type_preview').textContent = types[event.target.value];
+            type.addEventListener('change', function (event) {
+                type_preview.textContent = types[event.target.value];
+                intro_message.placeholder = intro_msg_placeholders[event.target.value];
+                main_message.placeholder = main_msg_placeholders[event.target.value];
             })
 
-            document.getElementById('deceased_full_name_lg').addEventListener('input', function (event) {
-                document.getElementById('deceased_full_name_lg_preview').innerHTML = event.target.value.replace(/\n/g, "<br>");
+            deceased_full_name_lg.addEventListener('input', function (event) {
+                deceased_full_name_lg_preview.innerHTML = event.target.value.replace(/\n/g, "<br>");
             })
 
-            document.getElementById('symbol').addEventListener('change', function(event) {
-                SYMBOL = event.target.value;
+            symbol.addEventListener('change', function (event) {
+                CURRENT_SYMBOL = event.target.value;
                 updateSymbol();
             })
 
-            document.getElementById('lifespan').addEventListener('input', function (event) {
-                document.getElementById('lifespan_preview').innerHTML = event.target.value.replace(/\n/g, "<br>");
+            lifespan.addEventListener('input', function (event) {
+                lifespan_preview.innerHTML = event.target.value.replace(/\n/g, "<br>");
             })
 
-            document.getElementById('intro_message').addEventListener('input', function (event) {
-                document.getElementById('intro_message_preview').innerHTML = event.target.value.replace(/\n/g, "<br>");
+            intro_message.addEventListener('input', function (event) {
+                intro_message_preview.innerHTML = event.target.value.replace(/\n/g, "<br>");
                 handleCounter();
             })
 
-            document.getElementById('deceased_full_name_sm').addEventListener('input', function (event) {
-                document.getElementById('deceased_full_name_sm_preview').innerHTML = event.target.value.replace(/\n/g, "<br>");
+            deceased_full_name_sm.addEventListener('input', function (event) {
+                deceased_full_name_sm_preview.innerHTML = event.target.value.replace(/\n/g, "<br>");
             })
 
-            document.getElementById('main_message').addEventListener('input', function (event) {
-                document.getElementById('main_message_preview').innerHTML = event.target.value.replace(/\n/g, "<br>");
+            main_message.addEventListener('input', function (event) {
+                main_message_preview.innerHTML = event.target.value.replace(/\n/g, "<br>");
                 handleCounter();
             });
 
-            document.getElementById('signature').addEventListener('input', function (event) {
-                document.getElementById('signature_preview').innerHTML = event.target.value.replace(/\n/g, "<br>");
+            signature.addEventListener('input', function (event) {
+                signature_preview.innerHTML = event.target.value.replace(/\n/g, "<br>");
             });
 
             /**
@@ -249,18 +275,18 @@
              * @returns int
              */
             function countWords(textarea) {
-                return textarea.value.split(' ')
-                    .filter(function(n) { return n != '' })
-                    .length;
+                return textarea.value.split(' ').filter(function (n) {
+                        return n != ''
+                    }).length;
             }
 
             /**
              * Handle word (message) counter
              */
             function handleCounter() {
-                const intro_msg_count = countWords(document.getElementById('intro_message'));
-                const main_msg_count = countWords(document.getElementById('main_message'));
-                TOTAL_WORDS = intro_msg_count + main_msg_count;
+                const intro_msg_count = countWords(intro_message);
+                const main_msg_count = countWords(main_message);
+                CURRENT_WORDS_COUNT = intro_msg_count + main_msg_count;
                 updateCounter()
             }
 
@@ -269,18 +295,17 @@
              */
             function updateCounter() {
                 const counter = document.getElementById('message_counter');
-                counter.textContent = `${TOTAL_WORDS} / ${TRESHOLD}`;
-                counter.classList.toggle('text-counter-danger', TOTAL_WORDS > TRESHOLD);
-                counter.classList.toggle('text-counter-success', TOTAL_WORDS <= TRESHOLD);
+                counter.textContent = `${CURRENT_WORDS_COUNT} / ${WORDS_COUNT_TRESHOLD}`;
+                counter.classList.toggle('text-counter-danger', CURRENT_WORDS_COUNT > WORDS_COUNT_TRESHOLD);
+                counter.classList.toggle('text-counter-success', CURRENT_WORDS_COUNT <= WORDS_COUNT_TRESHOLD);
             }
 
             function updateSymbol() {
-                if(SYMBOL === '') {
+                if (CURRENT_SYMBOL === '') {
                     $('#symbol_wrapper').hide();
-                }
-                else {
+                } else {
                     $('#symbol_wrapper').show();
-                    $('#symbol_image').attr('src', `${window.location.origin}/images/posts/symbols/${SYMBOL}.svg`)
+                    $('#symbol_image').attr('src', `${window.location.origin}/images/posts/symbols/${CURRENT_SYMBOL}.svg`)
                 }
             }
 
