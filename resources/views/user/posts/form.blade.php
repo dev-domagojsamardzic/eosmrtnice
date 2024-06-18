@@ -286,6 +286,4 @@
 
         </script>
     </div>
-@push('scripts')
-    @endpush
 </x-app-layout>
