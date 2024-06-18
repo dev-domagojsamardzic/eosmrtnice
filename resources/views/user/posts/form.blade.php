@@ -55,8 +55,7 @@
                 {{-- Starts at --}}
                 <div class="form-group row">
                     <div class="col-lg-4 col-sm-12">
-                        <x-input-label for="starts_at" :value="__('models/post.starts_at')"
-                                       :required_tag="true"></x-input-label>
+                        <x-input-label for="starts_at" :value="__('models/post.starts_at')" :required_tag="true"></x-input-label>
                         <div class="input-group input-group-joined date">
                             <input name="starts_at"
                                    id="starts_at"
@@ -108,7 +107,6 @@
                                     value="{{ $key }}" @selected($key === old('type', $post->symbol->value))>{{ $value }}</option>
                             @endforeach
                         </select>
-                        <x-input-error :messages="$errors->get('symbol')" class="mt-2"/>
                     </div>
                 </div>
 
@@ -133,7 +131,6 @@
                         <x-input-label for="intro_message" :value="__('models/post.intro_message')"/>
                         <textarea id="intro_message" name="intro_message" class="form-control" rows="2"
                                   placeholder="{{ __('models/post.intro_message_placeholders.' . $post->type->value) }}">{{ old('intro_message', $post->intro_message) }}</textarea>
-                        <x-input-error :messages="$errors->get('intro_message')" class="mt-2"/>
                     </div>
                 </div>
 
@@ -147,7 +144,6 @@
                                       name="deceased_full_name_sm"
                                       value="{{ $deceased->full_name }}"
                                       placeholder="{{ __('models/post.deceased_full_name_sm_placeholder') }}"/>
-                        <x-input-error :messages="$errors->get('deceased_full_name_sm')" class="mt-2"/>
                     </div>
                 </div>
 
@@ -157,7 +153,6 @@
                         <x-input-label for="main_message" :value="__('models/post.main_message')"/>
                         <textarea id="main_message" name="main_message" class="form-control" rows="5"
                                   placeholder="{{ __('models/post.main_message_placeholders.' . $post->type->value) }}">{{ old('main_message', $post->main_message) }}</textarea>
-                        <x-input-error :messages="$errors->get('main_message')" class="mt-2"/>
                     </div>
                 </div>
 
@@ -167,7 +162,6 @@
                         <x-input-label for="signature" :value="__('models/post.signature')"/>
                         <textarea id="signature" name="signature" class="form-control" rows="3"
                                   placeholder="{{ __('models/post.signature_placeholder') }}">{!! old('signature', $post->signature) !!}</textarea>
-                        <x-input-error :messages="$errors->get('signature')" class="mt-2"/>
                     </div>
                 </div>
 
