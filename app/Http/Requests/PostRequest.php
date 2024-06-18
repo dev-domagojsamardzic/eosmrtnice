@@ -39,11 +39,11 @@ class PostRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'type' => ['required', Rule::enum(PostType::class), new PostWordCount()],
-            'size' => ['required', Rule::enum(PostSize::class)],
-            'starts_at' => ['required', 'before:' . today()->subDay()->toDateString()],
+            'type' => ['required', Rule::enum(PostType::class)],
+            'size' => ['required', Rule::enum(PostSize::class), new PostWordCount()],
+            'starts_at' => ['required', 'after:' . today()->subDay()->format('d.m.Y.')],
             'deceased_full_name_lg' => ['required', 'string', 'max:128'],
-            'lifespan' => ['required'],
+            'lifespan' => ['required', 'string', 'max:30'],
         ];
     }
 
