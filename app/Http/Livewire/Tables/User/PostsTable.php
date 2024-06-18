@@ -5,10 +5,12 @@ namespace App\Http\Livewire\Tables\User;
 use App\Models\Deceased;
 use App\Models\Post;
 use Filament\Forms\Components\Select;
+use Filament\Tables\Columns\Layout\Split;
 use Filament\Forms\Concerns\InteractsWithForms;
 use Filament\Forms\Contracts\HasForms;
-use Filament\Tables;
 use Filament\Tables\Actions\Action;
+use Filament\Tables\Columns\Layout\Stack;
+use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Concerns\InteractsWithTable;
 use Filament\Tables\Contracts\HasTable;
 use Filament\Tables\Table;
@@ -30,9 +32,7 @@ class PostsTable extends Component implements HasForms, HasTable
             ->emptyStateDescription('')
             ->query($this->getQuery())
             ->striped()
-            ->columns([
-                //
-            ])
+            ->columns($this->getColumns())
             ->filters([
                 //
             ])
@@ -52,6 +52,29 @@ class PostsTable extends Component implements HasForms, HasTable
         return Post::query()->where('user_id', auth()->id());
     }
 
+    private function getColumns(): array
+    {
+        return [
+            Split::make([
+                TextColumn::make('type')
+                    ->label(__('models/post.type'))
+                    ->sortable()
+                    ->formatStateUsing(fn (Post $post) => $post->type->translate()),
+                TextColumn::make('deceased.full_name')
+                    ->label(__('models/deceased.full_name'))
+                    ->searchable(['first_name', 'last_name'])
+                    ->sortable(['first_name', 'last_name']),
+                Stack::make([
+                    TextColumn::make('starts_at')
+                        ->label(__('models/post.starts_at'))
+                        ->formatStateUsing(fn(Post $p):string => __('models/post.starts_at').': ' . $p->starts_at->format('d.m.Y.')),
+                    TextColumn::make('ends_at')
+                        ->label(__('models/post.ends_at'))
+                        ->formatStateUsing(fn(Post $p):string => __('models/post.ends_at').': ' . $p->ends_at->format('d.m.Y.')),
+                ]),
+            ]),
+        ];
+    }
     private function getHeaderActions(): array
     {
         return [

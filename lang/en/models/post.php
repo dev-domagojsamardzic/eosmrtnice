@@ -7,6 +7,7 @@ return [
     'select_deceased_for_new_post' => 'Select deceased for a new post',
     'type' => 'Type',
     'starts_at' => 'Post date',
+    'ends_at' => 'Post ends at',
     'size' => 'Post size',
     'is_framed' => 'Framed post',
     'deceased_full_name_lg_info' => 'Full Name on top of post, displayed in larger and bolder letters.',

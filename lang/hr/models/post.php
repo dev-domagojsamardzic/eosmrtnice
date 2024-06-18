@@ -7,6 +7,7 @@ return [
     'select_deceased_for_new_post' => 'Odaberite pokojnika za kojeg želite napraviti novu objavu.',
     'type' => 'Vrsta objave',
     'starts_at' => 'Vrijeme objave',
+    'ends_at' => 'Objava ističe',
     'size' => 'Veličina objave',
     'size_info' => 'U veličinu oglasa ubrajaju se samo riječi iz uvodnog dijela i glavne poruke.',
     'is_framed' => 'Poseban okvir',
