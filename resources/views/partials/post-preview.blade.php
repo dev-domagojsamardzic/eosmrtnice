@@ -15,7 +15,7 @@
                 <img src="{{ public_storage_asset($deceased->image) }}" />
             </div>
             <div class="symbol" id="symbol_wrapper">
-                <img id="symbol_image" src="{{ asset('images/posts/symbols/cross.svg') }}"/>
+                <img id="symbol_image" src=""/>
             </div>
         </div>
 
