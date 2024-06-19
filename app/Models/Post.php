@@ -6,10 +6,12 @@ use App\Enums\PostSize;
 use App\Enums\PostSymbol;
 use App\Enums\PostType;
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Str;
 
 /**
  * @property-read       int             id
@@ -32,7 +34,10 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property            Carbon          updated_at
  * @property            Carbon          deleted_at
  * -------------------------------------------------
+ * @property            int             word_count
  * -------------------------------------------------
+ * @property            Deceased        deceased
+ * @property            User            user
  */
 class Post extends Model
 {
@@ -70,6 +75,19 @@ class Post extends Model
         'size' => PostSize::SMALL,
         'symbol' => PostSymbol::NONE
     ];
+
+
+    /**
+     * Get total post words count
+     *
+     * @return Attribute
+     */
+    protected function wordsCount(): Attribute
+    {
+        return Attribute::make(
+            get: static fn() => Str::of($this->intro_message)->wordCount() + Str::of($this->main_message)->wordCount(),
+        );
+    }
 
     /**
      * Return post's deceased relationship
