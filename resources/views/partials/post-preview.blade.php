@@ -1,4 +1,4 @@
-<div id="post-preview-wrapper" class="post border_classic">
+<div id="post-preview-wrapper" class="post {{ $post->is_framed ? 'border_special' : 'border:classic' }}">
     <div id="type_preview" class="header">{{ $post->type->translate() }}</div>
     <div class="body">
 
@@ -14,8 +14,8 @@
             <div class="image">
                 <img src="{{ public_storage_asset($deceased->image) }}" />
             </div>
-            <div class="symbol" id="symbol_wrapper">
-                <img id="symbol_image" src=""/>
+            <div class="symbol" id="symbol_wrapper" {{ $post->symbol === \App\Enums\PostSymbol::NONE ? 'style="display:none"' : '' }}>
+                <img id="symbol_image" src="{{ $post->symbol === \App\Enums\PostSymbol::NONE ? '' : asset("/images/posts/symbols/{$post->symbol->value}.svg") }}"/>
             </div>
         </div>
 

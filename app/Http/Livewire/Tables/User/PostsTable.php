@@ -4,6 +4,8 @@ namespace App\Http\Livewire\Tables\User;
 
 use App\Models\Deceased;
 use App\Models\Post;
+use Filament\Actions\StaticAction;
+use Filament\Support\Enums\FontWeight;
 use Filament\Tables\Actions\ActionGroup;
 use Filament\Forms\Components\Select;
 use Filament\Tables\Actions\EditAction;
@@ -59,6 +61,7 @@ class PostsTable extends Component implements HasForms, HasTable
                 TextColumn::make('type')
                     ->label(__('models/post.type'))
                     ->sortable()
+                    ->weight(FontWeight::Bold)
                     ->formatStateUsing(fn (Post $post) => $post->type->translate()),
                 TextColumn::make('deceased.full_name')
                     ->label(__('models/deceased.full_name'))
@@ -79,8 +82,19 @@ class PostsTable extends Component implements HasForms, HasTable
     private function getActions(): array
     {
         return [
+            Action::make('preview')
+                ->label(__('common.view'))
+                ->icon('heroicon-s-eye')
+                ->color('grey-900')
+                ->extraAttributes(['class' => 'fikiriki'])
+                ->modalCancelAction(fn (StaticAction $action) => $action->label(__('common.close')))
+                ->modalSubmitAction(false)
+                ->modalContent(fn (Post $post): View => view(
+                    'partials/post-preview',
+                    ['post' => $post, 'deceased' => $post->deceased],
+                )),
             ActionGroup::make([
-                EditAction::make('view')
+                EditAction::make('edit')
                     ->label(__('common.edit'))
                     ->icon('heroicon-s-pencil-square')
                     ->url(fn(Post $post) => route('user.posts.edit', ['deceased' => $post->deceased_id, 'post' => $post->id])),
