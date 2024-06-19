@@ -28,12 +28,12 @@ return new class extends Migration
             $table->boolean('is_framed')->default(false);
             $table->string('image')->nullable();
             $table->string('symbol')->nullable();
-            $table->string('deceased_full_name_lg');
-            $table->string('deceased_full_name_sm');
-            $table->string('lifespan');
-            $table->string('intro_message')->nullable();
-            $table->string('main_message')->nullable();
-            $table->string('signature')->nullable();
+            $table->string('deceased_full_name_lg', 128);
+            $table->string('deceased_full_name_sm', 128)->nullable();
+            $table->string('lifespan', 50);
+            $table->string('intro_message', 1024)->nullable();
+            $table->string('main_message', 2048)->nullable();
+            $table->string('signature', 512)->nullable();
 
 
 
