@@ -8,7 +8,9 @@ use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Collection;
 
 /**
  * @property-read       int             id
@@ -30,9 +32,10 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property-read       string          full_name
  * @property-read       string          lifespan
  * ------------------------------------------------------
- * @property            User            user
- * @property            City            city
- * @property            County          county
+ * @property            User                user
+ * @property            City                city
+ * @property            County              county
+ * @property            Collection<Post>    posts
  */
 class Deceased extends Model
 {
@@ -94,6 +97,16 @@ class Deceased extends Model
     public function county(): BelongsTo
     {
         return $this->belongsTo(County::class, 'death_county_id');
+    }
+
+    /**
+     * Return deceased related posts
+     *
+     * @return HasMany
+     */
+    public function posts(): HasMany
+    {
+        return $this->hasMany(Post::class);
     }
 
     /**
