@@ -111,7 +111,7 @@ class PostController extends Controller
         $post->ends_at = Carbon::parse($request->input('ends_at'))->addWeeks(2)->format('Y-m-d');
         $post->is_framed = $request->boolean('is_framed');
         $post->image = $deceased->image;
-        $post->symbol = $request->input('symbol', '');
+        $post->symbol = $request->input('symbol') ?? '';
         $post->deceased_full_name_lg = $request->input('deceased_full_name_lg');
         $post->deceased_full_name_sm = $request->input('deceased_full_name_sm');
         $post->lifespan = $request->input('lifespan');
