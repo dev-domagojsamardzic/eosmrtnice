@@ -31,7 +31,16 @@ class PostController extends Controller
     }
 
     /**
+     * Show the form for editing resource.
+     */
+    public function edit(Deceased $deceased, Post $post): View
+    {
+        return $this->form($deceased, $post, 'edit');
+    }
+
+    /**
      * Store new resource
+     *
      * @param Deceased $deceased
      * @param PostRequest $request
      * @return RedirectResponse
@@ -39,6 +48,19 @@ class PostController extends Controller
     public function store(Deceased $deceased, PostRequest $request): RedirectResponse
     {
         return $this->apply($deceased, new Post, $request);
+    }
+
+    /**
+     * Update given resource
+     *
+     * @param Deceased $deceased
+     * @param Post $post
+     * @param PostRequest $request
+     * @return RedirectResponse
+     */
+    public function update(Deceased $deceased, Post $post, PostRequest $request): RedirectResponse
+    {
+        return $this->apply($deceased, $post, $request);
     }
 
     /**
@@ -53,7 +75,7 @@ class PostController extends Controller
     {
         $route = match($action) {
             'create' => route('user.posts.store',['deceased' => $deceased->id]),
-            'edit' => route('user.posts.update', ['id' => $post->id]),
+            'edit' => route('user.posts.update', ['deceased' => $deceased->id, 'post' => $post->id]),
             default => '',
         };
 
