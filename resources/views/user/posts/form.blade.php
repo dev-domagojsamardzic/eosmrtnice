@@ -72,12 +72,14 @@
                 </div>
 
                 {{-- Is framed --}}
-                <div class="form-group">
-                    <div class="custom-control custom-checkbox">
-                        <input type="checkbox" class="custom-control-input" name="is_framed" id="is_framed" @checked((bool)old('is_framed', $post->is_framed))>
-                        <label class="custom-control-label" for="is_framed">
-                            {{ __('models/post.is_framed') }}
-                        </label>
+                <div class="form-group row">
+                    <div class="col-lg-4 col-sm-12">
+                        <div class="custom-control custom-checkbox">
+                            <input type="checkbox" class="custom-control-input" name="is_framed" id="is_framed" @checked((bool)old('is_framed', $post->is_framed))>
+                            <label class="custom-control-label" for="is_framed">
+                                {{ __('models/post.is_framed') }}
+                            </label>
+                        </div>
                     </div>
                 </div>
 
