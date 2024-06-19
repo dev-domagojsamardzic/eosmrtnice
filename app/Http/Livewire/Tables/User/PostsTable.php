@@ -4,7 +4,9 @@ namespace App\Http\Livewire\Tables\User;
 
 use App\Models\Deceased;
 use App\Models\Post;
+use Filament\Tables\Actions\ActionGroup;
 use Filament\Forms\Components\Select;
+use Filament\Tables\Actions\EditAction;
 use Filament\Tables\Columns\Layout\Split;
 use Filament\Forms\Concerns\InteractsWithForms;
 use Filament\Forms\Contracts\HasForms;
@@ -36,9 +38,7 @@ class PostsTable extends Component implements HasForms, HasTable
             ->filters([
                 //
             ])
-            ->actions([
-                //
-            ])
+            ->actions($this->getActions())
             ->headerActions($this->getHeaderActions());
     }
 
@@ -72,6 +72,18 @@ class PostsTable extends Component implements HasForms, HasTable
                         ->label(__('models/post.ends_at'))
                         ->formatStateUsing(fn(Post $p):string => __('models/post.ends_at').': ' . $p->ends_at->format('d.m.Y.')),
                 ]),
+            ]),
+        ];
+    }
+
+    private function getActions(): array
+    {
+        return [
+            ActionGroup::make([
+                EditAction::make('view')
+                    ->label(__('common.edit'))
+                    ->icon('heroicon-s-pencil-square')
+                    ->url(fn(Post $post) => route('user.posts.edit', ['deceased' => $post->deceased_id, 'post' => $post->id])),
             ]),
         ];
     }
