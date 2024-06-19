@@ -9,7 +9,7 @@
 
     <div class="row">
         {{-- Preview --}}
-        <div class="col-lg-6 col-sm-12 d-flex align-items-start justify-content-center">
+        <div class="col-lg-6 col-sm-12 d-flex align-items-start justify-content-center mb-3">
             @include('partials/post-preview')
         </div>
         {{-- Form --}}
@@ -130,7 +130,7 @@
                 <div class="form-group row">
                     <div class="col-12">
                         <x-input-label for="intro_message" :value="__('models/post.intro_message')"/>
-                        <textarea id="intro_message" name="intro_message" class="form-control" rows="2"
+                        <textarea id="intro_message" name="intro_message" class="form-control" rows="3"
                                   placeholder="{{ __('models/post.intro_message_placeholders.' . $post->type->value) }}">{{ old('intro_message', $post->intro_message) }}</textarea>
                     </div>
                 </div>
@@ -152,7 +152,7 @@
                 <div class="form-group row">
                     <div class="col-12">
                         <x-input-label for="main_message" :value="__('models/post.main_message')"/>
-                        <textarea id="main_message" name="main_message" class="form-control" rows="5"
+                        <textarea id="main_message" name="main_message" class="form-control" rows="6"
                                   placeholder="{{ __('models/post.main_message_placeholders.' . $post->type->value) }}">{{ old('main_message', $post->main_message) }}</textarea>
                     </div>
                 </div>

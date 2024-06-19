@@ -1,10 +1,13 @@
 .post {
-
     padding: .2rem;
     position: relative;
     width: 100%;
-    max-width: 420px;
+}
 
+@media screen and (min-width: 769px) {
+    .post {
+        max-width: 60%;
+    }
 }
 
 .post.border_special {
@@ -13,6 +16,7 @@
     border-image-slice: 35;
     border-image-width: 30px;
     border-image-repeat: round;
+    padding-bottom: 1.75rem;
 }
 
 .post.border_classic {
@@ -40,7 +44,7 @@
 }
 
 .post .body {
-    padding: .5rem 2rem 1.75rem 2rem;
+    padding: .5rem 2rem;
     font-size: 1rem;
     line-height: 1.5rem;
 }
