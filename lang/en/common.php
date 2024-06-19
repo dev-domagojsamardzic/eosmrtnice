@@ -51,4 +51,5 @@ return [
     'save_and_resend_offer' => 'Save and resend offer',
     'ongoing' => 'Ongoing',
     'expired' => 'Expired',
+    'close' => 'Close',
 ];
