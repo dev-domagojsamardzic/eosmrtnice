@@ -85,7 +85,7 @@ class Post extends Model
     protected function wordsCount(): Attribute
     {
         return Attribute::make(
-            get: static fn() => Str::of($this->intro_message)->wordCount() + Str::of($this->main_message)->wordCount(),
+            get: fn() => Str::of($this->intro_message)->wordCount() + Str::of($this->main_message)->wordCount(),
         );
     }
 
