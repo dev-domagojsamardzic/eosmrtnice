@@ -22,4 +22,5 @@ return [
     'current_word_count' => 'Current word count',
     'symbol' => 'Symbol',
     'symbol_info' => 'Select a symbol that will be displayed next to the deceased\'s image',
+    'is_active_description' => 'Only active and approved posts will be displayed',
 ];

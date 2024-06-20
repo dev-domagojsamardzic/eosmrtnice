@@ -15,6 +15,8 @@ use Filament\Forms\Contracts\HasForms;
 use Filament\Tables\Actions\Action;
 use Filament\Tables\Columns\Layout\Stack;
 use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Columns\TextColumn\TextColumnSize;
+use Filament\Tables\Columns\ToggleColumn;
 use Filament\Tables\Concerns\InteractsWithTable;
 use Filament\Tables\Contracts\HasTable;
 use Filament\Tables\Table;
@@ -75,7 +77,26 @@ class PostsTable extends Component implements HasForms, HasTable
                         ->label(__('models/post.ends_at'))
                         ->formatStateUsing(fn(Post $p):string => __('models/post.ends_at').': ' . $p->ends_at->format('d.m.Y.')),
                 ]),
-            ]),
+                TextColumn::make('is_approved')
+                ->badge()
+                ->formatStateUsing(fn(int $state): string => match($state) {
+                    1 => __('models/post.post_approved'),
+                    0 => __('models/post.post_not_approved'),
+                })
+                ->color(fn(int $state): string => match($state) {
+                    1 => 'success',
+                    0 => 'danger',
+                }),
+                Stack::make([
+                    TextColumn::make('is_active')
+                        ->badge(false)
+                        ->formatStateUsing(fn () => __('models/post.post_active'))
+                        ->size(TextColumnSize::ExtraSmall)
+                        ->color('secondary'),
+                    ToggleColumn::make('is_active'),
+                ])->alignStart(),
+            ])->from('md'),
+
         ];
     }
 
@@ -84,6 +105,7 @@ class PostsTable extends Component implements HasForms, HasTable
         return [
             Action::make('preview')
                 ->label(__('common.view'))
+                ->iconButton()
                 ->icon('heroicon-s-eye')
                 ->color('grey-900')
                 ->modalHeading('')

@@ -37,4 +37,8 @@ return [
         '3' => 'Posljednji pozdrav voljenom/oj prijatelju/prijateljici, suprugu/supruzi...',
         '4' => 'Ovim putem želimo zahvaliti svima...'
     ],
+    'is_active_description' => 'Samo aktivne i odobrene objave se prikazuju',
+    'post_active' => 'Aktivna objava?',
+    'post_approved' => 'Objava je odobrena',
+    'post_not_approved' => 'Objava nije odobrena',
 ];
