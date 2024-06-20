@@ -1,4 +1,4 @@
-<div id="post-preview-wrapper" class="post {{ $post->is_framed ? 'border_special' : 'border:classic' }}">
+<div id="post-preview-wrapper" class="post {{ $post->is_framed ? 'border_special' : 'border_classic' }}">
     <div id="type_preview" class="header">{{ $post->type->translate() }}</div>
     <div class="body">
 
