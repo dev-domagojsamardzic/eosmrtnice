@@ -30,11 +30,13 @@ use Illuminate\Support\Str;
  * @property            string          intro_message
  * @property            string          main_message
  * @property            string          signature
+ * @property            bool            is_active
+ * @property            bool            is_approved
  * @property            Carbon          created_at
  * @property            Carbon          updated_at
  * @property            Carbon          deleted_at
  * -------------------------------------------------
- * @property            int             word_count
+ * @property            int             words_count
  * -------------------------------------------------
  * @property            Deceased        deceased
  * @property            User            user
@@ -73,7 +75,9 @@ class Post extends Model
         'is_framed' => false,
         'type' => PostType::DEATH_NOTICE,
         'size' => PostSize::SMALL,
-        'symbol' => PostSymbol::NONE
+        'symbol' => PostSymbol::NONE,
+        'is_active' => false,
+        'is_approved' => false,
     ];
 
 

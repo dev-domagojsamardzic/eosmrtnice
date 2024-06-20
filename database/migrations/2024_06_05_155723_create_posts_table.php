@@ -34,6 +34,9 @@ return new class extends Migration
             $table->string('main_message', 2048)->nullable();
             $table->string('signature', 512)->nullable();
 
+            $table->boolean('is_active')->default(false);
+            $table->boolean('is_approved')->default(false);
+
             $table->timestamps();
             $table->softDeletes();
         });
