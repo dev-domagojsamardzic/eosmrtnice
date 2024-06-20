@@ -64,6 +64,13 @@
             <span>{{ __('sidebar.ads') }}</span></a>
     </li>
 
+    <!-- Nav Item - Posts -->
+    <li class="nav-item">
+        <a class="nav-link" href="{{ route(auth_user_type() . '.posts.index') }}">
+            <i class="fas fa-address-card"></i>
+            <span>{{ __('sidebar.posts') }}</span></a>
+    </li>
+
     <!-- Nav Item - Offers -->
     <li class="nav-item">
         <a class="nav-link" href="{{ route(auth_user_type() . '.offers.index') }}">
