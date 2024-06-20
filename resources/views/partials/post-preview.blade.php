@@ -3,11 +3,11 @@
     <div class="body">
 
         <div id="deceased_full_name_lg_preview" class="deceased_full_name_lg">
-            {{ $deceased->full_name }}
+            {{ old('deceased_full_name_lg', $deceased->full_name) }}
         </div>
 
         <div id="lifespan_preview" class="lifespan">
-            {{ $deceased->lifespan }}
+            {{ old('lifespan', $deceased->lifespan) }}
         </div>
 
         <div class="images_wrapper">
@@ -24,7 +24,7 @@
         </div>
 
         <div id="deceased_full_name_sm_preview" class="deceased_full_name_sm">
-            {{ $deceased->full_name }}
+            {{ old('deceased_full_name_sm', $deceased->full_name) }}
         </div>
 
         <div id="main_message_preview" class="deceased_main_message">
