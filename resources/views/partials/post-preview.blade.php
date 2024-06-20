@@ -24,7 +24,7 @@
         </div>
 
         <div id="deceased_full_name_sm_preview" class="deceased_full_name_sm">
-            {{ old('deceased_full_name_sm', $deceased->full_name) }}
+            {{ old('deceased_full_name_sm', $post->deceased_full_name_sm) }}
         </div>
 
         <div id="main_message_preview" class="deceased_main_message">
