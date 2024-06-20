@@ -3,6 +3,6 @@
     border-radius: 0 !important;
 }
 
-.fi-modal-content {
+.fi-modal-content:has(#post-preview-wrapper) {
     align-items: center;
 }
