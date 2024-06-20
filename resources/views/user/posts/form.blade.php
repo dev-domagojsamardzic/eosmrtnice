@@ -215,6 +215,11 @@
 
             updateCounter()
             updateSymbol();
+
+            handleIntroMsgPreview();
+            handleMainMsgPreview();
+            handleSignaturePreview();
+            handleDeceasedFullNameSmPreview();
         })
 
         size.addEventListener('change', updateCounter);
@@ -233,27 +238,21 @@
 
         symbol.addEventListener('change', updateSymbol)
 
-        lifespan.addEventListener('input', function (event) {
-            lifespan_preview.innerHTML = event.target.value.replace(/\n/g, "<br>");
-        })
+        lifespan.addEventListener('input', handleLifespanPreview)
 
-        intro_message.addEventListener('input', function (event) {
-            intro_message_preview.innerHTML = event.target.value.replace(/\n/g, "<br>");
+        intro_message.addEventListener('input', function () {
+            handleIntroMsgPreview();
             updateCounter();
         })
 
-        deceased_full_name_sm.addEventListener('input', function (event) {
-            deceased_full_name_sm_preview.innerHTML = event.target.value.replace(/\n/g, "<br>");
-        })
+        deceased_full_name_sm.addEventListener('input', handleDeceasedFullNameSmPreview)
 
-        main_message.addEventListener('input', function (event) {
-            main_message_preview.innerHTML = event.target.value.replace(/\n/g, "<br>");
+        main_message.addEventListener('input', function () {
+            handleMainMsgPreview()
             updateCounter();
         });
 
-        signature.addEventListener('input', function (event) {
-            signature_preview.innerHTML = event.target.value.replace(/\n/g, "<br>");
-        });
+        signature.addEventListener('input', handleSignaturePreview);
 
         /**
          * Count words from element
@@ -307,6 +306,41 @@
                 $('#symbol_wrapper').show();
                 $('#symbol_image').attr('src', `${window.location.origin}/images/posts/symbols/${current_symbol}.svg`)
             }
+        }
+
+        /**
+         * Handle intro_message preview
+         */
+        function handleIntroMsgPreview() {
+            intro_message_preview.innerHTML = intro_message.value.replace(/\n/g, "<br>");
+        }
+
+        /**
+         * Handle main_message preview
+         */
+        function handleMainMsgPreview() {
+            main_message_preview.innerHTML = main_message.value.replace(/\n/g, "<br>");
+        }
+
+        /**
+         * Handle signature preview
+         */
+        function handleSignaturePreview() {
+            signature_preview.innerHTML = signature.value.replace(/\n/g, "<br>");
+        }
+
+        /**
+         * Handle deceased_full_name_sm preview
+         */
+        function handleDeceasedFullNameSmPreview() {
+            deceased_full_name_sm_preview.innerHTML = deceased_full_name_sm.value.trim();
+        }
+
+        /**
+         * Handle lifespan preview
+         */
+        function handleLifespanPreview() {
+            lifespan_preview.innerHTML = lifespan.value.trim();
         }
 
     </script>

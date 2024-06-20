@@ -20,7 +20,7 @@
         </div>
 
         <div id="intro_message_preview" class="intro_message">
-            {!! $post->intro_message !!}
+            {!! old('intro_message', $post->intro_message) !!}
         </div>
 
         <div id="deceased_full_name_sm_preview" class="deceased_full_name_sm">
@@ -28,11 +28,11 @@
         </div>
 
         <div id="main_message_preview" class="deceased_main_message">
-            {!! $post->main_message !!}
+            {!! old('main_message', $post->main_message) !!}
         </div>
 
         <div id="signature_preview" class="signature">
-            {!! $post->signature !!}
+            {!! old('signature', $post->signature) !!}
         </div>
     </div>
 </div>
