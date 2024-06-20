@@ -86,7 +86,7 @@ class PostsTable extends Component implements HasForms, HasTable
                 ->label(__('common.view'))
                 ->icon('heroicon-s-eye')
                 ->color('grey-900')
-                ->extraAttributes(['class' => 'fikiriki'])
+                ->modalHeading('')
                 ->modalCancelAction(fn (StaticAction $action) => $action->label(__('common.close')))
                 ->modalSubmitAction(false)
                 ->modalContent(fn (Post $post): View => view(
