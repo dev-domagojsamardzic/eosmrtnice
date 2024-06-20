@@ -112,7 +112,7 @@ class PostController extends Controller
         $post->is_framed = $request->boolean('is_framed');
         $post->image = $deceased->image;
         $post->symbol = $request->input('symbol') ?? '';
-        $post->deceased_full_name_lg = $request->input('deceased_full_name_lg');
+        $post->deceased_full_name_lg = $request->input('deceased_full_name_lg') ?? $deceased->full_name;
         $post->deceased_full_name_sm = $request->input('deceased_full_name_sm');
         $post->lifespan = $request->input('lifespan');
         $post->intro_message = trim($request->input('intro_message'), " \r\n\t");
