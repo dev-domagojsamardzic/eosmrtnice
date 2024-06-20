@@ -145,7 +145,7 @@
                         <x-text-input id="deceased_full_name_sm"
                                       type="text"
                                       name="deceased_full_name_sm"
-                                      value="{{ old('deceased_full_name_sm', $deceased->full_name) }}"
+                                      value="{{ old('deceased_full_name_sm', $post->deceased_full_name_sm) }}"
                                       placeholder="{{ __('models/post.deceased_full_name_sm_placeholder') }}"/>
                     </div>
                 </div>
