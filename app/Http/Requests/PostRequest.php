@@ -41,7 +41,7 @@ class PostRequest extends FormRequest
         return [
             'type' => ['required', Rule::enum(PostType::class)],
             'size' => ['required', Rule::enum(PostSize::class), new PostWordCount()],
-            'starts_at' => ['required', 'after:' . today()->subDay()->format('d.m.Y.')],
+            'starts_at' => ['required'],
             'deceased_full_name_lg' => ['required', 'string', 'max:128'],
             'lifespan' => ['required', 'string', 'max:30'],
         ];
