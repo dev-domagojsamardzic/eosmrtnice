@@ -71,6 +71,15 @@ class Offer extends Model
     }
 
     /**
+     * Return (offerables) posts that belong to single offer
+     * @return MorphToMany
+     */
+    public function posts(): MorphToMany
+    {
+        return $this->morphedByMany(Post::class, 'offerable')->withPivot(['quantity', 'price']);
+    }
+
+    /**
      * Return company related to offer
      * @return BelongsTo
      */
