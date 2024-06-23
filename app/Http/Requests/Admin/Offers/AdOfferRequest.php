@@ -6,7 +6,7 @@ use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
 
 /**
- * @property            int             company_id
+ * @property            int             user_id
  * @property            string          offerable_type
  * @property            int             offerable_id
  * @property            string          valid_from
