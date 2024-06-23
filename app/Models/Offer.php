@@ -20,6 +20,7 @@ use Illuminate\Http\Response;
  * @property-read       int                     id
  * @property            string                  number
  * @property            int                     company_id
+ * @property            int                     user_id
  * @property            float                   net_total
  * @property            float                   taxes
  * @property            float                   total
@@ -32,6 +33,7 @@ use Illuminate\Http\Response;
  * @property-read       bool                    is_valid
  * ------------------------------------------------------------
  * @property            Company                     company
+ * @property            User                        user
  * @property            Collection|Ad               ads
  * @property            Collection|Offerable        offerables
  *
@@ -75,6 +77,15 @@ class Offer extends Model
     public function company(): BelongsTo
     {
         return $this->belongsTo(Company::class);
+    }
+
+    /**
+     * Return user related to offer
+     * @return BelongsTo
+     */
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class);
     }
 
     /**
