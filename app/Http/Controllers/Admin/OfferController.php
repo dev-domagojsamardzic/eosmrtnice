@@ -77,8 +77,10 @@ class OfferController extends Controller
 
     public function send(Offer $offer): RedirectResponse
     {
+        $receiver = $offer->company?->email ?? $offer->user?->email;
+
         try {
-            Mail::to($offer->company)->send(new OfferCreated($offer, true));
+            Mail::to($receiver)->send(new OfferCreated($offer, true));
 
             $offer->sent_at = now();
             $offer->save();
