@@ -35,7 +35,7 @@ use Illuminate\Support\Carbon;
  * --------------------------------------------------------
  * @property            Company|null            company
  * @property            User|null               user
- * @property            Collection|Offer        offers
+ * @property            Collection<Offer>        offers
  */
 class Ad extends Model
 {
