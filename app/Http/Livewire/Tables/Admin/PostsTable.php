@@ -122,6 +122,12 @@ class PostsTable extends Component implements HasForms, HasTable
                     ->icon(fn (Post $post): string => $post->is_approved ? 'heroicon-m-x-circle' : 'heroicon-m-check-circle')
                     ->color(fn(Post $post): string => $post->is_approved ? 'danger' : 'success')
                     ->requiresConfirmation(),
+                Action::make('create_offer')
+                    ->label(__('models/offer.create'))
+                    ->visible(fn(Post $post): bool => !$post->offers()->valid()->exists())
+                    ->icon('heroicon-s-plus')
+                    ->color('black')
+                    ->url(fn(Post $post): string => route('admin.posts.offers.create', ['post' => $post])),
             ]),
         ];
     }
