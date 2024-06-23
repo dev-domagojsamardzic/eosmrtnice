@@ -61,6 +61,7 @@ class PostController extends Controller
 
         return view('user.posts.form', [
             'post' => $post,
+            'deceased' => $post->deceased,
             'types' => $postTypes,
             'sizes' => $postSizes,
             'symbols' => $postSymbols,
