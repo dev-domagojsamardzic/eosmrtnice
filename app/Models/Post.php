@@ -7,9 +7,11 @@ use App\Enums\PostSymbol;
 use App\Enums\PostType;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Casts\Attribute;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\MorphToMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Str;
 
@@ -38,8 +40,9 @@ use Illuminate\Support\Str;
  * -------------------------------------------------
  * @property            int             words_count
  * -------------------------------------------------
- * @property            Deceased        deceased
- * @property            User            user
+ * @property            Deceased            deceased
+ * @property            User                user
+ * @property            Collection<Offer>   offers
  */
 class Post extends Model
 {
@@ -112,5 +115,15 @@ class Post extends Model
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
+    }
+
+    /**
+     * Get the post's offer
+     *
+     * @return MorphToMany
+     */
+    public function offers(): MorphToMany
+    {
+        return $this->morphToMany(Offer::class, 'offerable');
     }
 }
