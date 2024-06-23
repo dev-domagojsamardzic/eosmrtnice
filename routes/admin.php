@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\CompanyController;
 use App\Http\Controllers\Admin\MemberController;
 use App\Http\Controllers\Admin\OfferController;
 use App\Http\Controllers\Admin\Offers\AdOfferController;
+use App\Http\Controllers\Admin\Offers\PostOfferController;
 use App\Http\Controllers\Admin\PartnerController;
 use App\Http\Controllers\Admin\PostController;
 use App\Http\Controllers\ProfileController;
@@ -38,6 +39,10 @@ Route::prefix('companies/{company}')->group(function () {
 Route::resource('ads/{ad}/offers', AdOfferController::class)
     ->except(['index'])
     ->names('ads.offers');
+
+Route::resource('posts/{post}/offers', PostOfferController::class)
+    ->except(['index'])
+    ->names('posts.offers');
 
 Route::resource('posts', PostController::class)
     ->only(['index', 'edit', 'update']);

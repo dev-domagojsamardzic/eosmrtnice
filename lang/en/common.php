@@ -52,4 +52,6 @@ return [
     'ongoing' => 'Ongoing',
     'expired' => 'Expired',
     'close' => 'Close',
+    'to' => 'to',
+    'words' => 'words',
 ];

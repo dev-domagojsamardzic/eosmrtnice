@@ -55,4 +55,6 @@ return [
     'ongoing' => 'U toku',
     'expired' => 'Isteklo',
     'close' => 'Zatvori',
+    'to' => 'do',
+    'words' => 'riječi',
 ];
