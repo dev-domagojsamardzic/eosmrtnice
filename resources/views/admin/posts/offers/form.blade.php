@@ -1,3 +1,4 @@
+@inject('carbon', 'Illuminate\Support\Carbon')
 <x-app-layout>
     <x-slot name="header">
         <h1 class="font-semibold text-gray-800 mb-4 dark:text-gray-200">
@@ -13,6 +14,7 @@
             @endif
 
             <input type="hidden" name="offerable_id" value="{{ $post->id }}">
+            <input type="hidden" name="user_id" value="{{ $post->user_id }}">
 
             @if($offer->exists)
                 <div class="form-group row">
@@ -31,7 +33,7 @@
                                id="valid_from"
                                type="text"
                                class="form-control"
-                               value="{{ old('valid_from', $offer->valid_from) ? \Illuminate\Support\Carbon::parse(old('valid_from', $offer->valid_from))->format('d.m.Y.') : now()->format('d.m.Y.') }}">
+                               value="{{ old('valid_from', $offer->valid_from) ? $carbon::parse(old('valid_from', $offer->valid_from))->format('d.m.Y.') : now()->format('d.m.Y.') }}">
                         <span class="input-group-text">
                             <i class="fas fa-calendar-alt"></i>
                         </span>
@@ -43,7 +45,7 @@
                     <x-input-label for="valid_until" :value="__('models/offer.valid_until')"></x-input-label>
                     <div class="input-group input-group-joined date">
                         <input name="valid_until" id="valid_until" type="text" class="form-control"
-                               value="{{ old('valid_until', $offer->valid_until) ? \Illuminate\Support\Carbon::parse(old('valid_until', $offer->valid_until))->format('d.m.Y.') : now()->addMonth()->format('d.m.Y.') }}">
+                               value="{{ old('valid_until', $offer->valid_until) ? $carbon::parse(old('valid_until', $offer->valid_until))->format('d.m.Y.') : now()->addMonth()->format('d.m.Y.') }}">
                         <span class="input-group-text">
                             <i class="fas fa-calendar-alt"></i>
                         </span>
