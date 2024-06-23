@@ -86,8 +86,7 @@
                 {{-- Deceased full_name - LG --}}
                 <div class="form-group row">
                     <div class="col-sm-12 col-lg-12">
-                        <x-input-label for="deceased_full_name_lg" :value="__('models/deceased.full_name')"
-                                       :required_tag="true"/>
+                        <x-input-label for="deceased_full_name_lg" :value="__('models/deceased.full_name')" :required_tag="true"/>
                         <x-input-info :content="__('models/post.deceased_full_name_lg_info')"/>
                         <x-text-input id="deceased_full_name_lg"
                                       type="text"
@@ -121,7 +120,7 @@
                         <x-text-input id="lifespan"
                                       type="text"
                                       name="lifespan"
-                                      value="{{ old('lifespan', $deceased->lifespan) }}"
+                                      value="{{ old('lifespan', $post->lifespan ?? $deceased->lifespan) }}"
                                       placeholder="{{ __('models/post.lifespan_placeholder') }}"
                                       required/>
                         <x-input-error :messages="$errors->get('lifespan')" class="mt-2"/>
@@ -192,6 +191,7 @@
         const deceased_full_name_lg = document.getElementById('deceased_full_name_lg');
         const deceased_full_name_lg_preview = document.getElementById('deceased_full_name_lg_preview');
         const is_framed = document.getElementById('is_framed');
+        const image = document.getElementById('deceased_image');
         const symbol = document.getElementById('symbol');
         const lifespan = document.getElementById('lifespan');
         const lifespan_preview = document.getElementById('lifespan_preview');
@@ -206,20 +206,13 @@
         const types = @json($types, JSON_THROW_ON_ERROR);
 
         document.addEventListener('DOMContentLoaded', function () {
-
             $('#starts_at').datepicker({
                 dateFormat: "dd.mm.yy.",
                 autoSize: true,
                 language: "hr",
             });
-
             updateCounter()
-            updateSymbol();
-
-            handleIntroMsgPreview();
-            handleMainMsgPreview();
-            handleSignaturePreview();
-            handleDeceasedFullNameSmPreview();
+            handlePostPreview();
         })
 
         size.addEventListener('change', updateCounter);
@@ -236,7 +229,7 @@
             deceased_full_name_lg_preview.innerHTML = event.target.value.replace(/\n/g, "<br>");
         })
 
-        symbol.addEventListener('change', updateSymbol)
+        symbol.addEventListener('change', handleSymbolPreview)
 
         lifespan.addEventListener('input', handleLifespanPreview)
 
@@ -295,16 +288,49 @@
         }
 
         /**
+         * Handle post preview, element by element
+         */
+        function handlePostPreview() {
+            handleDeceasedFullNameLgPreview();
+            handleLifespanPreview()
+            handleImagePreview();
+            handleSymbolPreview();
+            handleIntroMsgPreview();
+            handleMainMsgPreview();
+            handleSignaturePreview();
+            handleDeceasedFullNameSmPreview();
+        }
+
+        /**
+         * Handle deceased_full_name_lg preview
+         */
+        function handleDeceasedFullNameLgPreview() {
+            deceased_full_name_lg_preview.innerHTML = deceased_full_name_lg.value.trim();
+        }
+
+        /**
+         * Handle lifespan preview
+         */
+        function handleLifespanPreview() {
+            lifespan_preview.innerHTML = lifespan.value.trim();
+        }
+
+        /**
+         * Handle image_preview
+         */
+        function handleImagePreview() {
+            image.src = '{{ isset($deceased) ? public_storage_asset($deceased->image) : '' }}'
+        }
+
+        /**
          * Update symbol display
          */
-        function updateSymbol() {
-            const current_symbol = symbol.value;
-
-            if (current_symbol === '') {
+        function handleSymbolPreview() {
+            if (symbol.value === '') {
                 $('#symbol_wrapper').hide();
             } else {
                 $('#symbol_wrapper').show();
-                $('#symbol_image').attr('src', `${window.location.origin}/images/posts/symbols/${current_symbol}.svg`)
+                $('#symbol_image').attr('src', `${window.location.origin}/images/posts/symbols/${symbol.value}.svg`)
             }
         }
 
@@ -313,6 +339,13 @@
          */
         function handleIntroMsgPreview() {
             intro_message_preview.innerHTML = intro_message.value.replace(/\n/g, "<br>");
+        }
+
+        /**
+         * Handle deceased_full_name_sm preview
+         */
+        function handleDeceasedFullNameSmPreview() {
+            deceased_full_name_sm_preview.innerHTML = deceased_full_name_sm.value.trim();
         }
 
         /**
@@ -328,20 +361,5 @@
         function handleSignaturePreview() {
             signature_preview.innerHTML = signature.value.replace(/\n/g, "<br>");
         }
-
-        /**
-         * Handle deceased_full_name_sm preview
-         */
-        function handleDeceasedFullNameSmPreview() {
-            deceased_full_name_sm_preview.innerHTML = deceased_full_name_sm.value.trim();
-        }
-
-        /**
-         * Handle lifespan preview
-         */
-        function handleLifespanPreview() {
-            lifespan_preview.innerHTML = lifespan.value.trim();
-        }
-
     </script>
 </x-app-layout>
