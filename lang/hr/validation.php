@@ -206,6 +206,7 @@ return [
         'title' => 'naziv',
         'valid_from' => 'vrijedi od',
         'valid_until' => 'vrijedi do',
+        'starts_at' => 'vrijeme objave',
     ],
 
 ];
