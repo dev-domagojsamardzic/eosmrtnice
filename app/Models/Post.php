@@ -57,6 +57,7 @@ class Post extends Model
         'symbol' => PostSymbol::class,
         'starts_at' => 'date',
         'ends_at' => 'date',
+        'is_framed' => 'boolean',
     ];
 
     /**
