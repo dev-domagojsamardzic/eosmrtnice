@@ -13,6 +13,7 @@ use Filament\Forms\Contracts\HasForms;
 use Filament\Tables\Actions\Action;
 use Filament\Tables\Columns\Layout\Stack;
 use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Columns\ViewColumn;
 use Filament\Tables\Concerns\InteractsWithTable;
 use Filament\Tables\Contracts\HasTable;
 use Filament\Tables\Table;
@@ -89,6 +90,8 @@ class PostsTable extends Component implements HasForms, HasTable
                         1 => 'success',
                         0 => 'danger',
                     }),
+                ViewColumn::make('offer_sent')
+                    ->view('filament.tables.columns.ad-offer-sent-badge'),
             ])->from('md'),
         ];
     }
