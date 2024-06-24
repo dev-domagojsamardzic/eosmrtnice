@@ -80,7 +80,8 @@
                                 <td class="text-align-left">
                                     {{ "{$offerable->offerable->type->translate()}: {$offerable->offerable->deceased_full_name_lg}" }} <br>
                                     {{ __('models/post.size').': '.ucfirst($offerable->offerable->size->name).' ('.__('common.to').' '.$offerable->offerable->size->value.' '.__('common.words').')' }} <br>
-                                    {{ __('models/post.is_framed') }}: {{ $offerable->offerable->is_framed ? __('common.yes') : __('common.no') }}
+                                    {{ __('models/post.is_framed') }}: {{ $offerable->offerable->is_framed ? __('common.yes') : __('common.no') }} <br>
+                                    {{ __('models/post.symbol') }}: {{ $offerable->offerable->symbol->translate() }}
                                 </td>
 
                                 <td>

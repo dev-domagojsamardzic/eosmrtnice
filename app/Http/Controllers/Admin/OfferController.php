@@ -153,7 +153,7 @@ class OfferController extends Controller
             }
 
             return redirect()->route('admin.offers.index')
-                ->with('alert', ['class' => 'success', 'message' => __('common/saved')]);
+                ->with('alert', ['class' => 'success', 'message' => __('common.saved')]);
         } catch(Exception $e) {
             return redirect()
                 ->route('admin.offers.index')

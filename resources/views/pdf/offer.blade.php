@@ -95,7 +95,8 @@
                     <td class="text-align-left">
                         {{ "{$item->type->translate()}: {$item->deceased_full_name_lg}" }} <br>
                         {{ __('models/post.size').': '.ucfirst($item->size->name).' ('.__('common.to').' '.$item->size->value.' '.__('common.words').')' }} <br>
-                        {{ __('models/post.is_framed') }}: {{ $item->is_framed ? __('common.yes') : __('common.no') }}
+                        {{ __('models/post.is_framed') }}: {{ $item->is_framed ? __('common.yes') : __('common.no') }} <br>
+                        {{ __('models/post.symbol') }}: {{ $item->symbol->translate() }}
                     </td>
                     <td class="text-align-right">{{ $item->pivot?->quantity }}</td>
                     <td class="text-align-right">{{ $item->pivot?->price . config('app.currency_symbol') }}</td>

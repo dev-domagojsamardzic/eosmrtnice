@@ -98,7 +98,7 @@ class PostOfferController extends OfferController
             }
 
             return redirect()->route('admin.posts.index')
-                ->with('alert', ['class' => 'success', 'message' => __('common/saved')]);
+                ->with('alert', ['class' => 'success', 'message' => __('common.saved')]);
         } catch (Exception $e) {
             return redirect()
                 ->route('admin.posts.index')

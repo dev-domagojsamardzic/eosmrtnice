@@ -111,7 +111,7 @@ class AdOfferController extends OfferController
             }
 
             return redirect()->route('admin.ads.index')
-                ->with('alert', ['class' => 'success', 'message' => __('common/saved')]);
+                ->with('alert', ['class' => 'success', 'message' => __('common.saved')]);
         } catch (Exception $e) {
             return redirect()
                 ->route('admin.ads.index')
