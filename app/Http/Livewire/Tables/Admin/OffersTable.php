@@ -50,7 +50,7 @@ class OffersTable extends Component implements HasForms, HasTable
             ->emptyStateHeading(__('common.no_records'))
             ->emptyStateDescription('')
             ->striped()
-            ->query(Offer::query()->orderBy('created_at'))
+            ->query($this->getQuery())
             ->columns($this->getColumns())
             ->filters($this->getFilters(), layout: FiltersLayout::AboveContent)
             ->filtersFormColumns(4)
@@ -63,6 +63,10 @@ class OffersTable extends Component implements HasForms, HasTable
         return view('livewire.offers-table');
     }
 
+    private function getQuery(): Builder
+    {
+        return Offer::query()->orderBy('created_at');
+    }
     /**
      * Get table columns
      *
@@ -94,19 +98,7 @@ class OffersTable extends Component implements HasForms, HasTable
                 Tables\Columns\Layout\Grid::make([
                     'lg' => 2, 'sm' => 1,
                 ])->schema([
-                    Stack::make([
-                        TextColumn::make('company.title')
-                            ->label(__('models/offer.company'))
-                            ->searchable(),
-                        TextColumn::make('company.address')
-                            ->label(__('models/company.address')),
-                        TextColumn::make('company.town')
-                            ->label(__('models/offer.town'))
-                            ->formatStateUsing(fn(Offer $o):string => $o->company->zipcode.', '.$o->company->town)
-                            ->searchable(),
-                        TextColumn::make('company.oib')
-                            ->label(__('models/offer.oib')),
-                    ]),
+                    Stack::make(fn (Offer $offer) => $this->getOfferRecipientStack($offer)),
                     Stack::make([
                         TextColumn::make('offerables')
                             ->label(__('models/offer.items_count'))
@@ -122,6 +114,32 @@ class OffersTable extends Component implements HasForms, HasTable
 
             ])->collapsible()->columnSpanFull(),
         ];
+    }
+
+    private function getOfferRecipientStack(Offer $offer): array
+    {
+        if ($offer->company) {
+            return [
+                TextColumn::make('company.title')
+                    ->label(__('models/offer.company'))
+                    ->searchable(),
+                TextColumn::make('company.address')
+                    ->label(__('models/company.address')),
+                TextColumn::make('company.town')
+                    ->label(__('models/offer.town'))
+                    ->formatStateUsing(fn(Offer $o):string => $o->company->zipcode.', '.$o->company->town)
+                    ->searchable(),
+                TextColumn::make('company.oib')
+                    ->label(__('models/offer.oib')),
+            ];
+        }
+        else {
+            return [
+                TextColumn::make('user.full_name')
+                    ->label(__('models/user.full_name'))
+                    ->searchable(),
+            ];
+        }
     }
 
     /**
