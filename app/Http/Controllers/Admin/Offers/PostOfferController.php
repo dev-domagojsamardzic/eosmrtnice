@@ -88,7 +88,7 @@ class PostOfferController extends OfferController
 
             if ($request->submit === 'save_and_send') {
 
-                Mail::to($offer->user)->send(new OfferCreated($offer));
+                Mail::to($offer->user)->queue(new OfferCreated($offer));
 
                 $offer->sent_at = now();
                 $offer->save();

@@ -80,7 +80,7 @@ class OfferController extends Controller
         $receiver = $offer->company?->email ?? $offer->user?->email;
 
         try {
-            Mail::to($receiver)->send(new OfferCreated($offer, true));
+            Mail::to($receiver)->queue(new OfferCreated($offer, true));
 
             $offer->sent_at = now();
             $offer->save();
@@ -143,7 +143,7 @@ class OfferController extends Controller
             $offer->save();
 
             if ($request->submit === "save_and_resend") {
-                Mail::to($offer->company)->send(new OfferCreated($offer, true));
+                Mail::to($offer->company)->queue(new OfferCreated($offer, true));
 
                 $offer->sent_at = now();
                 $offer->save();

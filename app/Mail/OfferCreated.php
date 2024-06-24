@@ -4,24 +4,28 @@ namespace App\Mail;
 
 use App\Models\Offer;
 use Illuminate\Bus\Queueable;
+use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Mail\Mailables\Attachment;
 use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
 
-class OfferCreated extends Mailable
+class OfferCreated extends Mailable implements ShouldQueue
 {
     use Queueable, SerializesModels;
 
     public Offer $offer;
     public bool $edited;
+
+    public string $key;
     /**
      * Create a new message instance.
      */
     public function __construct(Offer $offer, bool $edited = false)
     {
         $this->offer = $offer;
+        $this->edited = $edited;
         $this->key = $edited ? 'offer_edited' : 'offer_created';
     }
 
