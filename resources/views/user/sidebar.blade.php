@@ -35,6 +35,13 @@
             <span>{{ __('sidebar.posts') }}</span></a>
     </li>
 
+    <!-- Nav Item - Offers -->
+    <li class="nav-item">
+        <a class="nav-link" href="{{ route(auth_user_type() . '.offers.index') }}">
+            <i class="fas fa-file-pdf"></i>
+            <span>{{ __('sidebar.offers') }}</span></a>
+    </li>
+
     <!-- Divider -->
     <hr class="sidebar-divider d-none d-md-block">
 

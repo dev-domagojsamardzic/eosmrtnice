@@ -4,6 +4,7 @@ use App\Http\Controllers\PostController;
 use App\Http\Controllers\User\DeceasedController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\User\OfferController;
 
 Route::get('/dashboard', static function () {
     return view('user/dashboard');
@@ -19,6 +20,10 @@ Route::prefix('deceased/{deceased}')->group(function () {
     Route::get('posts/{post}/edit', [PostController::class, 'edit'])->name('posts.edit');
     Route::put('posts/{post}', [PostController::class, 'update'])->name('posts.update');
 });
+
+Route::resource('offers', OfferController::class)
+    ->only(['index', 'show']);
+Route::get('offers/{offer}/download', [OfferController::class, 'download'])->name('offers.download');
 
 Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
 Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');

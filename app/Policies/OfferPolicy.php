@@ -12,7 +12,7 @@ class OfferPolicy
      */
     public function viewAny(User $user): bool
     {
-        return is_admin() || is_partner();
+        return is_admin() || is_partner() || is_member();
     }
 
     /**
@@ -20,7 +20,9 @@ class OfferPolicy
      */
     public function view(User $user, Offer $offer): bool
     {
-        return is_admin() || (is_partner() && $offer->company->user->id === $user->id);
+        return is_admin() ||
+            (is_partner() && $offer->company->user->id === $user->id) ||
+            (is_member() && $offer->user->id === $user->id);
     }
 
     /**
