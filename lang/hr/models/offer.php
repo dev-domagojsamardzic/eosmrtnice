@@ -31,4 +31,10 @@ return [
     'sent_offers' => 'Poslano',
     'not_sent_offers' => 'Nije poslano',
     'download_pdf' => 'Preuzmi PDF',
+    'item_type' => 'Vrsta stavke',
+    'recipient' =>  'Primatelj',
+    'offerables' => [
+        'Ad' => 'Oglas',
+        'Post' => 'Objava',
+    ],
 ];

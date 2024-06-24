@@ -54,19 +54,41 @@
             <table style="color: #131313" class="w-100 table table-bordered mt-5">
                 <thead class="thead-dark">
                     <tr>
-                        <th scope="col">Vrsta</th>
-                        <th scope="col">Naziv</th>
-                        <th scope="col">Kompanija</th>
-                        <th scope="col">Količina</th>
-                        <th scope="col">Cijena</th>
+                        <th scope="col">{{ __('models/offer.item_type') }}</th>
+                        <th scope="col">{{ __('models/offer.item') }}</th>
+                        <th scope="col">{{ __('models/offer.recipient') }}</th>
+                        <th scope="col">{{ __('models/offer.quantity') }}</th>
+                        <th scope="col">{{ __('models/offer.price') }}</th>
                     </tr>
                 </thead>
                 <tbody>
                     @foreach($offer->offerables as $offerable)
                         <tr>
-                            <td>Oglas</td>
-                            <td>{{ $offerable->offerable->title }}</td>
-                            <td>{{ $offerable->offerable?->company?->title }}</td>
+                            <td>{{ __('models/offer.offerables.' . class_basename($offerable->offerable)) }}</td>
+                            @if($offerable->offerable instanceof App\Models\Ad)
+
+                                <td>
+                                    {{ $offerable->offerable->title }}
+                                </td>
+
+                                <td>
+                                    {{ $offerable->offerable->company->title }} <br>
+                                    {{ $offerable->offerable->company->oib }}
+                                </td>
+                            @endif
+                            @if($offerable->offerable instanceof App\Models\Post)
+                                <td class="text-align-left">
+                                    {{ "{$offerable->offerable->type->translate()}: {$offerable->offerable->deceased_full_name_lg}" }} <br>
+                                    {{ __('models/post.size').': '.ucfirst($offerable->offerable->size->name).' ('.__('common.to').' '.$offerable->offerable->size->value.' '.__('common.words').')' }} <br>
+                                    {{ __('models/post.is_framed') }}: {{ $offerable->offerable->is_framed ? __('common.yes') : __('common.no') }}
+                                </td>
+
+                                <td>
+                                    {{ $offerable->offerable->user->full_name }} <br>
+                                    {{ $offerable->offerable->user->email }}
+                                </td>
+                            @endif
+
                             <td>{{ $offerable->quantity }}</td>
                             <td>{{ $offerable->price }}</td>
                         </tr>

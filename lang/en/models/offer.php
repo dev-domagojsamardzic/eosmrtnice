@@ -31,4 +31,6 @@ return [
     'sent_offers' => 'Sent',
     'not_sent_offers' => 'Not sent',
     'download_pdf' => 'Download PDF',
+    'item_type' => 'Item type',
+    'recipient' =>  'Recipient',
 ];
