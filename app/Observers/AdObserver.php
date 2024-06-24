@@ -13,6 +13,6 @@ class AdObserver
      */
     public function created(Ad $ad): void
     {
-        Mail::to(admin())->send(new AdCreated($ad));
+        Mail::to(admin())->queue(new AdCreated($ad));
     }
 }
