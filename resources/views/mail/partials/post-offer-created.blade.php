@@ -1,15 +1,43 @@
+<x-mail::message>
+# {{ __("mail.$actionKey.greetings") }}
 
-<p>{{ __("mail.$key.greetings") }}</p>
+{{ __("mail.$actionKey.intro") }}
+<x-mail::table>
+<table class="data_table">
+    <tbody>
+        <tr>
+            <td class="text-bold">{{ __('models/post.post') }}</td>
+            <td class="text-right">{{ $offerable->type->translate() }}</td>
+        </tr>
+        <tr>
+            <td class="text-bold">{{ __('models/post.size') }}</td>
+            <td class="text-right">{{ __('common.to').' '.$offerable->size->value.' '.__('common.words') }}</td>
+        </tr>
+        <tr>
+            <td class="text-bold">{{ __('models/deceased.deceased') }}</td>
+            <td class="text-right">{{ $offerable->deceased->full_name }}</td>
+        </tr>
+        <tr>
+            <td class="text-bold">{{ __('models/post.is_framed') }}</td>
+            <td class="text-right">{{ $offerable->is_framed ? __('common.yes') : __('common.no') }}</td>
+        </tr>
+        <tr>
+            <td class="text-bold">{{ __('models/post.symbol') }}</td>
+            <td class="text-right">{{ $offerable->symbol->translate() }}</td>
+        </tr>
+        <tr>
+            <td class="text-bold">{{ __('models/post.starts_at') }}</td>
+            <td class="text-right">{{ $offerable->starts_at->format('d.m.Y.') }}</td>
+        </tr>
+    </tbody>
+</table>
+</x-mail::table>
 
-<p>{{ __("mail.$key.intro") }}</p>
-<p>{{ __('models/ad.ad') . ': ' . $offer->ads?->first()?->title }}</p>
-<p>{{ __('models/ad.months_valid') . ': ' . $offer->ads?->first()?->months_valid . ' ' . __('common.months') }}</p>
-<p>{{ __('models/offer.valid_from') . ': ' . $offer->valid_from->format('d.m.Y.') }}</p>
-<p>{{ __('models/offer.valid_until') . ': ' . $offer->valid_until->format('d.m.Y.') }}</p>
+{{ __("mail.$actionKey.payment") }}
 
-<p>{{ __("mail.$key.payment") }}</p>
+{{ __("mail.$actionKey.contact_info") }}
 
-<p>{{ __("mail.$key.contact_info") }}</p>
+{{ __('mail.kind_regards') }}
 
-<p>{{ __('mail.kind_regards') }}</p>
-<p>{{ config('app.name') }} {{ __('mail.team') }}</p>
+<x-mail::signature></x-mail::signature>
+</x-mail::message>
