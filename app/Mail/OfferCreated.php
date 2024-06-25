@@ -2,7 +2,9 @@
 
 namespace App\Mail;
 
+use App\Models\Ad;
 use App\Models\Offer;
+use App\Models\Post;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
@@ -16,17 +18,26 @@ class OfferCreated extends Mailable implements ShouldQueue
     use Queueable, SerializesModels;
 
     public Offer $offer;
-    public bool $edited;
 
-    public string $key;
+    public Ad|Post $offerable;
+
+    protected string $mailableMarkdown;
+
+    public string $actionKey;
     /**
      * Create a new message instance.
      */
     public function __construct(Offer $offer, bool $edited = false)
     {
         $this->offer = $offer;
-        $this->edited = $edited;
-        $this->key = $edited ? 'offer_edited' : 'offer_created';
+        $this->offerable = $offer->offerables()->first()->offerable;
+        if ($this->offerable instanceof Ad) {
+            $this->mailableMarkdown = 'mail/partials.ad-offer-created';
+        }
+        elseif ($this->offerable instanceof Post) {
+            $this->mailableMarkdown = 'mail/partials.post-offer-created';
+        }
+        $this->actionKey = $edited ? 'offer_edited' : 'offer_created';
     }
 
     /**
@@ -36,7 +47,7 @@ class OfferCreated extends Mailable implements ShouldQueue
     {
         return new Envelope(
             from: config('eosmrtnice.mail_from_address'),
-            subject: __("mail.$this->key.subject", ['offer' => $this->offer->number]),
+            subject: __("mail.$this->actionKey.subject", ['offer' => $this->offer->number]),
         );
     }
 
@@ -45,10 +56,7 @@ class OfferCreated extends Mailable implements ShouldQueue
      */
     public function content(): Content
     {
-        return new Content(
-            view: 'mail.offer-created',
-            with: ['key' => $this->key],
-        );
+        return new Content(markdown: $this->mailableMarkdown);
     }
 
     /**

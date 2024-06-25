@@ -87,3 +87,8 @@ Route::middleware('auth')->group(function () {
     Route::post('images/upload', [ImageController::class, 'upload'])->name('images.upload');
     Route::delete('images/upload/revert', [ImageController::class, 'revert'])->name('images.upload.revert');
 });
+
+Route::get('test', function () {
+    $o = App\Models\Offer::find(9);
+    return (new \App\Mail\OfferCreated($o))->render();
+});
