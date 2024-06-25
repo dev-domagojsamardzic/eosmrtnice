@@ -8,7 +8,7 @@
                 <div class="row">
                     <div
                         class="col-lg-5 d-none d-flex flex-column align-items-center justify-content-start px-3 py-5 bg-register-image">
-                        <img class="my-4" alt="{{ config('app.name') }}" src="{{ asset('storage/images/logo_vector_black.svg') }}">
+                        <img class="my-4" alt="{{ config('app.name') }}" src="{{ asset('images/logo/logo-dark.svg') }}">
                         <img class="my-4" alt="{{ config('app.name') }}" src="{{ asset('storage/images/partner.svg') }}">
                     </div>
                     <div class="col-lg-7">
