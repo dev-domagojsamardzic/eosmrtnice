@@ -100,6 +100,7 @@ img {
 .header {
     padding: 25px 0;
     text-align: center;
+    background-color: #333333;
 }
 
 .header a {
@@ -109,12 +110,9 @@ img {
     text-decoration: none;
 }
 
-/* Logo */
-
-.logo {
-    height: 75px;
-    max-height: 75px;
-    width: 75px;
+.header span {
+    color: #f1f0ef;
+    font-weight: bold;
 }
 
 /* Body */
@@ -167,12 +165,17 @@ img {
     padding: 0;
     text-align: center;
     width: 570px;
+    background-color: #333333;
 }
 
 .footer p {
     color: #b0adc5;
     font-size: 12px;
     text-align: center;
+}
+
+.text-small {
+    font-size: 12px;
 }
 
 .footer a {
@@ -295,4 +298,10 @@ img {
 
 .text-bold {
     font-weight: bold;
+}
+
+.table_signature td {
+    font-size: 12px;
+    font-weight: 400;
+    padding: 3px 0;
 }

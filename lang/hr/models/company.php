@@ -10,4 +10,7 @@ return [
         'website' => 'npr: https://example.com'
     ],
     'no_logo' => 'Nema logotipa',
+    'email' => 'Email adresa',
+    'phone' => 'Telefon',
+    'mobile_phone' => 'Mobitel',
 ];

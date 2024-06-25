@@ -31,6 +31,8 @@
 {{ __("mail.$actionKey.contact_info") }}
 
 {{ __('mail.kind_regards') }}
-{{ config('app.name') }} {{ __('mail.team') }}
+
+<x-mail::signature></x-mail::signature>
+
 </x-mail::message>
 

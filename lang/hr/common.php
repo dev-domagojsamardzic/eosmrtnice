@@ -57,4 +57,5 @@ return [
     'close' => 'Zatvori',
     'to' => 'do',
     'words' => 'riječi',
+    'all_rights_reserved' => 'Sva prava pridržana.',
 ];

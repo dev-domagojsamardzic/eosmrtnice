@@ -2,7 +2,7 @@
 
 return [
     'greetings' => 'Pozdrav.',
-    'kind_regards' => 'S poštovanjem,',
+    'kind_regards' => 'S poštovanjem',
     'team' => 'Team',
     'ad_created' => [
         'subject' => 'Novi oglas',
