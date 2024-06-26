@@ -77,16 +77,14 @@
 }
 
 .post .body .images_wrapper .image {
-    height: 140px;
-    width: 110px;
     overflow: hidden;
     border: 1px solid $black;
-    padding: 3px 2px 2px 3px;
+    padding: 2px;
 }
 
 .post .body .images_wrapper .image img {
-    height: 100%;
-    width: auto;
+    height: 140px;
+    width: 110px;
     object-fit: cover;
     object-position: center;
 }
