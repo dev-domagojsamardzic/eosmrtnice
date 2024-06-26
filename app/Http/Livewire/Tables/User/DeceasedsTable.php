@@ -75,8 +75,8 @@ class DeceasedsTable extends Component implements HasForms, HasTable
             Split::make([
                 ImageColumn::make('image')
                     ->label(__('models/deceased.image'))
-                    ->width(40)
-                    ->height(60)
+                    ->width(55)
+                    ->height(70)
                     ->grow(false),
                 TextColumn::make('full_name')
                     ->weight(FontWeight::Bold)
