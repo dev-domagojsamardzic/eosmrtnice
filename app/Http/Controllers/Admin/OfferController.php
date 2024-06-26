@@ -80,7 +80,7 @@ class OfferController extends Controller
         $receiver = $offer->company?->email ?? $offer->user?->email;
 
         try {
-            Mail::to($receiver)->queue(new OfferCreated($offer, true));
+            Mail::to($receiver)->queue(new OfferCreated($offer));
 
             $offer->sent_at = now();
             $offer->save();
