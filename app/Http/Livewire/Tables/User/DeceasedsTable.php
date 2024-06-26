@@ -32,7 +32,7 @@ class DeceasedsTable extends Component implements HasForms, HasTable
     {
         return $table
             ->emptyStateHeading(__('common.no_records'))
-            ->emptyStateDescription('')
+            ->emptyStateDescription(__('models/deceased.empty_state_description'))
             ->headerActions([
                 CreateAction::make('create')
                     ->label(__('models/deceased.add_deceased'))
