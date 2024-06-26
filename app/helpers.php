@@ -48,6 +48,18 @@ if (!function_exists('is_member')) {
     }
 }
 
+if (!function_exists('storage_public_path')) {
+    /**
+     * Returns storage path that begins with app/public
+     * @param string $path
+     * @return string
+     */
+    function storage_public_path(string $path = ''): string
+    {
+        return ($path === '') ? storage_path("app/public") : storage_path("app/public/$path");
+    }
+}
+
 if (!function_exists('public_storage_asset')) {
     /**
      * Returns asset link for item in public/storage directory
