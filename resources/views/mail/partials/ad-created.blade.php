@@ -1,24 +1,57 @@
-<p>{{ __('mail.greetings') }}</p>
-<p>
-    {{ __('mail.ad_created.intro', [
+<x-mail::message>
+# {{ __('mail.greetings') }}
+
+{{ __('mail.ad_created.intro', [
         'owner' => $ad->user?->full_name ?? __('mail.unknown_sender'),
         'company' => $ad->company?->title ?? __('mail.unknown_company'),
         'datetime' => $ad->created_at->format('d.m.Y. H:i'),
-    ])}}
-</p>
+    ])
+}}
 
-<p>{{ __('mail.ad_created.ad_properties') }}</p>
-<ul>
-    <li><strong>{{ __('models/ad.type') }}: </strong>{{ ucfirst($ad->type->name) }}</li>
-    <li><strong>{{ __('models/ad.months_valid') }}: </strong>{{ ucfirst($ad->months_valid) }} {{ __('common.months') }}</li>
-    @if($ad->type !== \App\Enums\AdType::STANDARD)
-        <li><strong>{{ __('models/company.logo') }}: </strong>{{ $ad->company?->logo ?? __('company.no_logo') }}</li>
-    @endif
-    @if($ad->type === \App\Enums\AdType::GOLD)
-        <li><strong>{{ __('models/ad.banner') }}: </strong>{{ $ad->banner ?? __('ad.no_banner') }}</li>
-        <li><strong>{{ __('models/ad.caption') }}: </strong>{{ $ad->caption ?? __('ad.no_caption') }}</li>
-    @endif
-</ul>
-<p>{{ __('mail.ad_created.outro') }}</p>
-<p>{{ __('mail.kind_regards') }}</p>
-<p>{{ config('app.name') }} {{ __('mail.team') }}</p>
+{{ __('mail.ad_created.ad_properties') }}
+
+<x-mail::table>
+    <table class="data_table">
+        <tbody>
+        <tr>
+            <td class="text-bold">{{ __('models/ad.type') }}</td>
+            <td class="text-right">{{ ucfirst($ad->type->name) }}</td>
+        </tr>
+        <tr>
+            <td class="text-bold">{{ __('models/ad.months_valid') }}</td>
+            <td class="text-right">{{ $ad->months_valid . ' ' . __('common.months') }}</td>
+        </tr>
+        <tr>
+            <td class="text-bold">{{ __('models/ad.title') }}</td>
+            <td class="text-right">{{ $ad->title }}</td>
+        </tr>
+        @if($ad->type !== \App\Enums\AdType::STANDARD)
+            <tr>
+                <td class="text-bold">{{ __('models/company.logo') }}</td>
+                <td class="text-right">{{ $ad->company?->logo ? __('common.yes') : __('common.no') }}</td>
+            </tr>
+        @endif
+        @if($ad->type === \App\Enums\AdType::GOLD)
+            <tr>
+                <td class="text-bold">{{ __('models/ad.banner') }}</td>
+                <td class="text-right">{{ $ad->banner ? __('common.yes') : __('common.no') }}</td>
+            </tr>
+            <tr>
+                <td class="text-bold">{{ __('models/ad.caption') }}</td>
+                <td class="text-right">{{ $ad->caption ?? __('ad.no_caption') }}</td>
+            </tr>
+        @endif
+        </tbody>
+    </table>
+</x-mail::table>
+
+{{ __('mail.ad_created.outro') }}
+
+{{ __('mail.kind_regards') }}
+
+<x-mail::signature></x-mail::signature>
+</x-mail::message>
+
+
+
+{{ config('app.name') }} {{ __('mail.team') }}

@@ -39,9 +39,7 @@ class AdCreated extends Mailable implements ShouldQueue
      */
     public function content(): Content
     {
-        return new Content(
-            view: 'mail.ad-created',
-        );
+        return new Content(markdown: 'mail/partials.ad-created');
     }
 
     /**
