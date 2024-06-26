@@ -1,7 +1,7 @@
 <x-mail::message>
 # {{ __("mail.$actionKey.greetings") }}
 
-{{ __("mail.$actionKey.intro") }}
+{{ __("mail.$actionKey.intro", ['offer' => $offer->number]) }}
 <x-mail::table>
 <table class="data_table">
     <tbody>

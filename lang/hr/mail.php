@@ -13,14 +13,14 @@ return [
     'offer_created' => [
         'subject' => 'Ponuda br. :offer',
         'greetings' => 'Poštovani',
-        'intro' => 'U privitku ove poruke šaljemo Vam ponudu za uslugu',
+        'intro' => 'U privitku ove poruke šaljemo Vam ponudu broj :offer za uslugu: ',
         'payment' => 'Nakon što platite, usluga će Vam se aktivirati.',
         'contact_info' => 'Za bilo kakva pitanja, molimo Vas da kontaktirate naš tim.'
     ],
     'offer_edited' => [
         'subject' => 'Ispravak ponude br. :offer',
         'greetings' => 'Poštovani',
-        'intro' => 'U privitku ove poruke šaljemo Vam ispravak ponude za uslugu',
+        'intro' => 'U privitku ove poruke šaljemo Vam ispravak ponude broj :offer za uslugu:',
         'payment' => 'Nakon što platite, usluga će Vam se aktivirati.',
         'contact_info' => 'Za bilo kakva pitanja, molimo Vas da kontaktirate naš tim.'
     ],
