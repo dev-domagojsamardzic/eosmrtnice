@@ -121,7 +121,7 @@ class ImageService
 
         try {
             Image::read(storage_public_path($source))
-                ->cover(240, 360)
+                ->cover(220, 280)
                 ->save(storage_public_path($destination));
             Storage::disk('public')->delete($source);
             $moved = true;
