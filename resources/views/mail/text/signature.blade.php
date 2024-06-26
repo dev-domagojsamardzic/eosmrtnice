@@ -1,0 +1,19 @@
+<x-mail::table>
+    <table class="table_signature">
+        <tbody>
+            <tr>
+                <td style="font-weight: bold">{{ config('app.name') }} {{ __('mail.team') }}</td>
+            </tr>
+            <tr>
+                <td>{{ __('models/company.email') . ': ' . company_data('email') }}</td>
+            </tr>
+            <tr>
+                <td>{{ __('models/company.phone') . ': ' . company_data('phone') }}</td>
+            </tr>
+            <tr>
+                <td>{{ __('models/company.mobile_phone') . ': ' . company_data('mobile_phone') }}</td>
+            </tr>
+        </tbody>
+    </table>
+</x-mail::table>
+
