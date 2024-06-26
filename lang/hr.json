@@ -1,0 +1,15 @@
+{
+    "Hello!" : "Pozdrav!",
+    "Regards" : "S poštovanjem",
+    "If you're having trouble clicking the \":actionText\" button, copy and paste the URL below\ninto your web browser:": "Ako imate problema s klikom na gumb \":actionText\", kopirajte i zalijepite URL ispod\nu vaš web preglednik:",
+    "Verify Email Address" : "Potvrda email adrese",
+    "Please click the button below to verify your email address." : "Kliknite na dugme kako bi potvrdili svoju email adresu.",
+    "Verify Email Address" : "Potvrdi email",
+    "If you did not create an account, no further action is required." : "Ako niste vi napravili račun, molimo Vas da ne poduzimate daljnje korake.",
+    "Reset Password Notification" : "Ponovno postavljanje lozinke",
+    "You are receiving this email because we received a password reset request for your account." : "Razlog zbog kojeg Vam šaljemo ovaj mail je taj što smo zaprimili zahtjev za ponovnim postavljanjem lozinke Vašeg računa.",
+    "Reset Password" : "Ponovo postavi lozinku",
+    "This password reset link will expire in :count minutes." : "Poveznica za ponovno postavljanje lozinke će isteći za :count minuta.",
+    "If you did not request a password reset, no further action is required." : "Ako Vi niste zatražili ponovno postavljanje lozinke, molimo Vas da ne poduzimate daljnje korake."
+
+}
