@@ -20,5 +20,5 @@ return [
     'maiden_name_prefix' => 'rođ.',
     'full_name' => 'Ime i prezime',
     'born_died' => 'Rođen/a - Preminuo/la',
-    'empty_state_description' => 'Dodajte pokojnika kako biste mogli kreirati objave.'
+    'empty_state_description' => 'Dodajte pokojnika kako biste mogli kreirati objave.',
 ];
