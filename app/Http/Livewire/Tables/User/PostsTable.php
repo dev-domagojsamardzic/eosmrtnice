@@ -8,6 +8,7 @@ use Filament\Actions\StaticAction;
 use Filament\Support\Enums\FontWeight;
 use Filament\Tables\Actions\ActionGroup;
 use Filament\Forms\Components\Select;
+use Filament\Tables\Actions\CreateAction;
 use Filament\Tables\Actions\EditAction;
 use Filament\Tables\Columns\Layout\Split;
 use Filament\Forms\Concerns\InteractsWithForms;
@@ -35,7 +36,8 @@ class PostsTable extends Component implements HasForms, HasTable
     {
         return $table
             ->emptyStateHeading(__('common.no_records'))
-            ->emptyStateDescription('')
+            ->emptyStateDescription(__('models/post.empty_state_description'))
+            ->emptyStateActions($this->getEmptyStateActions())
             ->query($this->getQuery())
             ->striped()
             ->columns($this->getColumns())
@@ -123,6 +125,7 @@ class PostsTable extends Component implements HasForms, HasTable
             ]),
         ];
     }
+
     private function getHeaderActions(): array
     {
         return [
@@ -135,9 +138,20 @@ class PostsTable extends Component implements HasForms, HasTable
                         ->options(Deceased::query()->where('user_id', auth()->id())->get()->pluck('full_name', 'id')->toArray())
                         ->required(),
                 ])
+                ->disabled(fn() => !auth()->user()->deceaseds()->exists())
                 ->action(function (array $data, Post $p): RedirectResponse|Redirector {
                     return redirect()->route(auth_user_type() . '.posts.create',['deceased' => $data['deceased_id']]);
                 })
+        ];
+    }
+
+    private function getEmptyStateActions(): array
+    {
+        return [
+            CreateAction::make('create_deceased')
+                ->label(__('models/deceased.add_deceased'))
+                ->icon('heroicon-m-plus')
+                ->url(route('user.deceaseds.create'))
         ];
     }
 }
