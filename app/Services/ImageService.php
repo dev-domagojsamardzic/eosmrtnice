@@ -6,7 +6,9 @@ use App\Models\Ad;
 use App\Models\Company;
 use App\Models\Deceased;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
+use Intervention\Image\Laravel\Facades\Image;
 
 class ImageService
 {
@@ -117,7 +119,18 @@ class ImageService
             Storage::disk('public')->delete($deceased->image);
         }
 
-        $moved = Storage::disk('public')->move($source, $destination);
+        try {
+            Image::read(storage_public_path($source))
+                ->cover(240, 360)
+                ->save(storage_public_path($destination));
+            Storage::disk('public')->delete($source);
+            $moved = true;
+
+        } catch (\Exception $e) {
+            Log::error($e->getMessage());
+            $moved = false;
+        }
+
         return $moved ? $destination : null;
     }
 
