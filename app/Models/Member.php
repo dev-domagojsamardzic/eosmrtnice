@@ -7,6 +7,7 @@ use App\Models\Scopes\MemberScope;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Attributes\ScopedBy;
+use Illuminate\Database\Eloquent\Collection;
 
 /**
  * @property        int         id
@@ -22,10 +23,10 @@ use Illuminate\Database\Eloquent\Attributes\ScopedBy;
  * @property        Carbon      created_at
  * @property        Carbon      updated_at
  * @property        Carbon      deleted_at
- * -------------------------------------------
+ * ----------------------------------------------------
  * @property-read   string      full_name
- * -------------------------------------------
- * @property        Company     $companies
+ * ----------------------------------------------------
+ * @property        Collection<Company>     companies
  */
 
 #[ScopedBy([MemberScope::class])]
