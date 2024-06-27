@@ -144,10 +144,10 @@ class Company extends Model
     {
         return Attribute::make(
             get: fn() => match($this->type) {
-                CompanyType::FUNERAL => 'graphics/svg/coffin-outline.svg',
-                CompanyType::MASONRY => 'graphics/svg/tomb-outline.svg',
-                CompanyType::FLOWERS => 'graphics/svg/flowers-outline.svg',
-                default => 'graphics/svg/cross-outline.svg',
+                CompanyType::FUNERAL => 'graphics/company_symbol/coffin-outline.svg',
+                CompanyType::MASONRY => 'graphics/company_symbol/tomb-outline.svg',
+                CompanyType::FLOWERS => 'graphics/company_symbol/flowers-outline.svg',
+                default => 'graphics/company_symbol/cross-outline.svg',
             },
         );
     }

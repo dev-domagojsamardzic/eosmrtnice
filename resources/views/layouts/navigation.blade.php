@@ -163,7 +163,7 @@
                        <small class="text-gray-700">{{ auth()->user()->email }}</small>
                     </span>
                     <img class="img-profile rounded-circle"
-                         src="{{ asset('images/avatar/' . auth()->user()->gender . '.svg') }}">
+                         src="{{ asset('graphics/avatar/' . auth()->user()->gender . '.svg') }}">
                 </a>
                 <!-- Dropdown - User Information -->
                 <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"

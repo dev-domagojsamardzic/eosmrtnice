@@ -27,7 +27,7 @@
 
             {{-- Symbol image --}}
             <div class="symbol" id="symbol_wrapper" @style(['display:none' => ($post->symbol === \App\Enums\PostSymbol::NONE)])>
-                <img id="symbol_image" src="{{ asset("/images/posts/symbols/{$post->symbol->value}.svg") }}"/>
+                <img id="symbol_image" src="{{ asset("graphics/post_symbol/{$post->symbol->value}.svg") }}"/>
             </div>
             {{-- Symbol image --}}
         </div>

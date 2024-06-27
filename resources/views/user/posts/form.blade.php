@@ -330,7 +330,7 @@
                 $('#symbol_wrapper').hide();
             } else {
                 $('#symbol_wrapper').show();
-                $('#symbol_image').attr('src', `${window.location.origin}/images/posts/symbols/${symbol.value}.svg`)
+                $('#symbol_image').attr('src', `${window.location.origin}/graphics/post_symbol/${symbol.value}.svg`)
             }
         }
 
