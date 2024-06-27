@@ -13,6 +13,24 @@
     <body class="">
         <div class="w-100 d-flex flex-column justify-content-center align-items-center">
             {{ $slot }}
+
+            <!-- Boostrap alert -->
+            @if(session()->has('alert'))
+                @php
+                    $flash = session('alert')
+                @endphp
+                <div id="flash_alert"
+                     class="alert alert-absolute-flex align-items-center alert-{{ $flash['class'] }} fade show"
+                     role="alert">
+                    <div class="d-flex justify-content-start align-items-center gap-3">
+                        @include('svg.icons.' . $flash['class'])
+                        {{ $flash['message'] }}
+                    </div>
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            @endif
         </div>
     </body>
 </html>

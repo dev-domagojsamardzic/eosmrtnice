@@ -37,19 +37,20 @@
                                                           name="email"
                                                           placeholder="{{ __('auth.placeholders.email') }}"
                                                           :value="old('email', $request->email)"
-                                                          required autofocus autocomplete="username" />
+                                                          required autofocus autocomplete="email" />
                                             <x-input-error :messages="$errors->get('email')" class="mt-2" />
                                         </div>
 
                                         <!-- Password -->
                                         <div class="mt-4">
                                             <x-input-label for="password" :value="__('auth.labels.password')" />
+                                            <x-input-info :content="__('auth.password_rules')" />
                                             <x-text-input id="password"
                                                           class="block mt-1 w-full"
                                                           type="password"
                                                           name="password"
                                                           placeholder="{{ __('auth.placeholders.password') }}"
-                                                          required autocomplete="new-password" />
+                                                          required/>
                                             <x-input-error :messages="$errors->get('password')" class="mt-2" />
                                         </div>
 
@@ -60,7 +61,7 @@
                                                           class="block mt-1 w-full"
                                                           type="password"
                                                           placeholder="{{ __('auth.placeholders.confirm_password') }}"
-                                                          name="password_confirmation" required autocomplete="new-password" />
+                                                          name="password_confirmation" required/>
 
                                             <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2" />
                                         </div>
