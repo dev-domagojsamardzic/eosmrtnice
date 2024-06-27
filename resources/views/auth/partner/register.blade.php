@@ -9,6 +9,7 @@
                     <div
                         class="col-lg-5 d-none d-flex flex-column align-items-center justify-content-start px-3 py-5 bg-register-image">
                         <img class="my-4" alt="{{ config('app.name') }}" src="{{ asset('graphics/logo/logo-dark.svg') }}">
+                        <h1>{{ config('app.name') }}</h1>
                         <img class="my-4" alt="{{ config('app.name') }}" src="{{ asset('graphics/symbol/partner.svg') }}">
                     </div>
                     <div class="col-lg-7">
@@ -212,6 +213,7 @@
                                             type="text"
                                             name="company_oib"
                                             :value="old('company_oib')"
+                                            maxlength="11"
                                             required
                                             placeholder="{{ __('auth.placeholders.company_oib') }}"/>
                                         <x-input-error :messages="$errors->get('company_oib')" class="mt-2"/>
