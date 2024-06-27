@@ -70,7 +70,7 @@ return [
     'already_registered' => 'Već imate račun?',
     'confirm_password_text' => 'Molimo Vas da potvrdite svoju lozinku prije nastavka.',
     'verify_email_text' => 'Hvala Vam na vašoj prijavi! Prije nego počnemo, potrebno je pročitati mail koji smo Vam upravo poslali te kliknuti na link u mailu. Na taj način ćete potvrditi svoj račun. Ako niste primili ovakav mail, rado ćemo Vam poslati drugi.',
-    'new_verification_link_text' => 'Novi verifikacijski link je poslan na email adresu koju ste upisali prilikom registracije.',
+    'new_verification_link_text' => 'Novi verifikacijski link je poslan na email adresu koju ste unijeli.',
     'new_verification_link_title' => 'Potvrda email adrese',
     'confirm_password_title' => 'Porvrda lozinke',
     'confirm_password' => 'Potvrdi lozinku',
@@ -80,5 +80,6 @@ return [
     'your_email_is_unverified' => 'Vaše email addresa nije verificirana.',
     'click_here_to_resend_verification_email' => 'Klikni ovdje kako bi Vam ponovo poslali verifikacijski email.',
     'new_verification_link_sent' => 'Novi verifikacijski link je poslan na Vašu email adresu.',
-    'password_rules' => 'Lozinka mora imati minimalno 8 znakova, od kojih minimalno 1 mora biti broj.'
+    'password_rules' => 'Lozinka mora imati minimalno 8 znakova, od kojih minimalno 1 mora biti broj.',
+    'password_updated' => 'Lozinka je uspješno promjenjena.',
 ];

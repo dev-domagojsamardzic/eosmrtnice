@@ -40,8 +40,12 @@ class ProfileController extends Controller
 
         $user->save();
 
+        $user->sendEmailVerificationNotification();
+
+        $message = ($user->isDirty('email')) ? __('auth.new_verification_link_sent') : __('common.updated');
+
         return redirect()->route(auth_user_type() . '.profile.edit')
-            ->with('alert', ['class' => 'success', 'message' => __('common.updated')]);
+            ->with('alert', ['class' => 'success', 'message' => $message]);
     }
 
     /**
