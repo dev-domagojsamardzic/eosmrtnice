@@ -24,7 +24,7 @@ import './filepond/filepond.js';
 $(document).ready(function() {
     setTimeout(() => {
         $('#flash_alert').fadeOut();
-    }, 2000);
+    }, 5000);
 })
 
 

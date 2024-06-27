@@ -79,8 +79,9 @@
                                 </div>
                                 {{-- password & confirm_password--}}
                                 <div class="form-group row">
-                                    <div class="col-sm-6 mb-3">
+                                    <div class="col-sm-12 mb-3">
                                         <x-input-label for="password" :value="__('auth.labels.password')"/>
+                                        <x-input-info :content="__('auth.password_rules')" />
                                         <x-text-input id="password"
                                                       type="password"
                                                       name="password"
@@ -88,7 +89,7 @@
                                                       required/>
                                         <x-input-error :messages="$errors->get('password')" class="mt-2"/>
                                     </div>
-                                    <div class="col-sm-6">
+                                    <div class="col-sm-12">
                                         <x-input-label for="password" :value="__('auth.labels.confirm_password')"/>
                                         <x-text-input id="password_confirmation"
                                                       type="password"

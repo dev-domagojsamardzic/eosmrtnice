@@ -68,7 +68,6 @@
                 </button>
             </div>
         @endif
-
     </div>
     <!-- End of Content Wrapper -->
 </div>

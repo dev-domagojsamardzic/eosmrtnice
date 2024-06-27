@@ -80,4 +80,5 @@ return [
     'your_email_is_unverified' => 'Vaše email addresa nije verificirana.',
     'click_here_to_resend_verification_email' => 'Klikni ovdje kako bi Vam ponovo poslali verifikacijski email.',
     'new_verification_link_sent' => 'Novi verifikacijski link je poslan na Vašu email adresu.',
+    'password_rules' => 'Lozinka mora imati minimalno 8 znakova, od kojih minimalno 1 mora biti broj.'
 ];
