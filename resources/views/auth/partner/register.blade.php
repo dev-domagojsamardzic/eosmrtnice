@@ -9,7 +9,7 @@
                     <div
                         class="col-lg-5 d-none d-flex flex-column align-items-center justify-content-start px-3 py-5 bg-register-image">
                         <img class="my-4" alt="{{ config('app.name') }}" src="{{ asset('graphics/logo/logo-dark.svg') }}">
-                        <img class="my-4" alt="{{ config('app.name') }}" src="{{ asset('images/graphics/symbol/partner.svg') }}">
+                        <img class="my-4" alt="{{ config('app.name') }}" src="{{ asset('graphics/symbol/partner.svg') }}">
                     </div>
                     <div class="col-lg-7">
                         <div class="p-5">
