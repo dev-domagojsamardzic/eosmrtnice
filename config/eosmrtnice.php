@@ -1,7 +1,11 @@
 <?php
 
 return [
-    // Data related to main company
+    /**
+     * *------------------------------------------------------------*
+     * *--  Data and information related to main (mother) company --*
+     * *------------------------------------------------------------*
+     */
     'company' => [
         'title' => env('COMPANY_TITLE', 'eOsmrtnice d.o.o.'),
         'address' => env('COMPANY_ADDRESS', 'Addresa Hrvatskih Branitelja 11'),
@@ -15,4 +19,15 @@ return [
     ],
 
     'mail_from_address' => env('MAIL_FROM_ADDRESS', 'info@eosmrtnice.com'),
+
+    /**
+     * *-------------------------------*
+     * *-- Images default dimensions --*
+     * --------------------------------*
+     */
+    'image_dimensions' => [
+        'deceased_image' => ['width' => 220, 'height' => 280],
+        'company_logo' => ['width' => 120, 'height' => 120],
+        'ad_banner' => ['width' => 500, 'height' => 300],
+    ],
 ];

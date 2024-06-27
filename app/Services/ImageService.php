@@ -48,7 +48,20 @@ class ImageService
             Storage::disk('public')->delete($company->logo);
         }
 
-        $moved = Storage::disk('public')->move($source, $destination);
+        $dimensions = config('eosmrtnice.image_dimensions.company_logo');
+
+        try {
+            Image::read(storage_public_path($source))
+                ->cover($dimensions['width'], $dimensions['height'])
+                ->save(storage_public_path($destination));
+            Storage::disk('public')->delete($source);
+            $moved = true;
+
+        } catch (\Exception $e) {
+            Log::error($e->getMessage());
+            $moved = false;
+        }
+
         return $moved ? $destination : null;
     }
 
@@ -119,9 +132,11 @@ class ImageService
             Storage::disk('public')->delete($deceased->image);
         }
 
+        $dimensions = config('eosmrtnice.image_dimensions.deceased_image');
+
         try {
             Image::read(storage_public_path($source))
-                ->cover(220, 280)
+                ->cover($dimensions['width'], $dimensions['height'])
                 ->save(storage_public_path($destination));
             Storage::disk('public')->delete($source);
             $moved = true;
