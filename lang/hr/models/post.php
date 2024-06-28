@@ -41,5 +41,5 @@ return [
     'post_active' => 'Aktivna objava?',
     'post_approved' => 'Objava je odobrena',
     'post_not_approved' => 'Objava nije odobrena',
-    'empty_state_description' => 'Prvo morate dodati pokojnika da biste mogli kreirati svoju prvu objavu.'
+    'empty_state_description' => 'Prvo morate dodati pokojnika da biste mogli kreirati svoju prvu objavu.',
 ];

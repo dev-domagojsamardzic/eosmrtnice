@@ -7,11 +7,13 @@
 
         <title>{{ config('app.name', 'Laravel') }}</title>
 
-        <!-- Scripts -->
-        @vite(['resources/scss/app.scss', 'resources/js/app.js'])
+        <!-- Styles -->
+        @vite('resources/scss/app.scss')
     </head>
     <body class="">
+        @include('layouts.guest_navbar')
         <div class="w-100 d-flex flex-column justify-content-center align-items-center">
+
             {{ $slot }}
 
             <!-- Boostrap alert -->
@@ -32,5 +34,7 @@
                 </div>
             @endif
         </div>
+        {{-- Scripts --}}
+        @vite('resources/js/app.js')
     </body>
 </html>
