@@ -27,7 +27,7 @@ use App\Http\Controllers\Auth\VerifyEmailController;
 
 Route::get('/', static function () {
     return view('welcome');
-});
+})->name('homepage');
 
 Route::middleware('guest')->group(function () {
 
