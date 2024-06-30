@@ -8,5 +8,6 @@ return [
     'last_goodbyes' => 'Posljednji pozdravi',
     'memories' => 'Sjećanja',
     'thank_yous' => 'Zahvale',
-    'submit_post' => 'Predajte obavijest'
+    'submit_post' => 'Predajte obavijest',
+    'dashboard' => 'Upravljačka ploča',
 ];

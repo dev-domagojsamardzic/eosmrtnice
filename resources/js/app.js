@@ -27,6 +27,15 @@ $(document).ready(function() {
     }, 5000);
 })
 
+$(document).ready(function() {
+    $(function () {
+        'use strict'
+        $('[data-toggle="offcanvas"]').on('click', function () {
+            $('.offcanvas-collapse').toggleClass('open')
+        })
+    })
+})
+
 /*import Alpine from 'alpinejs';
 
 window.Alpine = Alpine;
