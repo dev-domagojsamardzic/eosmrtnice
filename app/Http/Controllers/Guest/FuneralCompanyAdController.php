@@ -12,7 +12,7 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 
-class CompanyTypeController extends Controller
+class FuneralCompanyAdController extends Controller
 {
     /**
      * Return default query builder
@@ -37,9 +37,10 @@ class CompanyTypeController extends Controller
     public function funerals(): View
     {
         $counties = County::query()->orderBy('title')->get();
-        $funerals = $this->query()->inRandomOrder()->get();
+        $ads = $this->query()->inRandomOrder()->get();
+        $title = __('guest.funerals');
 
-        return view('guest.funerals', compact('counties', 'funerals'));
+        return view('guest.ads', compact('title', 'counties', 'ads'));
     }
 
     /**
@@ -51,6 +52,7 @@ class CompanyTypeController extends Controller
     {
         $county = $request->get('county');
         $city = $request->get('city');
+
         $ads = $this->query()
             ->when($county, function ($query, $county) {
                 $query->whereHas('company', function ($query) use ($county) {
