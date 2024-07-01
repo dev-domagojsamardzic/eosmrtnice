@@ -58,4 +58,5 @@ return [
     'to' => 'do',
     'words' => 'riječi',
     'all_rights_reserved' => 'Sva prava pridržana.',
+    'search' => 'Pretraži',
 ];

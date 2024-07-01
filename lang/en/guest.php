@@ -10,4 +10,6 @@ return [
     'thank_yous' => 'Special thanks',
     'submit_post' => 'Submit Post',
     'dashboard' => 'Dashboard',
+    'county' => 'County',
+    'city' => 'City',
 ];

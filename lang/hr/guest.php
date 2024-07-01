@@ -10,4 +10,7 @@ return [
     'thank_yous' => 'Zahvale',
     'submit_post' => 'Predajte obavijest',
     'dashboard' => 'Upravljačka ploča',
+    'county' => 'Županija',
+    'city' => 'Grad ili mjesto',
+    'all_counties' => 'Sve županije',
 ];

@@ -54,4 +54,5 @@ return [
     'close' => 'Close',
     'to' => 'to',
     'words' => 'words',
+    'search' => 'Search',
 ];
