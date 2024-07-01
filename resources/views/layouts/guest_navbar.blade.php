@@ -7,10 +7,10 @@
                     <a href="{{ route('guest.funerals') }}" class="text-black mr-3">
                         {{ __('guest.funerals') }}
                     </a>
-                    <a href="#" class="text-black mr-3">
+                    <a href="{{ route('guest.masonries') }}" class="text-black mr-3">
                         {{ __('guest.masonries') }}
                     </a>
-                    <a href="#" class="text-black mr-3">
+                    <a href="{{ route('guest.flowers') }}" class="text-black mr-3">
                         {{ __('guest.florists') }}
                     </a>
                 </div>
@@ -54,8 +54,8 @@
                 </div>
                 <ul>
                     <li><a href="{{ route('guest.funerals') }}" class="nav-link">{{ __('guest.funerals') }}</a></li>
-                    <li><a href="#" class="nav-link">{{ __('guest.masonries') }}</a></li>
-                    <li><a href="#" class="nav-link">{{ __('guest.florists') }}</a></li>
+                    <li><a href="{{ route('guest.masonries') }}" class="nav-link">{{ __('guest.masonries') }}</a></li>
+                    <li><a href="{{ route('guest.flowers') }}" class="nav-link">{{ __('guest.florists') }}</a></li>
                 </ul>
                 <div class="px-3">
                     <hr class="bg-white" style="opacity: .3">
