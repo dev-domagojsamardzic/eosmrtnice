@@ -2,3 +2,59 @@
     background-color: #eee;
     padding: 1rem 2rem;
 }
+
+.ad_preview_col {
+    padding: 1rem;
+}
+
+.ad_preview {
+    background-color: $gray-100;
+    padding: 2rem;
+    border: 1px solid $gray-600;
+}
+
+.ad_preview.premium, .ad_preview.gold {
+    outline: 1px solid $gray-600;
+    outline-offset: -5px;
+}
+
+.ad_preview.gold .left,
+.ad_preview.gold .right {
+    padding: 2rem;
+    max-width: 50%;
+}
+
+.ad_preview.gold h6 {
+    line-height: 1.75;
+    text-align: center;
+}
+
+.ad_preview .logo {
+    width: 60px;
+    border: 1px solid $gray-600;
+    padding: 3px;
+}
+
+.ad_preview p {
+    font-weight: 600;
+}
+
+.ad_preview p span {
+    font-weight: 400;
+}
+
+@media screen and (max-width: 991px){
+    .ad_preview.gold .left,
+    .ad_preview.gold .right {
+        padding: 0;
+        max-width: 100%;
+    }
+
+    .ad_preview.gold .right {
+        margin-top: 2rem;
+    }
+
+    .ads-search {
+        padding: 0 !important;
+    }
+}

@@ -59,4 +59,5 @@ return [
     'words' => 'riječi',
     'all_rights_reserved' => 'Sva prava pridržana.',
     'search' => 'Pretraži',
+    'no_results' => 'Nema rezultata',
 ];

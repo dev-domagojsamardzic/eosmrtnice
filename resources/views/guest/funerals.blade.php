@@ -1,10 +1,10 @@
 <x-guest-layout>
-    <h1 class="my-4">{{ __('guest.funerals') }}</h1>
+    <div class="row"><h1 class="my-4">{{ __('guest.funerals') }}</h1></div>
     @include('partials.ads-search')
 
-    <div class="wrapper" id="funerals_content">
+    <div class="wrapper row" id="funerals_content">
         @if($funerals->count() === 0)
-            <span class="mt-5">{{ __('common.no_results') }}</span>
+            @include('partials.ad_preview.no_results')
         @else
             @foreach($funerals as $funeral)
                 @php
@@ -17,7 +17,6 @@
                 @include($view, ['ad' => $funeral])
             @endforeach
         @endif
-
     </div>
 </x-guest-layout>
 
@@ -36,11 +35,12 @@
                 'county' : $('#county').val(),
                 'city' : $('#city').val(),
             },
-            success() {
-                //alert('fuck yeah!');
+            success: function(response) {
+                document.querySelector('#funerals_content').innerHTML = response[0];
+            },
+            error: function(error) {
+                console.log('Error fetching ads:', error);
             }
         });
-        // return response
-        // render
     })
 </script>

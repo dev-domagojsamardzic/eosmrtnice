@@ -1,5 +1,8 @@
 <div class="col-sm-12 col-lg-6 ad_preview_col">
-    <div class="ad_preview standard">
+    <div class="ad_preview premium">
+        @if($ad->company?->logo)
+            <img src="{{ public_storage_asset($ad->company->logo) }}" class="logo mb-2 rounded-circle" alt="{{ $ad->company->title }}" />
+        @endif
         <h5 class="mb-5">{{ $ad->company->title }}</h5>
         @if($ad->company?->address)
             <p class="text-black">{{ __('guest.address') }}:<span class="ml-2">{{ $ad->company->address }}</span></p>
