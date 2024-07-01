@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Guest;
 
+use App\Enums\AdType;
 use App\Enums\CompanyType;
 use App\Http\Controllers\Controller;
 use App\Models\Ad;
@@ -63,9 +64,23 @@ class CompanyTypeController extends Controller
                     });
                 });
             })
-            ->get()
-            ->toArray();
+            ->get();
 
-        return response()->json($ads);
+        if ($ads->isEmpty()) {
+            return response()->json([view('partials.ad_preview.no_results')->render()]);
+        }
+
+        $html = '';
+        foreach ($ads as $ad) {
+            $view = match($ad->type) {
+                AdType::PREMIUM => 'partials.ad_preview.premium',
+                AdType::GOLD => 'partials.ad_preview.gold',
+                default => 'partials.ad_preview.standard',
+            };
+
+            $html .= view($view, compact('ad'))->render();
+        }
+
+        return response()->json([$html]);
     }
 }
