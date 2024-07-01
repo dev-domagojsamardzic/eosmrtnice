@@ -2,23 +2,19 @@
 
 namespace App\Http\Controllers\Guest;
 
-use App\Enums\AdType;
 use App\Enums\CompanyType;
-use App\Http\Controllers\Controller;
 use App\Models\Ad;
 use App\Models\County;
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Request;
 use Illuminate\View\View;
 
-class MasonryCompanyAdController extends Controller
+class MasonryCompanyAdController extends CompanyTypeAdController
 {
     /**
-     * Return default query builder
+     * Return default query builder with masonries companies ads
      * @return Builder
      */
-    private function query(): Builder
+    protected function query(): Builder
     {
         return Ad::query()
             ->with('company')
@@ -30,8 +26,9 @@ class MasonryCompanyAdController extends Controller
             ->orderByRaw('CASE WHEN type = 3 THEN 1 ELSE 2 END')
             ->orderBy('created_at', 'desc');
     }
+
     /**
-     * Return view with funeral companies ads
+     * Return view with masonries companies ads
      * @return View
      */
     public function masonries(): View
@@ -42,47 +39,5 @@ class MasonryCompanyAdController extends Controller
         $searchRoute = route('guest.masonries.items');
 
         return view('guest.ads', compact('title', 'counties', 'ads', 'searchRoute'));
-    }
-
-    /**
-     * Return items requested through ajax request
-     * @param Request $request
-     * @return JsonResponse
-     */
-    public function items(Request $request): JsonResponse
-    {
-        $county = $request->get('county');
-        $city = $request->get('city');
-        $ads = $this->query()
-            ->when($county, function ($query, $county) {
-                $query->whereHas('company', function ($query) use ($county) {
-                    $query->where('county_id', $county);
-                });
-            })
-            ->when($city, function ($query, $city) {
-                $query->whereHas('company', function ($query) use ($city) {
-                    $query->whereHas('city', function ($query) use ($city) {
-                        $query->where('title', 'LIKE', '%'.$city.'%');
-                    });
-                });
-            })
-            ->get();
-
-        if ($ads->isEmpty()) {
-            return response()->json([view('partials.ad_preview.no_results')->render()]);
-        }
-
-        $html = '';
-        foreach ($ads as $ad) {
-            $view = match($ad->type) {
-                AdType::PREMIUM => 'partials.ad_preview.premium',
-                AdType::GOLD => 'partials.ad_preview.gold',
-                default => 'partials.ad_preview.standard',
-            };
-
-            $html .= view($view, compact('ad'))->render();
-        }
-
-        return response()->json([$html]);
     }
 }
