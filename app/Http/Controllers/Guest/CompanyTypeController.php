@@ -25,7 +25,9 @@ class CompanyTypeController extends Controller
                 $query->where('type', CompanyType::FUNERAL);
             })
             ->where('active', 1)
-            ->where('approved', 1);
+            ->where('approved', 1)
+            ->orderByRaw('CASE WHEN type = 3 THEN 1 ELSE 2 END')
+            ->orderBy('created_at', 'desc');
     }
     /**
      * Return view with funeral companies ads
