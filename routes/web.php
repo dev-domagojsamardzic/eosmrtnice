@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Guest\FuneralCompanyAdController;
+use App\Http\Controllers\Guest\MasonryCompanyAdController;
 use App\Http\Controllers\ImageController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
@@ -90,5 +91,7 @@ Route::middleware('auth')->group(function () {
 Route::group(['as' => 'guest.'], static function() {
     Route::get('pogrebna-poduzeca', [FuneralCompanyAdController::class, 'funerals'])->name('funerals');
     Route::post('pogrebna-poduzeca', [FuneralCompanyAdController::class, 'items'])->name('funerals.items');
+    Route::get('klesari', [MasonryCompanyAdController::class, 'masonries'])->name('masonries');
+    Route::post('klesari', [FuneralCompanyAdController::class, 'items'])->name('masonries.items');
 });
 
