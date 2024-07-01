@@ -53,7 +53,7 @@ class CompanyRequest extends FormRequest
             'city_id' => ['required', 'exists:cities,id', new CityBelongsToCounty('county_id')],
             'county_id' => ['required','exists:counties,id'],
             'oib' => ['required','numeric', 'digits:11'],
-            'email' => ['required','string', 'email', 'max:255', Rule::unique(Company::class)->ignore($this->route('company')->id)],
+            'email' => ['required','string', 'email', 'max:255', Rule::unique(Company::class)->ignore($this->route('company')?->id)],
             'phone' => ['nullable','string', 'max:64'],
             'mobile_phone' => ['nullable','string', 'max:64'],
             'website' => ['nullable', 'string', 'url:https', 'active_url'],
