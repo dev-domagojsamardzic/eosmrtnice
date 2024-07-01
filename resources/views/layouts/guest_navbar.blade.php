@@ -4,7 +4,7 @@
         <div class="row">
             <div class="col-12 d-flex flex-row align-items-center justify-content-between">
                 <div class="d-flex align-items-center justify-content-between">
-                    <a href="#" class="text-black mr-3">
+                    <a href="{{ route('guest.funerals') }}" class="text-black mr-3">
                         {{ __('guest.funerals') }}
                     </a>
                     <a href="#" class="text-black mr-3">
@@ -53,7 +53,7 @@
                     <hr class="bg-white" style="opacity: .3">
                 </div>
                 <ul>
-                    <li><a href="#" class="nav-link">{{ __('guest.funerals') }}</a></li>
+                    <li><a href="{{ route('guest.funerals') }}" class="nav-link">{{ __('guest.funerals') }}</a></li>
                     <li><a href="#" class="nav-link">{{ __('guest.masonries') }}</a></li>
                     <li><a href="#" class="nav-link">{{ __('guest.florists') }}</a></li>
                 </ul>
