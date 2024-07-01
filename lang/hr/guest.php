@@ -11,6 +11,11 @@ return [
     'submit_post' => 'Predajte obavijest',
     'dashboard' => 'Upravljačka ploča',
     'county' => 'Županija',
-    'city' => 'Grad ili mjesto',
+    'city' => 'Grad/Mjesto',
     'all_counties' => 'Sve županije',
+    'address' => 'Adresa',
+    'phone' => 'Telefon',
+    'mobile_phone' => 'Mobitel',
+    'email' => 'Email',
+    'web' => 'Web',
 ];
