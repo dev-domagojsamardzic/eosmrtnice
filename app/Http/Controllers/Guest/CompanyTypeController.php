@@ -6,6 +6,7 @@ use App\Enums\CompanyType;
 use App\Http\Controllers\Controller;
 use App\Models\Ad;
 use App\Models\County;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
@@ -13,20 +14,27 @@ use Illuminate\View\View;
 class CompanyTypeController extends Controller
 {
     /**
+     * Return default query builder
+     * @return Builder
+     */
+    private function query(): Builder
+    {
+        return Ad::query()
+            ->with('company')
+            ->whereHas('company', function ($query) {
+                $query->where('type', CompanyType::FUNERAL);
+            })
+            ->where('active', 1)
+            ->where('approved', 1);
+    }
+    /**
      * Return view with funeral companies ads
      * @return View
      */
     public function funerals(): View
     {
         $counties = County::query()->orderBy('title')->get();
-        $funerals = Ad::query()
-            ->with('company')
-            ->whereHas('company', function ($query) {
-                $query->where('type', CompanyType::FUNERAL);
-            })
-            ->where('active', 1)
-            ->where('approved', 1)
-            ->get();
+        $funerals = $this->query()->inRandomOrder()->get();
 
         return view('guest.funerals', compact('counties', 'funerals'));
     }
@@ -40,12 +48,7 @@ class CompanyTypeController extends Controller
     {
         $county = $request->get('county');
         $city = $request->get('city');
-        $ads = Ad::query()
-            ->whereHas('company', function ($query) {
-                $query->where('type', CompanyType::FUNERAL);
-            })
-            ->where('active', 1)
-            ->where('approved', 1)
+        $ads = $this->query()
             ->when($county, function ($query, $county) {
                 $query->whereHas('company', function ($query) use ($county) {
                     $query->where('county_id', $county);
@@ -58,7 +61,8 @@ class CompanyTypeController extends Controller
                     });
                 });
             })
-            ->get()->toArray();
+            ->get()
+            ->toArray();
 
         return response()->json($ads);
     }
