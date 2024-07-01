@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Guest\FlowersCompanyAdController;
 use App\Http\Controllers\Guest\FuneralCompanyAdController;
 use App\Http\Controllers\Guest\MasonryCompanyAdController;
 use App\Http\Controllers\ImageController;
@@ -92,6 +93,8 @@ Route::group(['as' => 'guest.'], static function() {
     Route::get('pogrebna-poduzeca', [FuneralCompanyAdController::class, 'funerals'])->name('funerals');
     Route::post('pogrebna-poduzeca', [FuneralCompanyAdController::class, 'items'])->name('funerals.items');
     Route::get('klesari', [MasonryCompanyAdController::class, 'masonries'])->name('masonries');
-    Route::post('klesari', [FuneralCompanyAdController::class, 'items'])->name('masonries.items');
+    Route::post('klesari', [MasonryCompanyAdController::class, 'items'])->name('masonries.items');
+    Route::get('cvjecari', [FlowersCompanyAdController::class, 'flowers'])->name('flowers');
+    Route::post('cvjecari', [FlowersCompanyAdController::class, 'items'])->name('flowers.items');
 });
 
