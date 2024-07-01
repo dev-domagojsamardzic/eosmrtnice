@@ -1,7 +1,7 @@
 <?php
 
+use App\Http\Controllers\Guest\CompanyTypeController;
 use App\Http\Controllers\ImageController;
-use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Auth\ConfirmablePasswordController;
@@ -30,7 +30,6 @@ Route::get('/', static function () {
 })->name('homepage');
 
 Route::middleware('guest')->group(function () {
-
     // user register
     Route::get('register', [RegisteredUserController::class, 'create'])
         ->name('register');
@@ -87,3 +86,9 @@ Route::middleware('auth')->group(function () {
     Route::post('images/upload', [ImageController::class, 'upload'])->name('images.upload');
     Route::delete('images/upload/revert', [ImageController::class, 'revert'])->name('images.upload.revert');
 });
+
+Route::group(['as' => 'guest.'], static function() {
+    Route::get('pogrebna-poduzeca', [CompanyTypeController::class, 'funerals'])->name('funerals');
+    Route::post('pogrebna-poduzeca', [CompanyTypeController::class, 'items'])->name('funerals.items');
+});
+
