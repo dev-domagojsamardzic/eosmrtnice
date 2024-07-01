@@ -12,7 +12,7 @@
     </head>
     <body class="">
         @include('layouts.guest_navbar')
-        <div class="w-100 d-flex flex-column justify-content-center align-items-center">
+        <div class="container">
 
             {{ $slot }}
 
