@@ -27,7 +27,7 @@
         e.preventDefault();
         $.ajax({
             method: 'POST',
-            url: '{{ route('guest.funerals.items') }}',
+            url: '{{ $searchRoute }}',
             headers: {
                 'X-CSRF-TOKEN': '{{ csrf_token() }}'
             },

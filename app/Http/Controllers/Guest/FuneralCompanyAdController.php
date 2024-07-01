@@ -39,8 +39,9 @@ class FuneralCompanyAdController extends Controller
         $counties = County::query()->orderBy('title')->get();
         $ads = $this->query()->inRandomOrder()->get();
         $title = __('guest.funerals');
+        $searchRoute = route('guest.funerals.items');
 
-        return view('guest.ads', compact('title', 'counties', 'ads'));
+        return view('guest.ads', compact('title', 'counties', 'ads', 'searchRoute'));
     }
 
     /**
