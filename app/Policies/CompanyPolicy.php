@@ -20,7 +20,7 @@ class CompanyPolicy
      */
     public function view(User $user, Company $company): bool
     {
-        return is_admin() || $company->user?->id === $user->id;
+        return is_admin() || (is_partner() && $company->user?->id === $user->id);
     }
 
     /**
@@ -28,7 +28,7 @@ class CompanyPolicy
      */
     public function create(User $user): bool
     {
-        return is_partner();
+        return is_admin() || is_partner();
     }
 
     /**
@@ -36,7 +36,7 @@ class CompanyPolicy
      */
     public function update(User $user, Company $company): bool
     {
-        return is_admin() || $company->user?->id === $user->id;
+        return is_admin() || (is_partner() && $company->user?->id === $user->id);
     }
 
     /**
@@ -44,7 +44,7 @@ class CompanyPolicy
      */
     public function delete(User $user, Company $company): bool
     {
-        return is_admin() || $company->user?->id === $user->id;
+        return is_admin() || (is_partner() && $company->user?->id === $user->id);
     }
 
     /**
