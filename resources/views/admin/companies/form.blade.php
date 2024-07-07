@@ -8,7 +8,22 @@
     <div>
         <form method="POST" action="{{ $action }}">
             @csrf
-            {{ method_field('PUT') }}
+            @if($company->exists)
+                {{ method_field('PUT') }}
+            @endif
+
+            {{-- user_id --}}
+            <div class="form-group row">
+                <div class="col-md-6 mb-3">
+                    <x-input-label for="user_id" :value="__('models/company.owner')" :required_tag="true"/>
+                    <select class="form-control border border-dark" id="user_id" name="user_id">
+                        @foreach($partners as $partner)
+                            <option value="{{ $partner->id }}" @selected((int)old('user_id', $company->user_id) === $partner->id)>{{ "$partner->last_name, $partner->first_name" }}</option>
+                        @endforeach
+                    </select>
+                    <x-input-error :messages="$errors->get('user_id')" class="mt-2"/>
+                </div>
+            </div>
 
             {{-- Logo --}}
             <div class="form-group row">

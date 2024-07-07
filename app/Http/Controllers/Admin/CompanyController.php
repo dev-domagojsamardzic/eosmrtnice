@@ -8,6 +8,7 @@ use App\Http\Requests\Admin\CompanyRequest;
 use App\Models\City;
 use App\Models\Company;
 use App\Models\County;
+use App\Models\Partner;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\View\View;
@@ -29,6 +30,15 @@ class CompanyController extends Controller
     }
 
     /**
+     * Show company create form
+     * @return View
+     */
+    public function create(): View
+    {
+        return $this->form(new Company, 'create');
+    }
+
+    /**
      * Show company edit form
      * @param Company $company
      * @return View
@@ -36,6 +46,16 @@ class CompanyController extends Controller
     public function edit(Company $company): View
     {
         return $this->form($company, 'edit');
+    }
+
+    /**
+     * Store new resource
+     * @param CompanyRequest $request
+     * @return RedirectResponse
+     */
+    public function store(CompanyRequest $request): RedirectResponse
+    {
+        return $this->apply(new Company, $request);
     }
 
     /**
@@ -78,6 +98,10 @@ class CompanyController extends Controller
         $types = CompanyType::options();
         $counties = County::query()->orderBy('title')->get();
         $cities = City::query()->orderBy('title')->get();
+        $partners = Partner::query()
+            ->orderBy('last_name')
+            ->orderBy('first_name')
+            ->get();
 
         $route = match($action) {
             'edit' => route(auth_user_type() . '.companies.update', ['company' => $company]),
@@ -91,6 +115,7 @@ class CompanyController extends Controller
                 'types' => $types,
                 'counties' => $counties,
                 'cities' => $cities,
+                'partners' => $partners,
                 'action_name' => $action,
                 'action' => $route,
                 'quit' => route(auth_user_type() . '.companies.index'),
@@ -124,6 +149,7 @@ class CompanyController extends Controller
             }
         }
 
+        $company->user()->associate($request->input('user_id'));
         $company->type = $request->input('type');
         $company->title = $request->input('title');
         $company->address = $request->input('address');

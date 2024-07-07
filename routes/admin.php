@@ -26,7 +26,7 @@ Route::resource('members', MemberController::class)
     ->only(['index', 'edit', 'update']);
 
 Route::resource('companies', CompanyController::class)
-    ->only(['index', 'edit', 'update']);
+    ->only(['index', 'create', 'edit', 'store', 'update']);
 
 Route::resource('deceaseds', DeceasedController::class);
 
