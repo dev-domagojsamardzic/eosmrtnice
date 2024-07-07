@@ -12,6 +12,7 @@ use Filament\Forms\Contracts\HasForms;
 use Filament\Support\Enums\FontWeight;
 use Filament\Support\Enums\IconPosition;
 use Filament\Tables\Actions\ActionGroup;
+use Filament\Tables\Actions\CreateAction;
 use Filament\Tables\Actions\DeleteAction;
 use Filament\Tables\Actions\EditAction;
 use Filament\Tables\Columns\IconColumn;
@@ -52,6 +53,7 @@ class CompaniesTable extends Component implements HasTable, HasForms
             ->groups($this->getGroups())
             ->defaultGroup('type')
             ->groupingSettingsHidden()
+            ->headerActions($this->getHeaderActions())
             ->actions($this->getActions())
             ->columns($this->getColumns())
             ->filters($this->getFilters());
@@ -187,6 +189,20 @@ class CompaniesTable extends Component implements HasTable, HasForms
                     ->modalSubmitActionLabel(__('common.delete'))
                     ->action(function(Company $company) { (new CompanyController())->destroy($company); })
             ])->iconPosition(IconPosition::Before),
+        ];
+    }
+
+    /**
+     * Return header actions
+     * @return array
+     */
+    private function getHeaderActions(): array
+    {
+        return [
+            CreateAction::make('create')
+                ->label(__('models/company.new_company'))
+                ->icon('heroicon-s-plus')
+                ->url(fn (Company $company): string => route(auth_user_type() . '.companies.create'))
         ];
     }
 
