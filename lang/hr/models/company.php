@@ -13,4 +13,6 @@ return [
     'email' => 'Email adresa',
     'phone' => 'Telefon',
     'mobile_phone' => 'Mobitel',
+    'new_company' => 'Nova tvrtka',
+    'owner' => 'Vlasnik tvrtke',
 ];
