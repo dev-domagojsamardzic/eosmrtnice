@@ -91,7 +91,7 @@
                         <x-text-input id="deceased_full_name_lg"
                                       type="text"
                                       name="deceased_full_name_lg"
-                                      value="{{ old('deceased_full_name_lg', $deceased->full_name) }}"
+                                      value="{{ old('deceased_full_name_lg') }}"
                                       placeholder="{{ __('models/post.deceased_full_name_lg_placeholder') }}"
                                       required/>
                         <x-input-error :messages="$errors->get('deceased_full_name_lg')" class="mt-2"/>
@@ -120,7 +120,7 @@
                         <x-text-input id="lifespan"
                                       type="text"
                                       name="lifespan"
-                                      value="{{ old('lifespan', $post->lifespan ?? $deceased->lifespan) }}"
+                                      value="{{ old('lifespan', $post->lifespan) }}"
                                       placeholder="{{ __('models/post.lifespan_placeholder') }}"
                                       required/>
                         <x-input-error :messages="$errors->get('lifespan')" class="mt-2"/>
@@ -319,7 +319,7 @@
          * Handle image_preview
          */
         function handleImagePreview() {
-            image.src = '{{ isset($deceased) ? public_storage_asset($deceased->image) : '' }}'
+            image.src = '{{ public_storage_asset($post->image) }}'
         }
 
         /**

@@ -13,7 +13,7 @@
 
         {{-- Deceased lifespan--}}
         <div id="lifespan_preview" class="lifespan">
-            {{ $post->deceased?->lifespan ?? $deceased->lifespan }}
+            {{ $post->lifespan }}
         </div>
         {{-- Deceased lifespan--}}
 
@@ -41,7 +41,7 @@
 
         {{-- Deceased full name - small --}}
         <div id="deceased_full_name_sm_preview" class="deceased_full_name_sm">
-            {{ $post->deceased_full_name_sm ?? $deceased->full_name }}
+            {{ $post->deceased_full_name_sm }}
         </div>
         {{-- Deceased full name - small --}}
 
