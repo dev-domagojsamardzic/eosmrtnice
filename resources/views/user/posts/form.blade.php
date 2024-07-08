@@ -319,7 +319,15 @@
          * Handle image_preview
          */
         function handleImagePreview() {
-            image.src = '{{ public_storage_asset($post->image) }}'
+            const has_image = '{{ $post->image }}'
+            const no_image = '{{ asset('images/no-image.png') }}';
+            const deceased_image = '{{ public_storage_asset($post->image) }}';
+
+            image.src = no_image;
+
+            if (has_image) {
+                image.src = deceased_image;
+            }
         }
 
         /**
