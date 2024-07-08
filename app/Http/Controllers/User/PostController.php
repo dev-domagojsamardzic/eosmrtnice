@@ -101,9 +101,13 @@ class PostController extends Controller
         $post->user()->associate(auth()->user());
         $post->type = $request->input('type');
         $post->size = $request->input('size');
-        $post->starts_at = Carbon::parse($request->input('starts_at'))->format('Y-m-d');
-        // TODO: post lasts for 2 weeks, change that
-        $post->ends_at = Carbon::parse($request->input('ends_at'))->addWeeks(2)->format('Y-m-d');
+
+        $startDate = Carbon::parse($request->input('starts_at'));
+        $postDurationInDays = (int)config('eosmrtnice.post_duration_days');
+        $endDate = $startDate->addDays($postDurationInDays);
+        $post->starts_at = $startDate->format('Y-m-d');
+        $post->ends_at = $endDate->format('Y-m-d');
+
         $post->is_framed = $request->boolean('is_framed');
         // TODO: store deceased image
         $post->image = '';

@@ -39,4 +39,12 @@ return [
             'height' => env('EOS_COMPANY_AD_BANNER_HEIGHT', 300),
         ],
     ],
+
+    /**
+     * *------------------------------------------------*
+     * *-- How long will the post be active (in days) --*
+     * *-------- default is 730 days (~2 years) --------*
+     * -------------------------------------------------*
+     */
+    'post_duration_days' => config('EOS_POST_DURATION_DAYS', 730),
 ];
