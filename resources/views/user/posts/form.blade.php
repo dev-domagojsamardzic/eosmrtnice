@@ -91,7 +91,7 @@
                         <x-text-input id="deceased_full_name_lg"
                                       type="text"
                                       name="deceased_full_name_lg"
-                                      value="{{ old('deceased_full_name_lg') }}"
+                                      value="{{ old('deceased_full_name_lg', $post->deceased_full_name_lg) }}"
                                       placeholder="{{ __('models/post.deceased_full_name_lg_placeholder') }}"
                                       required/>
                         <x-input-error :messages="$errors->get('deceased_full_name_lg')" class="mt-2"/>

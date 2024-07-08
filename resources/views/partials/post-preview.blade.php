@@ -20,7 +20,10 @@
         {{-- Images --}}
         <div class="images_wrapper">
             {{-- Deceased image --}}
-            <div id="image_preview" class="image">
+            <div id="image_preview" class="image" @style([
+                'display: none' => !$post->image,
+                'display: block' => $post->image
+            ])>
                 <img id="deceased_image" src="{{ public_storage_asset($post->image ?? '') }}" alt="{{ $post->deceased_full_name_lg }}" />
             </div>
             {{-- Deceased image --}}
