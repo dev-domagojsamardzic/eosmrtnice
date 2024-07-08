@@ -7,7 +7,7 @@ use App\Http\Controllers\Admin\OfferController;
 use App\Http\Controllers\Admin\Offers\AdOfferController;
 use App\Http\Controllers\Admin\Offers\PostOfferController;
 use App\Http\Controllers\Admin\PartnerController;
-use App\Http\Controllers\Admin\PostController;
+use App\Http\Controllers\User\PostController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -41,8 +41,7 @@ Route::resource('posts/{post}/offers', PostOfferController::class)
     ->except(['index'])
     ->names('posts.offers');
 
-Route::resource('posts', PostController::class)
-    ->only(['index', 'edit', 'update']);
+Route::resource('posts', PostController::class);
 
 Route::resource('offers', OfferController::class)
     ->only(['index', 'edit', 'update', 'delete']);

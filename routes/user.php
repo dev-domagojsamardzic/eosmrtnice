@@ -1,9 +1,9 @@
 <?php
 
-use App\Http\Controllers\PostController;
-use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\User\OfferController;
+use App\Http\Controllers\User\PostController;
+use Illuminate\Support\Facades\Route;
 
 Route::get('/dashboard', static function () {
     return view('user/dashboard');
