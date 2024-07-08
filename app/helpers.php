@@ -63,12 +63,16 @@ if (!function_exists('storage_public_path')) {
 if (!function_exists('public_storage_asset')) {
     /**
      * Returns asset link for item in public/storage directory
-     * @param string $path
+     * @param string|null $path
      * @return string
      */
-    function public_storage_asset(string $path = ''): string
+    function public_storage_asset(string $path = null): string
     {
-        return asset('storage/' . $path);
+        if ($path) {
+            return asset('storage/' . $path);
+        }
+
+        return asset('storage');
     }
 }
 
