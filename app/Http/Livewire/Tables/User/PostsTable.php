@@ -3,57 +3,31 @@
 namespace App\Http\Livewire\Tables\User;
 
 use App\Models\Post;
+use App\Http\Livewire\Tables\PostsTable as BasePostsTable;
 use Filament\Actions\StaticAction;
 use Filament\Support\Enums\FontWeight;
 use Filament\Tables\Actions\ActionGroup;
-use Filament\Forms\Components\Select;
-use Filament\Tables\Actions\CreateAction;
 use Filament\Tables\Actions\EditAction;
 use Filament\Tables\Columns\Layout\Split;
-use Filament\Forms\Concerns\InteractsWithForms;
-use Filament\Forms\Contracts\HasForms;
 use Filament\Tables\Actions\Action;
 use Filament\Tables\Columns\Layout\Stack;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Columns\TextColumn\TextColumnSize;
 use Filament\Tables\Columns\ToggleColumn;
-use Filament\Tables\Concerns\InteractsWithTable;
-use Filament\Tables\Contracts\HasTable;
-use Filament\Tables\Table;
 use Illuminate\Contracts\View\View;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\RedirectResponse;
-use Livewire\Component;
 use Livewire\Features\SupportRedirects\Redirector;
 
-class PostsTable extends Component implements HasForms, HasTable
+class PostsTable extends BasePostsTable
 {
-    use InteractsWithForms;
-    use InteractsWithTable;
-
-    public function table(Table $table): Table
+    protected function getQuery(): Builder
     {
-        return $table
-            ->emptyStateHeading(__('common.no_records'))
-            ->emptyStateDescription(__('models/post.empty_state_description'))
-            ->query($this->getQuery())
-            ->striped()
-            ->columns($this->getColumns())
-            ->actions($this->getActions())
-            ->headerActions($this->getHeaderActions());
+        return Post::query()
+            ->where('user_id', auth()->id());
     }
 
-    public function render(): View
-    {
-        return view('livewire.posts-table');
-    }
-
-    private function getQuery(): Builder
-    {
-        return Post::query()->where('user_id', auth()->id());
-    }
-
-    private function getColumns(): array
+    protected function getColumns(): array
     {
         return [
             Split::make([
@@ -89,11 +63,10 @@ class PostsTable extends Component implements HasForms, HasTable
                     ToggleColumn::make('is_active'),
                 ])->alignStart(),
             ])->from('md'),
-
         ];
     }
 
-    private function getActions(): array
+    protected function getActions(): array
     {
         return [
             Action::make('preview')
@@ -117,7 +90,7 @@ class PostsTable extends Component implements HasForms, HasTable
         ];
     }
 
-    private function getHeaderActions(): array
+    protected function getHeaderActions(): array
     {
         return [
             Action::make('create_post')

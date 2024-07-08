@@ -3,52 +3,21 @@
 namespace App\Http\Livewire\Tables\Admin;
 
 use App\Models\Post;
+use App\Http\Livewire\Tables\PostsTable as BasePostsTable;
 use Filament\Actions\StaticAction;
 use Filament\Support\Enums\FontWeight;
 use Filament\Tables\Actions\ActionGroup;
 use Filament\Tables\Actions\EditAction;
 use Filament\Tables\Columns\Layout\Split;
-use Filament\Forms\Concerns\InteractsWithForms;
-use Filament\Forms\Contracts\HasForms;
 use Filament\Tables\Actions\Action;
 use Filament\Tables\Columns\Layout\Stack;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Columns\ViewColumn;
-use Filament\Tables\Concerns\InteractsWithTable;
-use Filament\Tables\Contracts\HasTable;
-use Filament\Tables\Table;
 use Illuminate\Contracts\View\View;
-use Illuminate\Database\Eloquent\Builder;
-use Livewire\Component;
 
-class PostsTable extends Component implements HasForms, HasTable
+class PostsTable extends BasePostsTable
 {
-    use InteractsWithForms;
-    use InteractsWithTable;
-
-    public function table(Table $table): Table
-    {
-        return $table
-            ->striped()
-            ->emptyStateHeading(__('common.no_records'))
-            ->emptyStateDescription('')
-            ->query($this->getQuery())
-            ->columns($this->getColumns())
-            ->filters([])
-            ->actions($this->getActions());
-    }
-
-    public function render(): View
-    {
-        return view('livewire.posts-table');
-    }
-
-    private function getQuery(): Builder
-    {
-        return Post::query();
-    }
-
-    private function getColumns(): array
+    protected function getColumns(): array
     {
         return [
             Split::make([
@@ -92,7 +61,7 @@ class PostsTable extends Component implements HasForms, HasTable
         ];
     }
 
-    private function getActions(): array
+    protected function getActions(): array
     {
         return [
             Action::make('preview')
