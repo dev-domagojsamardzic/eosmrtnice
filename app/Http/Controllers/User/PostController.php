@@ -117,10 +117,10 @@ class PostController extends Controller
 
         try {
             $post->save();
-            return redirect()->route('user.posts.index')
+            return redirect()->route(auth_user_type() . '.posts.index')
                 ->with('alert', ['class' => 'success', 'message' => __('common.saved')]);
         } catch(Exception $e) {
-            return redirect()->route('user.posts.index')
+            return redirect()->route(auth_user_type() . '.posts.index')
                 ->with('alert', ['class' => 'danger', 'message' => __('common.something_went_wrong')]);
         }
     }
