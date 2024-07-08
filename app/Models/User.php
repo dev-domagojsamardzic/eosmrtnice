@@ -35,7 +35,6 @@ use Illuminate\Notifications\Notifiable;
  * -------------------------------------------
  * @property        Company                 companies
  * @property        Ad<Collection>          ads
- * @property        Deceased<Collection>    deceaseds
  */
 
 class User extends Authenticatable implements MustVerifyEmail
@@ -108,15 +107,6 @@ class User extends Authenticatable implements MustVerifyEmail
     public function ads(): HasManyThrough
     {
         return $this->hasManyThrough(Ad::class, Company::class);
-    }
-
-    /**
-     * Return deceased's of a user (for member)
-     * @return HasMany
-     */
-    public function deceaseds(): HasMany
-    {
-        return $this->hasMany(Deceased::class);
     }
 
     /**

@@ -4,7 +4,6 @@ namespace App\Services;
 
 use App\Models\Ad;
 use App\Models\Company;
-use App\Models\Deceased;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;

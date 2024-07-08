@@ -56,5 +56,4 @@ return [
     'delete_ad' => 'Obriši oglas',
     'offers' => 'Ponude',
     'delete_offer' => 'Obriši ponudu',
-    'delete_deceased' => 'Obriši pokojnika',
 ];

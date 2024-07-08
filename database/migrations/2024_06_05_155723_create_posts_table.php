@@ -18,7 +18,6 @@ return new class extends Migration
             $table->id();
 
             $table->foreignIdFor(User::class);
-            $table->foreignIdFor(Deceased::class);
 
             $table->unsignedInteger('type');
             $table->unsignedInteger('size');

@@ -9,6 +9,5 @@ return [
     'ads' => 'Oglasi',
     'services' => 'Usluge',
     'offers' => 'Ponude',
-    'deceaseds' => 'Pokojnici',
     'posts' => 'Objave',
 ];

@@ -2,7 +2,6 @@
 
 namespace App\Http\Livewire\Tables\User;
 
-use App\Models\Deceased;
 use App\Models\Post;
 use Filament\Actions\StaticAction;
 use Filament\Support\Enums\FontWeight;
@@ -37,13 +36,9 @@ class PostsTable extends Component implements HasForms, HasTable
         return $table
             ->emptyStateHeading(__('common.no_records'))
             ->emptyStateDescription(__('models/post.empty_state_description'))
-            ->emptyStateActions($this->getEmptyStateActions())
             ->query($this->getQuery())
             ->striped()
             ->columns($this->getColumns())
-            ->filters([
-                //
-            ])
             ->actions($this->getActions())
             ->headerActions($this->getHeaderActions());
     }
@@ -67,10 +62,6 @@ class PostsTable extends Component implements HasForms, HasTable
                     ->sortable()
                     ->weight(FontWeight::Bold)
                     ->formatStateUsing(fn (Post $post) => $post->type->translate()),
-                TextColumn::make('deceased.full_name')
-                    ->label(__('models/deceased.full_name'))
-                    ->searchable(['first_name', 'last_name'])
-                    ->sortable(['first_name', 'last_name']),
                 Stack::make([
                     TextColumn::make('starts_at')
                         ->label(__('models/post.starts_at'))
@@ -115,13 +106,13 @@ class PostsTable extends Component implements HasForms, HasTable
                 ->modalSubmitAction(false)
                 ->modalContent(fn (Post $post): View => view(
                     'partials/post-preview',
-                    ['post' => $post, 'deceased' => $post->deceased],
+                    ['post' => $post],
                 )),
             ActionGroup::make([
                 EditAction::make('edit')
                     ->label(__('common.edit'))
                     ->icon('heroicon-s-pencil-square')
-                    ->url(fn(Post $post) => route('user.posts.edit', ['deceased' => $post->deceased_id, 'post' => $post->id])),
+                    ->url(fn(Post $post) => route('user.posts.edit', ['post' => $post->id])),
             ]),
         ];
     }
@@ -132,26 +123,7 @@ class PostsTable extends Component implements HasForms, HasTable
             Action::make('create_post')
                 ->label(__('models/post.new_post'))
                 ->icon('heroicon-m-plus')
-                ->form([
-                    Select::make('deceased_id')
-                        ->label(__('models/post.select_deceased_for_new_post'))
-                        ->options(Deceased::query()->where('user_id', auth()->id())->get()->pluck('full_name', 'id')->toArray())
-                        ->required(),
-                ])
-                ->disabled(fn() => !auth()->user()->deceaseds()->exists())
-                ->action(function (array $data, Post $p): RedirectResponse|Redirector {
-                    return redirect()->route(auth_user_type() . '.posts.create',['deceased' => $data['deceased_id']]);
-                })
-        ];
-    }
-
-    private function getEmptyStateActions(): array
-    {
-        return [
-            CreateAction::make('create_deceased')
-                ->label(__('models/deceased.add_deceased'))
-                ->icon('heroicon-m-plus')
-                ->url(route('user.deceaseds.create'))
+                ->action(fn (): RedirectResponse|Redirector => redirect()->route(auth_user_type() . '.posts.create'))
         ];
     }
 }

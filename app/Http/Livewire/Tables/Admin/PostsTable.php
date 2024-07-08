@@ -57,10 +57,6 @@ class PostsTable extends Component implements HasForms, HasTable
                     ->sortable()
                     ->weight(FontWeight::Bold)
                     ->formatStateUsing(fn (Post $post) => $post->type->translate()),
-                TextColumn::make('deceased.full_name')
-                    ->label(__('models/deceased.full_name'))
-                    ->searchable(['first_name', 'last_name'])
-                    ->sortable(['first_name', 'last_name']),
                 Stack::make([
                     TextColumn::make('starts_at')
                         ->label(__('models/post.starts_at'))

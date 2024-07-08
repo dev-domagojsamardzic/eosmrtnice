@@ -9,7 +9,6 @@ use App\Http\Controllers\Admin\Offers\PostOfferController;
 use App\Http\Controllers\Admin\PartnerController;
 use App\Http\Controllers\Admin\PostController;
 use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\User\DeceasedController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/dashboard', static function () {
@@ -27,8 +26,6 @@ Route::resource('members', MemberController::class)
 
 Route::resource('companies', CompanyController::class)
     ->only(['index', 'create', 'edit', 'store', 'update']);
-
-Route::resource('deceaseds', DeceasedController::class);
 
 Route::get('ads', [AdController::class, 'index'])->name('ads.index');
 Route::prefix('companies/{company}')->group(function () {

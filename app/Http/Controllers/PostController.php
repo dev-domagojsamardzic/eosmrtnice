@@ -6,7 +6,6 @@ use App\Enums\PostSize;
 use App\Enums\PostSymbol;
 use App\Enums\PostType;
 use App\Http\Requests\PostRequest;
-use App\Models\Deceased;
 use App\Models\Post;
 use Exception;
 use Illuminate\Http\RedirectResponse;
@@ -25,57 +24,54 @@ class PostController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create(Deceased $deceased): View
+    public function create(): View
     {
-        return $this->form($deceased, new Post, 'create');
+        return $this->form(new Post, 'create');
     }
 
     /**
      * Show the form for editing resource.
      */
-    public function edit(Deceased $deceased, Post $post): View
+    public function edit(Post $post): View
     {
-        return $this->form($deceased, $post, 'edit');
+        return $this->form($post, 'edit');
     }
 
     /**
      * Store new resource
      *
-     * @param Deceased $deceased
      * @param PostRequest $request
      * @return RedirectResponse
      */
-    public function store(Deceased $deceased, PostRequest $request): RedirectResponse
+    public function store(PostRequest $request): RedirectResponse
     {
-        return $this->apply($deceased, new Post, $request);
+        return $this->apply(new Post, $request);
     }
 
     /**
      * Update given resource
      *
-     * @param Deceased $deceased
      * @param Post $post
      * @param PostRequest $request
      * @return RedirectResponse
      */
-    public function update(Deceased $deceased, Post $post, PostRequest $request): RedirectResponse
+    public function update(Post $post, PostRequest $request): RedirectResponse
     {
-        return $this->apply($deceased, $post, $request);
+        return $this->apply($post, $request);
     }
 
     /**
      * Show resource form
      *
-     * @param Deceased $deceased
      * @param Post $post
      * @param string $action
      * @return View
      */
-    private function form(Deceased $deceased, Post $post, string $action): View
+    private function form(Post $post, string $action): View
     {
         $route = match($action) {
-            'create' => route('user.posts.store',['deceased' => $deceased->id]),
-            'edit' => route('user.posts.update', ['deceased' => $deceased->id, 'post' => $post->id]),
+            'create' => route('user.posts.store',),
+            'edit' => route('user.posts.update', ['post' => $post->id]),
             default => '',
         };
 
@@ -85,7 +81,6 @@ class PostController extends Controller
 
         return view('user.posts.form', [
             'post' => $post,
-            'deceased' => $deceased,
             'types' => $postTypes,
             'sizes' => $postSizes,
             'symbols' => $postSymbols,
@@ -95,24 +90,23 @@ class PostController extends Controller
 
     /**
      * Apply changes to the resource
-     * @param Deceased $deceased
      * @param Post $post
      * @param PostRequest $request
      * @return RedirectResponse
      */
-    private function apply(Deceased $deceased, Post $post, PostRequest $request): RedirectResponse
+    private function apply(Post $post, PostRequest $request): RedirectResponse
     {
         $post->user()->associate(auth()->user());
-        $post->deceased()->associate($deceased);
         $post->type = $request->input('type');
         $post->size = $request->input('size');
         $post->starts_at = Carbon::parse($request->input('starts_at'))->format('Y-m-d');
         // TODO: post lasts for 2 weeks, change that
         $post->ends_at = Carbon::parse($request->input('ends_at'))->addWeeks(2)->format('Y-m-d');
         $post->is_framed = $request->boolean('is_framed');
-        $post->image = $deceased->image;
+        // TODO: store deceased image
+        $post->image = '';
         $post->symbol = $request->input('symbol') ?? '';
-        $post->deceased_full_name_lg = $request->input('deceased_full_name_lg') ?? $deceased->full_name;
+        $post->deceased_full_name_lg = $request->input('deceased_full_name_lg');
         $post->deceased_full_name_sm = $request->input('deceased_full_name_sm');
         $post->lifespan = $request->input('lifespan');
         $post->intro_message = trim($request->input('intro_message'), " \r\n\t");

@@ -9,6 +9,5 @@ return [
     'ads' => 'Ads',
     'services' => 'Services',
     'offers' => 'Offers',
-    'deceaseds' => 'Deceaseds',
     'posts' => 'Posts',
 ];

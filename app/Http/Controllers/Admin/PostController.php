@@ -61,7 +61,6 @@ class PostController extends Controller
 
         return view('user.posts.form', [
             'post' => $post,
-            'deceased' => $post->deceased,
             'types' => $postTypes,
             'sizes' => $postSizes,
             'symbols' => $postSymbols,
@@ -84,7 +83,7 @@ class PostController extends Controller
         $post->ends_at = Carbon::parse($request->input('ends_at'))->addWeeks(2)->format('Y-m-d');
         $post->is_framed = $request->boolean('is_framed');
         $post->symbol = $request->input('symbol') ?? '';
-        $post->deceased_full_name_lg = $request->input('deceased_full_name_lg') ?? $post->deceased?->full_name;
+        $post->deceased_full_name_lg = $request->input('deceased_full_name_lg');
         $post->deceased_full_name_sm = $request->input('deceased_full_name_sm');
         $post->lifespan = $request->input('lifespan');
         $post->intro_message = trim($request->input('intro_message'), " \r\n\t");

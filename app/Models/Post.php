@@ -18,7 +18,6 @@ use Illuminate\Support\Str;
 /**
  * @property-read       int             id
  * @property            int             user_id
- * @property            int             deceased_id
  * @property            PostType        type
  * @property            PostSize        size
  * @property            Carbon          starts_at
@@ -95,16 +94,6 @@ class Post extends Model
         return Attribute::make(
             get: fn() => Str::of($this->intro_message)->wordCount() + Str::of($this->main_message)->wordCount(),
         );
-    }
-
-    /**
-     * Return post's deceased relationship
-     *
-     * @return BelongsTo
-     */
-    public function deceased(): BelongsTo
-    {
-        return $this->belongsTo(Deceased::class, 'deceased_id');
     }
 
     /**

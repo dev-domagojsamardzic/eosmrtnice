@@ -47,13 +47,6 @@
             <span>{{ __('sidebar.companies') }}</span></a>
     </li>
 
-    <!-- Nav Item - Deceaseds -->
-    <li class="nav-item">
-        <a class="nav-link" href="{{ route(auth_user_type() . '.deceaseds.index') }}">
-            <i class="fas fa-cross"></i>
-            <span>{{ __('sidebar.deceaseds') }}</span></a>
-    </li>
-
     <!-- Divider -->
     <hr class="sidebar-divider">
 

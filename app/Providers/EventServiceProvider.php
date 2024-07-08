@@ -2,9 +2,7 @@
 
 namespace App\Providers;
 
-use App\Models\Deceased;
 use App\Models\Offer;
-use App\Observers\DeceasedObserver;
 use App\Observers\OfferObserver;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
@@ -29,7 +27,6 @@ class EventServiceProvider extends ServiceProvider
     public function boot(): void
     {
         Offer::observe(OfferObserver::class);
-        Deceased::observe(DeceasedObserver::class);
     }
 
     /**
