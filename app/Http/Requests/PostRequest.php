@@ -28,7 +28,7 @@ class PostRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return true;
+        return is_admin() || is_member();
     }
 
     /**
