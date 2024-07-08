@@ -72,8 +72,8 @@ class PostController extends Controller
     private function form(Post $post, string $action): View
     {
         $route = match($action) {
-            'create' => route('user.posts.store',),
-            'edit' => route('user.posts.update', ['post' => $post->id]),
+            'create' => route(auth_user_type() . '.posts.store'),
+            'edit' => route(auth_user_type() . '.posts.update', ['post' => $post->id]),
             default => '',
         };
 
