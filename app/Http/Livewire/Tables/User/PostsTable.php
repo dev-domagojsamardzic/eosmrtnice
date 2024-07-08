@@ -89,14 +89,4 @@ class PostsTable extends BasePostsTable
             ]),
         ];
     }
-
-    protected function getHeaderActions(): array
-    {
-        return [
-            Action::make('create_post')
-                ->label(__('models/post.new_post'))
-                ->icon('heroicon-m-plus')
-                ->action(fn (): RedirectResponse|Redirector => redirect()->route(auth_user_type() . '.posts.create'))
-        ];
-    }
 }

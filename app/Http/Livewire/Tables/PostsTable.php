@@ -5,12 +5,15 @@ namespace App\Http\Livewire\Tables;
 use App\Models\Post;
 use Filament\Forms\Concerns\InteractsWithForms;
 use Filament\Forms\Contracts\HasForms;
+use Filament\Tables\Actions\Action;
 use Filament\Tables\Concerns\InteractsWithTable;
 use Filament\Tables\Contracts\HasTable;
 use Filament\Tables\Table;
 use Illuminate\Contracts\View\View;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Http\RedirectResponse;
 use Livewire\Component;
+use Livewire\Features\SupportRedirects\Redirector;
 
 class PostsTable extends Component implements HasForms, HasTable
 {
@@ -26,7 +29,8 @@ class PostsTable extends Component implements HasForms, HasTable
             ->query($this->getQuery())
             ->columns($this->getColumns())
             ->filters([])
-            ->actions($this->getActions());
+            ->actions($this->getActions())
+            ->headerActions($this->getHeaderActions());
     }
 
     public function render(): View
@@ -51,6 +55,11 @@ class PostsTable extends Component implements HasForms, HasTable
 
     protected function getHeaderActions(): array
     {
-        return [];
+        return [
+            Action::make('create_post')
+                ->label(__('models/post.new_post'))
+                ->icon('heroicon-m-plus')
+                ->action(fn (): RedirectResponse|Redirector => redirect()->route(auth_user_type() . '.posts.create'))
+        ];
     }
 }
