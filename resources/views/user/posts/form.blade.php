@@ -86,7 +86,7 @@
                 {{-- Deceased full_name - LG --}}
                 <div class="form-group row">
                     <div class="col-sm-12 col-lg-12">
-                        <x-input-label for="deceased_full_name_lg" :value="__('models/deceased.full_name')" :required_tag="true"/>
+                        <x-input-label for="deceased_full_name_lg" :value="__('models/post.deceased_full_name')" :required_tag="true"/>
                         <x-input-info :content="__('models/post.deceased_full_name_lg_info')"/>
                         <x-text-input id="deceased_full_name_lg"
                                       type="text"
@@ -115,7 +115,7 @@
                 {{-- Lifespan --}}
                 <div class="form-group row">
                     <div class="col-sm-12 col-lg-6">
-                        <x-input-label for="lifespan" :value="__('models/deceased.born_died')" :required_tag="true"/>
+                        <x-input-label for="lifespan" :value="__('models/post.deceased_born_died')" :required_tag="true"/>
                         <x-input-info :content="__('models/post.lifespan_info')"/>
                         <x-text-input id="lifespan"
                                       type="text"
