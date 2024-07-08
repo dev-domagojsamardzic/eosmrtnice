@@ -191,6 +191,7 @@
         const deceased_full_name_lg = document.getElementById('deceased_full_name_lg');
         const deceased_full_name_lg_preview = document.getElementById('deceased_full_name_lg_preview');
         const is_framed = document.getElementById('is_framed');
+        const image_preview = document.getElementById('image_preview');
         const image = document.getElementById('deceased_image');
         const symbol = document.getElementById('symbol');
         const lifespan = document.getElementById('lifespan');
@@ -320,14 +321,15 @@
          */
         function handleImagePreview() {
             const has_image = '{{ $post->image }}'
-            const no_image = '{{ asset('images/no-image.png') }}';
-            const deceased_image = '{{ public_storage_asset($post->image) }}';
-
-            image.src = no_image;
 
             if (has_image) {
-                image.src = deceased_image;
+                image_preview.style.display = 'block';
+                image.src = '{{ public_storage_asset($post->image) }}';
+                return;
             }
+
+            image_preview.style.display = 'none';
+            image.src = '';
         }
 
         /**
