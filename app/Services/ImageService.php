@@ -4,6 +4,7 @@ namespace App\Services;
 
 use App\Models\Ad;
 use App\Models\Company;
+use App\Models\Post;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
@@ -13,7 +14,7 @@ class ImageService
 {
     public const LOGO_PATH = 'images/partners/logo/';
     public const BANNER_PATH = 'images/ads/banners/';
-    public const DECEASED_IMAGE_PATH = 'images/deceaseds/';
+    public const POST_IMAGE_PATH = 'images/posts/';
     /**
      * Store company logo
      *
@@ -103,17 +104,17 @@ class ImageService
      * Store deceased image
      *
      * @param Request $request
-     * @param Deceased $deceased
+     * @param Post $post
      * @return string|null
      */
-    public function storeDeceasedImage(Request $request, Deceased $deceased): string|null
+    public function storePostImage(Request $request, Post $post): string|null
     {
         $source = $request->input('image');
 
         if(!$source) {
             // Maybe user is removing image, check if image existed and delete
-            if ($deceased->image) {
-                Storage::disk('public')->delete($deceased->image);
+            if ($post->image) {
+                Storage::disk('public')->delete($post->image);
             }
             return null;
         }
@@ -125,10 +126,10 @@ class ImageService
         }
 
         $filename = pathinfo($source, PATHINFO_BASENAME);
-        $destination = self::DECEASED_IMAGE_PATH . $filename;
+        $destination = self::POST_IMAGE_PATH . $filename;
 
-        if (!is_null($deceased->image)) {
-            Storage::disk('public')->delete($deceased->image);
+        if (!is_null($post->image)) {
+            Storage::disk('public')->delete($post->image);
         }
 
         $dimensions = config('eosmrtnice.image_dimensions.deceased_image');

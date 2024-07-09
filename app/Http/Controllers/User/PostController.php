@@ -8,6 +8,7 @@ use App\Enums\PostType;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\PostRequest;
 use App\Models\Post;
+use App\Services\ImageService;
 use Exception;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Carbon;
@@ -15,6 +16,11 @@ use Illuminate\View\View;
 
 class PostController extends Controller
 {
+
+    public function __construct(protected ImageService $imageService)
+    {
+
+    }
     /**
      * Display a listing of the resource.
      */
@@ -98,6 +104,10 @@ class PostController extends Controller
      */
     private function apply(Post $post, PostRequest $request): RedirectResponse
     {
+        $deceasedImage = $this->imageService->storePostImage($request, $post);
+        $post->image = $deceasedImage;
+
+
         $post->user()->associate(auth()->user());
         $post->type = $request->input('type');
         $post->size = $request->input('size');
@@ -109,8 +119,7 @@ class PostController extends Controller
         $post->ends_at = $endDate->format('Y-m-d');
 
         $post->is_framed = $request->boolean('is_framed');
-        $post->image = $request->input('image');
-        $post->symbol = $request->input('symbol', '');
+        $post->symbol = $request->input('symbol') ?? PostSymbol::NONE;
         $post->deceased_full_name_lg = $request->input('deceased_full_name_lg');
         $post->deceased_full_name_sm = $request->input('deceased_full_name_sm');
         $post->lifespan = $request->input('lifespan');
