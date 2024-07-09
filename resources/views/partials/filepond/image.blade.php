@@ -2,6 +2,7 @@
     <script type="module">
 
         function changeImageFromPreview() {
+
             const hidden_image_element = document.querySelector('[type="hidden"][name="image"]');
             const deceased_image = document.getElementById('deceased_image')
 
@@ -54,7 +55,7 @@
                 dropValidation: true,
                 acceptedFileTypes: ['image/jpeg', 'image/png', 'image/webp'],
                 files: [
-                    @if($post->image)
+                    @if(old('image', $post->image))
                     {
                         source: '{{ old('image', $post->image) }}',
                         options: {
@@ -66,7 +67,7 @@
                 server: {
                     load: (source, load) => {
                         // Override img path with img asset URL
-                        source = '{{ public_storage_asset($post->image ?? '') }}';
+                        source = '{{ public_storage_asset(old('image', $post->image) ?? '') }}';
                         fetch(source)
                             .then(res => res.blob())
                             .then(load);
@@ -93,6 +94,7 @@
                     },
                 },
             });
+
             document.addEventListener('FilePond:processfile', changeImageFromPreview)
             document.addEventListener('FilePond:removefile', changeImageFromPreview)
         })

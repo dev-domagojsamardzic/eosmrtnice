@@ -337,12 +337,11 @@
              * Handle image_preview
              */
             function handleImagePreview() {
-                const has_image = '{{ $post->image }}'
-                const hidden_image_element = document.querySelector('[type="hidden"][name="image"]');
+                const has_image = '{{ old('image', $post->image) }}'
 
                 if (has_image) {
                     image_preview.style.display = 'block';
-                    image.src = '{{ public_storage_asset($post->image) }}';
+                    image.src = '{{ public_storage_asset(old('image', $post->image)) }}';
                     return;
                 }
 
