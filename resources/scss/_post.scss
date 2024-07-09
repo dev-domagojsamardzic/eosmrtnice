@@ -74,6 +74,7 @@
     flex-direction: row;
     justify-content: center;
     margin: 1rem 0;
+    gap: 1.25rem;
 }
 
 .post .body .images_wrapper .image {
@@ -93,7 +94,6 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-left: 1.25rem;
 }
 
 .post .body .images_wrapper .symbol img{
