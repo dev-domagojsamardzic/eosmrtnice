@@ -18,6 +18,7 @@ use Illuminate\Support\Str;
 /**
  * @property-read       int             id
  * @property            int             user_id
+ * @property            string          slug
  * @property            PostType        type
  * @property            PostSize        size
  * @property            Carbon          starts_at
@@ -39,7 +40,6 @@ use Illuminate\Support\Str;
  * -------------------------------------------------
  * @property            int             words_count
  * -------------------------------------------------
- * @property            Deceased            deceased
  * @property            User                user
  * @property            Collection<Offer>   offers
  */

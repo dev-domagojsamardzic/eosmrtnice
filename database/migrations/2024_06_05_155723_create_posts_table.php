@@ -19,6 +19,8 @@ return new class extends Migration
 
             $table->foreignIdFor(User::class);
 
+            $table->string('slug', 128);
+
             $table->unsignedInteger('type');
             $table->unsignedInteger('size');
             $table->date('starts_at')->nullable(false);
