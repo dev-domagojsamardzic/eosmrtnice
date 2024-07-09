@@ -43,6 +43,7 @@ class PostRequest extends FormRequest
             'size' => ['required', Rule::enum(PostSize::class), new PostWordCount()],
             'starts_at' => ['required'],
             'deceased_full_name_lg' => ['required', 'string', 'max:128'],
+            'deceased_full_name_sm' => ['max:128'],
             'lifespan' => ['required', 'string', 'max:30'],
         ];
     }

@@ -3,7 +3,9 @@
 namespace App\Providers;
 
 use App\Models\Offer;
+use App\Models\Post;
 use App\Observers\OfferObserver;
+use App\Observers\PostObserver;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
@@ -27,13 +29,6 @@ class EventServiceProvider extends ServiceProvider
     public function boot(): void
     {
         Offer::observe(OfferObserver::class);
-    }
-
-    /**
-     * Determine if events and listeners should be automatically discovered.
-     */
-    public function shouldDiscoverEvents(): bool
-    {
-        return false;
+        Post::observe(PostObserver::class);
     }
 }
