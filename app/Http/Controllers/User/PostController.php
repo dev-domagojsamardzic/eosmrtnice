@@ -109,9 +109,8 @@ class PostController extends Controller
         $post->ends_at = $endDate->format('Y-m-d');
 
         $post->is_framed = $request->boolean('is_framed');
-        // TODO: store deceased image
-        $post->image = '';
-        $post->symbol = $request->input('symbol') ?? '';
+        $post->image = $request->input('image');
+        $post->symbol = $request->input('symbol', '');
         $post->deceased_full_name_lg = $request->input('deceased_full_name_lg');
         $post->deceased_full_name_sm = $request->input('deceased_full_name_sm');
         $post->lifespan = $request->input('lifespan');
