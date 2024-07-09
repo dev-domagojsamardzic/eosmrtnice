@@ -44,4 +44,6 @@ return [
     'post_approved' => 'Objava je odobrena',
     'post_not_approved' => 'Objava nije odobrena',
     'empty_state_description' => 'Prvo morate dodati pokojnika da biste mogli kreirati svoju prvu objavu.',
+    'edit_post' => 'Uređivanje objave',
+    'edit_post_instructions' => 'Kako budete popunjavate formu, vaši unosi automatski će se prikazivati u području za pregled.',
 ];

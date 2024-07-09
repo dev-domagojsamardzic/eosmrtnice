@@ -20,19 +20,6 @@
                     {{ method_field('PUT') }}
                 @endif
 
-                {{-- Post type --}}
-                <div class="form-group row">
-                    <div class="col-sm-12">
-                        <x-input-label for="type" :value="__('models/post.type')" :required_tag="true"/>
-                        <select class="form-control border border-dark" id="type" name="type">
-                            @foreach($types as $key => $type)
-                                <option
-                                    value="{{ $key }}" @selected($key === (int)old('type', $post->type->value))>{{ $type }}</option>
-                            @endforeach
-                        </select>
-                        <x-input-error :messages="$errors->get('type')" class="mt-2"/>
-                    </div>
-                </div>
 
                 {{-- Post size --}}
                 <div class="form-group row">
@@ -71,6 +58,10 @@
                     </div>
                 </div>
 
+                <h3>{{ __('models/post.edit_post') }}</h3>
+                <p>{{ __('models/post.edit_post_instructions') }}</p>
+                <hr>
+
                 {{-- Is framed --}}
                 <div class="form-group row">
                     <div class="col-lg-4 col-sm-12">
@@ -83,14 +74,17 @@
                     </div>
                 </div>
 
-                {{-- Image --}}
-                <div class="form-group row" id="form-panel-image">
-                    <div class="col-lg-12 col-md-12 mb-3">
-                        <x-input-label for="image" :value="__('models/post.deceased_image')"></x-input-label>
-                        <x-input-info :content="__('models/post.deceased_image_helper_info')" />
-                        <input type="file" name="image" id="image">
-                        <small id="logo-message" class="text-xs font-weight-bold"></small>
-                        <x-input-error :messages="$errors->get('image')" class="mt-2" />
+                {{-- Post type --}}
+                <div class="form-group row">
+                    <div class="col-sm-12">
+                        <x-input-label for="type" :value="__('models/post.type')" :required_tag="true"/>
+                        <select class="form-control border border-dark" id="type" name="type">
+                            @foreach($types as $key => $type)
+                                <option
+                                    value="{{ $key }}" @selected($key === (int)old('type', $post->type->value))>{{ $type }}</option>
+                            @endforeach
+                        </select>
+                        <x-input-error :messages="$errors->get('type')" class="mt-2"/>
                     </div>
                 </div>
 
@@ -109,20 +103,6 @@
                     </div>
                 </div>
 
-                {{-- Symbol --}}
-                <div class="form-group row">
-                    <div class="col-sm-12">
-                        <x-input-label for="symbol" :value="__('models/post.symbol')"/>
-                        <x-input-info :content="__('models/post.symbol_info')"/>
-                        <select class="form-control border border-dark" id="symbol" name="symbol">
-                            @foreach($symbols as $key => $value)
-                                <option
-                                    value="{{ $key }}" @selected((string)$key === (string)old('symbol', $post->symbol->value))>{{ $value }}</option>
-                            @endforeach
-                        </select>
-                    </div>
-                </div>
-
                 {{-- Lifespan --}}
                 <div class="form-group row">
                     <div class="col-sm-12 col-lg-6">
@@ -135,6 +115,31 @@
                                       placeholder="{{ __('models/post.lifespan_placeholder') }}"
                                       required/>
                         <x-input-error :messages="$errors->get('lifespan')" class="mt-2"/>
+                    </div>
+                </div>
+
+                {{-- Image --}}
+                <div class="form-group row" id="form-panel-image">
+                    <div class="col-lg-12 col-md-12 mb-3">
+                        <x-input-label for="image" :value="__('models/post.deceased_image')"></x-input-label>
+                        <x-input-info :content="__('models/post.deceased_image_helper_info')" />
+                        <input type="file" name="image" id="image">
+                        <small id="logo-message" class="text-xs font-weight-bold"></small>
+                        <x-input-error :messages="$errors->get('image')" class="mt-2" />
+                    </div>
+                </div>
+
+                {{-- Symbol --}}
+                <div class="form-group row">
+                    <div class="col-sm-12">
+                        <x-input-label for="symbol" :value="__('models/post.symbol')"/>
+                        <x-input-info :content="__('models/post.symbol_info')"/>
+                        <select class="form-control border border-dark" id="symbol" name="symbol">
+                            @foreach($symbols as $key => $value)
+                                <option
+                                    value="{{ $key }}" @selected((string)$key === (string)old('symbol', $post->symbol->value))>{{ $value }}</option>
+                            @endforeach
+                        </select>
                     </div>
                 </div>
 
