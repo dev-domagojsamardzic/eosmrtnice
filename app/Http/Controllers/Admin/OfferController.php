@@ -16,21 +16,6 @@ use Livewire\Features\SupportRedirects\Redirector;
 
 class OfferController extends Controller
 {
-    public function __construct()
-    {
-        $this->authorizeResource(Offer::class);
-    }
-
-    /**
-     * Show all resources
-     *
-     * @return View
-     */
-    public function index(): View
-    {
-        return view('admin.offers.index');
-    }
-
     /**
      * Show resource edit form
      *

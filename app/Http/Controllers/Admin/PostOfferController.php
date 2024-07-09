@@ -1,8 +1,7 @@
 <?php
 
-namespace App\Http\Controllers\Admin\Offers;
+namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Admin\OfferController;
 use App\Http\Requests\Admin\Offers\PostOfferRequest;
 use App\Mail\OfferCreated;
 use App\Models\Offer;

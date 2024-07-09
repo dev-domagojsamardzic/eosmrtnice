@@ -1,21 +1,38 @@
 <?php
 
-namespace App\Http\Controllers\Admin\Offers;
+namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Admin\OfferController;
 use App\Http\Requests\Admin\Offers\AdOfferRequest;
+use App\Http\Controllers\Controller;
+use App\Mail\AdsOfferCreated;
 use App\Mail\OfferCreated;
 use App\Models\Ad;
-use App\Models\Offer;
+use App\Models\AdsOffer;
 use Carbon\Carbon;
 use Exception;
-use Illuminate\Support\Facades\Gate;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\View\View;
 
-class AdOfferController extends OfferController
+class AdsOfferController extends Controller
 {
+    public function __construct()
+    {
+        $this->authorizeResource(AdsOffer::class);
+    }
+
+    /**
+     * Show all resources
+     *
+     * @return View
+     */
+    public function index(): View
+    {
+        return view('admin.offers.index');
+    }
+
     /**
      * Display create form
      *
@@ -29,18 +46,72 @@ class AdOfferController extends OfferController
                 ->with('alert', ['class' => 'danger', 'message' => __('models/offer.messages.offer_for_ad_exists')]);
         }
 
-        return $this->form(new Offer, $ad, 'create');
+        return $this->form(new AdsOffer, $ad, 'create');
+    }
+
+    /**
+     * Store new resource
+     *
+     * @param AdsOffer $offer
+     * @param AdOfferRequest $request
+     * @return RedirectResponse
+     */
+    public function store(AdsOffer $offer, AdOfferRequest $request): RedirectResponse
+    {
+        return $this->apply($offer, $request);
+    }
+
+    /**
+     * Send an offer
+     *
+     * @param AdsOffer $ads_offer
+     * @return RedirectResponse
+     */
+    public function send(AdsOffer $ads_offer): RedirectResponse
+    {
+        $receiver = $ads_offer->company?->email;
+
+        if (!$receiver) {
+            return redirect()
+                ->route('admin.ads-offers.index')
+                ->with('alert', ['class' => 'danger', 'message' => __('models/offer.company_email_not_set')]);
+        }
+
+        try {
+            Mail::to($receiver)->queue(new AdsOfferCreated($ads_offer));
+
+            $ads_offer->sent_at = now();
+            $ads_offer->save();
+
+            return redirect()->route('admin.ads-offers.index')
+                ->with('alert', ['class' => 'success', 'message' => __('models/offer.messages.offer_sent')]);
+        } catch (Exception $e) {
+            return redirect()
+                ->route('admin.ads-offers.index')
+                ->with('alert', ['class' => 'danger', 'message' => __('common.something_went_wrong')]);
+        }
+    }
+
+    /**
+     * Download offer as PDF document
+     *
+     * @param AdsOffer $offer
+     * @return Response
+     */
+    public function download(AdsOffer $offer): Response
+    {
+        return $offer->downloadPdf();
     }
 
     /**
      * Display resource form
      *
-     * @param Offer $offer
+     * @param AdsOffer $offer
      * @param Ad $ad
      * @param string $action
      * @return View
      */
-    protected function form(Offer $offer, Ad $ad, string $action): View
+    private function form(AdsOffer $offer, Ad $ad, string $action): View
     {
         $route = match($action) {
             'edit' => route(auth_user_type() . '.ads.offers.update', ['offer' => $offer]),
@@ -61,24 +132,12 @@ class AdOfferController extends OfferController
     }
 
     /**
-     * Store new resource
-     *
-     * @param Offer $offer
-     * @param AdOfferRequest $request
-     * @return RedirectResponse
-     */
-    public function store(Offer $offer, AdOfferRequest $request): RedirectResponse
-    {
-        return $this->apply($offer, $request);
-    }
-
-    /**
      * Apply changes on resource
-     * @param Offer $offer
+     * @param AdsOffer $offer
      * @param AdOfferRequest $request
      * @return RedirectResponse
      */
-    protected function apply(Offer $offer, AdOfferRequest $request): RedirectResponse
+    private function apply(AdsOffer $offer, AdOfferRequest $request): RedirectResponse
     {
         $offer->company()->associate($request->input('company_id'));
         $total = (float)$request->input('quantity') * $request->input('price');

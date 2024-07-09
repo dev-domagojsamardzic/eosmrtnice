@@ -1,14 +1,13 @@
 <?php
 
 use App\Http\Controllers\Admin\AdController;
+use App\Http\Controllers\Admin\AdsOfferController;
 use App\Http\Controllers\Admin\CompanyController;
 use App\Http\Controllers\Admin\MemberController;
-use App\Http\Controllers\Admin\OfferController;
-use App\Http\Controllers\Admin\Offers\AdOfferController;
-use App\Http\Controllers\Admin\Offers\PostOfferController;
 use App\Http\Controllers\Admin\PartnerController;
-use App\Http\Controllers\User\PostController;
+use App\Http\Controllers\Admin\PostOfferController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\User\PostController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/dashboard', static function () {
@@ -33,17 +32,13 @@ Route::prefix('companies/{company}')->group(function () {
     Route::put('ads/{ad}', [AdController::class, 'update'])->name('ads.update');
 });
 
-Route::resource('ads/{ad}/offers', AdOfferController::class)
-    ->except(['index'])
-    ->names('ads.offers');
-
 Route::resource('posts/{post}/offers', PostOfferController::class)
     ->except(['index'])
     ->names('posts.offers');
 
 Route::resource('posts', PostController::class);
 
-Route::resource('offers', OfferController::class)
-    ->only(['index', 'edit', 'update', 'delete']);
-Route::get('offers/{offer}/send', [OfferController::class, 'send'])->name('offers.send');
-Route::get('offers/{offer}/download', [OfferController::class, 'download'])->name('offers.download');
+Route::resource('ads-offers', AdsOfferController::class)->names('ads-offers');
+
+Route::get('ads-offers/{ads_offer}/send', [AdsOfferController::class, 'send'])->name('ads-offers.send');
+Route::get('ads-offers/{ads_offer}/download', [AdsOfferController::class, 'download'])->name('ads-offers.download');

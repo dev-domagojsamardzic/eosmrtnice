@@ -37,4 +37,5 @@ return [
         'Ad' => 'Oglas',
         'Post' => 'Objava',
     ],
+    'company_email_not_set' => 'Mail nije poslan. Tvrtka nema postavljen email.',
 ];

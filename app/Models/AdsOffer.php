@@ -2,16 +2,19 @@
 
 namespace App\Models;
 
+use Barryvdh\Snappy\Facades\SnappyPdf;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Http\Response;
 
 /**
  * @property-read       int                 id
  * @property            int                 company_id
+ * @property            int                 ad_id
  * @property            string              number
  * @property            float               net_total
  * @property            float               taxes
@@ -27,10 +30,13 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property-read       bool                is_valid
  *  ------------------------------------------------------------
  * @property            Company             company
+ * @property            Ad                  ad
  */
 class AdsOffer extends Model
 {
     use SoftDeletes;
+
+    protected $table = 'ads_offers';
 
     protected $casts = [
         'valid_from' => 'datetime',
@@ -54,6 +60,14 @@ class AdsOffer extends Model
         return $this->belongsTo(Company::class);
     }
 
+    /**
+     * Return company related to offer
+     * @return BelongsTo
+     */
+    public function ad(): BelongsTo
+    {
+        return $this->belongsTo(Ad::class);
+    }
 
     /**
      * Scope a query to only include valid offers
@@ -73,5 +87,29 @@ class AdsOffer extends Model
             get: fn () => $this->valid_from->startOfDay()->lt(now()) &&
                 $this->valid_until->endOfDay()->gt(now())
         );
+    }
+
+    /**
+     * Transform offer to raw pdf
+     *
+     * @return string
+     */
+    public function toRawPdf(): string
+    {
+        return SnappyPdf::loadView('pdf.ads-offer', ['offer' => $this])
+            ->setOption('encoding', 'UTF-8')
+            ->output();
+    }
+
+    /**
+     * Return offer pdf as response
+     *
+     * @return Response
+     */
+    public function downloadPdf(): Response
+    {
+        return SnappyPdf::loadView('pdf.ads-offer', ['offer' => $this])
+            ->setOption('encoding', 'UTF-8')
+            ->download($this->number . '.pdf');
     }
 }

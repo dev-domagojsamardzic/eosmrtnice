@@ -10,4 +10,6 @@ return [
     'services' => 'Usluge',
     'offers' => 'Ponude',
     'posts' => 'Objave',
+    'ads_offers' => 'Ponude za oglase',
+    'posts_offers' => 'Ponude za objave',
 ];
