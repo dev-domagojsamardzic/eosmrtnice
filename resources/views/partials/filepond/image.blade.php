@@ -1,5 +1,20 @@
 @push('scripts')
     <script type="module">
+
+        function changeImageFromPreview() {
+            const hidden_image_element = document.querySelector('[type="hidden"][name="image"]');
+            const deceased_image = document.getElementById('deceased_image')
+
+            if (hidden_image_element.value) {
+                image_preview.style.display = 'block';
+                deceased_image.src = window.location.origin + '/storage/' + hidden_image_element.value;
+                return;
+            }
+
+            image_preview.style.display = 'none';
+            deceased_image.src = '';
+        }
+
         document.addEventListener('DOMContentLoaded', function() {
             FilePond.create(document.querySelector('#image'), {
                 labelIdle: '{!! __('filepond.labelIdle') !!}',
@@ -39,9 +54,9 @@
                 dropValidation: true,
                 acceptedFileTypes: ['image/jpeg', 'image/png', 'image/webp'],
                 files: [
-                    @if($deceased->image)
+                    @if($post->image)
                     {
-                        source: '{{ old('image', $deceased->image) }}',
+                        source: '{{ old('image', $post->image) }}',
                         options: {
                             type: 'local',
                         },
@@ -51,7 +66,7 @@
                 server: {
                     load: (source, load) => {
                         // Override img path with img asset URL
-                        source = '{{ public_storage_asset($deceased->image ?? '') }}';
+                        source = '{{ public_storage_asset($post->image ?? '') }}';
                         fetch(source)
                             .then(res => res.blob())
                             .then(load);
@@ -78,6 +93,7 @@
                     },
                 },
             });
+            document.addEventListener('FilePond:processfile', changeImageFromPreview)
         })
     </script>
 @endpush

@@ -83,6 +83,17 @@
                     </div>
                 </div>
 
+                {{-- Image --}}
+                <div class="form-group row" id="form-panel-image">
+                    <div class="col-lg-12 col-md-12 mb-3">
+                        <x-input-label for="image" :value="__('models/post.deceased_image')"></x-input-label>
+                        <x-input-info :content="__('models/post.deceased_image_helper_info')" />
+                        <input type="file" name="image" id="image">
+                        <small id="logo-message" class="text-xs font-weight-bold"></small>
+                        <x-input-error :messages="$errors->get('image')" class="mt-2" />
+                    </div>
+                </div>
+
                 {{-- Deceased full_name - LG --}}
                 <div class="form-group row">
                     <div class="col-sm-12 col-lg-12">
@@ -178,198 +189,202 @@
             </form>
         </div>
     </div>
-    <script type="module">
+    @include('partials.filepond.image')
+    @push('scripts')
+        <script type="module">
+            // Elements
+            const size = document.getElementById('size');
+            const type = document.getElementById('type');
+            const type_preview = document.getElementById('type_preview');
+            const intro_message = document.getElementById('intro_message');
+            const intro_message_preview = document.getElementById('intro_message_preview');
+            const main_message = document.getElementById('main_message');
+            const main_message_preview = document.getElementById('main_message_preview');
+            const deceased_full_name_lg = document.getElementById('deceased_full_name_lg');
+            const deceased_full_name_lg_preview = document.getElementById('deceased_full_name_lg_preview');
+            const is_framed = document.getElementById('is_framed');
+            const image_preview = document.getElementById('image_preview');
+            const image = document.getElementById('deceased_image');
+            const symbol = document.getElementById('symbol');
+            const lifespan = document.getElementById('lifespan');
+            const lifespan_preview = document.getElementById('lifespan_preview');
+            const deceased_full_name_sm = document.getElementById('deceased_full_name_sm');
+            const deceased_full_name_sm_preview = document.getElementById('deceased_full_name_sm_preview');
+            const signature = document.getElementById('signature');
+            const signature_preview = document.getElementById('signature_preview');
+            const post_preview_wrapper = document.getElementById('post-preview-wrapper');
 
-        // Elements
-        const size = document.getElementById('size');
-        const type = document.getElementById('type');
-        const type_preview = document.getElementById('type_preview');
-        const intro_message = document.getElementById('intro_message');
-        const intro_message_preview = document.getElementById('intro_message_preview');
-        const main_message = document.getElementById('main_message');
-        const main_message_preview = document.getElementById('main_message_preview');
-        const deceased_full_name_lg = document.getElementById('deceased_full_name_lg');
-        const deceased_full_name_lg_preview = document.getElementById('deceased_full_name_lg_preview');
-        const is_framed = document.getElementById('is_framed');
-        const image_preview = document.getElementById('image_preview');
-        const image = document.getElementById('deceased_image');
-        const symbol = document.getElementById('symbol');
-        const lifespan = document.getElementById('lifespan');
-        const lifespan_preview = document.getElementById('lifespan_preview');
-        const deceased_full_name_sm = document.getElementById('deceased_full_name_sm');
-        const deceased_full_name_sm_preview = document.getElementById('deceased_full_name_sm_preview');
-        const signature = document.getElementById('signature');
-        const signature_preview = document.getElementById('signature_preview');
-        const post_preview_wrapper = document.getElementById('post-preview-wrapper');
+            const intro_msg_placeholders = @json(__('models/post.intro_message_placeholders'), JSON_THROW_ON_ERROR);
+            const main_msg_placeholders = @json(__('models/post.main_message_placeholders'), JSON_THROW_ON_ERROR);
+            const types = @json($types, JSON_THROW_ON_ERROR);
 
-        const intro_msg_placeholders = @json(__('models/post.intro_message_placeholders'), JSON_THROW_ON_ERROR);
-        const main_msg_placeholders = @json(__('models/post.main_message_placeholders'), JSON_THROW_ON_ERROR);
-        const types = @json($types, JSON_THROW_ON_ERROR);
+            document.addEventListener('DOMContentLoaded', function () {
+                $('#starts_at').datepicker({
+                    dateFormat: "dd.mm.yy.",
+                    autoSize: true,
+                    language: "hr",
+                });
+                updateCounter()
+                handlePostPreview();
+            })
 
-        document.addEventListener('DOMContentLoaded', function () {
-            $('#starts_at').datepicker({
-                dateFormat: "dd.mm.yy.",
-                autoSize: true,
-                language: "hr",
+            size.addEventListener('change', updateCounter);
+
+            type.addEventListener('change', function (event) {
+                type_preview.textContent = types[event.target.value];
+                intro_message.placeholder = intro_msg_placeholders[event.target.value];
+                main_message.placeholder = main_msg_placeholders[event.target.value];
+            })
+
+            is_framed.addEventListener('change', toggleFrame)
+
+            deceased_full_name_lg.addEventListener('input', function (event) {
+                deceased_full_name_lg_preview.innerHTML = event.target.value.replace(/\n/g, "<br>");
+            })
+
+            symbol.addEventListener('change', handleSymbolPreview)
+
+            lifespan.addEventListener('input', handleLifespanPreview)
+
+            intro_message.addEventListener('input', function () {
+                handleIntroMsgPreview();
+                updateCounter();
+            })
+
+            deceased_full_name_sm.addEventListener('input', handleDeceasedFullNameSmPreview)
+
+            main_message.addEventListener('input', function () {
+                handleMainMsgPreview()
+                updateCounter();
             });
-            updateCounter()
-            handlePostPreview();
-        })
 
-        size.addEventListener('change', updateCounter);
+            signature.addEventListener('input', handleSignaturePreview);
 
-        type.addEventListener('change', function (event) {
-            type_preview.textContent = types[event.target.value];
-            intro_message.placeholder = intro_msg_placeholders[event.target.value];
-            main_message.placeholder = main_msg_placeholders[event.target.value];
-        })
-
-        is_framed.addEventListener('change', toggleFrame)
-
-        deceased_full_name_lg.addEventListener('input', function (event) {
-            deceased_full_name_lg_preview.innerHTML = event.target.value.replace(/\n/g, "<br>");
-        })
-
-        symbol.addEventListener('change', handleSymbolPreview)
-
-        lifespan.addEventListener('input', handleLifespanPreview)
-
-        intro_message.addEventListener('input', function () {
-            handleIntroMsgPreview();
-            updateCounter();
-        })
-
-        deceased_full_name_sm.addEventListener('input', handleDeceasedFullNameSmPreview)
-
-        main_message.addEventListener('input', function () {
-            handleMainMsgPreview()
-            updateCounter();
-        });
-
-        signature.addEventListener('input', handleSignaturePreview);
-
-        /**
-         * Count words from element
-         *
-         * @param textarea
-         * @returns int
-         */
-        function countWords(textarea) {
-            return textarea.value.split(' ').filter(function (n) {
-                return n != ''
-            }).length;
-        }
-
-        /**
-         * Update counter labels
-         */
-        function updateCounter() {
-            const word_count = countWords(intro_message) + countWords(main_message);
-            const word_count_treshold = parseInt(size.value);
-
-            const counter = document.getElementById('message_counter');
-
-            counter.textContent = `${word_count} / ${word_count_treshold}`;
-            counter.classList.toggle('text-counter-danger', word_count > word_count_treshold);
-            counter.classList.toggle('text-counter-success', word_count <= word_count_treshold);
-        }
-
-        /**
-         * Toggle post frame according to checkbox
-         */
-        function toggleFrame() {
-            if (is_framed.checked) {
-                post_preview_wrapper.classList.add('border_special');
-                post_preview_wrapper.classList.remove('border_classic');
-            }
-            else {
-                post_preview_wrapper.classList.add('border_classic');
-                post_preview_wrapper.classList.remove('border_special');
-            }
-        }
-
-        /**
-         * Handle post preview, element by element
-         */
-        function handlePostPreview() {
-            handleDeceasedFullNameLgPreview();
-            handleLifespanPreview()
-            handleImagePreview();
-            handleSymbolPreview();
-            handleIntroMsgPreview();
-            handleMainMsgPreview();
-            handleSignaturePreview();
-            handleDeceasedFullNameSmPreview();
-        }
-
-        /**
-         * Handle deceased_full_name_lg preview
-         */
-        function handleDeceasedFullNameLgPreview() {
-            deceased_full_name_lg_preview.innerHTML = deceased_full_name_lg.value.trim();
-        }
-
-        /**
-         * Handle lifespan preview
-         */
-        function handleLifespanPreview() {
-            lifespan_preview.innerHTML = lifespan.value.trim();
-        }
-
-        /**
-         * Handle image_preview
-         */
-        function handleImagePreview() {
-            const has_image = '{{ $post->image }}'
-
-            if (has_image) {
-                image_preview.style.display = 'block';
-                image.src = '{{ public_storage_asset($post->image) }}';
-                return;
+            /**
+             * Count words from element
+             *
+             * @param textarea
+             * @returns int
+             */
+            function countWords(textarea) {
+                return textarea.value.split(' ').filter(function (n) {
+                    return n != ''
+                }).length;
             }
 
-            image_preview.style.display = 'none';
-            image.src = '';
-        }
+            /**
+             * Update counter labels
+             */
+            function updateCounter() {
+                const word_count = countWords(intro_message) + countWords(main_message);
+                const word_count_treshold = parseInt(size.value);
 
-        /**
-         * Update symbol display
-         */
-        function handleSymbolPreview() {
-            if (symbol.value === '') {
-                $('#symbol_wrapper').hide();
-            } else {
-                $('#symbol_wrapper').show();
-                $('#symbol_image').attr('src', `${window.location.origin}/graphics/post_symbol/${symbol.value}.svg`)
+                const counter = document.getElementById('message_counter');
+
+                counter.textContent = `${word_count} / ${word_count_treshold}`;
+                counter.classList.toggle('text-counter-danger', word_count > word_count_treshold);
+                counter.classList.toggle('text-counter-success', word_count <= word_count_treshold);
             }
-        }
 
-        /**
-         * Handle intro_message preview
-         */
-        function handleIntroMsgPreview() {
-            intro_message_preview.innerHTML = intro_message.value.replace(/\n/g, "<br>");
-        }
+            /**
+             * Toggle post frame according to checkbox
+             */
+            function toggleFrame() {
+                if (is_framed.checked) {
+                    post_preview_wrapper.classList.add('border_special');
+                    post_preview_wrapper.classList.remove('border_classic');
+                }
+                else {
+                    post_preview_wrapper.classList.add('border_classic');
+                    post_preview_wrapper.classList.remove('border_special');
+                }
+            }
 
-        /**
-         * Handle deceased_full_name_sm preview
-         */
-        function handleDeceasedFullNameSmPreview() {
-            deceased_full_name_sm_preview.innerHTML = deceased_full_name_sm.value.trim();
-        }
+            /**
+             * Handle post preview, element by element
+             */
+            function handlePostPreview() {
+                handleDeceasedFullNameLgPreview();
+                handleLifespanPreview()
+                handleImagePreview();
+                handleSymbolPreview();
+                handleIntroMsgPreview();
+                handleMainMsgPreview();
+                handleSignaturePreview();
+                handleDeceasedFullNameSmPreview();
+            }
 
-        /**
-         * Handle main_message preview
-         */
-        function handleMainMsgPreview() {
-            main_message_preview.innerHTML = main_message.value.replace(/\n/g, "<br>");
-        }
+            /**
+             * Handle deceased_full_name_lg preview
+             */
+            function handleDeceasedFullNameLgPreview() {
+                deceased_full_name_lg_preview.innerHTML = deceased_full_name_lg.value.trim();
+            }
 
-        /**
-         * Handle signature preview
-         */
-        function handleSignaturePreview() {
-            signature_preview.innerHTML = signature.value.replace(/\n/g, "<br>");
-        }
-    </script>
+            /**
+             * Handle lifespan preview
+             */
+            function handleLifespanPreview() {
+                lifespan_preview.innerHTML = lifespan.value.trim();
+            }
+
+            /**
+             * Handle image_preview
+             */
+            function handleImagePreview() {
+                const has_image = '{{ $post->image }}'
+                const hidden_image_element = document.querySelector('[type="hidden"][name="image"]');
+
+                if (has_image) {
+                    image_preview.style.display = 'block';
+                    image.src = '{{ public_storage_asset($post->image) }}';
+                    return;
+                }
+
+                image_preview.style.display = 'none';
+                image.src = '';
+            }
+
+            /**
+             * Update symbol display
+             */
+            function handleSymbolPreview() {
+                if (symbol.value === '') {
+                    $('#symbol_wrapper').hide();
+                } else {
+                    $('#symbol_wrapper').show();
+                    $('#symbol_image').attr('src', `${window.location.origin}/graphics/post_symbol/${symbol.value}.svg`)
+                }
+            }
+
+            /**
+             * Handle intro_message preview
+             */
+            function handleIntroMsgPreview() {
+                intro_message_preview.innerHTML = intro_message.value.replace(/\n/g, "<br>");
+            }
+
+            /**
+             * Handle deceased_full_name_sm preview
+             */
+            function handleDeceasedFullNameSmPreview() {
+                deceased_full_name_sm_preview.innerHTML = deceased_full_name_sm.value.trim();
+            }
+
+            /**
+             * Handle main_message preview
+             */
+            function handleMainMsgPreview() {
+                main_message_preview.innerHTML = main_message.value.replace(/\n/g, "<br>");
+            }
+
+            /**
+             * Handle signature preview
+             */
+            function handleSignaturePreview() {
+                signature_preview.innerHTML = signature.value.replace(/\n/g, "<br>");
+            }
+        </script>
+    @endpush
+
 </x-app-layout>
