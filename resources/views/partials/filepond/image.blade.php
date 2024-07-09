@@ -5,7 +5,7 @@
             const hidden_image_element = document.querySelector('[type="hidden"][name="image"]');
             const deceased_image = document.getElementById('deceased_image')
 
-            if (hidden_image_element.value) {
+            if (hidden_image_element && hidden_image_element.value) {
                 image_preview.style.display = 'block';
                 deceased_image.src = window.location.origin + '/storage/' + hidden_image_element.value;
                 return;
@@ -94,6 +94,7 @@
                 },
             });
             document.addEventListener('FilePond:processfile', changeImageFromPreview)
+            document.addEventListener('FilePond:removefile', changeImageFromPreview)
         })
     </script>
 @endpush
