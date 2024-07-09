@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Exception;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Str;
+use Intervention\Image\Laravel\Facades\Image;
 
 class ImageController extends Controller
 {
@@ -29,7 +31,7 @@ class ImageController extends Controller
         }
 
         $validator = Validator::make($request->all(), [
-            $field => ['image', 'mimes:jpeg,jpg,png,svg+xml,webp', 'max:2048'], // Max 2MB
+            $field => ['image', 'mimes:jpeg,jpg,png,svg+xml,webp', 'max:4096'], // Max 2MB
         ]);
 
         if ($validator->fails()) {
@@ -40,13 +42,28 @@ class ImageController extends Controller
             ], 422);
         }
 
-        if ($request->file($field)) {
+        $file = $request->file($field);
+
+        if ($file->isValid()) {
             try {
-                $image = $request->file($field)->store('tmp', 'public');
+                $image = Image::read($file);
+
+                $dimensions = match($field) {
+                    'image' => config('eosmrtnice.image_dimensions.deceased_image'),
+                    default => config('eosmrtnice.image_dimensions.default'),
+                };
+
+                $image->cover($dimensions['width'], $dimensions['height']);
+
+                $tempFilename = Str::uuid()->toString();
+                $saveTmpPath = 'tmp/' . $tempFilename . '.' . $file->getClientOriginalExtension();
+
+                $image->save(storage_public_path($saveTmpPath));
+
                 return response()->json([
                     'message' => __('common.upload_successful'),
                     'class' => 'text-success',
-                    'image' => $image,
+                    'image' => $saveTmpPath,
                 ]);
             } catch(Exception $e) {
                 return response()->json([
@@ -56,6 +73,7 @@ class ImageController extends Controller
                 ],500);
             }
         }
+
         return response()->json([
             'message' => __('common.upload_failed'),
             'class' => 'text-danger',
