@@ -26,6 +26,10 @@ return [
      * --------------------------------*
      */
     'image_dimensions' => [
+        'default' => [
+            'width' => env('EOS_DEFAULT_IMAGE_WIDTH', 500),
+            'height' => env('EOS_DEFAULT_IMAGE_HEIGHT', 325),
+        ],
         'deceased_image' => [
             'width' => env('EOS_DECEASED_IMAGE_WIDTH', 200),
             'height' => env('EOS_DECEASED_IMAGE_HEIGHT', 280),
