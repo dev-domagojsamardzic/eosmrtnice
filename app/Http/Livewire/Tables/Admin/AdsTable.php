@@ -2,14 +2,12 @@
 
 namespace App\Http\Livewire\Tables\Admin;
 
-use App\Http\Controllers\Admin\AdController;
+use App\Http\Controllers\Partner\AdController;
 use App\Models\Ad;
 use App\Models\Company;
 use App\Services\ImageService;
 use Exception;
 use Filament\Forms\Components\Select;
-use Filament\Forms\Concerns\InteractsWithForms;
-use Filament\Forms\Contracts\HasForms;
 use Filament\Support\Enums\IconPosition;
 use Filament\Tables\Actions\Action;
 use Filament\Tables\Actions\ActionGroup;
@@ -20,44 +18,24 @@ use Filament\Tables\Columns\Layout\Split;
 use Filament\Tables\Columns\Layout\View as ViewLayout;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Columns\ViewColumn;
-use Filament\Tables\Concerns\InteractsWithTable;
-use Filament\Tables\Contracts\HasTable;
 use Filament\Tables\Filters\SelectFilter;
-use Filament\Tables\Table;
-use Illuminate\Contracts\View\View;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\RedirectResponse;
-use Livewire\Component;
 use Livewire\Features\SupportRedirects\Redirector;
+use App\Http\Livewire\Tables\AdsTable as BaseAdsTable;
 
-class AdsTable extends Component implements HasForms, HasTable
+class AdsTable extends BaseAdsTable
 {
-    use InteractsWithForms;
-    use InteractsWithTable;
-
     /**
-     * @throws Exception
+     * Return query builder
+     * @return Builder
      */
-    public function table(Table $table): Table
+    protected function getQuery(): Builder
     {
-        return $table
-            ->striped()
-            ->query($this->getQuery())
-            ->emptyStateHeading(__('common.no_records'))
-            ->emptyStateDescription('')
-            ->columns($this->getColumns())
-            ->filters($this->getFilters())
-            ->headerActions($this->getHeaderActions())
-            ->actions($this->getActions())
-            ->groups($this->getGroups());
+        return Ad::query()->orderByDesc('created_at');
     }
 
-    public function render(): View
-    {
-        return view('livewire.table');
-    }
-
-    private function getColumns(): array
+    protected function getColumns(): array
     {
         return [
             Split::make([
@@ -124,7 +102,7 @@ class AdsTable extends Component implements HasForms, HasTable
      * @return array
      * @throws Exception
      */
-    private function getFilters(): array
+    protected function getFilters(): array
     {
         return [
             SelectFilter::make('expired')
@@ -136,36 +114,11 @@ class AdsTable extends Component implements HasForms, HasTable
         ];
     }
 
-    private function getHeaderActions(): array
-    {
-        return [
-            Action::make('create_ad')
-                ->label(__('models/ad.new_ad'))
-                ->icon('heroicon-m-plus')
-                ->form([
-                    Select::make('company_id')
-                        ->label(__('models/ad.select_company_for_new_ad'))
-                        ->searchable()
-                        ->options(
-                            Company::query()
-                                ->availableForAd()
-                                ->get()
-                                ->pluck('title', 'id')
-                                ->toArray()
-                        )
-                        ->required(),
-                ])
-                ->action(function (array $data): RedirectResponse|Redirector {
-                    return redirect()->route(auth_user_type() . '.ads.create',$data['company_id']);
-                })
-        ];
-    }
-
     /**
      * Return table actions
      * @return array
      */
-    private function getActions(): array
+    protected function getActions(): array
     {
         return  [
             ActionGroup::make([
@@ -212,17 +165,28 @@ class AdsTable extends Component implements HasForms, HasTable
         ];
     }
 
-    /**
-     * Return query builder
-     * @return Builder
-     */
-    private function getQuery(): Builder
+    protected function getHeaderActions(): array
     {
-        return Ad::query()->orderByDesc('created_at');
-    }
-
-    private function getGroups(): array
-    {
-        return [];
+        return [
+            Action::make('create_ad')
+                ->label(__('models/ad.new_ad'))
+                ->icon('heroicon-m-plus')
+                ->form([
+                    Select::make('company_id')
+                        ->label(__('models/ad.select_company_for_new_ad'))
+                        ->searchable()
+                        ->options(
+                            Company::query()
+                                ->availableForAd()
+                                ->get()
+                                ->pluck('title', 'id')
+                                ->toArray()
+                        )
+                        ->required(),
+                ])
+                ->action(function (array $data): RedirectResponse|Redirector {
+                    return redirect()->route(auth_user_type() . '.ads.create',$data['company_id']);
+                })
+        ];
     }
 }

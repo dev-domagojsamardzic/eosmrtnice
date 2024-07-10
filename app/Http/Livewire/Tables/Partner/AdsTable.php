@@ -4,81 +4,29 @@ namespace App\Http\Livewire\Tables\Partner;
 
 use App\Http\Controllers\Partner\AdController;
 use App\Models\Ad;
-use App\Models\Company;
 use App\Services\ImageService;
 use Filament\Support\Enums\IconPosition;
-use Filament\Tables\Actions\Action;
 use Filament\Tables\Actions\ActionGroup;
 use Filament\Tables\Actions\DeleteAction;
 use Filament\Tables\Actions\EditAction;
 use Filament\Tables\Columns\ImageColumn;
 use Filament\Tables\Columns\Layout\Split;
-use Filament\Forms\Concerns\InteractsWithForms;
-use Filament\Forms\Contracts\HasForms;
 use Filament\Tables\Columns\Layout\Stack;
 use Filament\Tables\Columns\Layout\View as ViewLayout;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Columns\ToggleColumn;
 use Filament\Tables\Columns\ViewColumn;
-use Filament\Tables\Concerns\InteractsWithTable;
-use Filament\Tables\Contracts\HasTable;
-use Filament\Tables\Table;
-use Illuminate\Contracts\View\View;
 use Illuminate\Database\Eloquent\Builder;
-use Livewire\Component;
-use Filament\Forms\Components\Select;
-use Livewire\Features\SupportRedirects\Redirector;
+use App\Http\Livewire\Tables\AdsTable as BaseAdsTable;
 
 
-class AdsTable extends Component implements HasForms, HasTable
+class AdsTable extends BaseAdsTable
 {
-    use InteractsWithForms;
-    use InteractsWithTable;
-
-    public function table(Table $table): Table
-    {
-        return $table
-            ->striped()
-            ->emptyStateHeading(__('common.no_records'))
-            ->emptyStateDescription('')
-            ->headerActions([
-                Action::make('create_ad')
-                    ->label(__('models/ad.new_ad'))
-                    ->icon('heroicon-m-plus')
-                    ->disabled(!auth()->user()->can('create', Ad::class ))
-                    ->form([
-                        Select::make('company_id')
-                            ->label(__('models/ad.select_company_for_new_ad'))
-                            ->options(
-                                Company::query()
-                                    ->where('user_id', auth()->id())
-                                    ->availableForAd()
-                                    ->get()
-                                    ->pluck('title', 'id')
-                                    ->toArray()
-                            )
-                            ->required(),
-                    ])
-                    ->action(function (array $data, Ad $ad): Redirector {
-                        return redirect()->route(auth_user_type() . '.ads.create',$data['company_id']);
-                    })
-            ])
-            ->query($this->getQuery())
-            ->columns($this->getColumns())
-            ->filters($this->getFilters())
-            ->actions($this->getActions());
-    }
-
-    public function render(): View
-    {
-        return view('livewire.table');
-    }
-
     /**
      * Return query builder
      * @return Builder
      */
-    private function getQuery(): Builder
+    protected function getQuery(): Builder
     {
         return Ad::query()
             ->where('expired', 0)
@@ -91,7 +39,7 @@ class AdsTable extends Component implements HasForms, HasTable
      * Return table columns
      * @return array
      */
-    private function getColumns(): array
+    protected function getColumns(): array
     {
         return [
             Split::make([
@@ -137,19 +85,10 @@ class AdsTable extends Component implements HasForms, HasTable
     }
 
     /**
-     * Return table filters
-     * @return array
-     */
-    private function getFilters(): array
-    {
-        return [];
-    }
-
-    /**
      * Return table actions
      * @return array
      */
-    private function getActions(): array
+    protected function getActions(): array
     {
         return  [
             ActionGroup::make([
