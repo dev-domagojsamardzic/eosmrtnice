@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\PostOfferController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\User\OfferController;
 use App\Http\Controllers\User\PostController;
@@ -11,9 +12,10 @@ Route::get('/dashboard', static function () {
 
 Route::resource('posts', PostController::class)->names('posts');
 
-Route::resource('offers', OfferController::class)
-    ->only(['index', 'show']);
-Route::get('offers/{offer}/download', [OfferController::class, 'download'])->name('offers.download');
+Route::resource('posts-offers', PostOfferController::class)
+    ->except('create')
+    ->names('posts-offers');
+Route::get('posts-offers/{post}/create', [PostOfferController::class, 'create'])->name('posts-offers.create');
 
 Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
 Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
