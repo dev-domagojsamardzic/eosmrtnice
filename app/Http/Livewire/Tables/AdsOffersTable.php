@@ -85,7 +85,7 @@ class AdsOffersTable extends Component implements HasForms, HasTable
             ])->from('md'),
             Panel::make([
                 Tables\Columns\Layout\Grid::make([
-                    'lg' => 2, 'sm' => 1,
+                    'lg' => 3, 'sm' => 1,
                 ])->schema([
                     Stack::make([
                         TextColumn::make('company.title')
@@ -101,10 +101,20 @@ class AdsOffersTable extends Component implements HasForms, HasTable
                             ->label(__('models/offer.oib')),
                     ]),
                     Stack::make([
-                        TextColumn::make('taxes')
-                            ->formatStateUsing(fn(AdsOffer $o): string => __('models/offer.taxes').': '.$o->taxes.config('app.currency_symbol')),
+                        TextColumn::make('ad.title')
+                            ->formatStateUsing(fn (AdsOffer $o): string => __('models/ad.ad') . ': ' . $o->ad->title),
+                        TextColumn::make('ad.type')
+                            ->formatStateUsing(fn (AdsOffer $o): string => __('models/ad.type') . ': ' . $o->ad->type->translate()),
+                        TextColumn::make('ad.months_valid')
+                            ->formatStateUsing(fn (AdsOffer $o): string => __('models/ad.months_valid') . ': ' . $o->ad->months_valid),
+                    ]),
+                    Stack::make([
+                        TextColumn::make('quantity')
+                                ->formatStateUsing(fn (AdsOffer $o):string => __('models/offer.quantity') . ': ' . $o->quantity),
+                        TextColumn::make('price')
+                                ->formatStateUsing(fn (AdsOffer $o): string => __('models/offer.price') . ': ' . currency($o->price)),
                         TextColumn::make('total')
-                            ->formatStateUsing(fn(AdsOffer $o): string => __('models/offer.total').': '.$o->total.config('app.currency_symbol')),
+                            ->formatStateUsing(fn (AdsOffer $o): string => __('models/offer.total') . ': ' . currency($o->total)),
                     ]),
                 ])
 
