@@ -78,12 +78,12 @@ class AdController extends Controller
         try {
             $ad->delete();
             return redirect()
-                ->route('admin.ads.index')
+                ->route(auth_user_type() . '.ads.index')
                 ->with('alert', ['class' => 'success', 'message' => __('common.deleted')]);
         }
         catch (Exception $e) {
             return redirect()
-                ->route('admin.ads.index')
+                ->route(auth_user_type() . '.ads.index')
                 ->with('alert', ['class' => 'danger', 'message' => __('common.something_went_wrong')]);
         }
     }
@@ -146,6 +146,7 @@ class AdController extends Controller
             $ad->type = $request->input('type');
         }
 
+        $ad->title = $request->input('title');
         $ad->months_valid = $request->input('months_valid', 1);
         $ad->caption = $request->input('caption');
 
@@ -154,10 +155,10 @@ class AdController extends Controller
 
         try {
             $ad->save();
-            return redirect()->route('admin.ads.index')
+            return redirect()->route(auth_user_type() . '.ads.index')
                 ->with('alert', ['class' => 'success', 'message' => __('common.saved')]);
         } catch(Exception $e) {
-            return redirect()->route('admin.ads.index')
+            return redirect()->route(auth_user_type() . '.ads.index')
                 ->with('alert', ['class' => 'danger', 'message' => __('common.something_went_wrong')]);
         }
     }
