@@ -109,7 +109,7 @@ class AdsTable extends BaseAdsTable
                     ->requiresConfirmation()
                     ->modalHeading(__('partner.delete_ad'))
                     ->modalSubmitActionLabel(__('common.delete'))
-                    ->action(fn (Ad $ad) => (new AdController(new ImageService()))->destroy($ad->company, $ad))
+                    ->action(fn (Ad $ad) => (new AdController(new ImageService()))->destroy($ad))
             ])->iconPosition(IconPosition::Before),
         ];
     }
