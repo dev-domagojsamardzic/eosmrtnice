@@ -141,9 +141,20 @@ class AdsOfferController extends Controller
      */
     private function apply(AdsOffer $ads_offer, AdOfferRequest $request): RedirectResponse
     {
-        $ads_offer->company()->associate($request->input('company_id'));
-        $total = (float)$request->input('quantity') * $request->input('price');
-        $taxes = (float)($total * (config('app.tax_percentage') / 100));
+        if ($ads_offer->company()->doesntExist()) {
+            $ads_offer->company()->associate($request->input('company_id'));
+        }
+
+        if ($ads_offer->ad()->doesntExist()) {
+            $ads_offer->ad()->associate($request->input('ad_id'));
+        }
+
+        // TODO: SOLVE OFFER_NUMBER GENERATING
+        $ads_offer->quantity = (int)$request->input('quantity');
+        $ads_offer->price = (float)$request->input('price');
+
+        $total = $ads_offer->price * $ads_offer->quantity;
+        $taxes = (float)($total * ((float)config('app.tax_percentage') / 100));
         $ads_offer->total = $total;
         $ads_offer->taxes = $taxes;
         $ads_offer->net_total = $total - $taxes;
@@ -153,16 +164,15 @@ class AdsOfferController extends Controller
         try {
             $ads_offer->save();
 
-            $ads_offer->offerables()->create([
-                'offerable_id' => $request->input('offerable_id'),
-                'offerable_type' => Ad::class,
-                'quantity' => $request->input('quantity'),
-                'price' => $request->input('price'),
-            ]);
-
             if ($request->submit === 'save_and_send') {
 
-                Mail::to($ads_offer->company)->queue(new OfferCreated($ads_offer));
+                if (!$ads_offer->company?->email) {
+                    return redirect()
+                        ->route('admin.ads.index')
+                        ->with('alert', ['class' => 'danger', 'message' => __('models/offer.company_email_not_set')]);
+                }
+
+                Mail::to($ads_offer->company)->queue(new AdsOfferCreated($ads_offer));
 
                 $ads_offer->sent_at = now();
                 $ads_offer->save();
