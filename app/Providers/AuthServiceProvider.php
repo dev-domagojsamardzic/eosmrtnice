@@ -47,7 +47,6 @@ class AuthServiceProvider extends ServiceProvider
 
         // Check if ad has valid offers
         Gate::define('create-post-offer', static function (User $user, Post $post) {
-            dd('create-post-offer GATE');
             return is_admin() && $post->offers()->valid()->count() === 0;
         });
 
