@@ -53,20 +53,4 @@ class AdPolicy
     {
         return is_admin() || (is_partner() && $ad->user?->id === $user->id);
     }
-
-    /**
-     * Determine whether the user can restore the model.
-     */
-    public function restore(User $user, Ad $ad): bool
-    {
-        return false;
-    }
-
-    /**
-     * Determine whether the user can permanently delete the model.
-     */
-    public function forceDelete(User $user, Ad $ad): bool
-    {
-        return false;
-    }
 }
