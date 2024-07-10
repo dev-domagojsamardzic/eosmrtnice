@@ -50,6 +50,8 @@ class ImageController extends Controller
 
                 $dimensions = match($field) {
                     'image' => config('eosmrtnice.image_dimensions.deceased_image'),
+                    'logo'  => config('eosmrtnice.image_dimensions.company_logo'),
+                    'banner' => config('eosmrtnice.image_dimensions.ad_banner'),
                     default => config('eosmrtnice.image_dimensions.default'),
                 };
 

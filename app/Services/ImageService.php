@@ -48,15 +48,8 @@ class ImageService
             Storage::disk('public')->delete($company->logo);
         }
 
-        $dimensions = config('eosmrtnice.image_dimensions.company_logo');
-
         try {
-            Image::read(storage_public_path($source))
-                ->cover($dimensions['width'], $dimensions['height'])
-                ->save(storage_public_path($destination));
-            Storage::disk('public')->delete($source);
-            $moved = true;
-
+            $moved = Storage::disk('public')->move($source, $destination);
         } catch (\Exception $e) {
             Log::error($e->getMessage());
             $moved = false;
@@ -96,7 +89,13 @@ class ImageService
             Storage::disk('public')->delete($ad->banner);
         }
 
-        $moved = Storage::disk('public')->move($source, $destination);
+        try {
+            $moved = Storage::disk('public')->move($source, $destination);
+        } catch (\Exception $e) {
+            Log::error($e->getMessage());
+            $moved = false;
+        }
+
         return $moved ? $destination : null;
     }
 
