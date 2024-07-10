@@ -29,36 +29,48 @@ class AdController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
+     * Show the form for creating a new resource.
      * @param Company $company
+     * @return View
+     */
+    public function create(Company $company): View
+    {
+        return $this->form(new Ad, 'create', $company);
+    }
+
+    /**
+     * Update the specified resource in storage.
      * @param Ad $ad
      * @param AdRequest $request
      * @return RedirectResponse
      */
-    public function update(Company $company, Ad $ad, AdRequest $request): RedirectResponse
+    public function update(Ad $ad, AdRequest $request): RedirectResponse
     {
-        return $this->apply($company, $ad, $request);
+        return $this->apply($ad, $request);
+    }
+
+    public function store(AdRequest $request): RedirectResponse
+    {
+        return $this->apply(new Ad, $request);
     }
 
 
     /**
      *  Show the form for editing the specified resource.
      *
-     * @param Company $company
      * @param Ad $ad
      * @return View
      */
-    public function edit(Company $company, Ad $ad): View
+    public function edit(Ad $ad): View
     {
-        return $this->form($company, $ad, 'edit');
+        return $this->form($ad, 'edit');
     }
 
     /**
-     * @param Company $company
      * @param Ad $ad
      * @return RedirectResponse|Redirector
      */
-    public function destroy(Company $company, Ad $ad): RedirectResponse|Redirector
+    public function destroy(Ad $ad): RedirectResponse|Redirector
     {
         try {
             $ad->delete();
@@ -75,18 +87,20 @@ class AdController extends Controller
 
     /**
      * Display resource's form
-     * @param Company $company
      * @param Ad $ad
      * @param string $action
+     * @param Company|null $company
      * @return View
      */
-    private function form(Company $company, Ad $ad, string $action): View
+    private function form(Ad $ad, string $action, ?Company $company = null): View
     {
+        $company = $company ?? $ad->company;
+
         $types = AdType::options();
 
         $route = match($action) {
-            'edit' => route(auth_user_type() . '.ads.update', ['company' => $company, 'ad' => $ad]),
-            'create' => route(auth_user_type() . '.ads.store', ['company' => $company]),
+            'edit' => route(auth_user_type() . '.ads.update', ['ad' => $ad]),
+            'create' => route(auth_user_type() . '.ads.store'),
             default => ''
         };
         $quit = route(auth_user_type() . '.ads.index');
@@ -103,13 +117,20 @@ class AdController extends Controller
 
     /**
      * Apply changes on resource
-     * @param Company $company
      * @param Ad $ad
      * @param AdRequest $request
      * @return RedirectResponse
      */
-    private function apply(Company $company, Ad $ad, AdRequest $request): RedirectResponse
+    private function apply(Ad $ad, AdRequest $request): RedirectResponse
     {
+        try {
+            $companyId = $request->input('company_id');
+            $company = Company::query()->where('id', $companyId)->firstOrFail();
+        } catch (Exception $e) {
+            return redirect()->route(auth_user_type() . '.ads.index')
+                ->with('alert', ['class' => 'danger', 'message' => __('common.ad_company_not_found')]);
+        }
+
         $companyLogo = $this->imageService->storeCompanyLogo($request, $company);
         $company->logo = $companyLogo;
         $company->save();

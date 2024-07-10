@@ -26,11 +26,9 @@ Route::resource('members', MemberController::class)
 Route::resource('companies', CompanyController::class)
     ->only(['index', 'create', 'edit', 'store', 'update']);
 
-Route::get('ads', [AdController::class, 'index'])->name('ads.index');
-Route::prefix('companies/{company}')->group(function () {
-    Route::get('ads/{ad}/edit', [AdController::class, 'edit'])->name('ads.edit');
-    Route::put('ads/{ad}', [AdController::class, 'update'])->name('ads.update');
-});
+Route::resource('ads', AdController::class)
+    ->except('create');
+Route::get('ads/{company}/create', [AdController::class, 'create'])->name('ads.create');
 
 Route::resource('posts/{post}/offers', PostOfferController::class)
     ->except(['index'])

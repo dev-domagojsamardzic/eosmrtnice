@@ -15,6 +15,8 @@
                 {{ method_field('PUT') }}
             @endif
 
+            <input type="hidden" name="company_id" value="{{ $company->id }}">
+
             {{-- Prevent user from editing ad_type --}}
             @can('set-ad-type', [$ad])
                 <div class="form-group row">
