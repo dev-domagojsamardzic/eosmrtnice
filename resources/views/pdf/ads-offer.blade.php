@@ -59,7 +59,7 @@
     <table class="items-table w-100 mt-32">
         <thead>
         <tr>
-            <th class="text-align-left">{{ __('models/offer.item') }}</th>
+            <th class="text-align-left">{{ __('models/ad.ad') }}</th>
             <th class="text-align-right">{{ __('models/offer.quantity') }}</th>
             <th class="text-align-left">{{ __('models/offer.price') }}</th>
             <th class="text-align-right">{{ __('models/offer.total') }}</th>
@@ -67,7 +67,11 @@
         </thead>
         <tbody>
         <tr>
-            <td class="text-align-left">{{ $offer->ad->title ?? $offer->ad->fallbackTitle }}</td>
+            <td class="text-align-left">
+                {{ $offer->ad?->title ?? $offer->ad->fallbackTitle }}<br>
+                {{ __('models/ad.type') . ': ' . $offer->ad?->type->translate() }}<br>
+                {{ __('models/ad.months_valid') .': '.$offer->ad?->months_valid .' '. __('common.months') }}
+            </td>
             <td class="text-align-right">{{ $offer->quantity }}</td>
             <td class="text-align-right">{{ currency($offer->price) }}</td>
             <td class="text-align-right">{{ currency($offer->net_total) }}</td>
