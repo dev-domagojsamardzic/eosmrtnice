@@ -51,6 +51,6 @@ class AdPolicy
      */
     public function delete(User $user, Ad $ad): bool
     {
-        return is_admin() || (is_partner() && $ad->user?->id === $user->id);
+        return is_admin() || (is_partner() && $this->userOwnsAdRelatedCompany($user, $ad));
     }
 }
