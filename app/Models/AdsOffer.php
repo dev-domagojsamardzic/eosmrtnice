@@ -17,6 +17,7 @@ use Illuminate\Http\Response;
  * @property            int                 ad_id
  * @property            string              number
  * @property            int                 quantity
+ * @property            float               price
  * @property            float               net_total
  * @property            float               taxes
  * @property            float               total
@@ -43,6 +44,8 @@ class AdsOffer extends Model
         'valid_from' => 'datetime',
         'valid_until' => 'datetime',
         'sent_at' => 'datetime',
+        'quantity' => 'integer',
+        'price' => 'decimal:2',
         'net_total' => 'decimal:2',
         'taxes' => 'decimal:2',
         'total' => 'decimal:2',
@@ -50,6 +53,7 @@ class AdsOffer extends Model
 
     protected $attributes = [
         'number' => 'P',
+        'confirmed' => false,
     ];
 
     /**
