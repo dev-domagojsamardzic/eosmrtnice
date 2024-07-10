@@ -25,9 +25,9 @@ class AdController extends Controller
      */
     public function index(): View
     {
-        return view('ads.index', [
+        return view('index', [
             'title' => __('models/ad.ads'),
-            'table' => livewire_table_name('.ads-table')
+            'table' => livewire_table_name('ads-table')
         ]);
     }
 

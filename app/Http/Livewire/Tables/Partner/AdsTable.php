@@ -4,8 +4,11 @@ namespace App\Http\Livewire\Tables\Partner;
 
 use App\Http\Controllers\Partner\AdController;
 use App\Models\Ad;
+use App\Models\Company;
 use App\Services\ImageService;
+use Filament\Forms\Components\Select;
 use Filament\Support\Enums\IconPosition;
+use Filament\Tables\Actions\Action;
 use Filament\Tables\Actions\ActionGroup;
 use Filament\Tables\Actions\DeleteAction;
 use Filament\Tables\Actions\EditAction;
@@ -18,6 +21,8 @@ use Filament\Tables\Columns\ToggleColumn;
 use Filament\Tables\Columns\ViewColumn;
 use Illuminate\Database\Eloquent\Builder;
 use App\Http\Livewire\Tables\AdsTable as BaseAdsTable;
+use Illuminate\Http\RedirectResponse;
+use Livewire\Features\SupportRedirects\Redirector;
 
 
 class AdsTable extends BaseAdsTable
@@ -106,6 +111,32 @@ class AdsTable extends BaseAdsTable
                     ->modalSubmitActionLabel(__('common.delete'))
                     ->action(fn (Ad $ad) => (new AdController(new ImageService()))->destroy($ad->company, $ad))
             ])->iconPosition(IconPosition::Before),
+        ];
+    }
+
+    protected function getHeaderActions(): array
+    {
+        return [
+            Action::make('create_ad')
+                ->label(__('models/ad.new_ad'))
+                ->icon('heroicon-m-plus')
+                ->form([
+                    Select::make('company_id')
+                        ->label(__('models/ad.select_company_for_new_ad'))
+                        ->searchable()
+                        ->options(
+                            Company::query()
+                                ->where('user_id', auth()->id())
+                                ->availableForAd()
+                                ->get()
+                                ->pluck('title', 'id')
+                                ->toArray()
+                        )
+                        ->required(),
+                ])
+                ->action(function (array $data): RedirectResponse|Redirector {
+                    return redirect()->route(auth_user_type() . '.ads.create',$data['company_id']);
+                })
         ];
     }
 }
