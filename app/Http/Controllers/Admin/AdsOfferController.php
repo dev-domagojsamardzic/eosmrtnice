@@ -30,7 +30,10 @@ class AdsOfferController extends Controller
      */
     public function index(): View
     {
-        return view('admin.offers.index');
+        return view('index', [
+            'title' => __('admin.ads-offers'),
+            'table' => livewire_table_name('ads-offers-table')
+        ]);
     }
 
     /**
