@@ -69,7 +69,7 @@
         <tr>
             <td class="text-align-left">
                 {{ __('models/post.type') . ': ' . $offer->post?->type->translate() }}<br>
-                {{ __('models/post.size') . ': ' . $offer->post?->size . ' ' . __('common.words') }}<br>
+                {{ __('models/post.size') . ': ' . $offer->post?->size->value . ' ' . __('common.words') }}<br>
                 {{ __('models/post.starts_at') . ': ' . $offer->post?->starts_at->format('d.m.Y.') }}<br>
                 {{ __('models/post.deceased_full_name_lg') . ': ' . $offer->post?->deceased_full_name_lg }}<br>
                 {{ __('models/post.image') . ': ' . $offer->post?->image ? __('common.yes') : __('common.no') }}<br>
