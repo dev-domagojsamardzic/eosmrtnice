@@ -4,9 +4,10 @@ namespace App\Http\Livewire\Tables\Admin;
 
 use App\Http\Controllers\Admin\AdController;
 use App\Models\Ad;
-use App\Models\Offer;
+use App\Models\Company;
 use App\Services\ImageService;
 use Exception;
+use Filament\Forms\Components\Select;
 use Filament\Forms\Concerns\InteractsWithForms;
 use Filament\Forms\Contracts\HasForms;
 use Filament\Support\Enums\IconPosition;
@@ -25,13 +26,18 @@ use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
 use Illuminate\Contracts\View\View;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Http\RedirectResponse;
 use Livewire\Component;
+use Livewire\Features\SupportRedirects\Redirector;
 
 class AdsTable extends Component implements HasForms, HasTable
 {
     use InteractsWithForms;
     use InteractsWithTable;
 
+    /**
+     * @throws Exception
+     */
     public function table(Table $table): Table
     {
         return $table
@@ -41,6 +47,7 @@ class AdsTable extends Component implements HasForms, HasTable
             ->emptyStateDescription('')
             ->columns($this->getColumns())
             ->filters($this->getFilters())
+            ->headerActions($this->getHeaderActions())
             ->actions($this->getActions())
             ->groups($this->getGroups());
     }
@@ -126,6 +133,31 @@ class AdsTable extends Component implements HasForms, HasTable
                     0 => __('models/ad.ongoing_group'),
                     1 => __('models/ad.expired_group'),
                 ])
+        ];
+    }
+
+    private function getHeaderActions(): array
+    {
+        return [
+            Action::make('create_ad')
+                ->label(__('models/ad.new_ad'))
+                ->icon('heroicon-m-plus')
+                ->form([
+                    Select::make('company_id')
+                        ->label(__('models/ad.select_company_for_new_ad'))
+                        ->searchable()
+                        ->options(
+                            Company::query()
+                                ->availableForAd()
+                                ->get()
+                                ->pluck('title', 'id')
+                                ->toArray()
+                        )
+                        ->required(),
+                ])
+                ->action(function (array $data): RedirectResponse|Redirector {
+                    return redirect()->route(auth_user_type() . '.ads.create',$data['company_id']);
+                })
         ];
     }
 
