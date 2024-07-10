@@ -77,6 +77,12 @@ class AdController extends Controller
     {
         try {
             $ad->delete();
+
+            // Delete current valid ad's offer
+            if ($ad->offers()->valid()->exists()) {
+                $ad->offers()->valid()->delete();
+            }
+
             return redirect()
                 ->route(auth_user_type() . '.ads.index')
                 ->with('alert', ['class' => 'success', 'message' => __('common.deleted')]);

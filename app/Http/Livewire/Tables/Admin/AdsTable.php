@@ -158,6 +158,7 @@ class AdsTable extends BaseAdsTable
                     ->icon('heroicon-s-trash')
                     ->requiresConfirmation()
                     ->modalHeading(__('admin.delete_ad'))
+                    ->modalDescription(__('admin.delete_ad_description'))
                     ->modalSubmitActionLabel(__('common.delete'))
                     ->action(fn (Ad $ad) => (new AdController(new ImageService()))->destroy($ad)),
 
