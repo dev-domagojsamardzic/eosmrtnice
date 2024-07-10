@@ -30,16 +30,16 @@ Route::resource('ads', AdController::class)
     ->except('create');
 Route::get('ads/{company}/create', [AdController::class, 'create'])->name('ads.create');
 
-Route::resource('posts/{post}/offers', PostOfferController::class)
-    ->except(['index'])
-    ->names('posts.offers');
-
 Route::resource('posts', PostController::class);
+
+Route::resource('posts-offers', PostOfferController::class)
+    ->except('create')
+    ->names('posts-offers');
+Route::get('posts-offers/{post}/create', [PostOfferController::class, 'create'])->name('posts-offers.create');
 
 Route::resource('ads-offers', AdsOfferController::class)
     ->except('create')
     ->names('ads-offers');
-
 Route::get('ads-offers/{ad}/create', [AdsOfferController::class, 'create'])->name('ads-offers.create');
 
 Route::get('ads-offers/{ads_offer}/send', [AdsOfferController::class, 'send'])->name('ads-offers.send');
