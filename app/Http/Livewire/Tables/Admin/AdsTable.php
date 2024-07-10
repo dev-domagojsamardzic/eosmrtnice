@@ -152,14 +152,14 @@ class AdsTable extends BaseAdsTable
                     ->icon('heroicon-s-pencil-square')
                     ->url(fn (Ad $ad): string => route(
                         auth_user_type() . '.ads.edit',
-                        ['company' => $ad->company_id, 'ad' => $ad->id])),
+                        ['ad' => $ad->id])),
                 DeleteAction::make('delete')
                     ->label(__('common.delete'))
                     ->icon('heroicon-s-trash')
                     ->requiresConfirmation()
                     ->modalHeading(__('admin.delete_ad'))
                     ->modalSubmitActionLabel(__('common.delete'))
-                    ->action(fn (Ad $ad) => (new AdController(new ImageService()))->destroy($ad->company, $ad)),
+                    ->action(fn (Ad $ad) => (new AdController(new ImageService()))->destroy($ad)),
 
             ])->iconPosition(IconPosition::Before),
         ];
