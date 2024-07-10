@@ -20,8 +20,6 @@ class AdsOfferCreated extends Mailable implements ShouldQueue
 
     public Ad $ad;
 
-    protected string $mailableMarkdown;
-
     public string $actionKey;
     /**
      * Create a new message instance.
