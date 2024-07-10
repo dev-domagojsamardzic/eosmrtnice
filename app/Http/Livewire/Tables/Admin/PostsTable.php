@@ -14,8 +14,6 @@ use Filament\Tables\Columns\Layout\Stack;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Columns\ViewColumn;
 use Illuminate\Contracts\View\View;
-use Illuminate\Http\RedirectResponse;
-use Livewire\Features\SupportRedirects\Redirector;
 
 class PostsTable extends BasePostsTable
 {

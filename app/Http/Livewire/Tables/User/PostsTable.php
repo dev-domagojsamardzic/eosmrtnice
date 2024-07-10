@@ -16,8 +16,6 @@ use Filament\Tables\Columns\TextColumn\TextColumnSize;
 use Filament\Tables\Columns\ToggleColumn;
 use Illuminate\Contracts\View\View;
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Http\RedirectResponse;
-use Livewire\Features\SupportRedirects\Redirector;
 
 class PostsTable extends BasePostsTable
 {
