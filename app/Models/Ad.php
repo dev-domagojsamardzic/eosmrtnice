@@ -4,12 +4,11 @@ namespace App\Models;
 
 use App\Enums\AdType;
 use Illuminate\Database\Eloquent\Casts\Attribute;
-use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOneThrough;
-use Illuminate\Database\Eloquent\Relations\MorphToMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Carbon;
 
@@ -33,9 +32,8 @@ use Illuminate\Support\Carbon;
  * --------------------------------------------------------
  * @property-read       string                  fallbackTitle
  * --------------------------------------------------------
- * @property            Company|null            company
- * @property            User|null               user
- * @property            Collection<Offer>        offers
+ * @property            Company                 company
+ * @property            Offer                   offers
  */
 class Ad extends Model
 {
@@ -106,10 +104,10 @@ class Ad extends Model
     /**
      * Get the ad's offer
      *
-     * @return MorphToMany
+     * @return HasMany
      */
-    public function offers(): MorphToMany
+    public function offers(): HasMany
     {
-        return $this->morphToMany(Offer::class, 'offerable');
+        return $this->hasMany(AdsOffer::class, 'ad_id', 'id');
     }
 }
