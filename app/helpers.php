@@ -124,3 +124,16 @@ if (!function_exists('percentage')) {
         return $amount . '%';
     }
 }
+
+if (!function_exists('livewire_table_name')) {
+    /**
+     * Get livewire table name
+     *
+     * @param string $name
+     * @return string
+     */
+    function livewire_table_name(string $name = ''): string
+    {
+        return ($name) ? 'tables.' . auth_user_type() . '.' . $name : 'tables.' . auth_user_type();
+    }
+}
