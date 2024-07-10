@@ -142,12 +142,12 @@ class AdsTable extends Component implements HasForms, HasTable
                     ->visible(fn(Ad $ad): bool => !$ad->offers()->valid()->exists())
                     ->icon('heroicon-s-plus')
                     ->color('black')
-                    ->url(fn(Ad $ad): string => route('admin.ads.offers.create', ['ad' => $ad])),
+                    ->url(fn(Ad $ad): string => route('admin.ads-offers.create', ['ad' => $ad])),
                 Action::make('download_offer_pdf')
                     ->label(__('models/ad.download_offer_pdf'))
                     ->icon('heroicon-o-arrow-down-tray')
                     ->visible(fn(Ad $ad): bool => $ad->offers()->valid()->exists())
-                    ->url(fn(Ad $ad) => route('admin.offers.download', ['offer' => $ad->offers()->valid()->first()->id])),
+                    ->url(fn(Ad $ad) => route('admin.ads-offers.download', ['ads_offer' => $ad->offers()->valid()->first()->id])),
                 Action::make('approve')
                     ->label(fn (Ad $ad): string => $ad->approved ? __('common.disapprove') : __('common.approve'))
                     ->action(function(Ad $ad): void {

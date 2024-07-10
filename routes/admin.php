@@ -38,7 +38,11 @@ Route::resource('posts/{post}/offers', PostOfferController::class)
 
 Route::resource('posts', PostController::class);
 
-Route::resource('ads-offers', AdsOfferController::class)->names('ads-offers');
+Route::resource('ads-offers', AdsOfferController::class)
+    ->except('create')
+    ->names('ads-offers');
+
+Route::get('ads-offers/{ad}/create', [AdsOfferController::class, 'create'])->name('ads-offers.create');
 
 Route::get('ads-offers/{ads_offer}/send', [AdsOfferController::class, 'send'])->name('ads-offers.send');
 Route::get('ads-offers/{ads_offer}/download', [AdsOfferController::class, 'download'])->name('ads-offers.download');

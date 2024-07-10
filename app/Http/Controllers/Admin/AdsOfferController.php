@@ -52,13 +52,13 @@ class AdsOfferController extends Controller
     /**
      * Store new resource
      *
-     * @param AdsOffer $offer
+     * @param AdsOffer $ads_offer
      * @param AdOfferRequest $request
      * @return RedirectResponse
      */
-    public function store(AdsOffer $offer, AdOfferRequest $request): RedirectResponse
+    public function store(AdsOffer $ads_offer, AdOfferRequest $request): RedirectResponse
     {
-        return $this->apply($offer, $request);
+        return $this->apply($ads_offer, $request);
     }
 
     /**
@@ -106,23 +106,25 @@ class AdsOfferController extends Controller
     /**
      * Display resource form
      *
-     * @param AdsOffer $offer
-     * @param Ad $ad
+     * @param AdsOffer $ads_offer
+     * @param Ad|null $ad
      * @param string $action
      * @return View
      */
-    private function form(AdsOffer $offer, Ad $ad, string $action): View
+    private function form(AdsOffer $ads_offer, ?Ad $ad, string $action): View
     {
+        $ad = $ad ?? $ads_offer->ad;
+
         $route = match($action) {
-            'edit' => route(auth_user_type() . '.ads.offers.update', ['offer' => $offer]),
-            'create' => route(auth_user_type() . '.ads.offers.store', ['ad' => $ad]),
+            'edit' => route(auth_user_type() . '.ads-offers.update', ['ads_offer' => $ads_offer]),
+            'create' => route(auth_user_type() . '.ads-offers.store'),
             default => ''
         };
 
         return view(
-            'admin.ads.offers.form',
+            'admin.ads-offers.form',
             [
-                'offer' => $offer,
+                'offer' => $ads_offer,
                 'ad' => $ad,
                 'action_name' => $action,
                 'action' => $route,
@@ -133,25 +135,25 @@ class AdsOfferController extends Controller
 
     /**
      * Apply changes on resource
-     * @param AdsOffer $offer
+     * @param AdsOffer $ads_offer
      * @param AdOfferRequest $request
      * @return RedirectResponse
      */
-    private function apply(AdsOffer $offer, AdOfferRequest $request): RedirectResponse
+    private function apply(AdsOffer $ads_offer, AdOfferRequest $request): RedirectResponse
     {
-        $offer->company()->associate($request->input('company_id'));
+        $ads_offer->company()->associate($request->input('company_id'));
         $total = (float)$request->input('quantity') * $request->input('price');
         $taxes = (float)($total * (config('app.tax_percentage') / 100));
-        $offer->total = $total;
-        $offer->taxes = $taxes;
-        $offer->net_total = $total - $taxes;
-        $offer->valid_from = Carbon::parse($request->input('valid_from'))->format('Y-m-d');
-        $offer->valid_until = Carbon::parse($request->input('valid_until'))->format('Y-m-d');
+        $ads_offer->total = $total;
+        $ads_offer->taxes = $taxes;
+        $ads_offer->net_total = $total - $taxes;
+        $ads_offer->valid_from = Carbon::parse($request->input('valid_from'))->format('Y-m-d');
+        $ads_offer->valid_until = Carbon::parse($request->input('valid_until'))->format('Y-m-d');
 
         try {
-            $offer->save();
+            $ads_offer->save();
 
-            $offer->offerables()->create([
+            $ads_offer->offerables()->create([
                 'offerable_id' => $request->input('offerable_id'),
                 'offerable_type' => Ad::class,
                 'quantity' => $request->input('quantity'),
@@ -160,10 +162,10 @@ class AdsOfferController extends Controller
 
             if ($request->submit === 'save_and_send') {
 
-                Mail::to($offer->company)->queue(new OfferCreated($offer));
+                Mail::to($ads_offer->company)->queue(new OfferCreated($ads_offer));
 
-                $offer->sent_at = now();
-                $offer->save();
+                $ads_offer->sent_at = now();
+                $ads_offer->save();
 
                 return redirect()->route('admin.ads.index')
                     ->with('alert', ['class' => 'success', 'message' => __('models/offer.messages.offer_sent')]);
