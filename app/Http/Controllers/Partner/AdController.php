@@ -8,9 +8,9 @@ use App\Http\Requests\Partner\AdRequest;
 use App\Models\Ad;
 use App\Models\Company;
 use App\Services\ImageService;
+use Exception;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
-use Exception;
 use Livewire\Features\SupportRedirects\Redirector;
 
 class AdController extends Controller
@@ -25,7 +25,10 @@ class AdController extends Controller
      */
     public function index(): View
     {
-        return view('partner.ads.index');
+        return view('ads.index', [
+            'title' => __('models/ad.ads'),
+            'table' => livewire_table_name('.ads-table')
+        ]);
     }
 
     /**
@@ -35,54 +38,72 @@ class AdController extends Controller
      */
     public function create(Company $company): View
     {
-        return $this->form($company, new Ad, 'create');
-    }
-
-    /**
-     * Store new resource
-     * @param Company $company
-     * @param AdRequest $request
-     * @return RedirectResponse
-     */
-    public function store(Company $company, AdRequest $request):RedirectResponse
-    {
-        return $this->apply($company, new Ad, $request);
-    }
-
-    /**
-     *  Show the form for editing the specified resource.
-     *
-     * @param Company $company
-     * @param Ad $ad
-     * @return View
-     */
-    public function edit(Company $company, Ad $ad): View
-    {
-        return $this->form($company, $ad, 'edit');
+        return $this->form(new Ad, 'create', $company);
     }
 
     /**
      * Update the specified resource in storage.
+     * @param Ad $ad
+     * @param AdRequest $request
+     * @return RedirectResponse
      */
-    public function update(AdRequest $request, Company $company, Ad $ad): RedirectResponse
+    public function update(Ad $ad, AdRequest $request): RedirectResponse
     {
-        return $this->apply($company, $ad, $request);
+        return $this->apply($ad, $request);
+    }
+
+    public function store(AdRequest $request): RedirectResponse
+    {
+        return $this->apply(new Ad, $request);
+    }
+
+
+    /**
+     *  Show the form for editing the specified resource.
+     *
+     * @param Ad $ad
+     * @return View
+     */
+    public function edit(Ad $ad): View
+    {
+        return $this->form($ad, 'edit');
+    }
+
+    /**
+     * @param Ad $ad
+     * @return RedirectResponse|Redirector
+     */
+    public function destroy(Ad $ad): RedirectResponse|Redirector
+    {
+        try {
+            $ad->delete();
+            return redirect()
+                ->route('admin.ads.index')
+                ->with('alert', ['class' => 'success', 'message' => __('common.deleted')]);
+        }
+        catch (Exception $e) {
+            return redirect()
+                ->route('admin.ads.index')
+                ->with('alert', ['class' => 'danger', 'message' => __('common.something_went_wrong')]);
+        }
     }
 
     /**
      * Display resource's form
-     * @param Company $company
      * @param Ad $ad
      * @param string $action
+     * @param Company|null $company
      * @return View
      */
-    private function form(Company $company, Ad $ad, string $action): View
+    private function form(Ad $ad, string $action, ?Company $company = null): View
     {
+        $company = $company ?? $ad->company;
+
         $types = AdType::options();
 
         $route = match($action) {
-            'edit' => route(auth_user_type() . '.ads.update', ['company' => $company, 'ad' => $ad]),
-            'create' => route(auth_user_type() . '.ads.store', ['company' => $company]),
+            'edit' => route(auth_user_type() . '.ads.update', ['ad' => $ad]),
+            'create' => route(auth_user_type() . '.ads.store'),
             default => ''
         };
         $quit = route(auth_user_type() . '.ads.index');
@@ -99,13 +120,20 @@ class AdController extends Controller
 
     /**
      * Apply changes on resource
-     * @param Company $company
      * @param Ad $ad
      * @param AdRequest $request
      * @return RedirectResponse
      */
-    private function apply(Company $company, Ad $ad, AdRequest $request): RedirectResponse
+    private function apply(Ad $ad, AdRequest $request): RedirectResponse
     {
+        try {
+            $companyId = $request->input('company_id');
+            $company = Company::query()->where('id', $companyId)->firstOrFail();
+        } catch (Exception $e) {
+            return redirect()->route(auth_user_type() . '.ads.index')
+                ->with('alert', ['class' => 'danger', 'message' => __('common.ad_company_not_found')]);
+        }
+
         $companyLogo = $this->imageService->storeCompanyLogo($request, $company);
         $company->logo = $companyLogo;
         $company->save();
@@ -113,11 +141,11 @@ class AdController extends Controller
         if ($ad->company()->doesntExist()) {
             $ad->company()->associate($company);
         }
-        // Prevent type changing when editing ad
-        if ($request->user()->can('set-ad-type', [$ad])) {
-            $ad->type = $request->input('type', AdType::STANDARD);
+
+        if ($request->input('type')) {
+            $ad->type = $request->input('type');
         }
-        $ad->title = $request->input('title');
+
         $ad->months_valid = $request->input('months_valid', 1);
         $ad->caption = $request->input('caption');
 
@@ -126,30 +154,10 @@ class AdController extends Controller
 
         try {
             $ad->save();
-            return redirect()->route('partner.ads.index')
+            return redirect()->route('admin.ads.index')
                 ->with('alert', ['class' => 'success', 'message' => __('common.saved')]);
         } catch(Exception $e) {
-           return redirect()->route('partner.ads.index')
-                ->with('alert', ['class' => 'danger', 'message' => __('common.something_went_wrong')]);
-        }
-    }
-
-    /**
-     * @param Company $company
-     * @param Ad $ad
-     * @return RedirectResponse|Redirector
-     */
-    public function destroy(Company $company, Ad $ad): RedirectResponse|Redirector
-    {
-        try {
-            $ad->delete();
-            return redirect()
-                ->route('partner.ads.index')
-                ->with('alert', ['class' => 'success', 'message' => __('common.deleted')]);
-        }
-        catch (Exception $e) {
-            return redirect()
-                ->route('partner.ads.index')
+            return redirect()->route('admin.ads.index')
                 ->with('alert', ['class' => 'danger', 'message' => __('common.something_went_wrong')]);
         }
     }
