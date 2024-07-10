@@ -13,15 +13,9 @@ Route::get('/dashboard', static function () {
 Route::resource('companies', CompanyController::class)
     ->only(['index', 'create', 'edit', 'update', 'store']);
 
-Route::get('ads', [AdController::class, 'index'])->name('ads.index');
-
-Route::prefix('companies/{company}')->group(function () {
-    Route::get('ads/create', [AdController::class, 'create'])->name('ads.create');
-    Route::get('ads/{ad}/edit', [AdController::class, 'edit'])->name('ads.edit');
-    Route::post('ads', [AdController::class, 'store'])->name('ads.store');
-    Route::put('ads/{ad}', [AdController::class, 'update'])->name('ads.update');
-    Route::delete('ads/{ad}', [AdController::class, 'destroy'])->name('ads.destroy');
-});
+Route::resource('ads', AdController::class)
+    ->except('create');
+Route::get('ads/{company}/create', [AdController::class, 'create'])->name('ads.create');
 
 Route::resource('offers', OfferController::class)
     ->only(['index', 'show']);
