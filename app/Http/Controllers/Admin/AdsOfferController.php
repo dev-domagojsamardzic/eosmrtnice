@@ -95,12 +95,12 @@ class AdsOfferController extends Controller
     /**
      * Download offer as PDF document
      *
-     * @param AdsOffer $offer
+     * @param AdsOffer $ads_offer
      * @return Response
      */
-    public function download(AdsOffer $offer): Response
+    public function download(AdsOffer $ads_offer): Response
     {
-        return $offer->downloadPdf();
+        return $ads_offer->downloadPdf();
     }
 
     /**

@@ -66,36 +66,12 @@
         </tr>
         </thead>
         <tbody>
-        @if($offer->ads)
-            @foreach($offer->ads as $item)
-                <tr>
-                    <td class="text-align-left">{{ $item->title ?? $item->fallbackTitle }}</td>
-                    <td class="text-align-right">{{ $item->pivot?->quantity }}</td>
-                    <td class="text-align-right">{{ $item->pivot?->price . config('app.currency_symbol') }}</td>
-                    <td class="text-align-right">
-                        {{ number_format((int)$item->pivot?->quantity * (float)$item->pivot?->price, 2) . config('app.currency_symbol') }}
-                    </td>
-                </tr>
-            @endforeach
-        @endif
-        @if($offer->posts)
-            @foreach($offer->posts as $item)
-                <tr>
-                    <td class="text-align-left">
-                        {{ "{$item->type->translate()}: {$item->deceased_full_name_lg}" }} <br>
-                        {{ __('models/post.size').': '.ucfirst($item->size->name).' ('.__('common.to').' '.$item->size->value.' '.__('common.words').')' }} <br>
-                        {{ __('models/post.is_framed') }}: {{ $item->is_framed ? __('common.yes') : __('common.no') }} <br>
-                        {{ __('models/post.symbol') }}: {{ $item->symbol->translate() }}
-                    </td>
-                    <td class="text-align-right">{{ $item->pivot?->quantity }}</td>
-                    <td class="text-align-right">{{ $item->pivot?->price . config('app.currency_symbol') }}</td>
-                    <td class="text-align-right">
-                        {{ number_format((int)$item->pivot?->quantity * (float)$item->pivot?->price, 2) . config('app.currency_symbol') }}
-                    </td>
-                </tr>
-            @endforeach
-        @endif
-
+        <tr>
+            <td class="text-align-left">{{ $offer->ad->title ?? $offer->ad->fallbackTitle }}</td>
+            <td class="text-align-right">{{ $offer->quantity }}</td>
+            <td class="text-align-right">{{ currency($offer->price) }}</td>
+            <td class="text-align-right">{{ currency($offer->net_total) }}</td>
+        </tr>
 
         <tr>
             <td class="text-align-left" colspan="3"><strong>{{ __('models/offer.pdv') . ' ' . config('app.tax_percentage') . '%'}}</strong></td>
