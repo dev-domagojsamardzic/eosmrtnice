@@ -19,6 +19,7 @@ return new class extends Migration
             $table->foreignIdFor(Ad::class)->constrained();
 
             $table->string('number')->nullable(false);
+            $table->unsignedInteger('quantity')->nullable(false);
             $table->unsignedDecimal('net_total')->nullable(false);
             $table->unsignedDecimal('taxes')->nullable(false);
             $table->unsignedDecimal('total')->nullable(false);

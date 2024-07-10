@@ -16,6 +16,7 @@ use Illuminate\Http\Response;
  * @property            int                 company_id
  * @property            int                 ad_id
  * @property            string              number
+ * @property            int                 quantity
  * @property            float               net_total
  * @property            float               taxes
  * @property            float               total
