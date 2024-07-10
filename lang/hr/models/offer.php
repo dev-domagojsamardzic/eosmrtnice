@@ -23,7 +23,8 @@ return [
     'pdv' => 'PDV',
     'messages' => [
         'offer_sent' => 'Ponuda je poslana.',
-        'offer_for_ad_exists' => 'Ponuda za ovaj oglas već postoji.',
+        'offer_for_ad_exists' => 'Aktivna ponuda za ovaj oglas već postoji.',
+        'offer_for_ad_exists' => 'Aktivna ponuda za ovu objavu već postoji.',
     ],
     'number' => 'Broj ponude',
     'items_count' => 'Broj stavki',
@@ -38,4 +39,5 @@ return [
         'Post' => 'Objava',
     ],
     'company_email_not_set' => 'Mail nije poslan. Tvrtka nema postavljen email.',
+    'user_email_not_set' => 'Mail nije poslan. Korisnik nema postavljen email.',
 ];

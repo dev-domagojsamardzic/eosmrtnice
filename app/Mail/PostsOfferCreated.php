@@ -3,8 +3,9 @@
 namespace App\Mail;
 
 use App\Models\Ad;
-use App\Models\Offer;
+use App\Models\AdsOffer;
 use App\Models\Post;
+use App\Models\PostsOffer;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
@@ -13,30 +14,21 @@ use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
 
-class OfferCreated extends Mailable implements ShouldQueue
+class PostsOfferCreated extends Mailable implements ShouldQueue
 {
     use Queueable, SerializesModels;
 
-    public Offer $offer;
+    public PostsOffer $posts_offer;
 
-    public Ad|Post $offerable;
-
-    protected string $mailableMarkdown;
+    public Post $post;
 
     public string $actionKey;
     /**
      * Create a new message instance.
      */
-    public function __construct(Offer $offer, bool $edited = false)
+    public function __construct(PostsOffer $posts_offer, bool $edited = false)
     {
-        $this->offer = $offer;
-        $this->offerable = $offer->offerables()->first()->offerable;
-        if ($this->offerable instanceof Ad) {
-            $this->mailableMarkdown = 'mail/partials.ad-offer-created';
-        }
-        elseif ($this->offerable instanceof Post) {
-            $this->mailableMarkdown = 'mail/partials.post-offer-created';
-        }
+        $this->posts_offer = $posts_offer;
         $this->actionKey = $edited ? 'offer_edited' : 'offer_created';
     }
 
@@ -47,7 +39,7 @@ class OfferCreated extends Mailable implements ShouldQueue
     {
         return new Envelope(
             from: config('eosmrtnice.mail_from_address'),
-            subject: __("mail.$this->actionKey.subject", ['offer' => $this->offer->number]),
+            subject: __("mail.$this->actionKey.subject", ['offer' => $this->posts_offer->number]),
         );
     }
 
@@ -56,7 +48,7 @@ class OfferCreated extends Mailable implements ShouldQueue
      */
     public function content(): Content
     {
-        return new Content(markdown: $this->mailableMarkdown);
+        return new Content(markdown: 'mail/partials.post-offer-created');
     }
 
     /**
@@ -67,7 +59,7 @@ class OfferCreated extends Mailable implements ShouldQueue
     public function attachments(): array
     {
         return [
-            Attachment::fromData(fn () => $this->offer->toRawPdf(), $this->offer->number . '.pdf')
+            Attachment::fromData(fn () => $this->posts_offer->toRawPdf(), $this->posts_offer->number . '.pdf')
                 ->withMime('application/pdf'),
         ];
     }

@@ -11,6 +11,7 @@ use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Str;
@@ -109,10 +110,10 @@ class Post extends Model
     /**
      * Get the post's offer
      *
-     * @return MorphToMany
+     * @return HasMany
      */
-    public function offers(): MorphToMany
+    public function offers(): HasMany
     {
-        return $this->morphToMany(Offer::class, 'offerable');
+        return $this->hasMany(PostsOffer::class, 'post_id', 'id');
     }
 }

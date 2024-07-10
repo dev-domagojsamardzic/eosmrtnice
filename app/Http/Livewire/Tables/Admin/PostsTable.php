@@ -55,8 +55,9 @@ class PostsTable extends BasePostsTable
                         1 => 'success',
                         0 => 'danger',
                     }),
-                ViewColumn::make('offer_sent')
-                    ->view('filament.tables.columns.ad-offer-sent-badge'),
+                // TODO: Activate later
+                /*ViewColumn::make('offer_sent')
+                    ->view('filament.tables.columns.ad-offer-sent-badge'),*/
             ])->from('md'),
         ];
     }

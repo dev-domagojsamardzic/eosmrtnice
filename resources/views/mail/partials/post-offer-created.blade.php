@@ -1,33 +1,33 @@
 <x-mail::message>
 # {{ __("mail.$actionKey.greetings") }}
 
-{{ __("mail.$actionKey.intro", ['offer' => $offer->number]) }}
+{{ __("mail.$actionKey.intro", ['offer' => $posts_offer->number]) }}
 <x-mail::table>
 <table class="data_table">
     <tbody>
         <tr>
             <td class="text-bold">{{ __('models/post.post') }}</td>
-            <td class="text-right">{{ $offerable->type->translate() }}</td>
+            <td class="text-right">{{ $posts_offer->post?->type->translate() }}</td>
         </tr>
         <tr>
             <td class="text-bold">{{ __('models/post.size') }}</td>
-            <td class="text-right">{{ __('common.to').' '.$offerable->size->value.' '.__('common.words') }}</td>
+            <td class="text-right">{{ __('common.to').' '.$posts_offer->post?->size->value.' '.__('common.words') }}</td>
         </tr>
         <tr>
             <td class="text-bold">{{ __('models/deceased.deceased') }}</td>
-            <td class="text-right">{{ $offerable->deceased->full_name }}</td>
+            <td class="text-right">{{ $posts_offer->post?->deceased_full_name_lg }}</td>
         </tr>
         <tr>
             <td class="text-bold">{{ __('models/post.is_framed') }}</td>
-            <td class="text-right">{{ $offerable->is_framed ? __('common.yes') : __('common.no') }}</td>
+            <td class="text-right">{{ $posts_offer->post?->is_framed ? __('common.yes') : __('common.no') }}</td>
         </tr>
         <tr>
             <td class="text-bold">{{ __('models/post.symbol') }}</td>
-            <td class="text-right">{{ $offerable->symbol->translate() }}</td>
+            <td class="text-right">{{ $posts_offer->post?->symbol->translate() }}</td>
         </tr>
         <tr>
             <td class="text-bold">{{ __('models/post.starts_at') }}</td>
-            <td class="text-right">{{ $offerable->starts_at->format('d.m.Y.') }}</td>
+            <td class="text-right">{{ $posts_offer->post?->starts_at->format('d.m.Y.') }}</td>
         </tr>
     </tbody>
 </table>

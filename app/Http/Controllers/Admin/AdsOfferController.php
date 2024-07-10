@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Requests\Admin\Offers\AdOfferRequest;
 use App\Http\Controllers\Controller;
 use App\Mail\AdsOfferCreated;
-use App\Mail\OfferCreated;
 use App\Models\Ad;
 use App\Models\AdsOffer;
 use Carbon\Carbon;
@@ -157,7 +156,7 @@ class AdsOfferController extends Controller
         $ads_offer->price = (float)$request->input('price');
 
         $total = $ads_offer->price * $ads_offer->quantity;
-        $taxes = (float)($total * ((float)config('app.tax_percentage') / 100));
+        $taxes = ($total * ((float)config('app.tax_percentage') / 100));
         $ads_offer->total = $total;
         $ads_offer->taxes = $taxes;
         $ads_offer->net_total = $total - $taxes;
