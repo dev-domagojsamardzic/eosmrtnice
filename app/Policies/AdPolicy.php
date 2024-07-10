@@ -30,9 +30,12 @@ class AdPolicy
      */
     public function create(User $user): bool
     {
-        return is_partner() &&
-            $this->userOwnsAtLeastOneCompany($user) &&
-            $this->userOwnsCompaniesAvailableForAds($user);
+        return is_admin() ||
+            (
+                is_partner() &&
+                $this->userOwnsAtLeastOneCompany($user) &&
+                $this->userOwnsCompaniesAvailableForAds($user)
+            );
     }
 
     /**
