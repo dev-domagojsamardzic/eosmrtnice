@@ -26,7 +26,10 @@ class PostController extends Controller
      */
     public function index(): View
     {
-        return view(auth_user_type() . '.posts.index');
+        return view('index', [
+            'title' => __('models/post.post'),
+            'table' => livewire_table_name('posts-table')
+        ]);
     }
 
     /**
