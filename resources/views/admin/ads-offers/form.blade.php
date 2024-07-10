@@ -13,7 +13,7 @@
             @endif
 
             <input type="hidden" name="company_id" value="{{ $ad->company->id }}">
-            <input type="hidden" name="offerable_id" value="{{ $ad->id }}">
+            <input type="hidden" name="ad_id" value="{{ $ad->id }}">
 
             @if($offer->exists)
                 <div class="form-group row">
