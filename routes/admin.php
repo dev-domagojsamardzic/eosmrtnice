@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\Admin\AdController;
+use App\Http\Controllers\Partner\AdController;
 use App\Http\Controllers\Admin\AdsOfferController;
 use App\Http\Controllers\Admin\CompanyController;
 use App\Http\Controllers\Admin\MemberController;
