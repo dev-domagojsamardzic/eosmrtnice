@@ -40,7 +40,7 @@ class ServicesTable extends Component implements HasForms, HasTable
 
     public function render(): View
     {
-        return view('livewire.services-table');
+        return view('livewire.table');
     }
 
     /**

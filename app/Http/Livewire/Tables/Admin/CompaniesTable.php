@@ -60,7 +60,7 @@ class CompaniesTable extends Component implements HasTable, HasForms
     }
     public function render(): View
     {
-        return view('livewire.companies-table');
+        return view('livewire.table');
     }
 
     /**

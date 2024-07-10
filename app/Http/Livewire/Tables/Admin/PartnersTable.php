@@ -53,7 +53,7 @@ class PartnersTable extends Component implements HasTable, HasForms
     }
     public function render(): View
     {
-        return view('livewire.partners-table');
+        return view('livewire.table');
     }
 
     /**

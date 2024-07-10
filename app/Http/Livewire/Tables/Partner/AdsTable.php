@@ -71,7 +71,7 @@ class AdsTable extends Component implements HasForms, HasTable
 
     public function render(): View
     {
-        return view('livewire.ads-table');
+        return view('livewire.table');
     }
 
     /**

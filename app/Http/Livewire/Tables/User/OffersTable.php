@@ -51,7 +51,7 @@ class OffersTable extends Component implements HasForms, HasTable
 
     public function render(): View
     {
-        return view('livewire.offers-table');
+        return view('livewire.table');
     }
 
     /**

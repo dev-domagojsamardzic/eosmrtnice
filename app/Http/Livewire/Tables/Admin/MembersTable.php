@@ -53,7 +53,7 @@ class MembersTable extends Component implements HasTable, HasForms
     }
     public function render(): View
     {
-        return view('livewire.members-table');
+        return view('livewire.table');
     }
 
     /**
