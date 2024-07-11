@@ -68,12 +68,12 @@
         <tbody>
         <tr>
             <td class="text-align-left">
-                {{ __('models/post.type') . ': ' . $offer->post?->type->translate() }}<br>
-                {{ __('models/post.size') . ': ' . $offer->post?->size->value . ' ' . __('common.words') }}<br>
+                <b>{{ $offer->post?->type->translate() }}</b><br>
+                {{ __('common.to') . ' ' . $offer->post?->size->value . ' ' . __('common.words') }}<br>
                 {{ __('models/post.starts_at') . ': ' . $offer->post?->starts_at->format('d.m.Y.') }}<br>
-                {{ __('models/post.deceased_full_name_lg') . ': ' . $offer->post?->deceased_full_name_lg }}<br>
-                {{ __('models/post.image') . ': ' . $offer->post?->image ? __('common.yes') : __('common.no') }}<br>
-                {{ __('models/post.is_framed') . ': ' . $offer->post?->is_framed ? __('common.yes') : __('common.no') }}<br>
+                {{ __('models/post.deceased_full_name') . ': ' . $offer->post?->deceased_full_name_lg }}<br>
+                {{ __('models/post.deceased_image') . ': ' . ($offer->post?->image ? __('common.yes') : __('common.no')) }}<br>
+                {{ __('models/post.is_framed') . ': ' . ($offer->post?->is_framed ? __('common.yes') : __('common.no')) }}<br>
                 {{ __('models/post.symbol') . ': ' . $offer->post?->symbol->translate() }}<br>
             </td>
             <td class="text-align-right">{{ $offer->quantity }}</td>

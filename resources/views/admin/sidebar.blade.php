@@ -74,6 +74,13 @@
             <span>{{ __('sidebar.ads_offers') }}</span></a>
     </li>
 
+    <!-- Nav Item - Offers for posts -->
+    <li class="nav-item">
+        <a class="nav-link" href="{{ route(auth_user_type() . '.posts-offers.index') }}">
+            <i class="fas fa-file-pdf"></i>
+            <span>{{ __('sidebar.posts_offers') }}</span></a>
+    </li>
+
     <!-- Nav Item - Services -->
     {{--<li class="nav-item">
         <a class="nav-link" href="{{ route(auth_user_type() . '.services.index') }}">

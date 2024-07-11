@@ -56,5 +56,6 @@ return [
     'delete_ad' => 'Obriši oglas',
     'delete_ad_description' => 'Napomena! Brisanjem oglasa brišete i ponudu za taj oglas, ako ona postoji.',
     'ads-offers' => 'Ponude za oglase',
+    'posts-offers' => 'Ponude za objave',
     'delete_offer' => 'Obriši ponudu',
 ];
