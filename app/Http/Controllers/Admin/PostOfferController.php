@@ -70,7 +70,7 @@ class PostOfferController extends Controller
      */
     public function store(PostsOffer $posts_offer, PostOfferRequest $request): RedirectResponse
     {
-        return $this->apply($posts_offer, $request);
+        return $this->apply($posts_offer, $request, 'store');
     }
 
     /**
@@ -82,7 +82,7 @@ class PostOfferController extends Controller
      */
     public function update(PostsOffer $posts_offer, PostOfferRequest $request): RedirectResponse
     {
-        return $this->apply($posts_offer, $request);
+        return $this->apply($posts_offer, $request, 'update');
     }
 
     /**
@@ -161,9 +161,10 @@ class PostOfferController extends Controller
      * Apply changes on resource
      * @param PostsOffer $posts_offer
      * @param PostOfferRequest $request
+     * @param string $action
      * @return RedirectResponse
      */
-    protected function apply(PostsOffer $posts_offer, PostOfferRequest $request): RedirectResponse
+    protected function apply(PostsOffer $posts_offer, PostOfferRequest $request, string $action): RedirectResponse
     {
         if ($posts_offer->user()->doesntExist()) {
             $posts_offer->user()->associate($request->input('user_id'));
@@ -184,6 +185,11 @@ class PostOfferController extends Controller
         $posts_offer->net_total = $total - $taxes;
         $posts_offer->valid_from = Carbon::parse($request->input('valid_from'))->format('Y-m-d');
         $posts_offer->valid_until = Carbon::parse($request->input('valid_until'))->format('Y-m-d');
+
+        // Reset sent_at flag every time admin updates offer
+        if ($action === 'update') {
+            $posts_offer->sent_at = null;
+        }
 
         try {
             $posts_offer->save();
