@@ -33,17 +33,13 @@ Route::get('ads/{company}/create', [AdController::class, 'create'])->name('ads.c
 Route::resource('posts', PostController::class);
 
 /* Posts offers*/
-Route::resource('posts-offers', PostOfferController::class)
-    ->except('create')
-    ->names('posts-offers');
 Route::get('posts-offers/{post}/create', [PostOfferController::class, 'create'])->name('posts-offers.create');
 Route::get('posts-offers/{posts_offer}/send', [PostOfferController::class, 'send'])->name('posts-offers.send');
 Route::get('posts-offers/{posts_offer}/download', [PostOfferController::class, 'download'])->name('posts-offers.download');
+Route::resource('posts-offers', PostOfferController::class)->except('create')->names('posts-offers');
 
 /* Ads offers*/
-Route::resource('ads-offers', AdsOfferController::class)
-    ->except('create')
-    ->names('ads-offers');
 Route::get('ads-offers/{ad}/create', [AdsOfferController::class, 'create'])->name('ads-offers.create');
 Route::get('ads-offers/{ads_offer}/send', [AdsOfferController::class, 'send'])->name('ads-offers.send');
 Route::get('ads-offers/{ads_offer}/download', [AdsOfferController::class, 'download'])->name('ads-offers.download');
+Route::resource('ads-offers', AdsOfferController::class)->except('create')->names('ads-offers');
