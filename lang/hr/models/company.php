@@ -15,4 +15,13 @@ return [
     'mobile_phone' => 'Mobitel',
     'new_company' => 'Nova tvrtka',
     'owner' => 'Vlasnik tvrtke',
+    'phone_short' => 'Tel',
+    'mobile_phone_short' => 'Mob',
+    'fax_short' => 'Fax',
+    'bank_title' => 'Banka',
+    'bank_swift' => 'SWIFT',
+    'bank_iban' => 'IBAN',
+    'bank_model' => 'Model',
+    'bank_reference_number' => 'Poziv na broj',
+    'bank_model_reference_number' => 'Model / Poziv na broj',
 ];

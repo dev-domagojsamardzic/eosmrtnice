@@ -51,3 +51,14 @@ table.items-table, .items-table th, .items-table td {
 .background-lightgrey {
     background: #D3D3D3FF;
 }
+
+.border-thin-black {
+    border: 1px solid #333333;
+}
+
+.footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}

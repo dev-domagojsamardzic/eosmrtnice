@@ -99,6 +99,18 @@ if (!function_exists('company_data')) {
     }
 }
 
+if (!function_exists('company_bank_data')) {
+    function company_bank_data(string $property = null): array|string|null
+    {
+        $key = 'eosmrtnice.bank';
+        if ($property) {
+            $key .= '.' . $property;
+        }
+
+        return config($key);
+    }
+}
+
 if (!function_exists('currency')) {
     /**
      * Return amount with currency symbol

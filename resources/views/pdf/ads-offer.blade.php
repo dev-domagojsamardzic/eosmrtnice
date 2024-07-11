@@ -4,15 +4,7 @@
 @endsection
 
 @section('body')
-    <table>
-        <tbody>
-        <tr><td><strong>{{ company_data('title') }}</strong></td></tr>
-        <tr><td>{{ company_data('address') }}</td></tr>
-        <tr><td>{{ company_data('zipcode') . ', ' . company_data('town') }}</td></tr>
-        <tr><td>{{ company_data('country') }}</td></tr>
-        <tr><td>{{ __('models/company.oib') }}: {{ company_data('oib') }}</td></tr>
-        </tbody>
-    </table>
+    @include('pdf.partials.header')
 
     <table class="w-100 mt-16">
         <thead>
@@ -88,4 +80,7 @@
         </tr>
         </tbody>
     </table>
+
+    @include('pdf.partials.remark')
+    @include('pdf.partials.footer')
 @endsection

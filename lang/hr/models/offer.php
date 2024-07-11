@@ -40,4 +40,6 @@ return [
     ],
     'company_email_not_set' => 'Mail nije poslan. Tvrtka nema postavljen email.',
     'user_email_not_set' => 'Mail nije poslan. Korisnik nema postavljen email.',
+    'remark' => 'Napomena',
+    'remark_text' => 'OVO NIJE FISKALIZIRANI RAČUN (Članak 27.a Zakona o fiskalizaciji)',
 ];
