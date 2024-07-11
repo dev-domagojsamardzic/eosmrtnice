@@ -2,7 +2,6 @@
 
 namespace App\Policies;
 
-use App\Models\Offer;
 use App\Models\User;
 
 class AdsOfferPolicy

@@ -52,6 +52,17 @@ class AdsOfferController extends Controller
     }
 
     /**
+     * Display edit form
+     *
+     * @param Ad $ad
+     * @return View|RedirectResponse
+     */
+    public function edit(Ad $ad): View|RedirectResponse
+    {
+        return $this->form(new AdsOffer, $ad, 'edit');
+    }
+
+    /**
      * Store new resource
      *
      * @param AdsOffer $ads_offer
@@ -60,7 +71,19 @@ class AdsOfferController extends Controller
      */
     public function store(AdsOffer $ads_offer, AdOfferRequest $request): RedirectResponse
     {
-        return $this->apply($ads_offer, $request);
+        return $this->apply($ads_offer, $request, 'store');
+    }
+
+    /**
+     * Update resource resource
+     *
+     * @param AdsOffer $ads_offer
+     * @param AdOfferRequest $request
+     * @return RedirectResponse
+     */
+    public function update(AdsOffer $ads_offer, AdOfferRequest $request): RedirectResponse
+    {
+        return $this->apply($ads_offer, $request, 'update');
     }
 
     /**
@@ -139,9 +162,10 @@ class AdsOfferController extends Controller
      * Apply changes on resource
      * @param AdsOffer $ads_offer
      * @param AdOfferRequest $request
+     * @param string $action
      * @return RedirectResponse
      */
-    private function apply(AdsOffer $ads_offer, AdOfferRequest $request): RedirectResponse
+    private function apply(AdsOffer $ads_offer, AdOfferRequest $request, string $action): RedirectResponse
     {
         if ($ads_offer->company()->doesntExist()) {
             $ads_offer->company()->associate($request->input('company_id'));
@@ -162,6 +186,11 @@ class AdsOfferController extends Controller
         $ads_offer->net_total = $total - $taxes;
         $ads_offer->valid_from = Carbon::parse($request->input('valid_from'))->format('Y-m-d');
         $ads_offer->valid_until = Carbon::parse($request->input('valid_until'))->format('Y-m-d');
+
+        // Reset sent_at flag every time admin updates offer
+        if ($action === 'update') {
+            $ads_offer->sent_at = null;
+        }
 
         try {
             $ads_offer->save();
