@@ -11,6 +11,7 @@ return [
     'size' => 'Veličina objave',
     'size_info' => 'U veličinu oglasa ubrajaju se samo riječi iz uvodnog dijela i glavne poruke.',
     'is_framed' => 'Poseban okvir',
+    'deceased' => 'Pokojnik',
     'deceased_full_name' => 'Ime i prezime pokojnika',
     'deceased_born_died' => 'Datum rođenja - Datum smrti',
     'deceased_full_name_lg_info' => 'Ime i prezime koje se nalazi na vrhu objave, ispisano podebljanim i uvećanim slovima.',
