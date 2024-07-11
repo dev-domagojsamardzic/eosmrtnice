@@ -51,6 +51,17 @@ class PostOfferController extends Controller
     }
 
     /**
+     * Display edit form
+     *
+     * @param PostsOffer $posts_offer
+     * @return View
+     */
+    public function edit(PostsOffer $posts_offer): View
+    {
+        return $this->form($posts_offer, null, 'edit');
+    }
+
+    /**
      * Store new resource
      *
      * @param PostsOffer $posts_offer
@@ -58,6 +69,18 @@ class PostOfferController extends Controller
      * @return RedirectResponse
      */
     public function store(PostsOffer $posts_offer, PostOfferRequest $request): RedirectResponse
+    {
+        return $this->apply($posts_offer, $request);
+    }
+
+    /**
+     * Update resource
+     *
+     * @param PostsOffer $posts_offer
+     * @param PostOfferRequest $request
+     * @return RedirectResponse
+     */
+    public function update(PostsOffer $posts_offer, PostOfferRequest $request): RedirectResponse
     {
         return $this->apply($posts_offer, $request);
     }
@@ -169,7 +192,7 @@ class PostOfferController extends Controller
 
                 if (!$posts_offer->user?->email) {
                     return redirect()
-                        ->route('admin.posts.index')
+                        ->route('admin.posts-offers.index')
                         ->with('alert', ['class' => 'danger', 'message' => __('models/offer.user_email_not_set')]);
                 }
 
@@ -178,15 +201,15 @@ class PostOfferController extends Controller
                 $posts_offer->sent_at = now();
                 $posts_offer->save();
 
-                return redirect()->route('admin.posts.index')
+                return redirect()->route('admin.posts-offers.index')
                     ->with('alert', ['class' => 'success', 'message' => __('models/offer.messages.offer_sent')]);
             }
 
-            return redirect()->route('admin.posts.index')
+            return redirect()->route('admin.posts-offers.index')
                 ->with('alert', ['class' => 'success', 'message' => __('common.saved')]);
         } catch (Exception $e) {
             return redirect()
-                ->route('admin.posts.index')
+                ->route('admin.posts-offers.index')
                 ->with('alert', ['class' => 'danger', 'message' => __('common.something_went_wrong')]);
         }
     }

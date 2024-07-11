@@ -170,7 +170,7 @@ class AdsOfferController extends Controller
 
                 if (!$ads_offer->company?->email) {
                     return redirect()
-                        ->route('admin.ads.index')
+                        ->route('admin.ads-offers.index')
                         ->with('alert', ['class' => 'danger', 'message' => __('models/offer.company_email_not_set')]);
                 }
 
@@ -179,15 +179,15 @@ class AdsOfferController extends Controller
                 $ads_offer->sent_at = now();
                 $ads_offer->save();
 
-                return redirect()->route('admin.ads.index')
+                return redirect()->route('admin.ads-offers.index')
                     ->with('alert', ['class' => 'success', 'message' => __('models/offer.messages.offer_sent')]);
             }
 
-            return redirect()->route('admin.ads.index')
+            return redirect()->route('admin.ads-offers.index')
                 ->with('alert', ['class' => 'success', 'message' => __('common.saved')]);
         } catch (Exception $e) {
             return redirect()
-                ->route('admin.ads.index')
+                ->route('admin.ads-offers.index')
                 ->with('alert', ['class' => 'danger', 'message' => __('common.something_went_wrong')]);
         }
     }
