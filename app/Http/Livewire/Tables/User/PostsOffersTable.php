@@ -2,10 +2,7 @@
 
 namespace App\Http\Livewire\Tables\User;
 
-use App\Http\Livewire\Tables\AdsOffersTable as BaseTable;
-use App\Models\AdsOffer;
-use App\Models\Company;
-use App\Models\Member;
+use App\Http\Livewire\Tables\PostsOffersTable as BaseTable;
 use App\Models\PostsOffer;
 use Exception;
 use Filament\Forms\Components\DatePicker;
@@ -22,6 +19,7 @@ class PostsOffersTable extends BaseTable
     {
         return PostsOffer::query()
             ->where('user_id', auth()->id())
+            ->whereNotNull('sent_at')
             ->orderBy('created_at');
     }
 
