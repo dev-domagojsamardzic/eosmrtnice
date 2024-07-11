@@ -91,11 +91,12 @@ class PostsOffersTable extends Component implements HasForms, HasTable
                 ])->schema([
                     Stack::make([
                         TextColumn::make('user.full_name')
-                            ->searchable(['user.first_name', 'user.last_name']),
+                            ->searchable(['first_name', 'last_name']),
                         TextColumn::make('user.email'),
                     ]),
                     Stack::make([
-                        TextColumn::make('post.deceased_full_name_lg'),
+                        TextColumn::make('post.deceased_full_name_lg')
+                            ->searchable(),
                         TextColumn::make('post.type')
                             ->formatStateUsing(fn(PostsOffer $o): string => $o->post?->type->translate()),
                         TextColumn::make('post.size')

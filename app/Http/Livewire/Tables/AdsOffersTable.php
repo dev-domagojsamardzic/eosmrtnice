@@ -98,11 +98,13 @@ class AdsOffersTable extends Component implements HasForms, HasTable
                             ->formatStateUsing(fn(AdsOffer $o):string => $o->company->zipcode.', '.$o->company->town)
                             ->searchable(),
                         TextColumn::make('company.oib')
-                            ->label(__('models/offer.oib')),
+                            ->label(__('models/offer.oib'))
+                            ->searchable(),
                     ]),
                     Stack::make([
                         TextColumn::make('ad.title')
-                            ->formatStateUsing(fn (AdsOffer $o): string => __('models/ad.ad') . ': ' . $o->ad->title),
+                            ->formatStateUsing(fn (AdsOffer $o): string => __('models/ad.ad') . ': ' . $o->ad->title)
+                            ->searchable(),
                         TextColumn::make('ad.type')
                             ->formatStateUsing(fn (AdsOffer $o): string => __('models/ad.type') . ': ' . $o->ad->type->translate()),
                         TextColumn::make('ad.months_valid')
