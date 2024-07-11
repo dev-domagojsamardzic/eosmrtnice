@@ -54,5 +54,4 @@ class Member extends User
     {
         static::addGlobalScope(new MemberScope);
     }
-
 }
