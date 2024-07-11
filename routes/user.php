@@ -2,7 +2,6 @@
 
 use App\Http\Controllers\Admin\PostOfferController;
 use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\User\OfferController;
 use App\Http\Controllers\User\PostController;
 use Illuminate\Support\Facades\Route;
 
@@ -13,9 +12,9 @@ Route::get('/dashboard', static function () {
 Route::resource('posts', PostController::class)->names('posts');
 
 Route::resource('posts-offers', PostOfferController::class)
-    ->except('create')
+    ->only(['index', 'show'])
     ->names('posts-offers');
-Route::get('posts-offers/{post}/create', [PostOfferController::class, 'create'])->name('posts-offers.create');
+Route::get('posts-offers/{posts_offer}/download', [PostOfferController::class, 'download'])->name('posts-offers.download');
 
 Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
 Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
