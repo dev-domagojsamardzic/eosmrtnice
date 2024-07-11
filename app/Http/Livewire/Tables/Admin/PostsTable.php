@@ -25,11 +25,16 @@ class PostsTable extends BasePostsTable
     {
         return [
             Split::make([
-                TextColumn::make('type')
-                    ->label(__('models/post.type'))
-                    ->sortable()
-                    ->weight(FontWeight::Bold)
-                    ->formatStateUsing(fn (Post $post) => $post->type->translate()),
+                Stack::make([
+                    TextColumn::make('type')
+                        ->label(__('models/post.type'))
+                        ->weight(FontWeight::Bold)
+                        ->searchable()
+                        ->formatStateUsing(fn (Post $post) => $post->type->translate()),
+                    TextColumn::make('deceased_full_name_lg')
+                        ->label(__('models/post.deceased_full_name'))
+                        ->searchable()
+                ]),
                 Stack::make([
                     TextColumn::make('starts_at')
                         ->label(__('models/post.starts_at'))
