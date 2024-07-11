@@ -12,7 +12,7 @@ Route::get('/dashboard', static function () {
 Route::resource('posts', PostController::class)->names('posts');
 
 Route::resource('posts-offers', PostOfferController::class)
-    ->only(['index', 'show'])
+    ->only(['index'])
     ->names('posts-offers');
 Route::get('posts-offers/{posts_offer}/download', [PostOfferController::class, 'download'])->name('posts-offers.download');
 
