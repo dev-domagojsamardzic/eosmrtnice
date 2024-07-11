@@ -22,6 +22,7 @@ class AdsOffersTable extends BaseTable
 
         return AdsOffer::query()
             ->whereIn('company_id', $companies)
+            ->whereNotNull('sent_at')
             ->orderBy('created_at');
     }
 
