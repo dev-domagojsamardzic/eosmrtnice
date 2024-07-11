@@ -2,6 +2,7 @@
 
 namespace App\Policies;
 
+use App\Models\AdsOffer;
 use App\Models\User;
 
 class AdsOfferPolicy
@@ -17,16 +18,16 @@ class AdsOfferPolicy
     /**
      * Determine whether the user can view the model.
      */
-    public function view(User $user, Offer $offer): bool
+    public function view(User $user, AdsOffer $adsOffer): bool
     {
         return is_admin() ||
-            (is_partner() && $offer->company->user->id === $user->id && !$offer->sent_at);
+            (is_partner() && $adsOffer->company->user->id === $user->id && !$adsOffer->sent_at);
     }
 
     /**
      * Determine whether the user can update the model.
      */
-    public function update(User $user, Offer $offer): bool
+    public function update(User $user, AdsOffer $adsOffer): bool
     {
         return is_admin();
     }
