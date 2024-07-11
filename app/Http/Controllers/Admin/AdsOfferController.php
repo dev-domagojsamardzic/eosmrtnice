@@ -54,12 +54,12 @@ class AdsOfferController extends Controller
     /**
      * Display edit form
      *
-     * @param Ad $ad
+     * @param AdsOffer $ads_offer
      * @return View|RedirectResponse
      */
-    public function edit(Ad $ad): View|RedirectResponse
+    public function edit(AdsOffer $ads_offer): View|RedirectResponse
     {
-        return $this->form(new AdsOffer, $ad, 'edit');
+        return $this->form($ads_offer, null, 'edit');
     }
 
     /**
