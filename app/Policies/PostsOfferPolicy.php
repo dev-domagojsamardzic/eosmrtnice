@@ -22,7 +22,7 @@ class PostsOfferPolicy
     public function view(User $user, PostsOffer $postsOffer): bool
     {
         return is_admin() ||
-            (is_member() && $postsOffer->user_id === $user->id);
+            (is_member() && $postsOffer->user_id === $user->id && !$postsOffer->sent_at);
     }
 
     /**

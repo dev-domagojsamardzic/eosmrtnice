@@ -21,7 +21,7 @@ class AdsOfferPolicy
     public function view(User $user, Offer $offer): bool
     {
         return is_admin() ||
-            (is_partner() && $offer->company->user->id === $user->id);
+            (is_partner() && $offer->company->user->id === $user->id && !$offer->sent_at);
     }
 
     /**
