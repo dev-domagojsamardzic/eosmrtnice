@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Guest\FlowersCompanyAdController;
 use App\Http\Controllers\Guest\FuneralCompanyAdController;
+use App\Http\Controllers\Guest\HomepageController;
 use App\Http\Controllers\Guest\MasonryCompanyAdController;
 use App\Http\Controllers\ImageController;
 use Illuminate\Support\Facades\Route;
@@ -27,9 +28,7 @@ use App\Http\Controllers\Auth\VerifyEmailController;
 |
 */
 
-Route::get('/', static function () {
-    return view('welcome');
-})->name('homepage');
+Route::get('/', [HomepageController::class, 'home'])->name('homepage');
 
 Route::middleware('guest')->group(function () {
     // user register
