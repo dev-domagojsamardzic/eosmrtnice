@@ -69,16 +69,18 @@
             </td>
             <td class="text-align-right">{{ $offer->quantity }}</td>
             <td class="text-align-right">{{ currency($offer->price) }}</td>
-            <td class="text-align-right">{{ currency($offer->net_total) }}</td>
+            <td class="text-align-right">{{ currency($offer->total) }}</td>
         </tr>
 
         <tr>
-            <td class="text-align-left" colspan="3"><strong>{{ __('models/offer.pdv') . ' ' . config('app.tax_percentage') . '%'}}</strong></td>
-            <td class="text-align-right"><strong>{{ currency($offer->taxes) }}</strong></td>
+            <td class="text-align-left" colspan="3">
+                <strong>{{ __('models/offer.pdv_basis') . ' ' . percentage(config('app.tax_percentage'))}}</strong>
+            </td>
+            <td class="text-align-right"><strong>{{ currency($offer->net_total) }}</strong></td>
         </tr>
 
         <tr class="background-lightgrey">
-            <td class="text-align-left" colspan="3"><strong>{{ __('models/offer.total') }}</strong></td>
+            <td class="text-align-left" colspan="3"><strong>{{ __('models/offer.total_to_pay') }}</strong></td>
             <td class="text-align-right"><strong>{{ currency($offer->total) }}</strong></td>
         </tr>
         </tbody>
