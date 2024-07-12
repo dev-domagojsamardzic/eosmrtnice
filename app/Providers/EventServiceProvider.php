@@ -3,8 +3,12 @@
 namespace App\Providers;
 
 use App\Models\Ad;
+use App\Models\AdsOffer;
+use App\Models\Offer;
 use App\Models\Post;
+use App\Models\PostsOffer;
 use App\Observers\AdObserver;
+use App\Observers\OfferObserver;
 use App\Observers\PostObserver;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
@@ -30,5 +34,7 @@ class EventServiceProvider extends ServiceProvider
     {
         Ad::observe(AdObserver::class);
         Post::observe(PostObserver::class);
+        AdsOffer::observe(OfferObserver::class);
+        PostsOffer::observe(OfferObserver::class);
     }
 }

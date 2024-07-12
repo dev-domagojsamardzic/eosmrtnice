@@ -58,7 +58,7 @@ class Offer extends Model
     ];
 
     protected $attributes = [
-        'number' => 'P',
+        'number' => '',
         'confirmed' => false,
     ];
 
