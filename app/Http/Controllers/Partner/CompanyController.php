@@ -101,10 +101,14 @@ class CompanyController extends Controller
         $types = CompanyType::options();
         $counties = County::query()->orderBy('title')->get();
         $cities = City::query()->orderBy('title')->get();
-        $partners = Partner::query()
-            ->orderBy('last_name')
-            ->orderBy('first_name')
-            ->get();
+
+        $partners = null;
+        if (is_admin()) {
+            $partners = Partner::query()
+                ->orderBy('last_name')
+                ->orderBy('first_name')
+                ->get();
+        }
 
         $route = match($action) {
             'edit' => route(auth_user_type() . '.companies.update', ['company' => $company]),
