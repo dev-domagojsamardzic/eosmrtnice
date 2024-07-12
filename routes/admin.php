@@ -2,7 +2,7 @@
 
 use App\Http\Controllers\Partner\AdController;
 use App\Http\Controllers\Admin\AdsOfferController;
-use App\Http\Controllers\Admin\CompanyController;
+use App\Http\Controllers\Partner\CompanyController;
 use App\Http\Controllers\Admin\MemberController;
 use App\Http\Controllers\Admin\PartnerController;
 use App\Http\Controllers\Admin\PostOfferController;

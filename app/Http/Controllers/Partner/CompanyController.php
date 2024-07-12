@@ -8,6 +8,7 @@ use App\Http\Requests\Partner\CompanyRequest;
 use App\Models\City;
 use App\Models\Company;
 use App\Models\County;
+use App\Models\Partner;
 use App\Services\ImageService;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
@@ -25,7 +26,10 @@ class CompanyController extends Controller
      */
     public function index(): View
     {
-        return view('partner.companies.index');
+        return view('index', [
+            'title' => __('admin.companies'),
+            'table' => livewire_table_name('companies-table'),
+        ]);
     }
 
     /**
@@ -48,6 +52,16 @@ class CompanyController extends Controller
     }
 
     /**
+     * Store new resource
+     * @param CompanyRequest $request
+     * @return RedirectResponse
+     */
+    public function store(CompanyRequest $request): RedirectResponse
+    {
+        return $this->apply(new Company, $request);
+    }
+
+    /**
      * Update resource
      * @param Company $company
      * @param CompanyRequest $request
@@ -59,16 +73,6 @@ class CompanyController extends Controller
     }
 
     /**
-     * Store new resource
-     * @param CompanyRequest $request
-     * @return RedirectResponse
-     */
-    public function store(CompanyRequest $request): RedirectResponse
-    {
-        return $this->apply(new Company, $request);
-    }
-
-    /**
      * Delete resource
      * @param Company $company
      * @return RedirectResponse|Redirector
@@ -77,11 +81,11 @@ class CompanyController extends Controller
     {
         try {
             $company->delete();
-            return redirect()->route('admin.companies.index')
+            return redirect()->route(auth_user_type() . '.companies.index')
                 ->with('alert', ['class' => 'success', 'message' => __('common.deleted')]);
         } catch (\Exception $e) {
             return redirect()
-                ->route('admin.companies.index')
+                ->route(auth_user_type() . '.companies.index')
                 ->with('alert', ['class' => 'danger', 'message' => __('common.something_went_wrong')]);
         }
     }
@@ -97,6 +101,10 @@ class CompanyController extends Controller
         $types = CompanyType::options();
         $counties = County::query()->orderBy('title')->get();
         $cities = City::query()->orderBy('title')->get();
+        $partners = Partner::query()
+            ->orderBy('last_name')
+            ->orderBy('first_name')
+            ->get();
 
         $route = match($action) {
             'edit' => route(auth_user_type() . '.companies.update', ['company' => $company]),
@@ -110,6 +118,7 @@ class CompanyController extends Controller
                 'types' => $types,
                 'counties' => $counties,
                 'cities' => $cities,
+                'partners' => $partners,
                 'action_name' => $action,
                 'action' => $route,
                 'quit' => route(auth_user_type() . '.companies.index'),
@@ -128,7 +137,13 @@ class CompanyController extends Controller
         $companyLogo = $this->imageService->storeCompanyLogo($request, $company);
         $company->logo = $companyLogo;
 
-        $company->user()->associate(auth()->user());
+        if (is_admin()) {
+            $company->user()->associate($request->input('user_id'));
+        }
+        if (is_partner()) {
+            $company->user()->associate(auth()->user());
+        }
+
         $company->type = $request->input('type');
         $company->title = $request->input('title');
         $company->address = $request->input('address');
@@ -145,11 +160,11 @@ class CompanyController extends Controller
 
         try{
             $company->save();
-            return redirect()->route('partner.companies.index')
+            return redirect()->route(auth_user_type() . '.companies.index')
                 ->with('alert', ['class' => 'success', 'message' => __('common.saved')]);
         }catch (\Exception $e) {
             return redirect()
-                ->route('partner.companies.index')
+                ->route(auth_user_type() . '.companies.index')
                 ->with('alert', ['class' => 'danger', 'message' => __('common.something_went_wrong')]);
         }
     }
