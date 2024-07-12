@@ -58,13 +58,7 @@
                     <x-input-label for="type" :value="__('admin.labels.company_type')" :required_tag="true"/>
                     <select class="form-control border border-dark" name="type" id="type">
                         @foreach($types as $value => $type)
-                            @if((int)old('type') === $value)
-                                <option value="{{ $value }}" selected>{{ $type }}</option>
-                            @elseif($company->type === $value)
-                                <option value="{{ $value }}" selected>{{ $type }}</option>
-                            @else
-                                <option value="{{ $value }}">{{ $type }}</option>
-                            @endif
+                            <option value="{{ $value }}" @selected((int)old('type', $company->type->value) === (int)$value)>{{ $type }}</option>
                         @endforeach
                     </select>
                     <x-input-error :messages="$errors->get('type')" class="mt-2" />
