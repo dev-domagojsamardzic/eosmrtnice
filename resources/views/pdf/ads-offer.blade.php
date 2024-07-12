@@ -9,8 +9,7 @@
     <table class="w-100 mt-16">
         <thead>
         <tr class="h-72">
-            <th class="text-align-left font-size-md">{{ __('models/offer.offer') . ' #' . $offer->id}}</th>
-            <th class="text-align-right font-size-md">{{ $offer->number }}</th>
+            <th class="text-align-left font-size-md">{{ __('models/offer.offer_number') . ' ' . $offer->number}}</th>
         </tr>
         </thead>
         <tbody>

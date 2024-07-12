@@ -53,7 +53,8 @@ table.items-table, .items-table th, .items-table td {
 }
 
 .border-thin-black {
-    border: 1px solid #333333;
+    border-bottom: 1px solid #333333;
+    border-top: 1px solid #333333;
 }
 
 .footer {
