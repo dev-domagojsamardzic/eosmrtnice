@@ -36,5 +36,6 @@
         </div>
         {{-- Scripts --}}
         @vite('resources/js/app.js')
+        <script src="{{ asset('js/masonry.js') }}"></script>
     </body>
 </html>
