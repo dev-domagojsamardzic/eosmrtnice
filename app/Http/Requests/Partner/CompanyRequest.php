@@ -3,6 +3,7 @@
 namespace App\Http\Requests\Partner;
 
 use App\Enums\CompanyType;
+use App\Enums\UserType;
 use App\Models\Company;
 use App\Rules\CityBelongsToCounty;
 use Illuminate\Contracts\Validation\ValidationRule;
@@ -34,7 +35,7 @@ class CompanyRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return is_partner();
+        return is_admin() || is_partner();
     }
 
     /**
@@ -44,7 +45,7 @@ class CompanyRequest extends FormRequest
      */
     public function rules(): array
     {
-        return [
+        $rules = [
             'type' => ['required', Rule::enum(CompanyType::class)],
             'title' => ['required', 'string', 'max:255'],
             'address' => ['nullable','string', 'max:512'],
@@ -58,5 +59,16 @@ class CompanyRequest extends FormRequest
             'mobile_phone' => ['nullable','string', 'max:64'],
             'website' => ['nullable', 'string', 'url:https', 'active_url'],
         ];
+
+        if (is_admin()) {
+            $rules['user_id'] = [
+                'required',
+                Rule::exists('users', 'id')->where(function ($query) {
+                    $query->where('type', UserType::PARTNER);
+                }),
+            ];
+        }
+
+        return $rules;
     }
 }
