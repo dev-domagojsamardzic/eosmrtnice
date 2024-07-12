@@ -33,8 +33,8 @@ return new class extends Migration
         // Create default Administrator
         DB::table('users')->insert([
             'id' => 1,
-            'first_name' => 'Admin',
-            'last_name' => 'Admin',
+            'first_name' => 'Leon',
+            'last_name' => 'Rešetar',
             'email' => 'admin@email.com',
             'type' => UserType::ADMIN,
             'gender' => Gender::MALE,
