@@ -4,13 +4,18 @@
     width: 100%;
 }
 
+.main_post {
+    width: 100%;
+}
+
 @media screen and (min-width: 769px) {
     .post {
         max-width: 60%;
     }
 }
 
-.post.border_special {
+.post.border_special,
+.main_post.border_special {
     border: solid;
     border-image: url(./../img/border_vector.svg);
     border-image-slice: 35;
@@ -19,11 +24,13 @@
     padding-bottom: 1.75rem;
 }
 
-.post.border_classic {
+.post.border_classic,
+.main_post.border_classic{
     border: 1px solid $black;
 }
 
-.post .header {
+.post .header,
+.main_post .header,{
     background-color: $black;
     color: $white;
     padding: 8px;
@@ -32,24 +39,23 @@
     text-align: center;
 }
 
-.post.border_classic .header {
-
-}
-
-.post.border_special .header {
+.post.border_special .header,
+.main_post.border_special .header{
     max-width: 60%;
     margin-left: auto;
     margin-right: auto;
     margin-top: -8px;
 }
 
-.post .body {
+.post .body,
+.main_post .body {
     padding: .5rem 2rem;
     font-size: 1rem;
     line-height: 1.5rem;
 }
 
-.post .body .deceased_full_name_lg {
+.post .body .deceased_full_name_lg,
+.main_post .body .deceased_full_name_lg {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -60,7 +66,8 @@
     margin: 1rem;
 }
 
-.post .body .lifespan {
+.post .body .lifespan,
+.main_post .body .lifespan {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -69,7 +76,8 @@
     margin: 1rem 0;
 }
 
-.post .body .images_wrapper {
+.post .body .images_wrapper,
+.main_post .body .images_wrapper {
     display: flex;
     flex-direction: row;
     justify-content: center;
@@ -77,49 +85,57 @@
     gap: 1.25rem;
 }
 
-.post .body .images_wrapper .image {
+.post .body .images_wrapper .image,
+.main_post .body .images_wrapper .image {
     overflow: hidden;
     border: 1px solid $black;
     padding: 2px;
 }
 
-.post .body .images_wrapper .image img {
+.post .body .images_wrapper .image img,
+.main_post .body .images_wrapper .image img {
     height: 140px;
     width: 110px;
     object-fit: cover;
     object-position: center;
 }
 
-.post .body .images_wrapper .symbol {
+.post .body .images_wrapper .symbol,
+.main_post .body .images_wrapper .symbol {
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
-.post .body .images_wrapper .symbol img{
+.post .body .images_wrapper .symbol img,
+.main_post .body .images_wrapper .symbol img {
     height: 60px;
     width: auto;
 }
 
-.post .body .intro_message {
+.post .body .intro_message,
+.main_post .body .intro_message {
     text-align: center;
     overflow-wrap: break-word;
     margin: 2rem 0 1rem 0;
 }
 
-.post .body .deceased_full_name_sm {
+.post .body .deceased_full_name_sm,
+.main_post .body .deceased_full_name_sm {
     font-weight: 500;
     text-align: center;
     text-transform: uppercase
 }
 
-.post .body .deceased_main_message {
+.post .body .deceased_main_message,
+.main_post .body .deceased_main_message {
     text-align: center;
     overflow-wrap: break-word;
     margin: 1rem 0 2rem 0;
 }
 
-.post .body .signature {
+.post .body .signature,
+.main_post .body .signature {
     text-align: center;
     overflow-wrap: break-word;
     font-size: .75rem;
