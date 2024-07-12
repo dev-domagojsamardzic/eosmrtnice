@@ -21,7 +21,10 @@ class MemberController extends Controller
      */
     public function index(): View
     {
-        return view('admin.members.index');
+        return view('index', [
+            'title' => __('admin.users'),
+            'table' => livewire_table_name('members-table')
+        ]);
     }
 
     /**

@@ -22,7 +22,10 @@ class PartnerController extends Controller
      */
     public function index(): View
     {
-        return view('admin.partners.index');
+        return view('index', [
+            'title' => __('admin.partners'),
+            'table' => livewire_table_name('partners-table')
+        ]);
     }
 
     /**
