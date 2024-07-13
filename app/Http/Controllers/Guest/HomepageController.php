@@ -11,8 +11,8 @@ class HomepageController extends Controller
     public function home(): View
     {
         $posts = Post::query()
-            ->orderBy('starts_at')
-            ->orderBy('created_at')
+            ->orderByDesc('starts_at')
+            ->inRandomOrder()
             ->get()
             ->groupBy(function($item, $key) {
                 return $item->starts_at->format('d.m.Y.');
