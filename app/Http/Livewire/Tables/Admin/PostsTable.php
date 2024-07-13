@@ -106,6 +106,15 @@ class PostsTable extends BasePostsTable
                     ->icon(fn (Post $post): string => $post->is_approved ? 'heroicon-m-x-circle' : 'heroicon-m-check-circle')
                     ->color(fn(Post $post): string => $post->is_approved ? 'danger' : 'success')
                     ->requiresConfirmation(),
+                Action::make('activate')
+                    ->label(fn (Post $post): string => $post->is_active ? __('common.deactivate') : __('common.activate'))
+                    ->action(function(Post $post): void {
+                        $post->is_active = !$post->is_active;
+                        $post->save();
+                    })
+                    ->icon(fn (Post $post): string => $post->is_active ? 'heroicon-m-x-circle' : 'heroicon-m-check-circle')
+                    ->color(fn(Post $post): string => $post->is_active ? 'danger' : 'success')
+                    ->requiresConfirmation(),
             ]),
         ];
     }
