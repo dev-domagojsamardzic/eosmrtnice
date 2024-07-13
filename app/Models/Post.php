@@ -6,6 +6,7 @@ use App\Enums\PostSize;
 use App\Enums\PostSymbol;
 use App\Enums\PostType;
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -114,5 +115,18 @@ class Post extends Model
     public function offers(): HasMany
     {
         return $this->hasMany(PostsOffer::class, 'post_id', 'id');
+    }
+
+    /**
+     * Scope a query to only include posts that can be displayed
+     */
+    public function scopeDisplayable(Builder $query): void
+    {
+        $query->where(function (Builder $query) {
+            $query->where('starts_at', '<=', now()->format('Y-m-d'))
+                ->where('ends_at', '>', now()->format('Y-m-d'));
+        })
+        ->where('is_active', true)
+        ->where('is_approved', true);
     }
 }
