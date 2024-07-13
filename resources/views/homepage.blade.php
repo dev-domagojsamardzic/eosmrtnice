@@ -10,6 +10,8 @@
                 @endforeach
             </div>
         @endforeach
-
+    </div>
+    <div class="w-100 d-flex align-items-center justify-content-center py-5">
+        <button type="button" id="loadMorePosts" class="btn btn-primary" data-date="{{ $nextDateToLoad }}">{{ 'Učitaj još' }}</button>
     </div>
 </x-guest-layout>

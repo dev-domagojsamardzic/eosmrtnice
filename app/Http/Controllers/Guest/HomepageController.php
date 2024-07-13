@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Guest;
 
 use App\Http\Controllers\Controller;
 use App\Models\Post;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
 use Illuminate\View\View;
 
@@ -31,8 +32,11 @@ class HomepageController extends Controller
                 return $item->starts_at->format('d.m.Y.');
             });
 
+        $nextDateToLoad = Carbon::parse(end($latestDates))->subDay()->format('Y-m-d');
+
         return view('homepage',[
-            'posts' => $posts
+            'posts' => $posts,
+            'nextDateToLoad' => $nextDateToLoad,
         ]);
     }
 }
