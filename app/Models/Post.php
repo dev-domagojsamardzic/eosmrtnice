@@ -43,6 +43,9 @@ use Illuminate\Support\Str;
  * -------------------------------------------------
  * @property            User                user
  * @property            Collection<Offer>   offers
+ * -------------------------------------------------
+ * @method                              forDisplay
+ * @method                              todayOrOlder
  */
 class Post extends Model
 {
@@ -120,7 +123,7 @@ class Post extends Model
     /**
      * Scope a query to only include posts that can be displayed
      */
-    public function scopeDisplayable(Builder $query): void
+    public function scopeForDisplay(Builder $query): void
     {
         $query->where(function (Builder $query) {
             $query->where('starts_at', '<=', now()->format('Y-m-d'))
@@ -128,5 +131,13 @@ class Post extends Model
         })
         ->where('is_active', true)
         ->where('is_approved', true);
+    }
+
+    /**
+     * Scope a query to only include posts that can be displayed
+     */
+    public function scopeTodayOrOlder(Builder $query): void
+    {
+        $query->where('starts_at', '<=', now()->format('Y-m-d'));
     }
 }
