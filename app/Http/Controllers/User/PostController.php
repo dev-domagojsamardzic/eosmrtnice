@@ -7,7 +7,9 @@ use App\Enums\PostSymbol;
 use App\Enums\PostType;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\PostRequest;
+use App\Models\Member;
 use App\Models\Post;
+use App\Models\User;
 use App\Services\ImageService;
 use Exception;
 use Illuminate\Http\RedirectResponse;
@@ -90,11 +92,27 @@ class PostController extends Controller
         $postSizes = PostSize::options();
         $postSymbols = PostSymbol::options();
 
+        $me = admin();
+
+        $postOwners = Member::query()
+            ->where('active', true)
+            ->orderBy('last_name')
+            ->orderBy('first_name')
+            ->select(['id', 'first_name', 'last_name', 'email'])
+            ->get()
+            ->each(function($item) {
+                return $item->data = "$item->last_name $item->first_name ($item->email)";
+            })
+            ->pluck('data', 'id')->toArray();
+
+        $postOwners = [...[$me->id => "$me->last_name $me->first_name ($me->email)"], ...$postOwners];
+
         return view('user.posts.form', [
             'post' => $post,
             'types' => $postTypes,
             'sizes' => $postSizes,
             'symbols' => $postSymbols,
+            'postOwners' => $postOwners,
             'action' => $route,
         ]);
     }
@@ -110,14 +128,18 @@ class PostController extends Controller
         $deceasedImage = $this->imageService->storePostImage($request, $post);
         $post->image = $deceasedImage;
 
-
         $post->user()->associate(auth()->user());
+
+        if (is_admin()) {
+            $post->user()->associate($request->input('user_id'));
+        }
+
         $post->type = $request->input('type');
         $post->size = $request->input('size');
 
         $startDate = Carbon::parse($request->input('starts_at'));
         $postDurationInDays = (int)config('eosmrtnice.post_duration_days');
-        $endDate = $startDate->addDays($postDurationInDays);
+        $endDate = $startDate->clone()->addDays($postDurationInDays);
         $post->starts_at = $startDate->format('Y-m-d');
         $post->ends_at = $endDate->format('Y-m-d');
 

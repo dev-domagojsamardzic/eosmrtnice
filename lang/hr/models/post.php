@@ -48,5 +48,6 @@ return [
     'edit_post' => 'Uređivanje objave',
     'edit_post_instructions' => 'Kako budete popunjavate formu, vaši unosi automatski će se prikazivati u području za pregled.',
     'deceased_image' => 'Slika pokojnika',
-    'deceased_image_helper_info' => 'Podržani formati: jpeg, jpg, png. Preporučene dimenzije: 200 x 280.'
+    'deceased_image_helper_info' => 'Podržani formati: jpeg, jpg, png. Preporučene dimenzije: 200 x 280.',
+    'post_owner' => 'Vlasnik objave',
 ];

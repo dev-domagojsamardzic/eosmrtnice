@@ -21,6 +21,20 @@
                 @endif
 
 
+                @if(is_admin())
+                    {{-- Post owner (user_id) --}}
+                    <div class="form-group row">
+                        <div class="col-sm-12">
+                            <x-input-label for="user_id" :value="__('models/post.post_owner')" :required_tag="true"/>
+                            <select class="form-control border border-dark" id="user_id" name="user_id">
+                                @foreach($postOwners as $id => $data)
+                                    <option value="{{ $id }}" @selected((int)$id === (int)old('type', $post->user_id))>{{ $data }}</option>
+                                @endforeach
+                            </select>
+                            <x-input-error :messages="$errors->get('user_id')" class="mt-2"/>
+                        </div>
+                    </div>
+                @endif
                 {{-- Post size --}}
                 <div class="form-group row">
                     <div class="col-sm-12">
