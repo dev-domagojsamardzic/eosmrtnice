@@ -66,4 +66,27 @@
 
 .posts_date_title {
     margin-top: 2rem;
+    margin-bottom: 2rem;
+}
+
+/* HEADING ELEMENT WITH LINE THROUGH */
+.line-through {
+    display: flex;
+    flex-direction: row;
+}
+
+.line-through:before, .line-through:after {
+    content: "";
+    flex: 1 1;
+    border-bottom: 2px solid $black;
+}
+
+.line-through:before {
+    margin-right: 2rem;
+    margin-bottom: 1.25rem;
+}
+
+.line-through:after {
+    margin-left: 2rem;
+    margin-bottom: 1.25rem;
 }
