@@ -80,6 +80,15 @@ class HomepageController extends Controller
 
         $html = view('partials/posts-masonry-block',['date' => $dateFormatted, 'collection' => $posts])->render();
 
-        return response()->json(['content' => $html, 'date' => '2024-07-14']);
+        // Calculate next date to be loaded
+        $nextDate = Post::query()
+            ->forDisplay()
+            ->where('starts_at', '<', $date)
+            ->max('starts_at');
+
+        return response()->json([
+            'content' => $html,
+            'date' => $nextDate
+        ]);
     }
 }

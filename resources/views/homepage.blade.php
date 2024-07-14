@@ -33,17 +33,20 @@
                 'date': $('#loadMorePosts').data('date')
             },
             success: function(response) {
+                const postWrapper = document.querySelector('#postsWrapper');
                 // create element from string
                 const element = document.createElement('div');
                 element.innerHTML = response['content'];
                 // declare masonry object
                 var masonry = new Masonry('#postsWrapper', { "percentPosition": true, "itemSelector": ".masonry-item", "columnWidth": ".col-md-4" })
                 // append child element
-                document.querySelector('#postsWrapper').appendChild(element)
+                postWrapper.appendChild(element)
                 masonry.appended(element)
                 // set new date for loading
                 $('#loadMorePosts').data('date', response['date']);
-
+                if (response['date'] === null) {
+                    $('#loadMorePosts').hide();
+                }
             },
             error: function(error) {
                 console.error(error);
