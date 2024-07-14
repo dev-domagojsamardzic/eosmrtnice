@@ -12,15 +12,25 @@ class HomepageController extends Controller
 {
     public function home(): View
     {
-        // First loading, only show posts from 2 latest dates inserted
+        // Take last 3 dates
+        // Use latest 2 dates for first posts query
+        // Use third latest date (if exists) for loadMoreBtn
         $latestDates = DB::table('posts')
             ->select('starts_at')
             ->distinct()
             ->orderBy('starts_at', 'desc')
-            ->limit(2)
+            ->limit(3)
             ->pluck('starts_at')
             ->toArray();
 
+        if (count($latestDates) === 0) {
+            return view('homepage',[
+                'posts' => collect([]),
+                'nextDateToLoad' => null,
+            ]);
+        }
+
+        // First loading, only show posts from 2 latest dates inserted
         $posts = Post::query()
             ->forDisplay()
             ->todayOrOlder()

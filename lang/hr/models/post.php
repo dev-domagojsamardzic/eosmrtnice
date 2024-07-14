@@ -50,4 +50,5 @@ return [
     'deceased_image' => 'Slika pokojnika',
     'deceased_image_helper_info' => 'Podržani formati: jpeg, jpg, png. Preporučene dimenzije: 200 x 280.',
     'post_owner' => 'Vlasnik objave',
+    'no_posts_yet' => 'Trenutno nema objava',
 ];
