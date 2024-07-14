@@ -29,6 +29,7 @@ use App\Http\Controllers\Auth\VerifyEmailController;
 */
 
 Route::get('/', [HomepageController::class, 'home'])->name('homepage');
+Route::post('/',[HomepageController::class, 'items'])->name('homepage.items');
 
 Route::middleware('guest')->group(function () {
     // user register

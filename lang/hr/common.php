@@ -60,4 +60,5 @@ return [
     'all_rights_reserved' => 'Sva prava pridržana.',
     'search' => 'Pretraži',
     'no_results' => 'Nema rezultata',
+    'load_more' => 'Učitaj još',
 ];

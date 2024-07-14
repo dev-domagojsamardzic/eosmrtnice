@@ -4,17 +4,24 @@ namespace App\Http\Controllers\Guest;
 
 use App\Http\Controllers\Controller;
 use App\Models\Post;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
 use Illuminate\View\View;
 
 class HomepageController extends Controller
 {
+    /**
+     * Load homepage
+     * @return View
+     */
     public function home(): View
     {
         // Take last 3 dates
         // Use latest 2 dates for first posts query
         // Use third latest date (if exists) for loadMoreBtn
+        // TODO: datumi ne smiju biti stariji od danas
         $latestDates = DB::table('posts')
             ->select('starts_at')
             ->distinct()
@@ -30,6 +37,8 @@ class HomepageController extends Controller
             ]);
         }
 
+        $nextDateToLoad = (count($latestDates) === 3) ? array_pop($latestDates) : null;
+
         // First loading, only show posts from 2 latest dates inserted
         $posts = Post::query()
             ->forDisplay()
@@ -42,11 +51,35 @@ class HomepageController extends Controller
                 return $item->starts_at->format('d.m.Y.');
             });
 
-        $nextDateToLoad = Carbon::parse(end($latestDates))->subDay()->format('Y-m-d');
-
         return view('homepage',[
             'posts' => $posts,
             'nextDateToLoad' => $nextDateToLoad,
         ]);
+    }
+
+    /**
+     * Return mixed items when "load more"
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function items(Request $request): JsonResponse
+    {
+        $date = $request->input('date');
+
+        if($date === null) {
+            return response()->json([],204);
+        }
+
+        $dateFormatted = Carbon::parse($date)->format('d.m.Y');
+
+        $posts = Post::query()
+            ->forDisplay()
+            ->where('starts_at', $request->date)
+            ->inRandomOrder()
+            ->get();
+
+        $html = view('partials/posts-masonry-block',['date' => $dateFormatted, 'collection' => $posts])->render();
+
+        return response()->json(['content' => $html, 'date' => '2024-07-14']);
     }
 }
