@@ -62,7 +62,7 @@
                 </div>
                 <ul>
                     <li><a href="{{ route('guest.death-notices') }}" class="nav-link">{{ __('guest.death_notices') }}</a></li>
-                    <li><a href="#" class="nav-link">{{ __('guest.last_goodbyes') }}</a></li>
+                    <li><a href="{{ route('guest.last-goodbyes') }}" class="nav-link">{{ __('guest.last_goodbyes') }}</a></li>
                     <li><a href="{{ route('guest.memories') }}" class="nav-link">{{ __('guest.memories') }}</a></li>
                     <li><a href="#" class="nav-link">{{ __('guest.thank_yous') }}</a></li>
                 </ul>
@@ -117,7 +117,7 @@
             <nav class="site-navigation navbar-collapse" role="navigation">
                 <ul class="site-menu js-clone-nav">
                     <li><a href="{{ route('guest.death-notices') }}" class="nav-link">{{ __('guest.death_notices') }}</a></li>
-                    <li><a href="#" class="nav-link">{{ __('guest.last_goodbyes') }}</a></li>
+                    <li><a href="{{ route('guest.last-goodbyes') }}" class="nav-link">{{ __('guest.last_goodbyes') }}</a></li>
                     <li><a href="{{ route('guest.memories') }}" class="nav-link">{{ __('guest.memories') }}</a></li>
                     <li><a href="#" class="nav-link">{{ __('guest.thank_yous') }}</a></li>
                     {{-- nav link with children --}}
