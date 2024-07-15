@@ -32,6 +32,7 @@ class MemoryController extends PostController
             });
 
         return view('guest.posts', [
+            'pageTitle' => __('guest.memories'),
             'posts' => $posts,
             'nextDateToLoad' => $nextDateToLoad,
             'loadMoreItemsRoute' => route('guest.memories.items'),

@@ -1,5 +1,5 @@
 <x-guest-layout>
-    <h1 class="mt-3">{{ __('common.search_results') }}</h1>
+    <h1 class="my-5">{{ __('common.search_results') }}</h1>
     @include('partials/posts-search')
     <div class="row posts_wrapper" id="postsWrapper" data-masonry='{ "percentPosition": true, "itemSelector": ".masonry-item", "columnWidth": ".col-md-4" }'>
         @if($posts->isEmpty())

@@ -32,6 +32,7 @@ class DeathNoticeController extends PostController
             });
 
         return view('guest.posts', [
+            'pageTitle' => __('guest.death_notices'),
             'posts' => $posts,
             'nextDateToLoad' => $nextDateToLoad,
             'loadMoreItemsRoute' => route('guest.death-notices.items'),

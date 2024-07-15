@@ -1,4 +1,8 @@
 <x-guest-layout>
+    @isset($pageTitle)
+        <h1 class="my-5">{{ $pageTitle }}</h1>
+    @endisset
+
     @include('partials/posts-search')
 
     <div class="row posts_wrapper" id="postsWrapper" data-masonry='{ "percentPosition": true, "itemSelector": ".masonry-item", "columnWidth": ".col-md-4" }'>

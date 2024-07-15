@@ -32,6 +32,7 @@ class LastGoodbyeController extends PostController
             });
 
         return view('guest.posts', [
+            'pageTitle' => __('guest.last_goodbyes'),
             'posts' => $posts,
             'nextDateToLoad' => $nextDateToLoad,
             'loadMoreItemsRoute' => route('guest.last-goodbyes.items'),
