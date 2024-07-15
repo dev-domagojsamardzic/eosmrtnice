@@ -64,7 +64,7 @@
                     <li><a href="{{ route('guest.death-notices') }}" class="nav-link">{{ __('guest.death_notices') }}</a></li>
                     <li><a href="{{ route('guest.last-goodbyes') }}" class="nav-link">{{ __('guest.last_goodbyes') }}</a></li>
                     <li><a href="{{ route('guest.memories') }}" class="nav-link">{{ __('guest.memories') }}</a></li>
-                    <li><a href="#" class="nav-link">{{ __('guest.thank_yous') }}</a></li>
+                    <li><a href="{{ route('guest.thank-yous') }}" class="nav-link">{{ __('guest.thank_yous') }}</a></li>
                 </ul>
                 <div class="px-3">
                     <hr class="bg-white" style="opacity: .3">
@@ -119,7 +119,7 @@
                     <li><a href="{{ route('guest.death-notices') }}" class="nav-link">{{ __('guest.death_notices') }}</a></li>
                     <li><a href="{{ route('guest.last-goodbyes') }}" class="nav-link">{{ __('guest.last_goodbyes') }}</a></li>
                     <li><a href="{{ route('guest.memories') }}" class="nav-link">{{ __('guest.memories') }}</a></li>
-                    <li><a href="#" class="nav-link">{{ __('guest.thank_yous') }}</a></li>
+                    <li><a href="{{ route('guest.thank-yous') }}" class="nav-link">{{ __('guest.thank_yous') }}</a></li>
                     {{-- nav link with children --}}
                     {{--<li class="has-children">
                         <a href="#" class="nav-link">
