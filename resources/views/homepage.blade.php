@@ -22,7 +22,9 @@
 
 <script type="module">
     const loadMoreBtn = document.querySelector('#loadMorePosts');
-    const searchBtn = document.querySelector('#submitPostSearch');
+
+    const nameInput = document.querySelector('#name')
+    const datePicker = document.querySelector('#date')
 
     loadMoreBtn.addEventListener('click', function(e) {
         e.preventDefault();
@@ -33,7 +35,7 @@
                 'X-CSRF-TOKEN': '{{ csrf_token() }}'
             },
             data: {
-                'date': $('#loadMorePosts').data('date')
+                'date': $('#loadMorePosts').attr('data-date')
             },
             success: function(response) {
                 const postWrapper = document.querySelector('#postsWrapper');
@@ -45,8 +47,9 @@
                 // append child element
                 postWrapper.appendChild(element)
                 masonry.appended(element)
+                console.log('DATE', response['date']);
                 // set new date for loading
-                $('#loadMorePosts').data('date', response['date']);
+                $('#loadMorePosts').attr('data-date', response['date']);
                 if (response['date'] === null) {
                     $('#loadMorePosts').hide();
                 }
@@ -57,8 +60,13 @@
         });
     })
 
-    searchBtn.addEventListener('click', function(e){
+    nameInput.addEventListener('input', function (e) {
         e.preventDefault();
+        search();
+        toggleLoadMorePosts();
+    })
+
+    function search() {
         $.ajax({
             method: 'POST',
             url: '{{ route('homepage.search') }}',
@@ -71,6 +79,11 @@
             },
             success: function(response) {
                 const postWrapper = document.querySelector('#postsWrapper');
+
+                if(response === undefined) {
+                    postWrapper.innerHTML = "{{ __('common.no_results') }}";
+                    return;
+                }
                 // create element from string
                 const element = document.createElement('div');
                 element.innerHTML = response[0];
@@ -82,20 +95,32 @@
                 /*masonry.appended(element)*/
                 masonry.appended(element)
                 masonry.layout()
-                $('#loadMorePosts').hide();
             },
             error: function(error) {
                 console.log('Error searching posts:', error);
             }
         });
-    })
+    }
+
+    function toggleLoadMorePosts() {
+        if ($('#name').val() === '' && $('#date').val() === '') {
+            $('#loadMorePosts').show();
+        }
+        else {
+            $('#loadMorePosts').hide();
+        }
+    }
 
     document.addEventListener('DOMContentLoaded', function () {
         $('#date').datepicker({
             dateFormat: "dd.mm.yy.",
             autoSize: true,
             language: "hr",
+            maxDate: '{{ now()->format('d.m.Y.') }}',
+            onSelect: function (e) {
+                search();
+                toggleLoadMorePosts();
+            }
         });
-        console.log('Yipy')
     });
 </script>

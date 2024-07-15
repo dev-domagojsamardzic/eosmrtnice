@@ -1,5 +1,5 @@
 <form id="postSearchForm" method="GET">
-    <div class="form-group ads-search row">
+    <div class="form-group ads-search row mt-4">
         <div class="col-sm-12 col-md-4 mb-3">
             <x-input-label for="name" :value="__('models/post.full_name')"/>
             <x-text-input
@@ -20,11 +20,8 @@
             </div>
         </div>
         <div class="col-sm-12 col-md-4 mt-auto mb-3">
-            <button id="submitPostSearch" type="submit" class="btn btn-primary">
-                <i class="fas fa-search mr-2"></i>
-                {{ __('common.search') }}
-            </button>
             <a type="button" href="{{ route('homepage') }}" class="btn btn-link">
+                <i class="fas fa-times mr-2"></i>
                 {{ __('common.cancel') }}
             </a>
         </div>

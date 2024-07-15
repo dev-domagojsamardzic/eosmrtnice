@@ -21,14 +21,7 @@ class HomepageController extends Controller
         // Take last 3 dates
         // Use latest 2 dates for first posts query
         // Use third latest date (if exists) for loadMoreBtn
-        $latestDates = DB::table('posts')
-            ->select('starts_at')
-            ->distinct()
-            ->where('starts_at', '<=', now()->toDateString())
-            ->orderBy('starts_at', 'desc')
-            ->limit(3)
-            ->pluck('starts_at')
-            ->toArray();
+        $latestDates = $this->getLatestDates(3);
 
         if (count($latestDates) === 0) {
             return view('homepage',[
@@ -105,6 +98,7 @@ class HomepageController extends Controller
 
         $posts = Post::query()
             ->forDisplay()
+            ->todayOrOlder()
             ->when($name, function ($query, $name) {
                 $search = strtolower(trim($name));
                 $query->where('deceased_full_name_lg', 'like', '%'.$search.'%');
@@ -112,11 +106,21 @@ class HomepageController extends Controller
             ->when($date, function ($query, $date) {
                 $dateFormatted = Carbon::parse($date)->format('Y-m-d');
                 $query->whereDate('starts_at',  $dateFormatted);
+            }, function($query) {
+                $latestDates = $this->getLatestDates(2);
+                $query->whereIn('starts_at', $latestDates);
             })
-            ->get()
-            ->groupBy(function($item, $key) {
-                return $item->starts_at->format('d.m.Y.');
-            });
+            ->orderByDesc('starts_at')
+            ->inRandomOrder()
+            ->get();
+
+        if ($posts->isEmpty()) {
+            return response()->json([],204);
+        }
+
+        $posts = $posts->groupBy(function($item, $key) {
+            return $item->starts_at->format('d.m.Y.');
+        });
 
         $html = '';
 
@@ -125,5 +129,22 @@ class HomepageController extends Controller
         }
 
         return response()->json([$html]);
+    }
+
+    /**
+     * Return latest X starts_at dates from posts table
+     * @param int $days
+     * @return array
+     */
+    private function getLatestDates(int $days = 1): array
+    {
+        return DB::table('posts')
+            ->select('starts_at')
+            ->distinct()
+            ->where('starts_at', '<=', now()->toDateString())
+            ->orderBy('starts_at', 'desc')
+            ->limit($days)
+            ->pluck('starts_at')
+            ->toArray();
     }
 }
