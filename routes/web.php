@@ -4,10 +4,10 @@ use App\Http\Controllers\Guest\FlowersCompanyAdController;
 use App\Http\Controllers\Guest\FuneralCompanyAdController;
 use App\Http\Controllers\Guest\HomepageController;
 use App\Http\Controllers\Guest\MasonryCompanyAdController;
-use App\Http\Controllers\Guest\PostController;
 use App\Http\Controllers\Guest\Posts\DeathNoticeController;
 use App\Http\Controllers\Guest\Posts\LastGoodbyeController;
 use App\Http\Controllers\Guest\Posts\MemoryController;
+use App\Http\Controllers\Guest\Posts\ThankYouController;
 use App\Http\Controllers\ImageController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
@@ -44,6 +44,9 @@ Route::post('sjecanja', [MemoryController::class, 'items'])->name('guest.memorie
 
 Route::get('posljednji-pozdravi',[LastGoodbyeController::class, 'index'])->name('guest.last-goodbyes');
 Route::post('posljednji-pozdravi', [LastGoodbyeController::class, 'items'])->name('guest.last-goodbyes.items');
+
+Route::get('zahvale',[ThankYouController::class, 'index'])->name('guest.thank-yous');
+Route::post('zahvale', [ThankYouController::class, 'items'])->name('guest.thank-yous.items');
 
 Route::middleware('guest')->group(function () {
     // user register
