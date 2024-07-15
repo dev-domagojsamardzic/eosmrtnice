@@ -89,9 +89,9 @@ class HomepageController extends Controller
      * Search posts
      *
      * @param Request $request
-     * @return JsonResponse
+     * @return View
      */
-    public function search(Request $request): JsonResponse
+    public function search(Request $request): View
     {
         $name = $request->input('name');
         $date = $request->input('date');
@@ -106,29 +106,19 @@ class HomepageController extends Controller
             ->when($date, function ($query, $date) {
                 $dateFormatted = Carbon::parse($date)->format('Y-m-d');
                 $query->whereDate('starts_at',  $dateFormatted);
-            }, function($query) {
-                $latestDates = $this->getLatestDates(2);
+            })
+            ->when(!$name && !$date, function($query) {
+                $latestDates = $this->getLatestDates();
                 $query->whereIn('starts_at', $latestDates);
             })
             ->orderByDesc('starts_at')
             ->inRandomOrder()
-            ->get();
+            ->get()
+            ->groupBy(function($item, $key) {
+                return $item->starts_at->format('d.m.Y.');
+            });
 
-        if ($posts->isEmpty()) {
-            return response()->json([],204);
-        }
-
-        $posts = $posts->groupBy(function($item, $key) {
-            return $item->starts_at->format('d.m.Y.');
-        });
-
-        $html = '';
-
-        foreach ($posts as $dateString => $postCollection) {
-            $html .= view('partials/posts-masonry-block',['date' => $dateString, 'collection' => $postCollection])->render();
-        }
-
-        return response()->json([$html]);
+        return view('guest.search', ['posts' => $posts, 'name' => $name, 'date' => $date]);
     }
 
     /**

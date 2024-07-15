@@ -23,9 +23,6 @@
 <script type="module">
     const loadMoreBtn = document.querySelector('#loadMorePosts');
 
-    const nameInput = document.querySelector('#name')
-    const datePicker = document.querySelector('#date')
-
     loadMoreBtn.addEventListener('click', function(e) {
         e.preventDefault();
         $.ajax({
@@ -60,67 +57,12 @@
         });
     })
 
-    nameInput.addEventListener('input', function (e) {
-        e.preventDefault();
-        search();
-        toggleLoadMorePosts();
-    })
-
-    function search() {
-        $.ajax({
-            method: 'POST',
-            url: '{{ route('homepage.search') }}',
-            headers: {
-                'X-CSRF-TOKEN': '{{ csrf_token() }}'
-            },
-            data: {
-                'name' : $('#name').val(),
-                'date' : $('#date').val(),
-            },
-            success: function(response) {
-                const postWrapper = document.querySelector('#postsWrapper');
-
-                if(response === undefined) {
-                    postWrapper.innerHTML = "{{ __('common.no_results') }}";
-                    return;
-                }
-                // create element from string
-                const element = document.createElement('div');
-                element.innerHTML = response[0];
-                // declare masonry object
-                var masonry = new Masonry('#postsWrapper', { "percentPosition": true, "itemSelector": ".masonry-item", "columnWidth": ".col-md-4" })
-                // append child element
-                postWrapper.innerHTML = ""
-                postWrapper.appendChild(element)
-                /*masonry.appended(element)*/
-                masonry.appended(element)
-                masonry.layout()
-            },
-            error: function(error) {
-                console.log('Error searching posts:', error);
-            }
-        });
-    }
-
-    function toggleLoadMorePosts() {
-        if ($('#name').val() === '' && $('#date').val() === '') {
-            $('#loadMorePosts').show();
-        }
-        else {
-            $('#loadMorePosts').hide();
-        }
-    }
-
     document.addEventListener('DOMContentLoaded', function () {
         $('#date').datepicker({
             dateFormat: "dd.mm.yy.",
             autoSize: true,
             language: "hr",
             maxDate: '{{ now()->format('d.m.Y.') }}',
-            onSelect: function (e) {
-                search();
-                toggleLoadMorePosts();
-            }
         });
     });
 </script>
