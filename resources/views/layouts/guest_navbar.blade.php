@@ -63,7 +63,7 @@
                 <ul>
                     <li><a href="{{ route('guest.death-notices') }}" class="nav-link">{{ __('guest.death_notices') }}</a></li>
                     <li><a href="#" class="nav-link">{{ __('guest.last_goodbyes') }}</a></li>
-                    <li><a href="#" class="nav-link">{{ __('guest.memories') }}</a></li>
+                    <li><a href="{{ route('guest.memories') }}" class="nav-link">{{ __('guest.memories') }}</a></li>
                     <li><a href="#" class="nav-link">{{ __('guest.thank_yous') }}</a></li>
                 </ul>
                 <div class="px-3">
@@ -118,7 +118,7 @@
                 <ul class="site-menu js-clone-nav">
                     <li><a href="{{ route('guest.death-notices') }}" class="nav-link">{{ __('guest.death_notices') }}</a></li>
                     <li><a href="#" class="nav-link">{{ __('guest.last_goodbyes') }}</a></li>
-                    <li><a href="#" class="nav-link">{{ __('guest.memories') }}</a></li>
+                    <li><a href="{{ route('guest.memories') }}" class="nav-link">{{ __('guest.memories') }}</a></li>
                     <li><a href="#" class="nav-link">{{ __('guest.thank_yous') }}</a></li>
                     {{-- nav link with children --}}
                     {{--<li class="has-children">
