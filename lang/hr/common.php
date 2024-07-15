@@ -61,4 +61,5 @@ return [
     'search' => 'Pretraži',
     'no_results' => 'Nema rezultata',
     'load_more' => 'Učitaj još',
+    'cancel' => 'Poništi',
 ];

@@ -1,4 +1,6 @@
 <x-guest-layout>
+    @include('partials/posts-search')
+
     <div class="row posts_wrapper" id="postsWrapper" data-masonry='{ "percentPosition": true, "itemSelector": ".masonry-item", "columnWidth": ".col-md-4" }'>
         @if($posts->isEmpty())
             <div class="col-12 my-5 flex flex-col align-items-center justify-content-center">
@@ -19,9 +21,10 @@
 </x-guest-layout>
 
 <script type="module">
-    const button = document.querySelector('#loadMorePosts');
+    const loadMoreBtn = document.querySelector('#loadMorePosts');
+    const searchBtn = document.querySelector('#submitPostSearch');
 
-    button.addEventListener('click', function(e) {
+    loadMoreBtn.addEventListener('click', function(e) {
         e.preventDefault();
         $.ajax({
             method: 'POST',
@@ -53,4 +56,46 @@
             }
         });
     })
+
+    searchBtn.addEventListener('click', function(e){
+        e.preventDefault();
+        $.ajax({
+            method: 'POST',
+            url: '{{ route('homepage.search') }}',
+            headers: {
+                'X-CSRF-TOKEN': '{{ csrf_token() }}'
+            },
+            data: {
+                'name' : $('#name').val(),
+                'date' : $('#date').val(),
+            },
+            success: function(response) {
+                const postWrapper = document.querySelector('#postsWrapper');
+                // create element from string
+                const element = document.createElement('div');
+                element.innerHTML = response[0];
+                // declare masonry object
+                var masonry = new Masonry('#postsWrapper', { "percentPosition": true, "itemSelector": ".masonry-item", "columnWidth": ".col-md-4" })
+                // append child element
+                postWrapper.innerHTML = ""
+                postWrapper.appendChild(element)
+                /*masonry.appended(element)*/
+                masonry.appended(element)
+                masonry.layout()
+                $('#loadMorePosts').hide();
+            },
+            error: function(error) {
+                console.log('Error searching posts:', error);
+            }
+        });
+    })
+
+    document.addEventListener('DOMContentLoaded', function () {
+        $('#date').datepicker({
+            dateFormat: "dd.mm.yy.",
+            autoSize: true,
+            language: "hr",
+        });
+        console.log('Yipy')
+    });
 </script>
