@@ -4,6 +4,6 @@
 
 @foreach($collection as $item)
     <div class="masonry-item post_wrapper col-sm-12 col-md-4">
-        @include('partials/post', ['post' => $item])
+        @include('partials/post-card-minimized', ['post' => $item])
     </div>
 @endforeach
