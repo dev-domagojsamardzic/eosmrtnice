@@ -61,7 +61,7 @@
                     <hr class="bg-white" style="opacity: .3">
                 </div>
                 <ul>
-                    <li><a href="#" class="nav-link">{{ __('guest.death_notices') }}</a></li>
+                    <li><a href="{{ route('guest.death-notices') }}" class="nav-link">{{ __('guest.death_notices') }}</a></li>
                     <li><a href="#" class="nav-link">{{ __('guest.last_goodbyes') }}</a></li>
                     <li><a href="#" class="nav-link">{{ __('guest.memories') }}</a></li>
                     <li><a href="#" class="nav-link">{{ __('guest.thank_yous') }}</a></li>
@@ -116,7 +116,7 @@
             {{-- Main navigation --}}
             <nav class="site-navigation navbar-collapse" role="navigation">
                 <ul class="site-menu js-clone-nav">
-                    <li><a href="#" class="nav-link">{{ __('guest.death_notices') }}</a></li>
+                    <li><a href="{{ route('guest.death-notices') }}" class="nav-link">{{ __('guest.death_notices') }}</a></li>
                     <li><a href="#" class="nav-link">{{ __('guest.last_goodbyes') }}</a></li>
                     <li><a href="#" class="nav-link">{{ __('guest.memories') }}</a></li>
                     <li><a href="#" class="nav-link">{{ __('guest.thank_yous') }}</a></li>
