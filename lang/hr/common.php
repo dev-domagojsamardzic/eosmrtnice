@@ -64,4 +64,5 @@ return [
     'cancel' => 'Poništi',
     'search_results' => 'Rezultati pretrage',
     'search_obituaries' => 'Pretraži osmrtnice',
+    'partners' => 'Partneri',
 ];

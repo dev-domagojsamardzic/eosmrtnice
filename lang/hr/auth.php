@@ -82,4 +82,6 @@ return [
     'new_verification_link_sent' => 'Novi verifikacijski link je poslan na Vašu email adresu.',
     'password_rules' => 'Lozinka mora imati minimalno 8 znakova, od kojih minimalno 1 mora biti broj.',
     'password_updated' => 'Lozinka je uspješno promjenjena.',
+    'registration_remark' => 'Registracija traje kraće od 2 minute.',
+    'dont_have_an_account' => 'Nemate račun?',
 ];

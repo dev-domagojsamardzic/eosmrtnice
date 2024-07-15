@@ -9,7 +9,8 @@
                     <div
                         class="col-lg-5 d-none d-flex flex-column align-items-center justify-content-start px-3 py-5 bg-register-image">
                         <img class="my-4" alt="{{ config('app.name') }}" src="{{ asset('graphics/logo/logo-dark.svg') }}">
-                        <h1>{{ config('app.name') }}</h1>
+                        <h1 class="text-gray-900 mb-2 font-weight-normal">{{ config('app.name') }}</h1>
+                        <h3 class="text-gray-900 mb-4 font-weight-bold">{{ __('common.partners') }}</h3>
                         <img class="my-4" alt="{{ config('app.name') }}" src="{{ asset('graphics/symbol/partner.svg') }}">
                     </div>
                     <div class="col-lg-7">
@@ -265,16 +266,16 @@
                                 </x-primary-button>
                             </form>
                             <hr>
+                            <div class="text-center mb-3">
+                                <a class="small"
+                                   href="{{ route('login') }}">{{ __('auth.labels.already_have_account_login') }}</a>
+                            </div>
                             @if (Route::has('password.request'))
                                 <div class="text-center">
                                     <a class="small"
                                        href="{{ route('password.request') }}">{{ __('auth.labels.forgot_password') }}</a>
                                 </div>
                             @endif
-                            <div class="text-center">
-                                <a class="small"
-                                   href="{{ route('login') }}">{{ __('auth.labels.already_have_account_login') }}</a>
-                            </div>
                         </div>
                     </div>
                 </div>

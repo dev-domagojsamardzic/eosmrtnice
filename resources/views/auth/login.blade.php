@@ -14,13 +14,14 @@
                     <div class="card-body p-0">
                         <!-- Nested Row within Card Body -->
                         <div class="row">
-                            <div class="col-lg-6 d-none d-flex align-items-center justify-content-center px-3 py-5 bg-login-image">
+                            <div class="col-lg-6 d-none d-flex align-items-center justify-content-center flex-column px-3 py-5 bg-login-image">
                                 <img height="200" width="auto" alt="{{ config('app.name') }}" src="{{ asset('graphics/logo/logo-dark.svg') }}">
+                                <h1 class="text-gray-900 mb-4 font-weight-normal">{{ config('app.name') }}</h1>
                             </div>
                             <div class="col-lg-6">
                                 <div class="p-5">
                                     <div class="text-left">
-                                        <h1 class="text-gray-900 mb-4">{{ config('app.name') }}</h1>
+                                        <h2 class="text-gray-900 mb-4">{{ __('auth.log_in') }}</h2>
                                     </div>
                                     <form method="POST" action="{{ route('login') }}">
                                         @csrf
@@ -57,18 +58,20 @@
                                         </x-primary-button>
                                     </form>
                                     <hr>
+                                    <div class="text-center">
+                                        <a class="font-weight-bold" href="{{ route('register') }}">{{ __('auth.create_account') }}</a>
+                                        <p class="small mt-2">{{ __('auth.registration_remark') }}</p>
+                                    </div>
+                                    <hr>
                                     @if (Route::has('password.request'))
                                         <div class="text-center">
                                             <a class="small" href="{{ route('password.request') }}">{{ __('auth.labels.forgot_password') }}</a>
                                         </div>
                                     @endif
 
-                                    <div class="text-center">
-                                        <a class="small" href="{{ route('register') }}">{{ __('auth.create_account') }}</a>
-                                    </div>
                                     <hr>
                                     <div class="text-center">
-                                        <a class="small" href="{{ route('partner.register') }}">{{ __('auth.become_a_partner') }}</a>
+                                        <a class="font-weight-bold" href="{{ route('partner.register') }}">{{ __('auth.become_a_partner') }}</a>
                                     </div>
                                 </div>
                             </div>

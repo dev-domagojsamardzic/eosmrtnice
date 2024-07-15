@@ -7,14 +7,14 @@
                 <!-- Nested Row within Card Body -->
                 <div class="row">
                     <div
-                        class="col-lg-5 d-none d-flex align-items-center justify-content-center px-3 py-5 bg-register-image">
-                        <img height="đ" width="auto" alt="{{ config('app.name') }}"
-                             src="{{ asset('graphics/logo/logo-dark.svg') }}">
+                        class="col-lg-5 d-none d-flex align-items-center justify-content-center flex-column px-3 py-5 bg-register-image">
+                        <img height="đ" width="auto" alt="{{ config('app.name') }}" src="{{ asset('graphics/logo/logo-dark.svg') }}">
+                        <h1 class="text-gray-900 mb-4 font-weight-normal">{{ config('app.name') }}</h1>
                     </div>
                     <div class="col-lg-7">
                         <div class="p-5">
                             <div class="text-left">
-                                <h1 class="h4 text-gray-900 mb-4">{{ __('auth.create_account') }}</h1>
+                                <h2 class="text-gray-900 mb-4">{{ __('auth.register') }}</h2>
                             </div>
                             <form method="POST" action="{{ route('register') }}">
                                 @csrf
@@ -90,21 +90,21 @@
                                 </x-primary-button>
                             </form>
                             <hr>
+                            <div class="text-center mb-3">
+                                <a class="small"
+                                   href="{{ route('login') }}">{{ __('auth.labels.already_have_account_login') }}</a>
+                            </div>
                             @if (Route::has('password.request'))
                                 <div class="text-center">
                                     <a class="small"
                                        href="{{ route('password.request') }}">{{ __('auth.labels.forgot_password') }}</a>
                                 </div>
                             @endif
-                            <div class="text-center">
-                                <a class="small"
-                                   href="{{ route('login') }}">{{ __('auth.labels.already_have_account_login') }}</a>
-                            </div>
+
 
                             <hr>
                             <div class="text-center">
-                                <a class="small"
-                                   href="{{ route('partner.register') }}">{{ __('auth.become_a_partner') }}</a>
+                                <a class="font-weight-bold" href="{{ route('partner.register') }}">{{ __('auth.become_a_partner') }}</a>
                             </div>
                         </div>
                     </div>
