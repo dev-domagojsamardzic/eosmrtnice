@@ -62,4 +62,6 @@ return [
     'no_results' => 'Nema rezultata',
     'load_more' => 'Učitaj još',
     'cancel' => 'Poništi',
+    'search_results' => 'Rezultati pretrage',
+    'search_obituaries' => 'Pretraži osmrtnice',
 ];
