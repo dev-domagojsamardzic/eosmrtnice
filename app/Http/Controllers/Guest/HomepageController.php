@@ -21,10 +21,10 @@ class HomepageController extends Controller
         // Take last 3 dates
         // Use latest 2 dates for first posts query
         // Use third latest date (if exists) for loadMoreBtn
-        // TODO: datumi ne smiju biti stariji od danas
         $latestDates = DB::table('posts')
             ->select('starts_at')
             ->distinct()
+            ->where('starts_at', '<=', now()->toDateString())
             ->orderBy('starts_at', 'desc')
             ->limit(3)
             ->pluck('starts_at')
