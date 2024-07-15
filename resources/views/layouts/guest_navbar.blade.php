@@ -4,20 +4,20 @@
         <div class="row">
             <div class="col-12 d-flex flex-row align-items-center justify-content-between">
                 <div class="d-flex align-items-center justify-content-between">
-                    <a href="{{ route('guest.funerals') }}" class="text-black mr-3">
+                    <a href="{{ route('guest.funerals') }}" @class(['text-black mr-3', 'navbar-item-active' => request()->routeIs('guest.funerals')])>
                         {{ __('guest.funerals') }}
                     </a>
-                    <a href="{{ route('guest.masonries') }}" class="text-black mr-3">
+                    <a href="{{ route('guest.masonries') }}" @class(['text-black mr-3', 'navbar-item-active' => request()->routeIs('guest.masonries')])>
                         {{ __('guest.masonries') }}
                     </a>
-                    <a href="{{ route('guest.flowers') }}" class="text-black mr-3">
+                    <a href="{{ route('guest.flowers') }}" @class(['text-black mr-3', 'navbar-item-active' => request()->routeIs('guest.flowers')])>
                         {{ __('guest.florists') }}
                     </a>
                 </div>
 
                 <!--class="float-right"-->
                 <div>
-                    <a class="btn btn-primary btn-user btn-block text-white" role="button" href="#">
+                    <a class="btn btn-primary btn-user btn-block text-white" role="button" href="{{ route('user.posts.create') }}">
                         {{ __('guest.submit_post') }}
                     </a>
                 </div>
@@ -46,25 +46,37 @@
         <div class="navbar-collapse offcanvas-collapse">
             <nav class="site-navigation" role="navigation">
 
-                <a class="btn btn-secondary btn-user text-black ml-3" role="button" href="#">
+                <a class="btn btn-secondary btn-user text-black ml-3" role="button" href="{{ route('user.posts.create') }}">
                     {{ __('guest.submit_post') }}
                 </a>
                 <div class="px-3">
                     <hr class="bg-white" style="opacity: .3">
                 </div>
                 <ul>
-                    <li><a href="{{ route('guest.funerals') }}" class="nav-link">{{ __('guest.funerals') }}</a></li>
-                    <li><a href="{{ route('guest.masonries') }}" class="nav-link">{{ __('guest.masonries') }}</a></li>
-                    <li><a href="{{ route('guest.flowers') }}" class="nav-link">{{ __('guest.florists') }}</a></li>
+                    <li>
+                        <a href="{{ route('guest.funerals') }}" @class(['nav-link', 'navbar-item-active' => request()->routeIs('guest.funerals')])>{{ __('guest.funerals') }}</a>
+                    </li>
+                    <li>
+                        <a href="{{ route('guest.masonries') }}" @class(['nav-link', 'navbar-item-active' => request()->routeIs('guest.masonries')])>{{ __('guest.masonries') }}</a>
+                    </li>
+                    <li><a href="{{ route('guest.flowers') }}" @class(['nav-link', 'navbar-item-active' => request()->routeIs('guest.flowers')])>{{ __('guest.florists') }}</a></li>
                 </ul>
                 <div class="px-3">
                     <hr class="bg-white" style="opacity: .3">
                 </div>
                 <ul>
-                    <li><a href="{{ route('guest.death-notices') }}" class="nav-link">{{ __('guest.death_notices') }}</a></li>
-                    <li><a href="{{ route('guest.last-goodbyes') }}" class="nav-link">{{ __('guest.last_goodbyes') }}</a></li>
-                    <li><a href="{{ route('guest.memories') }}" class="nav-link">{{ __('guest.memories') }}</a></li>
-                    <li><a href="{{ route('guest.thank-yous') }}" class="nav-link">{{ __('guest.thank_yous') }}</a></li>
+                    <li>
+                        <a href="{{ route('guest.death-notices') }}" @class(['nav-link', 'navbar-item-active' => request()->routeIs('guest.death-notices')])>{{ __('guest.death_notices') }}</a>
+                    </li>
+                    <li>
+                        <a href="{{ route('guest.last-goodbyes') }}" @class(['nav-link', 'navbar-item-active' => request()->routeIs('guest.last-goodbyes')])>{{ __('guest.last_goodbyes') }}</a>
+                    </li>
+                    <li>
+                        <a href="{{ route('guest.memories') }}" @class(['nav-link', 'navbar-item-active' => request()->routeIs('guest.memories')])>{{ __('guest.memories') }}</a>
+                    </li>
+                    <li>
+                        <a href="{{ route('guest.thank-yous') }}" @class(['nav-link', 'navbar-item-active' => request()->routeIs('guest.thank-yous')])>{{ __('guest.thank_yous') }}</a>
+                    </li>
                 </ul>
                 <div class="px-3">
                     <hr class="bg-white" style="opacity: .3">
@@ -116,29 +128,18 @@
             {{-- Main navigation --}}
             <nav class="site-navigation navbar-collapse" role="navigation">
                 <ul class="site-menu js-clone-nav">
-                    <li><a href="{{ route('guest.death-notices') }}" class="nav-link">{{ __('guest.death_notices') }}</a></li>
-                    <li><a href="{{ route('guest.last-goodbyes') }}" class="nav-link">{{ __('guest.last_goodbyes') }}</a></li>
-                    <li><a href="{{ route('guest.memories') }}" class="nav-link">{{ __('guest.memories') }}</a></li>
-                    <li><a href="{{ route('guest.thank-yous') }}" class="nav-link">{{ __('guest.thank_yous') }}</a></li>
-                    {{-- nav link with children --}}
-                    {{--<li class="has-children">
-                        <a href="#" class="nav-link">
-                            About Us<i class="fas fa-chevron-down ml-2"></i>
-                        </a>
-                        <ul class="dropdown arrow-top">
-                            <li><a href="#team-section" class="nav-link">Team</a></li>
-                            <li><a href="#pricing-section" class="nav-link">Pricing</a></li>
-                            <li><a href="#faq-section" class="nav-link">FAQ</a></li>
-                            <li class="has-children">
-                                <a href="#">More Links</a>
-                                <ul class="dropdown">
-                                    <li><a href="#">Menu One</a></li>
-                                    <li><a href="#">Menu Two</a></li>
-                                    <li><a href="#">Menu Three</a></li>
-                                </ul>
-                            </li>
-                        </ul>
-                    </li>--}}
+                    <li>
+                        <a href="{{ route('guest.death-notices') }}" @class(['nav-link', 'navbar-item-active' => request()->routeIs('guest.death-notices')])>{{ __('guest.death_notices') }}</a>
+                    </li>
+                    <li>
+                        <a href="{{ route('guest.last-goodbyes') }}" @class(['nav-link', 'navbar-item-active' => request()->routeIs('guest.last-goodbyes')])>{{ __('guest.last_goodbyes') }}</a>
+                    </li>
+                    <li>
+                        <a href="{{ route('guest.memories') }}" @class(['nav-link', 'navbar-item-active' => request()->routeIs('guest.memories')])>{{ __('guest.memories') }}</a>
+                    </li>
+                    <li>
+                        <a href="{{ route('guest.thank-yous') }}" @class(['nav-link', 'navbar-item-active' => request()->routeIs('guest.thank-yous')])>{{ __('guest.thank_yous') }}</a>
+                    </li>
                 </ul>
             </nav>
 
