@@ -91,4 +91,39 @@ class HomepageController extends Controller
             'date' => $nextDate
         ]);
     }
+
+    /**
+     * Search posts
+     *
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function search(Request $request): JsonResponse
+    {
+        $name = $request->input('name');
+        $date = $request->input('date');
+
+        $posts = Post::query()
+            ->forDisplay()
+            ->when($name, function ($query, $name) {
+                $search = strtolower(trim($name));
+                $query->where('deceased_full_name_lg', 'like', '%'.$search.'%');
+            })
+            ->when($date, function ($query, $date) {
+                $dateFormatted = Carbon::parse($date)->format('Y-m-d');
+                $query->whereDate('starts_at',  $dateFormatted);
+            })
+            ->get()
+            ->groupBy(function($item, $key) {
+                return $item->starts_at->format('d.m.Y.');
+            });
+
+        $html = '';
+
+        foreach ($posts as $dateString => $postCollection) {
+            $html .= view('partials/posts-masonry-block',['date' => $dateString, 'collection' => $postCollection])->render();
+        }
+
+        return response()->json([$html]);
+    }
 }
