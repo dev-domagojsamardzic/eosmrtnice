@@ -5,6 +5,7 @@ use App\Http\Controllers\Guest\FuneralCompanyAdController;
 use App\Http\Controllers\Guest\HomepageController;
 use App\Http\Controllers\Guest\MasonryCompanyAdController;
 use App\Http\Controllers\Guest\PostController;
+use App\Http\Controllers\Guest\Posts\DeathNoticeController;
 use App\Http\Controllers\ImageController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
@@ -33,8 +34,8 @@ Route::get('/', [HomepageController::class, 'home'])->name('homepage');
 Route::post('/',[HomepageController::class, 'items'])->name('homepage.items');
 Route::get('pretrazi',[HomepageController::class, 'search'])->name('homepage.search');
 
-Route::get('obavijesti-o-smrti',[PostController::class, 'deathNotices'])->name('guest.death-notices');
-
+Route::get('obavijesti-o-smrti',[DeathNoticeController::class, 'index'])->name('guest.death-notices');
+Route::post('obavijesti-o-smrti', [DeathNoticeController::class, 'items'])->name('guest.death-notices.items');
 
 Route::middleware('guest')->group(function () {
     // user register
