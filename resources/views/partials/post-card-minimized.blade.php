@@ -35,6 +35,13 @@
             {{-- Symbol image --}}
         </div>
         {{-- Images --}}
+
+        <div class="d-flex align-items-center justify-content-center w-100 mt-5">
+            <span class="badge badge-dark p-2" title="{{ __('guest.candles_lit', ['number' => $post->candles]) }}">
+                <i class="fas fa-fire mr-2"></i>
+                {{ $post->candles }}
+            </span>
+        </div>
     </div>
     {{-- Post body --}}
 </div>

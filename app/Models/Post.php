@@ -35,6 +35,7 @@ use Illuminate\Support\Str;
  * @property            string          signature
  * @property            bool            is_active
  * @property            bool            is_approved
+ * @property            int             candles
  * @property            Carbon          created_at
  * @property            Carbon          updated_at
  * @property            Carbon          deleted_at
@@ -82,6 +83,7 @@ class Post extends Model
         'type' => PostType::DEATH_NOTICE,
         'size' => PostSize::SMALL,
         'symbol' => PostSymbol::NONE,
+        'candles' => 0,
         'is_active' => false,
         'is_approved' => false,
     ];

@@ -18,4 +18,5 @@ return [
     'mobile_phone' => 'Mobitel',
     'email' => 'Email',
     'web' => 'Web',
+    'candles_lit' => 'Broj zapaljenih svijeća: :number',
 ];
