@@ -9,6 +9,7 @@ use App\Http\Controllers\Guest\Posts\LastGoodbyeController;
 use App\Http\Controllers\Guest\Posts\MemoryController;
 use App\Http\Controllers\Guest\Posts\ThankYouController;
 use App\Http\Controllers\ImageController;
+use App\Http\Controllers\Guest\PostController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Auth\ConfirmablePasswordController;
@@ -35,6 +36,8 @@ use App\Http\Controllers\Auth\VerifyEmailController;
 Route::get('/', [HomepageController::class, 'home'])->name('homepage');
 Route::post('/',[HomepageController::class, 'items'])->name('homepage.items');
 Route::get('pretrazi',[HomepageController::class, 'search'])->name('homepage.search');
+
+Route::get('objava/{id}/{slug}', [PostController::class, 'show'])->name('posts.show');
 
 Route::get('obavijesti-o-smrti',[DeathNoticeController::class, 'index'])->name('guest.death-notices');
 Route::post('obavijesti-o-smrti', [DeathNoticeController::class, 'items'])->name('guest.death-notices.items');

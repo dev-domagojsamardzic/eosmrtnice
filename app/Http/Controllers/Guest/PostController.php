@@ -87,6 +87,16 @@ class PostController extends Controller
     }
 
     /**
+     * Show a post
+     * @param Post $post
+     * @return View
+     */
+    public function show(Post $post): View
+    {
+        return view('guest.post',['post' => $post]);
+    }
+
+    /**
      * Return mixed items when "load more"
      * @param Request $request
      * @return JsonResponse
