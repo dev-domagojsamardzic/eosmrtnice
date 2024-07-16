@@ -19,7 +19,6 @@ use Illuminate\Support\Str;
 /**
  * @property-read       int             id
  * @property            int             user_id
- * @property            string          slug
  * @property            PostType        type
  * @property            PostSize        size
  * @property            Carbon          starts_at
