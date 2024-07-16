@@ -11,6 +11,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
 use Illuminate\View\View;
+use Kudashevs\ShareButtons\ShareButtons;
 
 class PostController extends Controller
 {
@@ -93,11 +94,17 @@ class PostController extends Controller
      */
     public function show(Post $post): View
     {
+        $social = (new ShareButtons)->page($post->url, $post->deceased_full_name_lg, [
+            'title' => config('app.name'),
+            'rel' => 'nofollow noopener noreferrer',
+        ])->facebook()->whatsapp()->getRawLinks();
+
         $isCandleLit = request()?->cookie(config('app.name').'_candles_'.$post->id);
 
         return view('guest.post',[
             'post' => $post,
             'isCandleLit' => $isCandleLit,
+            'social' => $social,
         ]);
     }
 

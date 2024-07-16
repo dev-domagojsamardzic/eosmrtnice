@@ -1,3 +1,15 @@
+<div class="d-flex flex-column align-items-center justify-content-center mt-4">
+    <div class="d-flex align-items-center justify-content-center gap-2">
+        <a class="btn btn-outline-primary" href="{{ $social['facebook'] }}">
+            <i class="fab fa-facebook-f"></i>
+        </a>
+        <a class="btn btn-outline-primary" href="{{ $social['whatsapp'] }}">
+            <i class="fab fa-whatsapp"></i>
+        </a>
+    </div>
+    <hr class="hr_gray_500 w-50">
+</div>
+
 <div @class([
     'candle_lit' => ($isCandleLit ?? false),
     'full_post_wrapper d-flex flex-column align-items-center justify-content-center'
@@ -58,10 +70,6 @@
         <i class="fas fa-fire mr-2"></i>
         <span class="candles_count font-weight-500">{{ $post->candles }}</span>
     </button>
-</div>
-
-<div class="d-flex align-items-center justify-content-center mt-4">
-    <hr class="hr_gray_500 w-50">
 </div>
 
 
