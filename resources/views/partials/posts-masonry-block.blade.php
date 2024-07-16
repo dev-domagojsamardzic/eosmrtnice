@@ -3,7 +3,7 @@
 </div>
 
 @foreach($collection as $item)
-    <a href="{{ route('posts.show', ['id' => $item->id, 'slug' => $item->slug]) }}">
+    <a target="_blank" href="{{ route('posts.show', ['post' => $item->id, 'slug' => $item->slug]) }}">
         <div class="masonry-item post_wrapper col-sm-12 col-md-4">
             @include('partials/post-card-minimized', ['post' => $item])
         </div>

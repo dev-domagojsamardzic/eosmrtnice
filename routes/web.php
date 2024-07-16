@@ -37,7 +37,7 @@ Route::get('/', [HomepageController::class, 'home'])->name('homepage');
 Route::post('/',[HomepageController::class, 'items'])->name('homepage.items');
 Route::get('pretrazi',[HomepageController::class, 'search'])->name('homepage.search');
 
-Route::get('objava/{id}/{slug}', [PostController::class, 'show'])->name('posts.show');
+Route::get('objava/{post}/{slug?}', [PostController::class, 'show'])->name('posts.show');
 
 Route::get('obavijesti-o-smrti',[DeathNoticeController::class, 'index'])->name('guest.death-notices');
 Route::post('obavijesti-o-smrti', [DeathNoticeController::class, 'items'])->name('guest.death-notices.items');

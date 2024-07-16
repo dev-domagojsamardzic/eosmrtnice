@@ -40,6 +40,7 @@ use Illuminate\Support\Str;
  * @property            Carbon          deleted_at
  * -------------------------------------------------
  * @property            int             words_count
+ * @property            string          slug
  * -------------------------------------------------
  * @property            User                user
  * @property            Collection<Offer>   offers
@@ -97,6 +98,26 @@ class Post extends Model
     {
         return Attribute::make(
             get: fn() => Str::of($this->intro_message)->wordCount() + Str::of($this->main_message)->wordCount(),
+        );
+    }
+
+    /**
+     * Get posts slug
+     */
+    protected function slug(): Attribute
+    {
+        return Attribute::make(
+            get: fn () => Str::slug($this->deceased_full_name_lg)
+        );
+    }
+
+    /**
+     * Get posts url
+     */
+    protected function url(): Attribute
+    {
+        return Attribute::make(
+            get: fn () => route('posts.show', [$this->id, $this->slug])
         );
     }
 

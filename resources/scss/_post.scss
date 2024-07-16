@@ -30,7 +30,7 @@
 }
 
 .post .header,
-.main_post .header,{
+.main_post .header {
     background-color: $black;
     color: $white;
     padding: 8px;
@@ -66,6 +66,13 @@
     margin: 1rem;
 }
 
+.full_post_wrapper .deceased_full_name_lg {
+    font-size: 1.75rem;
+    line-height: 3.25rem;
+    font-weight: 400;
+    text-align: center;
+}
+
 .post .body .lifespan,
 .main_post .body .lifespan {
     display: flex;
@@ -74,6 +81,14 @@
     font-size: .875rem;
     font-weight: 500;
     margin: 1rem 0;
+}
+
+.full_post_wrapper .lifespan {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.125rem;
+    font-weight: 500;
 }
 
 .post .body .images_wrapper,
@@ -86,7 +101,8 @@
 }
 
 .post .body .images_wrapper .image,
-.main_post .body .images_wrapper .image {
+.main_post .body .images_wrapper .image,
+.full_post_wrapper .image {
     overflow: hidden;
     border: 1px solid $black;
     padding: 2px;
@@ -96,6 +112,13 @@
 .main_post .body .images_wrapper .image img {
     height: 140px;
     width: 110px;
+    object-fit: cover;
+    object-position: center;
+}
+
+.full_post_wrapper .image img {
+    height: 210px;
+    width: 165px;
     object-fit: cover;
     object-position: center;
 }
@@ -120,6 +143,12 @@
     margin: 2rem 0 1rem 0;
 }
 
+.full_post_wrapper .intro_message {
+    text-align: center;
+    font-size: 1rem;
+    line-height: 1.75rem;
+}
+
 .post .body .deceased_full_name_sm,
 .main_post .body .deceased_full_name_sm {
     font-weight: 500;
@@ -127,11 +156,26 @@
     text-transform: uppercase
 }
 
+.full_post_wrapper .deceased_full_name_sm {
+    font-weight: 500;
+    text-align: center;
+    text-transform: uppercase;
+    font-size: 1rem;
+    line-height: 1.75rem;
+}
+
 .post .body .deceased_main_message,
 .main_post .body .deceased_main_message {
     text-align: center;
     overflow-wrap: break-word;
     margin: 1rem 0 2rem 0;
+}
+
+.full_post_wrapper .deceased_main_message {
+    text-align: center;
+    overflow-wrap: break-word;
+    font-size: 1.125rem;
+    line-height: 2rem;
 }
 
 .post .body .signature,
@@ -143,10 +187,31 @@
     font-weight: bold;
 }
 
+.full_post_wrapper .signature {
+    font-size: .825rem;
+    line-height: 1.5rem;
+    font-weight: bold;
+    text-align: center;
+}
+
 .text-counter-success {
     color: $fern-green;
 }
 
 .text-counter-danger {
     color: $red;
+}
+
+.font-weight-500 {
+    font-weight: 500;
+}
+
+.full_post_wrapper {
+    padding: 3rem 4rem;
+}
+
+@media screen and (max-width: 768px) {
+    .full_post_wrapper {
+        padding: 2rem 2rem;
+    }
 }

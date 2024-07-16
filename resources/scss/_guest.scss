@@ -95,3 +95,27 @@
     font-weight: 600;
     text-decoration: underline;
 }
+
+.full_post_wrapper {
+    background: #eee;
+    border: 1px solid $gray-400;
+}
+
+.full_post_wrapper .header {
+    background-color: $black;
+    color: $white;
+    font-weight: 500;
+    padding: 0 4rem;
+    font-size: 1rem;
+    line-height: 2rem;
+    text-align: center;
+}
+
+.full_post_wrapper .symbol img {
+    height: 70px;
+    width: auto;
+}
+
+.hr_gray_500 {
+    border-bottom: 1px solid $gray-500;
+}
