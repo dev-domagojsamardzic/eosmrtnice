@@ -1,5 +1,7 @@
-<div class="full_post_wrapper d-flex flex-column align-items-center justify-content-center">
-
+<div @class([
+    'candle_lit' => ($isCandleLit ?? false),
+    'full_post_wrapper d-flex flex-column align-items-center justify-content-center'
+])>
     {{--<div class="header mt-4">
         {{ $post->type->translate() }}
     </div>--}}
@@ -52,8 +54,52 @@
 
     <hr class="hr_gray_500 w-32 my-5">
 
-    <button class="btn-light-a-candle btn btn-outline-dark" title="Zapali svijeću">
+    <button id="lightCandleBtn" data-id="{{ $post->id }}" @class(['btn-light-a-candle btn btn-outline-dark', 'fire_effect_box_shadow' => ($isCandleLit ?? false)]) title="{{ __('guest.light_a_candle') }}">
         <i class="fas fa-fire mr-2"></i>
-        <span class="font-weight-500">{{ $post->candles }}</span>
+        <span class="candles_count font-weight-500">{{ $post->candles }}</span>
     </button>
 </div>
+
+<div class="d-flex align-items-center justify-content-center mt-4">
+    <hr class="hr_gray_500 w-50">
+</div>
+
+
+<script type="module">
+    const lightCandleBtn = document.getElementById('lightCandleBtn');
+    const postWrapper = document.querySelector('.full_post_wrapper');
+
+    lightCandleBtn.addEventListener('click', function(e) {
+
+        $.ajax({
+            method: 'POST',
+            url: '{{ route('posts.candle') }}',
+            headers: {
+                'X-CSRF-TOKEN': '{{ csrf_token() }}'
+            },
+            data: {
+                'post': this.dataset.id,
+            },
+            success: function(response) {
+
+                if (response['success'])
+                {
+                    let counter = lightCandleBtn.querySelector('.candles_count').innerText;
+                    let count = parseInt(counter) + parseInt(response['increment']);
+                    lightCandleBtn.querySelector('.candles_count').innerText = count;
+
+                    postWrapper.style.backgroundColor = '#5c5c5c';
+                    postWrapper.style.color = '#ffffff';
+                    postWrapper.style.transition = 'all 0.3s ease-in-out';
+
+                    lightCandleBtn.style.boxShadow = '0 0 8px 2px #ffe808,0 0 10px 4px #ff9a00,0 0 14px 6px #ff0000';
+                    lightCandleBtn.style.color = '#fff';
+                    lightCandleBtn.style.transition = 'all 0.3s ease-in-out';
+                }
+            },
+            error: function(error) {
+                console.error(error);
+            },
+        })
+    });
+</script>

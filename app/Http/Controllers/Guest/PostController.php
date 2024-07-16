@@ -93,7 +93,51 @@ class PostController extends Controller
      */
     public function show(Post $post): View
     {
-        return view('guest.post',['post' => $post]);
+        $isCandleLit = request()?->cookie(config('app.name').'_candles_'.$post->id);
+
+        return view('guest.post',[
+            'post' => $post,
+            'isCandleLit' => $isCandleLit,
+        ]);
+    }
+
+    /**
+     * Handles "light a candle" action
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function candle(Request $request): JsonResponse
+    {
+        $post = $request->input('post');
+
+        if (!$post) {
+            return response()
+                ->json(['success' => false, 'message' => 'Podatci nepotpuni.'], 400);
+        }
+
+        if ($request->cookie(config('app.name') . '_candles_'.$post)) {
+            return response()
+                ->json(['id' => $post, 'success' => true, 'increment' => 0, 'message' => __('guest.candle_lit')]);
+        }
+
+        // returns int
+        Post::query()
+            ->where('id', $post)
+            ->increment('candles');
+
+        $cookie = cookie(
+            config('app.name') . '_candles_'.$post,
+            now()->timestamp,
+            60 * 24 * 90,
+            '/',
+            secure: false, // TODO: set to true
+            httpOnly: false, // TODO: remove this
+            sameSite: 'Lax',
+        );
+
+        return response()
+            ->json(['id' => $post, 'success' => true, 'increment' => 1,'message' => __('guest.candle_lit_successfuly')])
+            ->withCookie($cookie);
     }
 
     /**

@@ -119,3 +119,15 @@
 .hr_gray_500 {
     border-bottom: 1px solid $gray-500;
 }
+
+.fire_effect_box_shadow {
+    box-shadow: 0 0 8px 2px #ffe808,0 0 10px 4px #ff9a00,0 0 14px 6px #ff0000;
+    color: #fff;
+    transition: all 0.3s ease-in-out;
+}
+
+.candle_lit {
+    background-color: #5c5c5c;
+    color: #ffffff;
+    transition: all 0.3s ease-in-out;
+}

@@ -19,4 +19,7 @@ return [
     'email' => 'Email',
     'web' => 'Web',
     'candles_lit' => 'Broj zapaljenih svijeća: :number',
+    'light_a_candle' => 'Zapali svijeću',
+    'candle_already_lit' => 'Već ste zapalili svijeću.',
+    'candle_lit_successfuly' => 'Zapalili ste svijeću.',
 ];

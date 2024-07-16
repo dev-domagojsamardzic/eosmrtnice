@@ -37,6 +37,8 @@ Route::get('/', [HomepageController::class, 'home'])->name('homepage');
 Route::post('/',[HomepageController::class, 'items'])->name('homepage.items');
 Route::get('pretrazi',[HomepageController::class, 'search'])->name('homepage.search');
 
+Route::post('zapali-svijecu', [PostController::class, 'candle'])->name('posts.candle');
+
 Route::get('objava/{post}/{slug?}', [PostController::class, 'show'])->name('posts.show');
 
 Route::get('obavijesti-o-smrti',[DeathNoticeController::class, 'index'])->name('guest.death-notices');
