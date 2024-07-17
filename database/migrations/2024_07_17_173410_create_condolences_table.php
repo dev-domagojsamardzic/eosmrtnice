@@ -28,7 +28,7 @@ return new class extends Migration
 
             $table->string('package_addon');
 
-            $table->dateTime('paid_at');
+            $table->dateTime('paid_at')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });
