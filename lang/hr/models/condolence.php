@@ -8,6 +8,7 @@ return [
     'motive_info' => 'Odaberite jedan od motiva koji želite priložiti uz izraz sućuti',
     'message' => 'Poruka',
     'message_info' => 'Ovdje napišite svoju poruku i dodajte svoj potpis.',
+    'message_placeholder' => 'npr. Duboko suosjećamo u vašoj boli zbog odlaska dragog nam ___. Od srca, tvoj/tvoji ____',
     'package_addon' => 'Dodatak paketu',
     'package_addon_info' => 'U izraz sućuti možete uključiti (jedan ili više) ispod navedene dodatke.',
     'recipient_data' => 'Podatci o primatelju paketa',
