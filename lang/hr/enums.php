@@ -37,6 +37,18 @@ return [
     'star_of_david' => 'Davidova zvijezda',
     // App\Models\CondolenceMotive
     //'cross' => 'Križ',
+    'white_rose' => 'Bijele ruže',
+    'red_rose' => 'Crvene ruže',
+    'white_dove' => 'Bijela golubica',
+    'angel' => 'Anđeo',
+    'candles' => 'Svijeće',
     // App\Models\CondolencePackageAddon
-    'lanterns_1' => 'Lampioni (1 kom)',
+    'lanterns_6' => 'Lampioni (6 kom)',
+    'lanterns_5' => 'Lampioni (5 kom)',
+    'lanterns_4' => 'Lampioni (4 kom)',
+    'lanterns_3' => 'Lampioni (3 kom)',
+    'angel_statue' => 'Kipić anđela',
+    'red_roses' => '2 crvene ruže sa vrpcom',
+    'white_roses' => '2 bijele ruže sa vrpcom',
+
 ];

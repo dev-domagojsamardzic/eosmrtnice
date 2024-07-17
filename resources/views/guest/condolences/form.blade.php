@@ -10,42 +10,17 @@
             <p>{{ __('models/condolence.motive_info') }}</p>
             <div class="img-select-component w-100 mt-4">
                 <div class="row">
-                    <div class='col text-center'>
-                        <input type="radio" name="motive" id="img1" class="d-none imgbgchk" value="">
-                        <label for="img1">
-                            <img src="https://dummyimage.com/600x400/000/fff" alt="Image 1">
-                            <div class="tick_container">
-                                <div class="tick"><i class="fa fa-check"></i></div>
-                            </div>
-                        </label>
-                    </div>
-                    <div class='col text-center'>
-                        <input type="radio" name="motive" id="img2" class="d-none imgbgchk" value="">
-                        <label for="img2">
-                            <img src="https://dummyimage.com/600x400/000/fff" alt="Image 2">
-                            <div class="tick_container">
-                                <div class="tick"><i class="fa fa-check"></i></div>
-                            </div>
-                        </label>
-                    </div>
-                    <div class='col text-center'>
-                        <input type="radio" name="motive" id="img3" class="d-none imgbgchk" value="">
-                        <label for="img3">
-                            <img src="https://dummyimage.com/600x400/000/fff" alt="Image 3">
-                            <div class="tick_container">
-                                <div class="tick"><i class="fa fa-check"></i></div>
-                            </div>
-                        </label>
-                    </div>
-                    <div class='col text-center'>
-                        <input type="radio" name="motive" id="img4" class="d-none imgbgchk" value="">
-                        <label for="img4">
-                            <img src="https://dummyimage.com/600x400/000/fff" alt="Image 4">
-                            <div class="tick_container">
-                                <div class="tick"><i class="fa fa-check"></i></div>
-                            </div>
-                        </label>
-                    </div>
+                    @foreach($motives as $key => $motive)
+                        <div class='col text-center'>
+                            <input type="radio" name="motive" id="motive{{$key}}" class="d-none imgbgchk" value="{{ $key }}">
+                            <label for="motive{{$key}}">
+                                <img src="{{ asset('images/motives/' . $key . '.jpg') }}" alt="{{ $motive }}">
+                                <div class="tick_container">
+                                    <div class="tick"><i class="fa fa-check"></i></div>
+                                </div>
+                            </label>
+                        </div>
+                    @endforeach
                 </div>
             </div>
         </div>
