@@ -6,6 +6,16 @@ enum CondolenceMotive: int
 {
     case CROSS = 1;
 
+    case WHITE_ROSE = 2;
+
+    case RED_ROSE = 3;
+
+    case WHITE_DOVE = 4;
+
+    case ANGEL = 5;
+
+    case CANDLES = 6;
+
     public static function options(): array
     {
         $options = [];

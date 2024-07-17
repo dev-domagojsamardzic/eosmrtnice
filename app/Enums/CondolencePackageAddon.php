@@ -4,7 +4,13 @@ namespace App\Enums;
 
 enum CondolencePackageAddon: int
 {
-    case LANTERNS_1 = 1;
+    case LANTERNS_6 = 1;
+    case LANTERNS_5 = 2;
+    case LANTERNS_4 = 3;
+    case LANTERNS_3 = 4;
+    case ANGEL_STATUE = 5;
+    case RED_ROSES = 6;
+    case WHITE_ROSES = 7;
 
     public static function options(): array
     {
