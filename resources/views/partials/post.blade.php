@@ -1,13 +1,20 @@
 <div class="d-flex flex-column align-items-center justify-content-center mt-4">
-    <div class="d-flex align-items-center justify-content-center gap-2">
-        <a class="btn btn-outline-primary" href="{{ $social['facebook'] }}">
-            <i class="fab fa-facebook-f"></i>
-        </a>
-        <a class="btn btn-outline-primary" href="{{ $social['whatsapp'] }}">
-            <i class="fab fa-whatsapp"></i>
-        </a>
+    <div class="d-flex align-items-center justify-content-between w-100">
+        <div class="d-flex gap-4">
+            <a class="btn btn-outline-primary" href="{{ $social['facebook'] }}">
+                <i class="fab fa-facebook-f"></i>
+            </a>
+            <a class="btn btn-outline-primary" href="{{ $social['whatsapp'] }}">
+                <i class="fab fa-whatsapp"></i>
+            </a>
+        </div>
+        <div>
+            <a class="btn btn-outline-primary" href="#">
+                {{ __('common.send_condolence') }}
+            </a>
+        </div>
     </div>
-    <hr class="hr_gray_500 w-50">
+    <hr class="hr_gray_500 w-100">
 </div>
 
 <div @class([
