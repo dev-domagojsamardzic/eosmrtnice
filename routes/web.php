@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Guest\CondolenceController;
 use App\Http\Controllers\Guest\FlowersCompanyAdController;
 use App\Http\Controllers\Guest\FuneralCompanyAdController;
 use App\Http\Controllers\Guest\HomepageController;
@@ -52,6 +53,8 @@ Route::post('posljednji-pozdravi', [LastGoodbyeController::class, 'items'])->nam
 
 Route::get('zahvale',[ThankYouController::class, 'index'])->name('guest.thank-yous');
 Route::post('zahvale', [ThankYouController::class, 'items'])->name('guest.thank-yous.items');
+
+Route::get('posalji-sucut', [CondolenceController::class, 'create'])->name('guest.condolences.create');
 
 Route::middleware('guest')->group(function () {
     // user register
