@@ -9,7 +9,7 @@
             </a>
         </div>
         <div>
-            <a class="btn btn-outline-primary" href="{{ route('guest.condolences.create') }}">
+            <a class="btn btn-primary" href="{{ route('guest.condolences.create') }}">
                 {{ __('common.send_condolence') }}
             </a>
         </div>
@@ -21,9 +21,6 @@
     'candle_lit' => ($isCandleLit ?? false),
     'full_post_wrapper d-flex flex-column align-items-center justify-content-center'
 ])>
-    {{--<div class="header mt-4">
-        {{ $post->type->translate() }}
-    </div>--}}
 
     @if($post->symbol->value)
         <div class="symbol mt-4">
