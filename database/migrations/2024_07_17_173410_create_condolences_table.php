@@ -26,7 +26,7 @@ return new class extends Migration
             $table->string('sender_address', 1024)->nullable(false);
             $table->string('sender_additional_info', 1024);
 
-            $table->unsignedInteger('package_addon');
+            $table->string('package_addon');
 
             $table->dateTime('paid_at');
             $table->timestamps();
