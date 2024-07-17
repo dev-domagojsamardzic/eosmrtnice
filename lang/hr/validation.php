@@ -207,6 +207,13 @@ return [
         'valid_from' => 'vrijedi od',
         'valid_until' => 'vrijedi do',
         'starts_at' => 'vrijeme objave',
+        'message' => 'poruka',
+        'recipient_full_name' => 'ime i prezime primatelja paketa',
+        'recipient_address' => 'adresa primatelja',
+        'sender_full_name' => 'vaše ime i prezime',
+        'sender_email' => 'vaša email adresa',
+        'sender_phone' => 'vaš broj telefona',
+        'sender_address' => 'vaša adresa',
     ],
 
 ];
