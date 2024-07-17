@@ -9,7 +9,7 @@
             </a>
         </div>
         <div>
-            <a class="btn btn-outline-primary" href="#">
+            <a class="btn btn-outline-primary" href="{{ route('guest.condolences.create') }}">
                 {{ __('common.send_condolence') }}
             </a>
         </div>
