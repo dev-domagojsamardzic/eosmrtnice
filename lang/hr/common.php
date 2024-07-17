@@ -65,4 +65,5 @@ return [
     'search_results' => 'Rezultati pretrage',
     'search_obituaries' => 'Pretraži osmrtnice',
     'partners' => 'Partneri',
+    'send_condolence' => 'Pošalji sućut',
 ];
