@@ -2,6 +2,7 @@
 
 use App\Models\Ad;
 use App\Models\Company;
+use App\Models\Condolence;
 use App\Models\Post;
 use App\Models\User;
 use Illuminate\Database\Migrations\Migration;
@@ -15,11 +16,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('offers', function (Blueprint $table) {
+        Schema::create('offers', static function (Blueprint $table) {
             $table->id();
 
             $table->foreignIdFor(Company::class)->nullable()->constrained();
             $table->foreignIdFor(Ad::class)->nullable()->constrained();
+            $table->foreignIdFor(Condolence::class)->nullable()->constrained();
 
             $table->foreignIdFor(User::class)->nullable()->constrained();
             $table->foreignIdFor(Post::class)->nullable()->constrained();
