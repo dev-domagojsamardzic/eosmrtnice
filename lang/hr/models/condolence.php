@@ -36,4 +36,5 @@ return [
     'sender_additional_info' => 'Dodatne informacije',
     'sender_additional_info_info' => 'U slučaju potrebe R1/Eračuna molimo vas da upišete naziv pravnog subjekta i OIB.',
     'sender_additional_info_placeholder' => 'npr: Obrt za usluge X, 19928377457',
+    'paid_at' => 'Plaćeno',
 ];

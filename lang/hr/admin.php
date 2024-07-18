@@ -24,6 +24,7 @@ return [
     'phone' => 'Broj telefona',
     'mobile_phone' => 'Mobitel',
     'county' => 'Županija',
+    'condolences' => 'Narudžbe sućuti',
     'company_representative' => 'Vlasnik/Predstavnik',
     'placeholders' => [
         'company_title' => 'Unesite naziv tvrtke',

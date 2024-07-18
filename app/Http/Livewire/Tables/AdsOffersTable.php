@@ -119,7 +119,6 @@ class AdsOffersTable extends Component implements HasForms, HasTable
                             ->formatStateUsing(fn (AdsOffer $o): string => __('models/offer.total') . ': ' . currency($o->total)),
                     ]),
                 ])
-
             ])->collapsible()->columnSpanFull(),
         ];
     }

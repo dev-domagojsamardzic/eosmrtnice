@@ -67,4 +67,7 @@ return [
     'partners' => 'Partneri',
     'send_condolence' => 'Pošalji sućut',
     'send_order' => 'Pošalji narudžbu',
+    'not_paid' => 'Nije plaćeno',
+    'mark_paid' => 'Označi kao plaćeno',
+    'mark_unpaid' => 'Označi kao neplaćeno'
 ];
