@@ -64,6 +64,13 @@
             <span>{{ __('sidebar.posts') }}</span></a>
     </li>
 
+    <!-- Nav Item - Posts -->
+    <li class="nav-item">
+        <a class="nav-link" href="{{ route('admin.condolences.index') }}">
+            <i class="fas fa-hand-holding-heart"></i>
+            <span>{{ __('sidebar.condolences') }}</span></a>
+    </li>
+
     <!-- Divider -->
     <hr class="sidebar-divider">
 

@@ -12,4 +12,5 @@ return [
     'posts' => 'Objave',
     'ads_offers' => 'Ponude za oglase',
     'posts_offers' => 'Ponude za objave',
+    'condolences' => 'Narudžbe sućuti',
 ];
