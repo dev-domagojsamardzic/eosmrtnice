@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Guest\CondolenceController;
 use App\Http\Controllers\Partner\AdController;
 use App\Http\Controllers\Admin\AdsOfferController;
 use App\Http\Controllers\Partner\CompanyController;
@@ -31,6 +32,9 @@ Route::resource('ads', AdController::class)
 Route::get('ads/{company}/create', [AdController::class, 'create'])->name('ads.create');
 
 Route::resource('posts', PostController::class);
+
+Route::resource('condolences', CondolenceController::class)
+    ->only(['index', 'edit', 'update']);
 
 /* Posts offers*/
 Route::get('posts-offers/{post}/create', [PostOfferController::class, 'create'])->name('posts-offers.create');
