@@ -43,9 +43,13 @@ class CondolenceController extends Controller
         $condolence->sender_phone = $request->input('sender_phone');
         $condolence->sender_address = trim($request->input('sender_address'), " \r\n\t");
         $condolence->sender_additional_info = trim($request->input('sender_additional_info'), " \r\n\t");
-        $condolence->package_addon = $request->input('package_addon');
-        $condolence->save();
+        $condolence->package_addon = $request->input('package_addon', []);
 
-        return redirect()->back()->with('alert', ['class' => 'success', 'message' => 'Uspješno ste poslali narudžbu za paket sućuti. Javit ćemo Vam se u najkraćem mogućem roku.']);
+        try {
+            $condolence->save();
+            return redirect()->back()->with('alert', ['class' => 'success', 'message' => 'Uspješno ste poslali narudžbu za paket sućuti. \n Javit ćemo Vam se u najkraćem mogućem roku.']);
+        } catch (\Exception $e) {
+            return redirect()->back()->with('alert', ['class' => 'danger', 'message' => __('common.something_went_wrong')]);
+        }
     }
 }
