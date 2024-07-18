@@ -20,8 +20,9 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property            string          sender_phone
  * @property            string          sender_address
  * @property            string          sender_additional_info
- * @property            int             package_addon
- * @property            array           package_addons
+ * @property            array           package_addon
+ * @property            array           addons
+ * @property            string          number
  * @property            Carbon          paid_at
  * @property            Carbon          created_at
  * @property            Carbon          updated_at
@@ -47,11 +48,28 @@ class Condolence extends Model
      * Casting attribute as array
      * @return Attribute
      */
-    public function packageAddons(): Attribute
+    public function addons(): Attribute
     {
         return Attribute::make(
-            get: static fn ($value) => explode(', ', $value),
-            set: static fn ($value) => implode(',', $value),
+            get: function() {
+                $return = [];
+                $addons = CondolencePackageAddon::options();
+                foreach ($this->package_addon as $key) {
+                    $return[] = $addons[$key];
+                }
+                return $return;
+            }
+        );
+    }
+
+    /**
+     * Return condolence number
+     * @return Attribute
+     */
+    public function number(): Attribute
+    {
+        return Attribute::make(
+            get: fn() => str_pad($this->id, 5, '0', STR_PAD_LEFT)
         );
     }
 }
