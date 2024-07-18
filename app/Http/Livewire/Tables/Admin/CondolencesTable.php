@@ -3,11 +3,11 @@
 namespace App\Http\Livewire\Tables\Admin;
 
 use App\Models\Condolence;
+use Filament\Tables\Actions\ActionGroup;
 use Filament\Forms\Concerns\InteractsWithForms;
 use Filament\Forms\Contracts\HasForms;
 use Filament\Support\Enums\FontWeight;
 use Filament\Tables\Actions\Action;
-use Filament\Tables\Actions\EditAction;
 use Filament\Tables\Columns\Layout\Grid;
 use Filament\Tables\Columns\Layout\Panel;
 use Filament\Tables\Columns\Layout\Split;
@@ -113,7 +113,6 @@ class CondolencesTable extends Component implements HasForms, HasTable
                             ->description(__('models/condolence.sender_additional_info')),
                     ]),
                 ])
-
             ])->collapsible()->columnSpanFull(),
         ];
     }
@@ -121,20 +120,29 @@ class CondolencesTable extends Component implements HasForms, HasTable
     protected function getActions(): array
     {
         return [
-            EditAction::make('edit')
-                ->label(__('common.edit'))
-                ->icon('heroicon-s-pencil-square')
-                ->url(fn(Condolence $c) => route('admin.condolences.edit', ['condolence' => $c->id])),
-            Action::make('mark_paid')
-                ->label(fn (Condolence $c): string => $c->paid_at ? __('common.mark_unpaid') : __('common.mark_paid'))
-                ->action(function(Condolence $c): void {
-                    $paidAt = ($c->paid_at) ? null : now();
-                    $c->paid_at = $paidAt;
-                    $c->save();
-                })
-                ->icon(fn (Condolence $c): string => $c->paid_at ? 'heroicon-m-x-circle' : 'heroicon-m-check-circle')
-                ->color(fn(Condolence $c): string => $c->paid_at ? 'danger' : 'success')
-                ->requiresConfirmation(),
+            ActionGroup::make([
+                /*Action::make('create_offer')
+                    ->label(__('models/offer.create'))
+                    ->visible(true)
+                    ->icon('heroicon-s-plus')
+                    ->color('black')
+                    ->url(fn(Condolence $c): string => route('admin.condolences-offers.create', ['condolence' => $c->id])),*/
+                Action::make('edit')
+                    ->label(__('common.edit'))
+                    ->icon('heroicon-s-pencil-square')
+                    ->url(fn(Condolence $c) => route('admin.condolences.edit', ['condolence' => $c->id])),
+                Action::make('mark_paid')
+                    ->label(fn (Condolence $c): string => $c->paid_at ? __('common.mark_unpaid') : __('common.mark_paid'))
+                    ->action(function(Condolence $c): void {
+                        $paidAt = ($c->paid_at) ? null : now();
+                        $c->paid_at = $paidAt;
+                        $c->save();
+                    })
+                    ->icon(fn (Condolence $c): string => $c->paid_at ? 'heroicon-m-x-circle' : 'heroicon-m-check-circle')
+                    ->color(fn(Condolence $c): string => $c->paid_at ? 'danger' : 'success')
+                    ->requiresConfirmation(),
+            ])->dropdownPlacement('center')
+            ->dropdownOffset(-200)
         ];
     }
 
