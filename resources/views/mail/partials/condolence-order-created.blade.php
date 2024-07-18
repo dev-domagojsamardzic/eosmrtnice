@@ -1,10 +1,10 @@
 <x-mail::message>
-# {{ __("mail.condolence_order_received.greetings") }}
+# {{ __("mail.condolence_order_created.greetings") }}
 
-{{ __("mail.condolence_order_received.intro", ['number' => $condolence->number]) }}
+{{ __("mail.condolence_order_created.intro", ['number' => $condolence->number]) }}
 
 
-### {{ __("mail.condolence_order_received.order_info") }}
+### {{ __("mail.condolence_order_created.order_info") }}
 <x-mail::table>
 <table class="data_table">
 <tbody>
@@ -14,13 +14,13 @@
 </tr>
 <tr>
 <td class="text-bold">{{ __('models/condolence.message') }}</td>
-<td class="text-right">{!! $condolence->message !!}</td>
+<td class="text-center">{!! $condolence->message !!}</td>
 </tr>
 <tr>
 <td class="text-bold">{{ __('models/condolence.package_addon') }}</td>
 <td class="text-right">
 @foreach($condolence->addons as $addon)
-<p>{{ $addon }}</p>
+{{ $addon }}<br>
 @endforeach
 </td>
 </tr>
@@ -28,7 +28,7 @@
 </table>
 </x-mail::table>
 
-### {{ __("mail.condolence_order_received.recipient_data") }}
+### {{ __("mail.condolence_order_created.recipient_data") }}
 <x-mail::table>
 <table class="data_table">
 <tbody>
@@ -44,7 +44,7 @@
 </table>
 </x-mail::table>
 
-### {{ __("mail.condolence_order_received.sender_data") }}
+### {{ __("mail.condolence_order_created.sender_data") }}
 <x-mail::table>
 <table class="data_table">
 <tbody>
@@ -72,7 +72,7 @@
 </table>
 </x-mail::table>
 
-{{ __("mail.condolence_order_received.outro") }}
+{{ __("mail.condolence_order_created.outro") }}
 
 {{ __('mail.kind_regards') }}
 

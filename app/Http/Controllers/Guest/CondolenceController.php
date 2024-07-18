@@ -47,7 +47,7 @@ class CondolenceController extends Controller
 
         try {
             $condolence->save();
-            return redirect()->back()->with('alert', ['class' => 'success', 'message' => 'Uspješno ste poslali narudžbu za paket sućuti. \n Javit ćemo Vam se u najkraćem mogućem roku.']);
+            return redirect()->back()->with('alert', ['class' => 'success', 'message' => 'Uspješno ste poslali narudžbu za paket sućuti. Javit ćemo Vam se u najkraćem mogućem roku.']);
         } catch (\Exception $e) {
             return redirect()->back()->with('alert', ['class' => 'danger', 'message' => __('common.something_went_wrong')]);
         }
