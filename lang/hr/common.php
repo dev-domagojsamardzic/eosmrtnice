@@ -69,5 +69,6 @@ return [
     'send_order' => 'Pošalji narudžbu',
     'not_paid' => 'Nije plaćeno',
     'mark_paid' => 'Označi kao plaćeno',
-    'mark_unpaid' => 'Označi kao neplaćeno'
+    'mark_unpaid' => 'Označi kao neplaćeno',
+    'none' => 'Nema',
 ];

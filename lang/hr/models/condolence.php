@@ -19,7 +19,8 @@ return [
     'recipient_address' => 'Adresa primatelja',
     'recipient_address_info' => 'Ovdje unesite punu adresu primatelja, zajedno s mjestom stanovanja i poštanskim brojem',
     'recipient_address_placeholder' => 'npr: Istarska ulica 53, 10000 Zagreb',
-    'sender_data' => 'Vaši podatci',
+    'sender_data' => 'Podatci o pošiljatelju',
+    'your_data' => 'Vaši podatci',
     'sender_data_info' => 'Još nam trebaju Vaši podatci kako bismo zaključili narudžbu',
     'sender_full_name' => 'Vaše ime i prezime',
     'sender_full_name_info' => 'Ovdje unesite Vaše puno ime i prezime',
@@ -37,4 +38,6 @@ return [
     'sender_additional_info_info' => 'U slučaju potrebe R1/Eračuna molimo vas da upišete naziv pravnog subjekta i OIB.',
     'sender_additional_info_placeholder' => 'npr: Obrt za usluge X, 19928377457',
     'paid_at' => 'Plaćeno',
+    'sender_email_not_set' => 'Pošiljateljeva email adresa nije postavljena.',
+    'condolence' => 'Narudžba sućuti',
 ];
