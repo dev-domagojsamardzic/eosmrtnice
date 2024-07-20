@@ -175,7 +175,6 @@ class AdsOfferController extends Controller
             $ads_offer->ad()->associate($request->input('ad_id'));
         }
 
-        // TODO: SOLVE OFFER_NUMBER GENERATING
         $ads_offer->quantity = (int)$request->input('quantity');
         $ads_offer->price = (float)$request->input('price');
 
