@@ -5,6 +5,7 @@ namespace App\Providers;
 use App\Models\Ad;
 use App\Models\AdsOffer;
 use App\Models\Company;
+use App\Models\CondolencesOffer;
 use App\Models\Member;
 use App\Models\Partner;
 use App\Models\Post;
@@ -13,6 +14,7 @@ use App\Models\User;
 use App\Policies\AdPolicy;
 use App\Policies\AdsOfferPolicy;
 use App\Policies\CompanyPolicy;
+use App\Policies\CondolencesOfferPolicy;
 use App\Policies\MemberPolicy;
 use App\Policies\PartnerPolicy;
 use App\Policies\PostsOfferPolicy;
@@ -33,6 +35,7 @@ class AuthServiceProvider extends ServiceProvider
         Ad::class => AdPolicy::class,
         AdsOffer::class => AdsOfferPolicy::class,
         PostsOffer::class => PostsOfferPolicy::class,
+        CondolencesOffer::class => CondolencesOfferPolicy::class,
     ];
 
     /**
