@@ -51,4 +51,6 @@ Route::resource('ads-offers', AdsOfferController::class)->except('create')->name
 
 /* Condolences offers */
 Route::get('condolences-offers/{condolence}/create', [CondolencesOfferController::class, 'create'])->name('condolences-offers.create');
+Route::get('condolences-offers/{condolence}/send', [CondolencesOfferController::class, 'send'])->name('condolences-offers.send');
+Route::get('condolences-offers/{condolence}/download', [CondolencesOfferController::class, 'download'])->name('condolences-offers.download');
 Route::resource('condolences-offers', CondolencesOfferController::class)->except('create')->names('condolences-offers');
