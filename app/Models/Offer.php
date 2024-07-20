@@ -99,6 +99,15 @@ class Offer extends Model
     }
 
     /**
+     * Return condolence related to offer
+     * @return BelongsTo
+     */
+    public function condolence(): BelongsTo
+    {
+        return $this->belongsTo(Condolence::class);
+    }
+
+    /**
      * Scope a query to only include valid offers
      */
     public function scopeValid(Builder $query): void
