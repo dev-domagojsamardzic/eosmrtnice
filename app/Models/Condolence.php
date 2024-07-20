@@ -6,7 +6,9 @@ use App\Enums\CondolenceMotive;
 use App\Enums\CondolencePackageAddon;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Casts\Attribute;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
@@ -21,13 +23,15 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property            string          sender_address
  * @property            string          sender_additional_info
  * @property            array           package_addon
- * @property            array           addons
- * @property            string          number
  * @property            Carbon          paid_at
  * @property            Carbon          created_at
  * @property            Carbon          updated_at
  * @property            Carbon          deleted_at
- *
+ * -------------------------------------------------------------
+ * @property            array           addons
+ * @property            string          number
+ * -------------------------------------------------------------
+ * @property            Collection<Offer>           offers
  */
 class Condolence extends Model
 {
@@ -43,6 +47,16 @@ class Condolence extends Model
         'motive' => CondolenceMotive::CROSS,
         'paid_at' => null,
     ];
+
+    /**
+     * Get the ad's offer
+     *
+     * @return HasMany
+     */
+    public function offers(): HasMany
+    {
+        return $this->hasMany(CondolencesOffer::class, 'condolence_id', 'id');
+    }
 
     /**
      * Casting attribute as array
