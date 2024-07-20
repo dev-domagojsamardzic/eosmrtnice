@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use App\Models\Ad;
 use App\Models\AdsOffer;
+use App\Models\CondolencesOffer;
 use App\Models\PostsOffer;
 use App\Observers\AdObserver;
 use App\Observers\OfferObserver;
@@ -32,5 +33,6 @@ class EventServiceProvider extends ServiceProvider
         Ad::observe(AdObserver::class);
         AdsOffer::observe(OfferObserver::class);
         PostsOffer::observe(OfferObserver::class);
+        CondolencesOffer::observe(OfferObserver::class);
     }
 }
