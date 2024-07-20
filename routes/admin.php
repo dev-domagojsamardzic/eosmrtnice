@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\CondolencesOfferController;
 use App\Http\Controllers\Guest\CondolenceController;
 use App\Http\Controllers\Partner\AdController;
 use App\Http\Controllers\Admin\AdsOfferController;
@@ -47,3 +48,7 @@ Route::get('ads-offers/{ad}/create', [AdsOfferController::class, 'create'])->nam
 Route::get('ads-offers/{ads_offer}/send', [AdsOfferController::class, 'send'])->name('ads-offers.send');
 Route::get('ads-offers/{ads_offer}/download', [AdsOfferController::class, 'download'])->name('ads-offers.download');
 Route::resource('ads-offers', AdsOfferController::class)->except('create')->names('ads-offers');
+
+/* Condolences offers */
+Route::get('condolences-offers/{condolence}/create', [CondolencesOfferController::class, 'create'])->name('condolences-offers.create');
+Route::resource('condolences-offers', CondolencesOfferController::class)->except('create')->names('condolences-offers');
