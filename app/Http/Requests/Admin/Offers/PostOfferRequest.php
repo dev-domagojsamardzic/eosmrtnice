@@ -7,8 +7,7 @@ use Illuminate\Foundation\Http\FormRequest;
 
 /**
  * @property            int             user_id
- * @property            string          offerable_type
- * @property            int             offerable_id
+ * @property            int             post_id
  * @property            string          valid_from
  * @property            string          valid_until
  * @property            int             quantity
