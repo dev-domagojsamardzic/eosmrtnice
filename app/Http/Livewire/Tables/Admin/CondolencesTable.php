@@ -121,12 +121,12 @@ class CondolencesTable extends Component implements HasForms, HasTable
     {
         return [
             ActionGroup::make([
-                /*Action::make('create_offer')
+                Action::make('create_offer')
                     ->label(__('models/offer.create'))
-                    ->visible(true)
+                    ->visible(fn(Condolence $c) => !$c->offers()->valid()->exists())
                     ->icon('heroicon-s-plus')
                     ->color('black')
-                    ->url(fn(Condolence $c): string => route('admin.condolences-offers.create', ['condolence' => $c->id])),*/
+                    ->url(fn(Condolence $c): string => route('admin.condolences-offers.create', ['condolence' => $c->id])),
                 Action::make('edit')
                     ->label(__('common.edit'))
                     ->icon('heroicon-s-pencil-square')
