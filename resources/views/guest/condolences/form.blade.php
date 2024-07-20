@@ -102,7 +102,7 @@
         </div>
 
         {{-- SENDER DATA --}}
-        <h3 class="mt-5">{{ __('models/condolence.sender_data') }}</h3>
+        <h3 class="mt-5">{{ __('models/condolence.your_data') }}</h3>
         <p>{{ __('models/condolence.sender_data_info') }}</p>
         <hr class="hr_gray_500 w-75">
 
