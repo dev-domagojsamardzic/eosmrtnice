@@ -59,4 +59,5 @@ return [
     'ads-offers' => 'Ponude za oglase',
     'posts-offers' => 'Ponude za objave',
     'delete_offer' => 'Obriši ponudu',
+    'condolences-offers' => 'Ponude za narudžbe sućuti',
 ];
