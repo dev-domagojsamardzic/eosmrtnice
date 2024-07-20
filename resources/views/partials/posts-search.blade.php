@@ -20,7 +20,7 @@
                        id="date"
                        type="text"
                        value="{{ $date ?? '' }}"
-                       class="form-control">
+                       class="form-control datepicker" autocomplete="off">
                 <span class="input-group-text">
                     <i class="fas fa-calendar-alt"></i>
                 </span>

@@ -132,7 +132,8 @@
             <script type="module">
                 $('#valid_from,#valid_until').datepicker({
                     dateFormat: "dd.mm.yy.",
-                    minDate: new Date()
+                    minDate: new Date(),
+                    language: "hr",
                 });
 
 
