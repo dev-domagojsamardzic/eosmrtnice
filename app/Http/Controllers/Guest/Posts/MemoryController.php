@@ -15,11 +15,13 @@ class MemoryController extends PostController
     public function index(): View
     {
         $latestDates = $this->getLatestDates(3);
+        $loadMoreItemsRoute = route('guest.memories.items');
 
         if (count($latestDates) === 0) {
             return view('guest.posts',[
                 'posts' => collect([]),
                 'nextDateToLoad' => null,
+                'loadMoreItemsRoute' => $loadMoreItemsRoute,
             ]);
         }
 
@@ -35,7 +37,7 @@ class MemoryController extends PostController
             'pageTitle' => __('guest.memories'),
             'posts' => $posts,
             'nextDateToLoad' => $nextDateToLoad,
-            'loadMoreItemsRoute' => route('guest.memories.items'),
+            'loadMoreItemsRoute' => $loadMoreItemsRoute,
         ]);
     }
 

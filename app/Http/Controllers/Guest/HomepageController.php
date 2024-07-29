@@ -17,10 +17,13 @@ class HomepageController extends PostController
         // Use third latest date (if exists) for loadMoreBtn
         $latestDates = $this->getLatestDates(3);
 
+        $loadMoreItemsRoute = route('homepage.items');
+
         if (count($latestDates) === 0) {
             return view('guest.posts',[
                 'posts' => collect([]),
                 'nextDateToLoad' => null,
+                'loadMoreItemsRoute' => $loadMoreItemsRoute,
             ]);
         }
 
@@ -36,7 +39,7 @@ class HomepageController extends PostController
         return view('guest.posts',[
             'posts' => $posts,
             'nextDateToLoad' => $nextDateToLoad,
-            'loadMoreItemsRoute' => route('homepage.items'),
+            'loadMoreItemsRoute' => $loadMoreItemsRoute,
         ]);
     }
 }

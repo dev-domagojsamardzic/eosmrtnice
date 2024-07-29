@@ -15,11 +15,13 @@ class ThankYouController extends PostController
     public function index(): View
     {
         $latestDates = $this->getLatestDates(3);
+        $loadMoreItemsRoute = route('guest.thank-yous.items');
 
         if (count($latestDates) === 0) {
             return view('guest.posts',[
                 'posts' => collect([]),
                 'nextDateToLoad' => null,
+                'loadMoreItemsRoute' => $loadMoreItemsRoute,
             ]);
         }
 
@@ -35,7 +37,7 @@ class ThankYouController extends PostController
             'pageTitle' => __('guest.thank_yous'),
             'posts' => $posts,
             'nextDateToLoad' => $nextDateToLoad,
-            'loadMoreItemsRoute' => route('guest.thank-yous.items'),
+            'loadMoreItemsRoute' => $loadMoreItemsRoute,
         ]);
     }
 

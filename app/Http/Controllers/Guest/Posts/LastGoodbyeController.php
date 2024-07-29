@@ -15,11 +15,13 @@ class LastGoodbyeController extends PostController
     public function index(): View
     {
         $latestDates = $this->getLatestDates(3);
+        $loadMoreItemsRoute = route('guest.last-goodbyes.items');
 
         if (count($latestDates) === 0) {
             return view('guest.posts',[
                 'posts' => collect([]),
                 'nextDateToLoad' => null,
+                'loadMoreItemsRoute' => $loadMoreItemsRoute,
             ]);
         }
 
@@ -35,7 +37,7 @@ class LastGoodbyeController extends PostController
             'pageTitle' => __('guest.last_goodbyes'),
             'posts' => $posts,
             'nextDateToLoad' => $nextDateToLoad,
-            'loadMoreItemsRoute' => route('guest.last-goodbyes.items'),
+            'loadMoreItemsRoute' => $loadMoreItemsRoute,
         ]);
     }
 
