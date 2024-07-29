@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Enums\AdType;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -34,6 +35,8 @@ use Illuminate\Support\Carbon;
  * --------------------------------------------------------
  * @property            Company                 company
  * @property            Offer                   offers
+ * --------------------------------------------------------
+ * @method                                      forDisplay
  */
 class Ad extends Model
 {
@@ -109,5 +112,16 @@ class Ad extends Model
     public function offers(): HasMany
     {
         return $this->hasMany(AdsOffer::class, 'ad_id', 'id');
+    }
+
+    /**
+     * Scope a query to only include posts that can be displayed
+     */
+    public function scopeForDisplay(Builder $query): void
+    {
+        $query->where('active', 1)
+            ->where('approved', 1)
+            ->where('valid_from', '<=', now()->toDateString())
+            ->where('valid_until', '>=', now()->toDateString());
     }
 }
