@@ -39,6 +39,11 @@ and execute the following command:
 
 7. Your application is available at http://127.0.0.1
 
+Additional info:
+
+- IMPORTANT! Setup your email client (Mailhog, mailtrap, some other)
+- Install and setup supervisor (https://arjunamrutiya.medium.com/setting-up-laravel-supervisor-on-linux-a-step-by-step-guide-697aced570e5)
+
 
 
 
