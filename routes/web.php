@@ -62,7 +62,7 @@ Route::middleware('guest')->group(function () {
     Route::get('registracija', [RegisteredUserController::class, 'create'])
         ->name('register');
     Route::post('registracija', [RegisteredUserController::class, 'store'])
-        ->name('register');
+        ->name('register.store');
 
     // partner register
     Route::get('partner/registracija', [PartnerRegisteredUserController::class, 'create'])

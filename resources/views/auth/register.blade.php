@@ -16,7 +16,7 @@
                             <div class="text-left">
                                 <h2 class="text-gray-900 mb-4">{{ __('auth.register') }}</h2>
                             </div>
-                            <form method="POST" action="{{ route('register') }}">
+                            <form method="POST" action="{{ route('register.store') }}">
                                 @csrf
                                 <div class="form-group row">
                                     <div class="col-sm-6 mb-3 mb-sm-0">
