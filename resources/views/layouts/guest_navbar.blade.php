@@ -16,9 +16,12 @@
                 </div>
 
                 <!--class="float-right"-->
-                <div>
-                    <a class="btn btn-primary btn-user btn-block text-white" role="button" href="{{ route(auth_user_type().'.posts.create') }}">
+                <div class="d-flex flex-row gap-2">
+                    <a class="btn btn-primary btn-user text-white" role="button" href="@if(auth_user_type() === 'admin'){{ route('admin.posts.create') }}@else{{ route('user.posts.create') }}@endif">
                         {{ __('guest.submit_post') }}
+                    </a>
+                    <a class="btn btn-primary btn-user text-white" href="{{ route('guest.condolences.create') }}">
+                        {{ __('common.send_condolence') }}
                     </a>
                 </div>
             </div>
@@ -46,8 +49,11 @@
         <div class="navbar-collapse offcanvas-collapse">
             <nav class="site-navigation" role="navigation">
 
-                <a class="btn btn-secondary btn-user text-black ml-3" role="button" href="{{ route(auth_user_type().'.posts.create') }}">
+                <a class="btn btn-secondary btn-user text-black ml-3" role="button" href="@if(auth_user_type() === 'admin'){{ route('admin.posts.create') }}@else{{ route('user.posts.create') }}@endif">
                     {{ __('guest.submit_post') }}
+                </a>
+                <a class="btn btn-secondary btn-user text-black ml-3" role="button" href="{{ route('guest.condolences.create') }}">
+                    {{ __('common.send_condolence') }}
                 </a>
                 <div class="px-3">
                     <hr class="bg-white" style="opacity: .3">
