@@ -10,7 +10,11 @@ if (!function_exists('auth_user_type')) {
      */
     function auth_user_type(): string
     {
-        return auth()?->user()?->type?->value === 'member' ? 'user' : auth()?->user()?->type?->value;
+        if(!auth()->check()) {
+            return 'guest';
+        }
+
+        return auth()->user()->type?->value === 'member' ? 'user' : auth()?->user()?->type?->value;
     }
 }
 
