@@ -17,7 +17,7 @@
 
                 <!--class="float-right"-->
                 <div>
-                    <a class="btn btn-primary btn-user btn-block text-white" role="button" href="{{ route('user.posts.create') }}">
+                    <a class="btn btn-primary btn-user btn-block text-white" role="button" href="{{ route(auth_user_type().'.posts.create') }}">
                         {{ __('guest.submit_post') }}
                     </a>
                 </div>
@@ -46,7 +46,7 @@
         <div class="navbar-collapse offcanvas-collapse">
             <nav class="site-navigation" role="navigation">
 
-                <a class="btn btn-secondary btn-user text-black ml-3" role="button" href="{{ route('user.posts.create') }}">
+                <a class="btn btn-secondary btn-user text-black ml-3" role="button" href="{{ route(auth_user_type().'.posts.create') }}">
                     {{ __('guest.submit_post') }}
                 </a>
                 <div class="px-3">
