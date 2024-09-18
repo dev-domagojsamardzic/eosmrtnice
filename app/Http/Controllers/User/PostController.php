@@ -93,6 +93,7 @@ class PostController extends Controller
         $postSymbols = PostSymbol::options();
 
         $me = admin();
+        $me->data = "$me->last_name $me->first_name ($me->email)";
 
         $postOwners = Member::query()
             ->where('active', true)
@@ -103,9 +104,8 @@ class PostController extends Controller
             ->each(function($item) {
                 return $item->data = "$item->last_name $item->first_name ($item->email)";
             })
+            ->prepend($me)
             ->pluck('data', 'id')->toArray();
-
-        $postOwners = [...[$me->id => "$me->last_name $me->first_name ($me->email)"], ...$postOwners];
 
         return view('user.posts.form', [
             'post' => $post,
