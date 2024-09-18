@@ -23,6 +23,7 @@ return [
     'issue_time' => 'Vrijeme izdavanja',
     'pdv' => 'PDV',
     'pdv_basis' => 'Osnovica za PDV',
+    'pdv_amount' => 'Iznos PDV-a',
     'messages' => [
         'offer_sent' => 'Ponuda je poslana.',
         'offer_for_ad_exists' => 'Aktivna ponuda za ovaj oglas već postoji.',
