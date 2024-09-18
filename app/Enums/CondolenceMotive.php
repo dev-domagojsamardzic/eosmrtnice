@@ -2,37 +2,31 @@
 
 namespace App\Enums;
 
-enum CondolenceMotive: int
+enum CondolenceMotive: string
 {
-    case CROSS = 1;
+    case FS811083NOV = 'FS 81-1083_NOV';
 
-    case WHITE_ROSE = 2;
+    case FS811148NOV = 'FS 81-11148_NOV';
 
-    case RED_ROSE = 3;
+    case FS811150NOV = 'FS 81-1150_NOV';
 
-    case WHITE_DOVE = 4;
+    case FS811065NOV = 'FS 81-1065_NOV';
 
-    case ANGEL = 5;
+    case FS811331 = 'FS 81-1331';
 
-    case CANDLES = 6;
+    case FS811335 = 'FS 81-1335';
+
+    case FS811337 = 'FS 81-1337';
+
+    case FS811343 = 'FS 81-1343';
 
     public static function options(): array
     {
         $options = [];
 
         foreach (self::cases() as $case) {
-            $options[$case->value] = trans('enums.' . strtolower($case->name));
+            $options[strtolower($case->name)] = $case->value;
         }
         return $options;
-    }
-
-    /**
-     * Translate resource
-     * @param string $locale
-     * @return string
-     */
-    public function translate(string $locale = 'hr'): string
-    {
-        return __('enums.' . strtolower($this->name), locale: $locale);
     }
 }

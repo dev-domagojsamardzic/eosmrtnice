@@ -35,13 +35,6 @@ return [
     'moon_star' => 'Mjesec i zvijezda',
     'olive_branch' => 'Maslinova grančica',
     'star_of_david' => 'Davidova zvijezda',
-    // App\Models\CondolenceMotive
-    //'cross' => 'Križ',
-    'white_rose' => 'Bijele ruže',
-    'red_rose' => 'Crvene ruže',
-    'white_dove' => 'Bijela golubica',
-    'angel' => 'Anđeo',
-    'candles' => 'Svijeće',
     // App\Models\CondolencePackageAddon
     'lanterns_6' => 'Lampioni (6 kom)',
     'lanterns_5' => 'Lampioni (5 kom)',

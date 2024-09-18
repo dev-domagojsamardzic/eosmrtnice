@@ -77,7 +77,7 @@ class CondolencesTable extends Component implements HasForms, HasTable
                     Stack::make([
                         TextColumn::make('motive')
                             ->description(__('models/condolence.motive'))
-                            ->formatStateUsing(fn(Condolence $c) => $c->motive->translate()),
+                            ->formatStateUsing(fn(Condolence $c) => $c->motive),
                         TextColumn::make('package_addon')
                             ->description(__('models/condolence.package_addon'))
                             ->formatStateUsing(function(Condolence $c) {

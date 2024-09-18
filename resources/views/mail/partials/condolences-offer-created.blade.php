@@ -7,7 +7,7 @@
         <tbody>
             <tr>
                 <td class="text-bold">{{ __('models/condolence.motive') }}</td>
-                <td class="text-right">{{ $condolences_offer->condolence?->motive->translate() }}</td>
+                <td class="text-right">{{ $condolences_offer->condolence?->motive->value }}</td>
             </tr>
             <tr>
                 <td class="text-bold">{{ __('models/condolence.package_addon') }}</td>

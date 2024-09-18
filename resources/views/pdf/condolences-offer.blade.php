@@ -60,7 +60,7 @@
         <tbody>
         <tr>
             <td class="text-align-left">
-                {{ __('models/condolence.motive') . ': ' . $offer->condolence?->motive->translate() }}<br>
+                {{ __('models/condolence.motive') . ': ' . $offer->condolence?->motive->value }}<br>
                 {{ __('models/condolence.package_addon').':'  }}<br>
                 @if($offer->condolence?->package_addon)
                     <ul class="list-disc pl-4">

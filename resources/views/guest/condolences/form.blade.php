@@ -14,11 +14,11 @@
                 <p>{{ __('models/condolence.motive_info') }}</p>
                 <div class="img-select-component w-100 mt-4">
                     <div class="row">
-                        @foreach($motives as $key => $motive)
-                            <div class='col text-center'>
-                                <input type="radio" name="motive" id="motive{{$key}}" class="d-none imgbgchk" value="{{ $key }}" @checked((old('motive')) ? old('motive') == $key : $loop->iteration === 1)>
+                        @foreach($motives as $key => $value)
+                            <div class='col-sm-12 col-md-3 col-lg-2 text-center'>
+                                <input type="radio" name="motive" id="motive{{$key}}" class="d-none imgbgchk" value="{{ $value }}" @checked((old('motive')) ? old('motive') == $value : $loop->iteration === 1)>
                                 <label for="motive{{$key}}">
-                                    <img src="{{ asset('images/motives/' . $key . '.jpg') }}" alt="{{ $motive }}">
+                                    <img src="{{ asset('images/motives/' . $key . '.jpg') }}" alt="{{ $value }}">
                                     <div class="tick_container">
                                         <div class="tick"><i class="fa fa-check"></i></div>
                                     </div>

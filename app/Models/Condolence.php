@@ -44,7 +44,7 @@ class Condolence extends Model
     ];
 
     protected $attributes = [
-        'motive' => CondolenceMotive::CROSS,
+        'motive' => CondolenceMotive::FS811065NOV,
         'paid_at' => null,
     ];
 

@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('condolences', static function (Blueprint $table) {
             $table->id();
 
-            $table->unsignedInteger('motive');
+            $table->string('motive');
             $table->string('message', 2048)->nullable(false);
 
             $table->string('recipient_full_name', 256)->nullable(false);

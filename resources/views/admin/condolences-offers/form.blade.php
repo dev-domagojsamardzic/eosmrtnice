@@ -63,7 +63,7 @@
             <div class="row">
                 <div class="col-lg-8 col-sm-12 d-flex align-items-start justify-content-end flex-column">
                     <span class="font-weight-bold">{{ __('models/condolence.motive') }}:</span>
-                    <span>{{ $condolence->motive->translate() }}</span>
+                    <span>{{ $condolence->motive }}</span>
                     @if($condolence->package_addon)
                         <span class="font-weight-bold">{{ __('models/condolence.package_addon') }}</span>
                         <ul class="list-disc pl-4">

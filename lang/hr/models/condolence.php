@@ -4,7 +4,7 @@ return [
     'send_condolence' => 'Pošaljite sućut obitelji pokojnika',
     'condolences_intro' => 'Pošaljite izraz sućuti brzo i jednostavno koristeći ovaj obracac.',
     'condolences_contact' => 'Za sve upite, ili za telefonsko naručivanje sućuti, nazovite nas na',
-    'motive' => 'Prigodan motiv',
+    'motive' => 'Motiv sućutnice',
     'motive_info' => 'Odaberite jedan od motiva koji želite priložiti uz izraz sućuti',
     'message' => 'Poruka',
     'message_info' => 'Ovdje napišite svoju poruku i dodajte svoj potpis.',

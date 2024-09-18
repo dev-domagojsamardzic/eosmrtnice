@@ -10,7 +10,7 @@
 <tbody>
 <tr>
 <td class="text-bold">{{ __('models/condolence.motive') }}</td>
-<td class="text-right">{{ $condolence->motive->translate() }}</td>
+<td class="text-right">{{ $condolence->motive->value }}</td>
 </tr>
 <tr>
 <td class="text-bold">{{ __('models/condolence.message') }}</td>
