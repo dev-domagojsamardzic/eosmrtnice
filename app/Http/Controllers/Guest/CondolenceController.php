@@ -29,7 +29,7 @@ class CondolenceController extends Controller
      */
     public function create(): View
     {
-        $addons = CondolencePackageAddon::options();
+        $addons = config('eosmrtnice.products.condolences_addons');
         $motives = CondolenceMotive::options();
 
         return view('guest/condolences.form', [

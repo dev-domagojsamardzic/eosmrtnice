@@ -15,7 +15,7 @@
                 <div class="img-select-component w-100 mt-4">
                     <div class="row">
                         @foreach($motives as $key => $value)
-                            <div class='col-sm-12 col-md-3 col-lg-2 text-center'>
+                            <div class="col-sm-12 col-md-3 col-lg-3 text-center">
                                 <input type="radio" name="motive" id="motive{{$key}}" class="d-none imgbgchk" value="{{ $value }}" @checked((old('motive')) ? old('motive') == $value : $loop->iteration === 1)>
                                 <label for="motive{{$key}}">
                                     <img src="{{ asset('images/motives/' . $key . '.jpg') }}" alt="{{ $value }}">
@@ -23,6 +23,7 @@
                                         <div class="tick"><i class="fa fa-check"></i></div>
                                     </div>
                                 </label>
+                                <p><b>{{ $value }}</b></p>
                             </div>
                         @endforeach
                     </div>
@@ -45,11 +46,11 @@
             <div class="col-12">
                 <h6>{{ __('models/condolence.package_addon') }}</h6>
                 <p>{{ __('models/condolence.package_addon_info') }}</p>
-                @foreach($addons as $key => $addon)
+                @foreach($addons as $addon)
                     <div class="form-check mt-3">
-                        <input class="form-check-input" name="package_addon[]" type="checkbox" value="{{ $key }}" id="packageAddon{{ $key }}" @checked(in_array($key, old('package_addon', [])))>
-                        <label class="form-check-label label-lg ml-2 mt-0.5" for="packageAddon{{ $key }}">
-                            {{ $addon }}
+                        <input class="form-check-input" data-price="{{ $addon['price'] }}" name="package_addon[]" type="checkbox" value="{{ $addon['id'] }}" id="packageAddon{{ $addon['id'] }}" @checked(in_array($addon['id'], old('package_addon', [])))>
+                        <label class="form-check-label label-lg ml-2 mt-0.5" for="packageAddon{{ $addon['id'] }}">
+                            {{ __('enums.'.$addon['name']) }} - <strong>{{ $addon['price'] . config('app.currency_symbol') }}</strong>
                         </label>
                     </div>
                 @endforeach

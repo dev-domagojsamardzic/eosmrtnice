@@ -61,4 +61,23 @@ return [
      * -------------------------------------------------*
      */
     'post_duration_days' => config('EOS_POST_DURATION_DAYS', 730),
+
+
+    /**
+     * *------------------------------------------------*
+     *  * ----- List of products that have prices -----*
+     * * -----------------------------------------------*
+ */
+    'products' => [
+        'condolences_addons' => [
+            ['id' => 1, 'name' => 'lanterns_3', 'price' => 12.00],
+            ['id' => 2, 'name' => 'lanterns_5', 'price' => 18.00],
+            ['id' => 3, 'name' => 'lanterns_6', 'price' => 21.00],
+            ['id' => 4, 'name' => 'lanterns_7', 'price' => 24.00],
+            ['id' => 5, 'name' => 'lanterns_10', 'price' => 32.00],
+            ['id' => 6, 'name' => 'angel_statue', 'price' => 5.00],
+            ['id' => 7, 'name' => 'red_roses', 'price' => 6.00],
+            ['id' => 8, 'name' => 'white_roses', 'price' => 6.00],
+        ],
+    ],
 ];
