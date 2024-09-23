@@ -56,10 +56,12 @@ return [
     'delete_company' => 'Obriši tvrtku',
     'delete_ad' => 'Obriši oglas',
     'delete_ad_description' => 'Napomena! Brisanjem oglasa brišete i ponudu za taj oglas, ako ona postoji.',
-    'delete_condolence_addon' => 'Obriši dodatak na izraz sućuti.',
+    'delete_condolence_addon' => 'Obriši dodatak na izraz sućuti',
+    'delete_ad_type' => 'Obriši vrstu oglasa',
     'ads-offers' => 'Ponude za oglase',
     'posts-offers' => 'Ponude za objave',
     'delete_offer' => 'Obriši ponudu',
     'condolences-offers' => 'Ponude za narudžbe sućuti',
     'condolence_addons' => 'Dodatci za narudžbe sućuti',
+    'ad_types' => 'Vrste oglasa',
 ];

@@ -51,6 +51,12 @@
             <i class="fas fa-puzzle-piece"></i>
             <span>{{ __('sidebar.condolence_addons') }}</span></a>
     </li>
+    <!-- Ads types-->
+    <li class="nav-item">
+        <a class="nav-link" href="{{ route(auth_user_type() . '.ad-types.index') }}">
+            <i class="fas fa-puzzle-piece"></i>
+            <span>{{ __('sidebar.ad_types') }}</span></a>
+    </li>
 
     <!-- Divider -->
     <hr class="sidebar-divider">

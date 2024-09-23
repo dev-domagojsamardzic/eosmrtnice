@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\AdTypeController;
 use App\Http\Controllers\Admin\CondolencesOfferController;
 use App\Http\Controllers\Guest\CondolenceAddonController;
 use App\Http\Controllers\Guest\CondolenceController;
@@ -39,6 +40,9 @@ Route::resource('condolences', CondolenceController::class)
     ->only(['index', 'edit', 'update']);
 
 Route::resource('condolence-addons', CondolenceAddonController::class)
+    ->except(['show']);
+
+Route::resource('ad-types', AdTypeController::class)
     ->except(['show']);
 
 /* Posts offers*/

@@ -79,5 +79,13 @@ return [
             ['title' => '2 crvene ruže s vrpcom', 'price' => 6.00],
             ['title' => '2 bijele ruže s vrpcom', 'price' => 6.00],
         ],
+        'ad_types' => [
+            ['title' => 'Standard (1 mjesec)', 'duration_months' => 1, 'price' => 10.00],
+            ['title' => 'Premium (1 mjesec)', 'duration_months' => 1, 'price' => 20.00],
+            ['title' => 'Gold (1 mjesec)', 'duration_months' => 1, 'price' => 25.00],
+            ['title' => 'Standard (12 mjeseci)', 'duration_months' => 12, 'price' => 96.00],
+            ['title' => 'Premium (12 mjeseci)', 'duration_months' => 12, 'price' => 192.00],
+            ['title' => 'Gold (12 mjeseci)', 'duration_months' => 12, 'price' => 240.00],
+        ],
     ],
 ];
