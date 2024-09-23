@@ -14,4 +14,5 @@ return [
     'posts_offers' => 'Ponude za objave',
     'condolences' => 'Narudžbe sućuti',
     'condolences_offers' => 'Ponude za narudžbe sućuti',
+    'condolence_addons' => 'Dodatci za narudžbe sućuti',
 ];

@@ -70,14 +70,14 @@ return [
  */
     'products' => [
         'condolences_addons' => [
-            ['id' => 1, 'name' => 'lanterns_3', 'price' => 12.00],
-            ['id' => 2, 'name' => 'lanterns_5', 'price' => 18.00],
-            ['id' => 3, 'name' => 'lanterns_6', 'price' => 21.00],
-            ['id' => 4, 'name' => 'lanterns_7', 'price' => 24.00],
-            ['id' => 5, 'name' => 'lanterns_10', 'price' => 32.00],
-            ['id' => 6, 'name' => 'angel_statue', 'price' => 5.00],
-            ['id' => 7, 'name' => 'red_roses', 'price' => 6.00],
-            ['id' => 8, 'name' => 'white_roses', 'price' => 6.00],
+            ['title' => 'Lampioni (3 kom)', 'price' => 12.00],
+            ['title' => 'Lampioni (5 kom)', 'price' => 18.00],
+            ['title' => 'Lampioni (6 kom)', 'price' => 21.00],
+            ['title' => 'Lampioni (7 kom)', 'price' => 24.00],
+            ['title' => 'Lampioni (10 kom)', 'price' => 32.00],
+            ['title' => 'Kipić anđela', 'price' => 5.00],
+            ['title' => '2 crvene ruže s vrpcom', 'price' => 6.00],
+            ['title' => '2 bijele ruže s vrpcom', 'price' => 6.00],
         ],
     ],
 ];

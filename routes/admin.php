@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\CondolencesOfferController;
+use App\Http\Controllers\Guest\CondolenceAddonController;
 use App\Http\Controllers\Guest\CondolenceController;
 use App\Http\Controllers\Partner\AdController;
 use App\Http\Controllers\Admin\AdsOfferController;
@@ -36,6 +37,9 @@ Route::resource('posts', PostController::class);
 
 Route::resource('condolences', CondolenceController::class)
     ->only(['index', 'edit', 'update']);
+
+Route::resource('condolence-addons', CondolenceAddonController::class)
+    ->except(['show']);
 
 /* Posts offers*/
 Route::get('posts-offers/{post}/create', [PostOfferController::class, 'create'])->name('posts-offers.create');

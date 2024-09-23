@@ -21,11 +21,6 @@
     <!-- Divider -->
     <hr class="sidebar-divider">
 
-    <!-- Heading -->
-    {{--<div class="sidebar-heading">
-        {{ __('sidebar.management') }}
-    </div>--}}
-
     <!-- Nav Item - Partners -->
     <li class="nav-item">
         <a class="nav-link" href="{{ route(auth_user_type() . '.partners.index') }}">
@@ -45,6 +40,16 @@
         <a class="nav-link" href="{{ route(auth_user_type() . '.companies.index') }}">
             <i class="fas fa-building"></i>
             <span>{{ __('sidebar.companies') }}</span></a>
+    </li>
+
+    <!-- Divider -->
+    <hr class="sidebar-divider">
+
+    <!-- Condolence addons-->
+    <li class="nav-item">
+        <a class="nav-link" href="{{ route(auth_user_type() . '.condolence-addons.index') }}">
+            <i class="fas fa-puzzle-piece"></i>
+            <span>{{ __('sidebar.condolence_addons') }}</span></a>
     </li>
 
     <!-- Divider -->
