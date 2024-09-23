@@ -18,12 +18,16 @@ return new class extends Migration
             $table->string('message', 2048)->nullable(false);
 
             $table->string('recipient_full_name', 256)->nullable(false);
-            $table->string('recipient_address', 1024)->nullable(false);
+            $table->string('recipient_address', 512)->nullable(false);
+            $table->string('recipient_zipcode', 5)->nullable(false);
+            $table->string('recipient_town', 256)->nullable(false);
 
             $table->string('sender_full_name', 256)->nullable(false);
             $table->string('sender_email', 128)->nullable(false);
             $table->string('sender_phone', 64)->nullable(false);
-            $table->string('sender_address', 1024)->nullable(false);
+            $table->string('sender_address', 512)->nullable(false);
+            $table->string('sender_zipcode', 5)->nullable(false);
+            $table->string('sender_town', 256)->nullable(false);
             $table->string('sender_additional_info', 1024);
 
             $table->string('package_addon');

@@ -17,10 +17,14 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property            string          message
  * @property            string          recipient_full_name
  * @property            string          recipient_address
+ * @property            string          recipient_zipcode
+ * @property            string          recipient_town
  * @property            string          sender_full_name
  * @property            string          sender_email
  * @property            string          sender_phone
  * @property            string          sender_address
+ * @property            string          sender_zipcode
+ * @property            string          sender_town
  * @property            string          sender_additional_info
  * @property            array           package_addon
  * @property            Carbon          paid_at
