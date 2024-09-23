@@ -56,7 +56,8 @@ Route::post('zahvale', [ThankYouController::class, 'items'])->name('guest.thank-
 
 Route::get('posalji-sucut', [CondolenceController::class, 'create'])->name('guest.condolences.create');
 Route::post('posalji-sucut', [CondolenceController::class, 'store'])->name('guest.condolences.store');
-
+Route::get('posalji-sucut/hvala',[CondolenceController::class, 'thankyou'])
+    ->name('guest.condolences.thank-you');
 Route::middleware('guest')->group(function () {
     // user register
     Route::get('registracija', [RegisteredUserController::class, 'create'])

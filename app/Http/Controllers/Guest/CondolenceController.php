@@ -82,7 +82,7 @@ class CondolenceController extends Controller
 
         try {
             $condolence->save();
-            return redirect()->back()->with('alert', ['class' => 'success', 'message' => 'Uspješno ste poslali narudžbu za paket sućuti. Javit ćemo Vam se u najkraćem mogućem roku.']);
+            return redirect()->route('guest.condolences.thank-you');
         } catch (\Exception $e) {
             return redirect()->back()->with('alert', ['class' => 'danger', 'message' => __('common.something_went_wrong')]);
         }
@@ -113,5 +113,14 @@ class CondolenceController extends Controller
         } catch (\Exception $e) {
             return redirect()->route('admin.condolences.index')->with('alert', ['class' => 'danger', 'message' => __('common.something_went_wrong')]);
         }
+    }
+
+    /**
+     * Return thank you view
+     * @return View
+     */
+    public function thankyou(): View
+    {
+        return view('guest.condolences.thankyou');
     }
 }

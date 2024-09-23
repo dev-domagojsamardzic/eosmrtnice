@@ -71,4 +71,5 @@ return [
     'mark_paid' => 'Označi kao plaćeno',
     'mark_unpaid' => 'Označi kao neplaćeno',
     'none' => 'Nema',
+    'homepage' => 'Naslovnica',
 ];
