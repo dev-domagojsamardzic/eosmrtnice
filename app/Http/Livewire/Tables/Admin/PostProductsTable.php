@@ -2,8 +2,8 @@
 
 namespace App\Http\Livewire\Tables\Admin;
 
-use App\Http\Controllers\Admin\CondolenceAddonController;
-use App\Models\CondolenceAddon;
+use App\Http\Controllers\Admin\PostProductController;
+use App\Models\PostProduct;
 use Filament\Forms\Concerns\InteractsWithForms;
 use Filament\Forms\Contracts\HasForms;
 use Filament\Support\Enums\FontWeight;
@@ -21,7 +21,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Routing\Redirector;
 use Livewire\Component;
 
-class CondolenceAddonsTable extends Component implements HasForms, HasTable
+class PostProductsTable extends Component implements HasForms, HasTable
 {
     use InteractsWithForms;
     use InteractsWithTable;
@@ -46,24 +46,24 @@ class CondolenceAddonsTable extends Component implements HasForms, HasTable
 
     protected function getQuery(): Builder
     {
-        return CondolenceAddon::query()->orderBy('created_at');
+        return PostProduct::query()->orderBy('created_at');
     }
 
     protected function getColumns(): array
     {
         return [
             TextColumn::make('title')
-                ->label(__('models/condolence_addons.title'))
+                ->label(__('models/post_product.title'))
                 ->weight(FontWeight::Bold)
                 ->searchable(),
             TextColumn::make('price')
-                ->label(__('models/condolence_addons.price'))
-                ->formatStateUsing(function(CondolenceAddon $addon) {
-                    return $addon->price . config('app.currency_symbol');
+                ->label(__('models/post_product.price'))
+                ->formatStateUsing(function(PostProduct $product) {
+                    return $product->price . config('app.currency_symbol');
                 })
                 ->searchable(false),
             TextColumn::make('created_at')
-                ->label(__('models/condolence_addons.created_at'))
+                ->label(__('models/post_product.created_at'))
                 ->date('d.m.Y.'),
         ];
     }
@@ -74,13 +74,13 @@ class CondolenceAddonsTable extends Component implements HasForms, HasTable
             ActionGroup::make([
                 EditAction::make('edit')
                     ->label(__('common.edit'))
-                    ->url(fn (CondolenceAddon $addon): string => route(auth_user_type() . '.condolence-addons.edit', ['condolence_addon' => $addon])),
+                    ->url(fn (PostProduct $product): string => route(auth_user_type() . '.post-products.edit', ['post_product' => $product])),
                 DeleteAction::make('delete')
                     ->label(__('common.delete'))
                     ->requiresConfirmation()
-                    ->modalHeading(__('admin.delete_condolence_addon'))
+                    ->modalHeading(__('admin.delete_post_product'))
                     ->modalSubmitActionLabel(__('common.delete'))
-                    ->action(function(CondolenceAddon $addon) { (new CondolenceAddonController())->destroy($addon); })
+                    ->action(function(PostProduct $product) { (new PostProductController())->destroy($product); })
             ]),
         ];
     }
@@ -88,10 +88,10 @@ class CondolenceAddonsTable extends Component implements HasForms, HasTable
     protected function getHeaderActions(): array
     {
         return [
-            Action::make('create_condolence_addon')
-                ->label(__('models/condolence_addons.new_addon'))
+            Action::make('create_post_product')
+                ->label(__('models/post_product.new_post_product'))
                 ->icon('heroicon-m-plus')
-                ->action(fn (): RedirectResponse|Redirector => redirect()->route(auth_user_type() . '.condolence-addons.create'))
+                ->action(fn (): RedirectResponse|Redirector => redirect()->route(auth_user_type() . '.post-products.create'))
         ];
     }
 }

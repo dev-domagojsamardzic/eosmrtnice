@@ -87,5 +87,14 @@ return [
             ['title' => 'Premium (12 mjeseci)', 'duration_months' => 12, 'price' => 192.00],
             ['title' => 'Gold (12 mjeseci)', 'duration_months' => 12, 'price' => 240.00],
         ],
+        'post_products' => [
+            ['title' => 'Mali oglas (do 40 riječi)', 'price' => 8.00],
+            ['title' => 'Srednji oglas (do 80 riječi)', 'price' => 25.00],
+            ['title' => 'Veliki oglas (do 240 riječi)', 'price' => 80.00],
+            ['title' => 'Poseban okvir', 'price' => 5.00],
+            ['title' => 'Slika', 'price' => 5.00],
+            ['title' => 'Simbol', 'price' => 5.00],
+
+        ]
     ],
 ];

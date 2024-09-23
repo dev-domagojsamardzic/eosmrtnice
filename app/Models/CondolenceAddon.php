@@ -33,4 +33,8 @@ class CondolenceAddon extends Model
     protected $attributes = [
         'price' => 0.00,
     ];
+
+    protected $casts = [
+        'price' => 'decimal:2',
+    ];
 }

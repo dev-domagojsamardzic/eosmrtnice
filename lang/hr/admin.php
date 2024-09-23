@@ -61,7 +61,9 @@ return [
     'ads-offers' => 'Ponude za oglase',
     'posts-offers' => 'Ponude za objave',
     'delete_offer' => 'Obriši ponudu',
+    'delete_post_product' => 'Obriši dio objave',
     'condolences-offers' => 'Ponude za narudžbe sućuti',
     'condolence_addons' => 'Dodatci za narudžbe sućuti',
     'ad_types' => 'Vrste oglasa',
+    'post_products' => 'Dijelovi objave',
 ];

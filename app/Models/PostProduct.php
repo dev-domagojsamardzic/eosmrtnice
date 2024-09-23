@@ -9,13 +9,12 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 /**
  * @property        int             id
  * @property        string          title
- * @property        int             duration_months
  * @property        float           price
  * @property        Carbon          created_at
  * @property        Carbon          updated_at
  * @property        Carbon          deleted_at
  */
-class AdType extends Model
+class PostProduct extends Model
 {
     use SoftDeletes;
 
@@ -33,7 +32,6 @@ class AdType extends Model
      */
     protected $attributes = [
         'price' => 0.00,
-        'duration_months' => 1,
     ];
 
     protected $casts = [

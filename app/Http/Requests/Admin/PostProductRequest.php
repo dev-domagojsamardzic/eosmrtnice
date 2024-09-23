@@ -5,7 +5,7 @@ namespace App\Http\Requests\Admin;
 use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
 
-class AdTypeRequest extends FormRequest
+class PostProductRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,7 +24,6 @@ class AdTypeRequest extends FormRequest
     {
         return [
             'title' => ['required', 'string', 'max:255'],
-            'duration_months' => ['required', 'integer', 'min:1'],
             'price' => ['required', 'numeric', 'min:0'],
         ];
     }

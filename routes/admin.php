@@ -1,15 +1,16 @@
 <?php
 
-use App\Http\Controllers\Admin\AdTypeController;
-use App\Http\Controllers\Admin\CondolencesOfferController;
-use App\Http\Controllers\Guest\CondolenceAddonController;
-use App\Http\Controllers\Guest\CondolenceController;
-use App\Http\Controllers\Partner\AdController;
 use App\Http\Controllers\Admin\AdsOfferController;
-use App\Http\Controllers\Partner\CompanyController;
+use App\Http\Controllers\Admin\AdTypeController;
+use App\Http\Controllers\Admin\CondolenceAddonController;
+use App\Http\Controllers\Admin\CondolencesOfferController;
 use App\Http\Controllers\Admin\MemberController;
 use App\Http\Controllers\Admin\PartnerController;
 use App\Http\Controllers\Admin\PostOfferController;
+use App\Http\Controllers\Admin\PostProductController;
+use App\Http\Controllers\Guest\CondolenceController;
+use App\Http\Controllers\Partner\AdController;
+use App\Http\Controllers\Partner\CompanyController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\User\PostController;
 use Illuminate\Support\Facades\Route;
@@ -43,6 +44,9 @@ Route::resource('condolence-addons', CondolenceAddonController::class)
     ->except(['show']);
 
 Route::resource('ad-types', AdTypeController::class)
+    ->except(['show']);
+
+Route::resource('post-products', PostProductController::class)
     ->except(['show']);
 
 /* Posts offers*/
