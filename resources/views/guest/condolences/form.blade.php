@@ -12,6 +12,7 @@
             <div class="col-12">
                 <h6>{{ __('models/condolence.motive') }}</h6>
                 <p>{{ __('models/condolence.motive_info') }}</p>
+                <p>{!! __('models/condolence.motive_price_info') !!}</p>
                 <div class="img-select-component w-100 mt-4">
                     <div class="row">
                         @foreach($motives as $key => $value)
