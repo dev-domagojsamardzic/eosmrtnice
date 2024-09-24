@@ -45,14 +45,29 @@
                         <div class="tab-content">
                             <div class="tab-pane fade py-3 {{ (int)old('type', $ad->type->value) === (int)\App\Enums\AdType::STANDARD->value ? 'show active' : '' }}" id="{{ strtolower(\App\Enums\AdType::STANDARD->name) }}" role="tabpanel">
                                 <h4 class="text-md font-weight-bold mt-2 mb-4">{{ __('models/ad.info.standard.title') }}</h4>
+                                <h6>{{ __('models/ad.prices') }}</h6>
+                                <ol>
+                                    <li>{{ __('common.monthly') }}: <b>{{ config('eosmrtnice.products.ad_types.standard.price_monthly') . config('app.currency_symbol') }}</b></li>
+                                    <li>{{ __('common.annual') }}: <b>{{ config('eosmrtnice.products.ad_types.standard.price_annual') . config('app.currency_symbol') }}</b></li>
+                                </ol>
                                 {!! __('models/ad.info.standard.text') !!}
                             </div>
                             <div class="tab-pane fade py-3 {{ (int)old('type', $ad->type->value) === (int)\App\Enums\AdType::PREMIUM->value ? 'show active' : '' }}" id="{{ strtolower(\App\Enums\AdType::PREMIUM->name) }}" role="tabpanel">
                                 <h4 class="text-md font-weight-bold mt-2 mb-4">{{ __('models/ad.info.premium.title') }}</h4>
+                                <h6>{{ __('models/ad.prices') }}</h6>
+                                <ol>
+                                    <li>{{ __('common.monthly') }}: <b>{{ config('eosmrtnice.products.ad_types.premium.price_monthly') . config('app.currency_symbol') }}</b></li>
+                                    <li>{{ __('common.annual') }}: <b>{{ config('eosmrtnice.products.ad_types.premium.price_annual') . config('app.currency_symbol') }}</b></li>
+                                </ol>
                                 {!! __('models/ad.info.premium.text') !!}
                             </div>
                             <div class="tab-pane fade py-3 {{ (int)old('type', $ad->type->value) === (int)\App\Enums\AdType::GOLD->value ? 'show active' : '' }}" id="{{ strtolower(\App\Enums\AdType::GOLD->name) }}" role="tabpanel">
                                 <h4 class="text-md font-weight-bold mt-2 mb-4">{{ __('models/ad.info.gold.title') }}</h4>
+                                <h6>{{ __('models/ad.prices') }}</h6>
+                                <ol>
+                                    <li>{{ __('common.monthly') }}: <b>{{ config('eosmrtnice.products.ad_types.gold.price_monthly') . config('app.currency_symbol') }}</b></li>
+                                    <li>{{ __('common.annual') }}: <b>{{ config('eosmrtnice.products.ad_types.gold.price_annual') . config('app.currency_symbol') }}</b></li>
+                                </ol>
                                 {!! __('models/ad.info.gold.text') !!}
                             </div>
                         </div>

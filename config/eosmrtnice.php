@@ -79,5 +79,10 @@ return [
             ['id' => 7, 'name' => 'red_roses', 'price' => 6.00],
             ['id' => 8, 'name' => 'white_roses', 'price' => 6.00],
         ],
+        'ad_types' => [
+            'standard' => ['price_monthly' => 10.00, 'price_annual' => 96.00],
+            'premium' => ['price_monthly' => 20.00, 'price_annual' => 192.00],
+            'gold' => ['price_monthly' => 25.00, 'price_annual' => 240.00],
+        ]
     ],
 ];

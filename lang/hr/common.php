@@ -72,4 +72,6 @@ return [
     'mark_unpaid' => 'Označi kao neplaćeno',
     'none' => 'Nema',
     'homepage' => 'Naslovnica',
+    'monthly' => 'Mjesečna',
+    'annual' => 'Godišnja',
 ];
