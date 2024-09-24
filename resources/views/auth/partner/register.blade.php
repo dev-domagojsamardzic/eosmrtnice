@@ -9,7 +9,6 @@
                     <div
                         class="col-lg-5 d-none d-flex flex-column align-items-center justify-content-start px-3 py-5 bg-register-image">
                         <img class="my-4" alt="{{ config('app.name') }}" src="{{ asset('graphics/logo/logo-dark.svg') }}">
-                        <h1 class="text-gray-900 mb-2 font-weight-normal">{{ config('app.name') }}</h1>
                         <h3 class="text-gray-900 mb-4 font-weight-bold">{{ __('common.partners') }}</h3>
                         <img class="my-4" alt="{{ config('app.name') }}" src="{{ asset('graphics/symbol/partner.svg') }}">
                     </div>

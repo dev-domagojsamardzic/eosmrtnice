@@ -2,10 +2,9 @@
 
     <!-- Sidebar - Brand -->
     <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{{ route(auth_user_type() . '.dashboard') }}">
-        <div class="sidebar-brand-icon">
+        <div class="sidebar-brand-icon p-3">
             <img height="40" src="{{ asset('graphics/logo/logo-light.svg') }}" alt="{{ config('app.name') }}">
         </div>
-        <div class="sidebar-brand-text mx-3 mt-3">{{ config('app.name') }}</div>
     </a>
 
     <!-- Divider -->
