@@ -167,7 +167,7 @@
                 {{-- email --}}
                 <div class="col-md-6 mb-2">
                     <x-input-label for="email" :value="__('admin.labels.company_email')"/>
-                    <x-input-info style="display:inline-block;" :content="__('models/company.logo_helper_info')" inline/>
+                    <x-input-info style="display:inline-block;" :content="__('models/company.company_email_info')" inline/>
                     <x-text-input
                         id="email"
                         type="email"
