@@ -174,6 +174,9 @@ return [
         'password' => [
             'confirmed' => 'Lozinka se ne podudara sa ponovljenom lozinke. Budite pažljivi i pokušajte ponovo.',
         ],
+        'birthday' => [
+            'before' => 'Morate imati najmanje 18 godina kako biste se registrirali.',
+        ]
     ],
 
     /*

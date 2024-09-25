@@ -33,7 +33,7 @@ class ProfileUpdateRequest extends FormRequest
     public function messages(): array
     {
         return [
-            'birthday.before' => 'Morate imati najmanje 18 godina kako biste se registrirali.'
+            'birthday.before' => __('validation.custom.birthday.before'),
         ];
     }
 }
