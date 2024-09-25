@@ -15,7 +15,7 @@
     <tbody>
     <tr><td>{{ __('models/company.bank_iban') }}: {{ company_bank_data('iban') }}</td></tr>
     <tr><td>{{ __('models/company.bank_swift') }}: {{ company_bank_data('swift_code') }}</td></tr>
-    <tr><td>{{ __('models/company.bank_model_reference_number') }}: {{ company_bank_data('model').' / '.company_bank_data('reference_number') }}</td></tr>
+    <tr><td>{{ __('models/company.bank_model_reference_number') }}: {{ company_bank_data('model').' / ' . $reference_number }}</td></tr>
     <tr><td>{{ __('models/company.bank_title') }}: {{ company_bank_data('title') }}</td></tr>
     </tbody>
 </table>
