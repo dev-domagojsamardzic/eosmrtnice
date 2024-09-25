@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('last_name');
             $table->string('email')->unique();
             $table->string('type')->default(UserType::MEMBER);
+            $table->date('birthday')->nullable(false);
             $table->enum('gender',['m', 'f'])->nullable(false);
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
@@ -37,9 +38,24 @@ return new class extends Migration
             'last_name' => 'Rešetar',
             'email' => 'admin@email.com',
             'type' => UserType::ADMIN,
+            'birthday' => '1990-01-01',
             'gender' => Gender::MALE,
             'email_verified_at' => now(),
             'password' => Hash::make('admin'),
+            'remember_token' => null,
+            'created_at' => now(),
+            'updated_at' => null,
+        ]);
+        DB::table('users')->insert([
+            'id' => 2,
+            'first_name' => 'Domagoj',
+            'last_name' => 'Samardžić',
+            'email' => 'dev.domagojsamardzic@gmail.com',
+            'type' => UserType::ADMIN,
+            'birthday' => '1992-01-10',
+            'gender' => Gender::MALE,
+            'email_verified_at' => now(),
+            'password' => Hash::make('dev.domagojsamardzic'),
             'remember_token' => null,
             'created_at' => now(),
             'updated_at' => null,

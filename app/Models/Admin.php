@@ -14,6 +14,7 @@ use Illuminate\Database\Eloquent\Attributes\ScopedBy;
  * @property        string      last_name
  * @property        string      email
  * @property        UserType    type
+ * @property        Carbon      birthday
  * @property        string      gender
  * @property        Carbon      email_verified_at
  * @property        string      password
