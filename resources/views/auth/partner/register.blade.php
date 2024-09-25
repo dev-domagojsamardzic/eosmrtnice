@@ -64,6 +64,26 @@
                                     </div>
                                 </div>
 
+                                {{-- birthday --}}
+                                <div class="form-group row">
+                                    <div class="col-sm-12 col-md-6 mb-3 mb-sm-0">
+                                        <x-input-label for="birthday" :value="__('auth.labels.birthday')"></x-input-label>
+                                        <x-input-info :content="__('auth.birthday_info')" />
+                                        <div class="input-group input-group-joined date">
+                                            <input name="birthday"
+                                                   id="birthday"
+                                                   type="text"
+                                                   placeholder="dd.mm.yyyy."
+                                                   value="{{ old('birthday') }}"
+                                                   class="form-control datepicker" autocomplete="off">
+                                            <span class="input-group-text">
+                                                <i class="fas fa-calendar-alt"></i>
+                                            </span>
+                                        </div>
+                                        <x-input-error :messages="$errors->get('birthday')" class="mt-2"/>
+                                    </div>
+                                </div>
+
                                 {{-- email --}}
                                 <div class="form-group row">
                                     <div class="col-sm-12 mb-3">
@@ -282,3 +302,14 @@
         </div>
     </div>
 </x-guest-layout>
+
+<script type="module">
+    document.addEventListener('DOMContentLoaded', function () {
+        $('#birthday').datepicker({
+            dateFormat: "dd.mm.yy.",
+            autoSize: true,
+            language: "hr",
+            maxDate: '{{ now()->format('d.m.Y.') }}',
+        });
+    });
+</script>

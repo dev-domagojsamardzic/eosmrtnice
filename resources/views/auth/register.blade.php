@@ -61,8 +61,10 @@
                                             <input name="birthday"
                                                    id="birthday"
                                                    type="text"
+                                                   placeholder="dd.mm.yyyy."
                                                    value="{{ old('birthday') }}"
-                                                   class="form-control datepicker" autocomplete="off">
+                                                   class="form-control datepicker"
+                                                   autocomplete="off">
                                             <span class="input-group-text">
                                                 <i class="fas fa-calendar-alt"></i>
                                             </span>
