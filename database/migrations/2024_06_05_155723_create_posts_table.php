@@ -21,6 +21,8 @@ return new class extends Migration
 
             $table->unsignedInteger('type');
             $table->unsignedInteger('size');
+            $table->unsignedInteger('funeral_city_id');
+            $table->unsignedInteger('funeral_county_id');
             $table->date('starts_at')->nullable(false);
             $table->date('ends_at')->nullable(false);
             $table->boolean('is_framed')->default(false);

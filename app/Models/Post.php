@@ -21,6 +21,8 @@ use Illuminate\Support\Str;
  * @property            int             user_id
  * @property            PostType        type
  * @property            PostSize        size
+ * @property            int             funeral_county_id
+ * @property            int             funeral_city_id
  * @property            Carbon          starts_at
  * @property            Carbon          ends_at
  * @property            PostSymbol      symbol

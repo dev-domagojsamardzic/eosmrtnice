@@ -56,6 +56,20 @@
 
                 {{-- Starts at --}}
                 <div class="form-group row">
+                    {{-- city_id --}}
+                    <div class="col-md-6 col-sm-12">
+                        <x-input-label for="funeral_city_id" :value="__('models/post.funeral_city_id')"/>
+                        <select class="form-control border border-dark" id="funeral_city_id" name="funeral_city_id">
+                            @foreach($cities as $city)
+                                @if((int) old('funeral_city_id', $post->funeral_city_id) === $city->id)
+                                    <option value="{{ $city->id }}" selected>{{ $city->title }}</option>
+                                @else
+                                    <option value="{{ $city->id }}">{{ $city->title }}</option>
+                                @endif
+                            @endforeach
+                        </select>
+                        <x-input-error :messages="$errors->get('funeral_city_id')" class="mt-2"/>
+                    </div>
                     <div class="col-lg-4 col-sm-12">
                         <x-input-label for="starts_at" :value="__('models/post.starts_at')" :required_tag="true"></x-input-label>
                         <div class="input-group input-group-joined date">

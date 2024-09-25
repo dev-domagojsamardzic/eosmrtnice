@@ -7,9 +7,9 @@ use App\Enums\PostSymbol;
 use App\Enums\PostType;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\PostRequest;
+use App\Models\City;
 use App\Models\Member;
 use App\Models\Post;
-use App\Models\User;
 use App\Services\ImageService;
 use Exception;
 use Illuminate\Http\RedirectResponse;
@@ -92,6 +92,8 @@ class PostController extends Controller
         $postSizes = PostSize::options();
         $postSymbols = PostSymbol::options();
 
+        $cities = City::query()->orderBy('title')->get();
+
         $me = admin();
         $me->data = "$me->last_name $me->first_name ($me->email)";
 
@@ -113,6 +115,7 @@ class PostController extends Controller
             'sizes' => $postSizes,
             'symbols' => $postSymbols,
             'postOwners' => $postOwners,
+            'cities' => $cities,
             'action' => $route,
         ]);
     }
@@ -134,8 +137,15 @@ class PostController extends Controller
             $post->user()->associate($request->input('user_id'));
         }
 
+        $funeralCity = City::query()
+            ->where('id', $request->input('funeral_city_id'))
+            ->first();
+
         $post->type = $request->input('type');
         $post->size = $request->input('size');
+
+        $post->funeral_county_id = $funeralCity?->county_id ?? 0;
+        $post->funeral_city_id = $funeralCity?->id ?? 0;
 
         $startDate = Carbon::parse($request->input('starts_at'));
         $postDurationInDays = (int)config('eosmrtnice.post_duration_days');
