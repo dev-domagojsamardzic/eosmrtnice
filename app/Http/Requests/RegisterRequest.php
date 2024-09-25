@@ -12,6 +12,7 @@ use Illuminate\Validation\Rules\Password;
  * @property    string      last_name
  * @property    string      email
  * @property    string      gender
+ * @property    string      birthday
  * @property    string      password
  * @property    string      confirm_password
  */
@@ -38,7 +39,15 @@ class RegisterRequest extends FormRequest
             'last_name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
             'gender' => ['required', 'in:m,f'],
-            'password' => ['required', 'confirmed', Password::min(8)->numbers()],
+            'birthday' => ['required', 'date', 'before:-18 years'],
+            'password' => ['required', 'confirmed', Password::min(8)->numbers()->mixedCase()],
+        ];
+    }
+
+    public function messages(): array
+    {
+        return [
+            'birthday.before' => 'Morate imati najmanje 18 godina kako biste se registrirali.'
         ];
     }
 }

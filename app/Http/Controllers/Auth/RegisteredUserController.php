@@ -8,6 +8,7 @@ use App\Models\Member;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\View\View;
@@ -33,6 +34,7 @@ class RegisteredUserController extends Controller
         $user->last_name = $request->last_name;
         $user->gender = $request->gender;
         $user->email = $request->email;
+        $user->birthday = Carbon::createFromFormat('d.m.Y.', $request->birthday)->toDateString();
         $user->password = Hash::make($request->password);
         $user->save();
 

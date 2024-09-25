@@ -22,6 +22,7 @@ return [
         'email' => 'Email',
         'password' => 'Lozinka',
         'confirm_password' => 'Ponovi lozinku',
+        'birthday' => 'Datum rođenja',
         'remember_me' => 'Zapamti me',
         'forgot_password' => 'Zaboravili ste lozinku?',
         'name' => 'Ime i prezime',
@@ -80,8 +81,9 @@ return [
     'your_email_is_unverified' => 'Vaše email addresa nije verificirana.',
     'click_here_to_resend_verification_email' => 'Klikni ovdje kako bi Vam ponovo poslali verifikacijski email.',
     'new_verification_link_sent' => 'Novi verifikacijski link je poslan na Vašu email adresu.',
-    'password_rules' => 'Lozinka mora imati minimalno 8 znakova, od kojih minimalno 1 mora biti broj.',
+    'password_rules' => 'Unesite minimalno 8 znakova. Kombinirajte mala i velika slova (A-Z, a-z). Uključite barem jedan broj (0-9)',
     'password_updated' => 'Lozinka je uspješno promjenjena.',
     'registration_remark' => 'Registracija traje kraće od 2 minute.',
     'dont_have_an_account' => 'Nemate račun?',
+    'birthday_info' => 'Morate biti punoljetni da biste se registrirali.',
 ];

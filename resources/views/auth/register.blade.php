@@ -39,17 +39,38 @@
                                             placeholder="{{ __('auth.placeholders.last_name') }}"/>
                                     </div>
                                 </div>
+
                                 <div class="form-group row">
-                                    <div class="col-sm-12 mb-3 mb-sm-0">
+                                    <div class="col-sm-12 col-md-4 mb-3 mb-sm-0">
                                         <x-input-label class="d-block" for="gender" :value="__('auth.labels.gender')"/>
                                         @php
                                             $options = \App\Enums\Gender::options();
                                         @endphp
-                                        <x-input-radio-inline name="gender" :options="$options"
-                                                              :selected="\App\Enums\Gender::MALE->value"></x-input-radio-inline>
+                                        <x-input-radio-inline name="gender"
+                                                              :options="$options"
+                                                              :selected="\App\Enums\Gender::MALE->value"
+                                        ></x-input-radio-inline>
                                     </div>
-
                                 </div>
+
+                                <div class="form-group row">
+                                    <div class="col-sm-12 col-md-6 mb-3 mb-sm-0">
+                                        <x-input-label for="birthday" :value="__('auth.labels.birthday')"></x-input-label>
+                                        <x-input-info :content="__('auth.birthday_info')" />
+                                        <div class="input-group input-group-joined date">
+                                            <input name="birthday"
+                                                   id="birthday"
+                                                   type="text"
+                                                   value="{{ old('birthday') }}"
+                                                   class="form-control datepicker" autocomplete="off">
+                                            <span class="input-group-text">
+                                                <i class="fas fa-calendar-alt"></i>
+                                            </span>
+                                        </div>
+                                        <x-input-error :messages="$errors->get('birthday')" class="mt-2"/>
+                                    </div>
+                                </div>
+
                                 <div class="form-group">
                                     <x-input-label for="email" :value="__('auth.labels.email')"/>
                                     <x-text-input
@@ -112,3 +133,14 @@
         </div>
     </div>
 </x-guest-layout>
+
+<script type="module">
+    document.addEventListener('DOMContentLoaded', function () {
+        $('#birthday').datepicker({
+            dateFormat: "dd.mm.yy.",
+            autoSize: true,
+            language: "hr",
+            maxDate: '{{ now()->format('d.m.Y.') }}',
+        });
+    });
+</script>

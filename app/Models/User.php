@@ -22,6 +22,7 @@ use Illuminate\Notifications\Notifiable;
  * @property        string      last_name
  * @property        string      email
  * @property        UserType    type
+ * @property        Carbon      birthday
  * @property        Gender      gender
  * @property        Carbon      email_verified_at
  * @property        string      password
@@ -76,6 +77,7 @@ class User extends Authenticatable implements MustVerifyEmail
      * @var array<string, string>
      */
     protected $casts = [
+        'birthday' => 'date',
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
         'type' => UserType::class,
