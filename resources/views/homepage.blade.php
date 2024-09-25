@@ -22,40 +22,41 @@
 
 <script type="module">
     const loadMoreBtn = document.querySelector('#loadMorePosts');
-
-    loadMoreBtn.addEventListener('click', function(e) {
-        e.preventDefault();
-        $.ajax({
-            method: 'POST',
-            url: '{{ route('homepage.items') }}',
-            headers: {
-                'X-CSRF-TOKEN': '{{ csrf_token() }}'
-            },
-            data: {
-                'date': $('#loadMorePosts').attr('data-date')
-            },
-            success: function(response) {
-                const postWrapper = document.querySelector('#postsWrapper');
-                // create element from string
-                const element = document.createElement('div');
-                element.innerHTML = response['content'];
-                // declare masonry object
-                var masonry = new Masonry('#postsWrapper', { "percentPosition": true, "itemSelector": ".masonry-item", "columnWidth": ".col-md-4" })
-                // append child element
-                postWrapper.appendChild(element)
-                masonry.appended(element)
-                console.log('DATE', response['date']);
-                // set new date for loading
-                $('#loadMorePosts').attr('data-date', response['date']);
-                if (response['date'] === null) {
-                    $('#loadMorePosts').hide();
+    if(loadMoreBtn) {
+        loadMoreBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            $.ajax({
+                method: 'POST',
+                url: '{{ route('homepage.items') }}',
+                headers: {
+                    'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                },
+                data: {
+                    'date': $('#loadMorePosts').attr('data-date')
+                },
+                success: function(response) {
+                    const postWrapper = document.querySelector('#postsWrapper');
+                    // create element from string
+                    const element = document.createElement('div');
+                    element.innerHTML = response['content'];
+                    // declare masonry object
+                    var masonry = new Masonry('#postsWrapper', { "percentPosition": true, "itemSelector": ".masonry-item", "columnWidth": ".col-md-4" })
+                    // append child element
+                    postWrapper.appendChild(element)
+                    masonry.appended(element)
+                    console.log('DATE', response['date']);
+                    // set new date for loading
+                    $('#loadMorePosts').attr('data-date', response['date']);
+                    if (response['date'] === null) {
+                        $('#loadMorePosts').hide();
+                    }
+                },
+                error: function(error) {
+                    console.error(error);
                 }
-            },
-            error: function(error) {
-                console.error(error);
-            }
-        });
-    })
+            });
+        })
+    }
 
     document.addEventListener('DOMContentLoaded', function () {
         $('#date').datepicker({
