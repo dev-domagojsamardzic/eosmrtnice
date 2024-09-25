@@ -40,9 +40,7 @@ class Partner extends User
     {
         parent::__construct($attributes);
         // Override type attribute
-        $attributes = $this->getAttributes();
-        $attributes['type'] = UserType::PARTNER;
-        $this->attributes = $attributes;
+        $this->attributes['type'] = UserType::PARTNER;
     }
 
     /**

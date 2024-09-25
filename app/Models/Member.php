@@ -42,9 +42,7 @@ class Member extends User
     {
         parent::__construct($attributes);
         // Override type attribute
-        $attributes = $this->getAttributes();
-        $attributes['type'] = UserType::MEMBER;
-        $this->attributes = $attributes;
+        $this->attributes['type'] = UserType::MEMBER;
     }
 
     /**
