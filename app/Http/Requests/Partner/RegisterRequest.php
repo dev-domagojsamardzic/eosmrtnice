@@ -70,4 +70,11 @@ class RegisterRequest extends FormRequest
             'company_mobile_phone' => ['nullable','string', 'max:64']
         ];
     }
+
+    public function messages(): array
+    {
+        return [
+            'birthday.before' => 'Morate imati najmanje 18 godina kako biste se registrirali.'
+        ];
+    }
 }

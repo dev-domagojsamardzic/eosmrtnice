@@ -42,6 +42,25 @@
             </div>
         </div>
 
+        {{-- birthday --}}
+        <div class="form-group row">
+            <div class="col-sm-12 col-md-6 mb-3 mb-sm-0">
+                <x-input-info :content="__('auth.birthday_info')" />
+                <div class="input-group input-group-joined date">
+                    <input name="birthday"
+                           id="birthday"
+                           type="text"
+                           placeholder="dd.mm.yyyy."
+                           value="{{ old('birthday', $user->birthday->format('d.m.Y.')) }}"
+                           class="form-control datepicker" autocomplete="off">
+                    <span class="input-group-text">
+                                                <i class="fas fa-calendar-alt"></i>
+                                            </span>
+                </div>
+                <x-input-error :messages="$errors->get('birthday')" class="mt-2"/>
+            </div>
+        </div>
+
         <div>
             <x-input-label for="email" :value="__('Email')" :required_tag="true"/>
             <x-text-input id="email" name="email" type="email" class="mt-1 block w-full"
@@ -70,16 +89,17 @@
 
         <div class="flex items-center gap-4">
             <x-primary-button>{{ __('common.save') }}</x-primary-button>
-
-            {{--@if (session('status') === 'profile-updated')
-                <p
-                    x-data="{ show: true }"
-                    x-show="show"
-                    x-transition
-                    x-init="setTimeout(() => show = false, 2000)"
-                    class="text-sm text-gray-600 dark:text-gray-400"
-                >{{ __('common.saved') }}</p>
-            @endif--}}
         </div>
     </form>
+
+    <script type="module">
+        document.addEventListener('DOMContentLoaded', function () {
+            $('#birthday').datepicker({
+                dateFormat: "dd.mm.yy.",
+                autoSize: true,
+                language: "hr",
+                maxDate: '{{ now()->format('d.m.Y.') }}',
+            });
+        });
+    </script>
 </section>

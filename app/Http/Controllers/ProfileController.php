@@ -6,6 +6,7 @@ use App\Enums\Gender;
 use App\Http\Requests\ProfileUpdateRequest;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\View\View;
@@ -32,6 +33,7 @@ class ProfileController extends Controller
         $user->first_name = $request->input('first_name');
         $user->last_name = $request->input('last_name');
         $user->gender = $request->input('gender');
+        $user->birthday = Carbon::createFromFormat('d.m.Y.', $request->input('birthday'))->toDateString();
         $user->email = $request->input('email');
 
         if ($user->isDirty('email')) {

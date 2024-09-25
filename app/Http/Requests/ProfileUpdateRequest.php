@@ -25,7 +25,15 @@ class ProfileUpdateRequest extends FormRequest
             'first_name' => ['required', 'string', 'max:255'],
             'last_name' => ['required', 'string', 'max:255'],
             'gender' => ['required', 'in:m,f'],
+            'birthday' => ['required', 'date', 'before:-18 years'],
             'email' => ['required', 'string', 'lowercase', 'email', 'max:255', Rule::unique(User::class)->ignore($this->user()->id)],
+        ];
+    }
+
+    public function messages(): array
+    {
+        return [
+            'birthday.before' => 'Morate imati najmanje 18 godina kako biste se registrirali.'
         ];
     }
 }
