@@ -11,8 +11,10 @@
         @vite('resources/scss/app.scss')
     </head>
     <body class="">
+
         @include('layouts.guest_navbar')
-        <div class="container">
+
+        <div class="container guest-container">
 
             {{ $slot }}
 
@@ -34,6 +36,9 @@
                 </div>
             @endif
         </div>
+
+        @include('layouts.guest_footer')
+
         {{-- Scripts --}}
         @vite('resources/js/app.js')
         <script src="{{ asset('js/masonry.js') }}"></script>

@@ -8,16 +8,19 @@ return [
      */
     'company' => [
         'title' => env('EOS_COMPANY_TITLE', 'PROVEXIO d.o.o.'),
-        'address' => env('EOS_COMPANY_ADDRESS', 'Vinogradarska 3'),
+        'address' => env('EOS_COMPANY_ADDRESS', 'Vinogradska 3'),
         'zipcode' => env('EOS_COMPANY_ZIPCODE', '40313'),
         'town' => env('EOS_COMPANY_TOWN', 'Sv. Martin na Muri'),
+        'full_address' => env('EOS_COMPANY_FULL_ADDRESS', 'HR-40313, Sv. Martin na Muri, Vinogradska 3'),
         'country' => env('EOS_COMPANY_COUNTRY', 'Republika Hrvatska'),
         'oib' => env('EOS_COMPANY_OIB', '02540522475'),
         'email' => env('EOS_COMPANY_EMAIL', 'info@provexio.hr'),
-        'phone' => env('EOS_COMPANY_PHONE', '040/886-219'),
-        'fax' => env('EOS_COMPANY_FAX', '040/886-219'),
+        'info_email' => env('EOS_INFO_EMAIL', 'info@eosmrtnice.com'),
+        'phone' => env('EOS_COMPANY_PHONE', '0038540868219'),
+        'fax' => env('EOS_COMPANY_FAX', '0038540868219'),
         'mobile_phone' => env('EOS_COMPANY_MOBILE_PHONE', ''),
         'director' => env('EOS_COMPANY_DIRECTOR', 'Leon Rešetar'),
+        'mbs' => env('EOS_COMPANY_MBS', '070193285'),
     ],
 
     'bank' => [
