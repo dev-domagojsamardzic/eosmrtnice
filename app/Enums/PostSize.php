@@ -11,7 +11,7 @@ enum PostSize: int
     case MEDIUM = 80;
 
     /* to 180 words */
-    case LARGE = 180;
+    case LARGE = 240;
 
     public static function options(): array
     {
