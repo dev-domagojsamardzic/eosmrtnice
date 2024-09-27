@@ -33,10 +33,10 @@
                            id="date"
                            type="text"
                            value="{{ $date ?? '' }}"
-                           class="form-control datepicker" autocomplete="off">
-                    <span class="input-group-text">
-                            <i class="fas fa-calendar-alt"></i>
-                        </span>
+                           class="form-control datepicker border border-dark" autocomplete="off">
+                    <span class="input-group-text border-datepicker-calendar-icon">
+                        <i class="fas fa-calendar-alt"></i>
+                    </span>
                 </div>
             </div>
 
