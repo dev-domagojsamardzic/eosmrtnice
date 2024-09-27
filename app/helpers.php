@@ -1,6 +1,7 @@
 <?php
 
 use App\Enums\UserType;
+use App\Models\County;
 use App\Models\User;
 
 if (!function_exists('auth_user_type')) {
@@ -151,5 +152,16 @@ if (!function_exists('livewire_table_name')) {
     function livewire_table_name(string $name = ''): string
     {
         return ($name) ? 'tables.' . auth_user_type() . '.' . $name : 'tables.' . auth_user_type();
+    }
+}
+
+if(!function_exists('get_counties_array')) {
+    /**
+     * Return array of counties
+     * @return array
+     */
+    function get_counties_array(): array
+    {
+        return County::query()->pluck('title', 'id')->toArray();
     }
 }

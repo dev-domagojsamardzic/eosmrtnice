@@ -36,7 +36,7 @@ use App\Http\Controllers\Auth\VerifyEmailController;
 
 Route::get('/', [HomepageController::class, 'home'])->name('homepage');
 Route::post('/',[HomepageController::class, 'items'])->name('homepage.items');
-Route::get('pretrazi',[HomepageController::class, 'search'])->name('homepage.search');
+Route::get('trazi',[HomepageController::class, 'search'])->name('homepage.search');
 
 Route::post('zapali-svijecu', [PostController::class, 'candle'])->name('posts.candle');
 

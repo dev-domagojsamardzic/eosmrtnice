@@ -186,8 +186,7 @@ class PostController extends Controller
     {
         $name = $request->input('name');
         $date = $request->input('date');
-
-        $dates = (!$name && !$date) ? $this->getLatestDates() : [$date];
+        $county = $request->input('county_id');
 
         $posts = Post::query()
             ->where('is_active', true)
@@ -200,7 +199,10 @@ class PostController extends Controller
                 $dateFormatted = Carbon::parse($date)->format('Y-m-d');
                 $query->whereDate('starts_at',  $dateFormatted);
             })
-            ->when(!$name && !$date, function($query) {
+            ->when($county, function ($query, $county) {
+                $query->where('funeral_county_id', $county);
+            })
+            ->when(!$name && !$date && !$county, function($query) {
                 $latestDates = $this->getLatestDates();
                 $query->whereIn('starts_at', $latestDates);
             })
