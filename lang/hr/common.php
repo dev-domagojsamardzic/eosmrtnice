@@ -74,4 +74,5 @@ return [
     'homepage' => 'Naslovnica',
     'monthly' => 'Mjesečna',
     'annual' => 'Godišnja',
+    'all_counties' => 'Sve županije',
 ];

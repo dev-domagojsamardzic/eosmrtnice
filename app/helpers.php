@@ -158,10 +158,18 @@ if (!function_exists('livewire_table_name')) {
 if(!function_exists('get_counties_array')) {
     /**
      * Return array of counties
+     *
+     * @param bool $withAllCounties // with "all counties" option?
      * @return array
      */
-    function get_counties_array(): array
+    function get_counties_array(bool $withAllCounties = true): array
     {
-        return County::query()->pluck('title', 'id')->toArray();
+        $counties = County::query()->pluck('title', 'id')->toArray();
+
+        if($withAllCounties) {
+            $counties[0] = __('common.all_counties');
+            ksort($counties);
+        }
+        return $counties;
     }
 }
