@@ -20,8 +20,8 @@
                     {{ method_field('PUT') }}
                 @endif
 
-                <div class="row mt-2">
-                    <div class="offset-md-3 col-md-3 col-sm-6">
+                <div class="row my-3">
+                    <div class="offset-md-2 col-md-4 col-sm-6">
                         <div class="post-price-box">
                             <div class="post-price-box d-flex flex-col align-items-center justify-center p-3">
                                 <span class="font-weight-bold mb-2">{{ __('models/post.current_word_count') }}</span>
@@ -29,7 +29,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-3 col-sm-6">
+                    <div class="col-md-4 col-sm-6">
                         <div class="post-price-box d-flex flex-col align-items-center justify-center p-3">
                             <span class="font-weight-bold mb-2">{{ __('models/post.current_price') }}</span>
                             <span id="current_price_box" class="text-counter-success font-weight-bold"></span>
