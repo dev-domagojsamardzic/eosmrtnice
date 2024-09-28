@@ -41,9 +41,12 @@
                         <x-input-label for="size" :value="__('models/post.size')" :required_tag="true"/>
                         <x-input-info :content="__('models/post.size_info')"/>
                         <select class="form-control border border-dark" id="size" name="size">
-                            @foreach($sizes as $key => $size)
-                                <option
-                                    value="{{ $key }}" @selected($key === (int)old('type', $post->size->value))>{{ $size }}</option>
+                            @foreach($postSizes as $postSize)
+                                <option value="{{ $postSize['size'] }}"
+                                        @selected($postSize['size'] === (int)old('type', $post->size))
+                                        data-price="{{ $postSize['price'] }}">
+                                    {{ __('enums.'.$postSize['name']) }}
+                                </option>
                             @endforeach
                         </select>
                         <x-input-error :messages="$errors->get('size')" class="mt-2"/>
@@ -94,7 +97,13 @@
                 <div class="form-group row">
                     <div class="col-lg-4 col-sm-12">
                         <div class="custom-control custom-checkbox">
-                            <input type="checkbox" class="custom-control-input" name="is_framed" id="is_framed" @checked((bool)old('is_framed', $post->is_framed))>
+                            <input type="checkbox"
+                                   class="custom-control-input"
+                                   name="is_framed"
+                                   id="is_framed"
+                                   data-price="{{ config('eosmrtnice.products.post_frame.price') }}"
+                                   @checked((bool)old('is_framed', $post->is_framed))
+                            >
                             <label class="custom-control-label" for="is_framed">
                                 {{ __('models/post.is_framed') }}
                             </label>
@@ -164,8 +173,11 @@
                         <x-input-info :content="__('models/post.symbol_info')"/>
                         <select class="form-control border border-dark" id="symbol" name="symbol">
                             @foreach($symbols as $key => $value)
-                                <option
-                                    value="{{ $key }}" @selected((string)$key === (string)old('symbol', $post->symbol->value))>{{ $value }}</option>
+                                <option value="{{ $key }}"
+                                        data-price="{{ !$key ? 0 : config('eosmrtnice.products.post_symbol.price') }}"
+                                        @selected((string)$key === (string)old('symbol', $post->symbol->value))>
+                                    {{ $value }}
+                                </option>
                             @endforeach
                         </select>
                     </div>
@@ -225,6 +237,10 @@
     @include('partials.filepond.image')
     @push('scripts')
         <script type="module">
+            // Current total price
+
+            let POST_HAS_IMAGE = false;
+
             // Elements
             const size = document.getElementById('size');
             const type = document.getElementById('type');
@@ -257,11 +273,28 @@
                     autoSize: true,
                     language: "hr",
                 });
+
+                POST_HAS_IMAGE = ('{{ old('image', $post->image) }}') ? true : false;
+
                 updateCounter()
                 handlePostPreview();
+
+                calculateTotalPrice();
             })
 
-            size.addEventListener('change', updateCounter);
+            document.addEventListener('FilePond:processfile', function() {
+                POST_HAS_IMAGE = true;
+                calculateTotalPrice();
+            })
+            document.addEventListener('FilePond:removefile', function () {
+                POST_HAS_IMAGE = false;
+                calculateTotalPrice();
+            })
+
+            size.addEventListener('change', function() {
+                updateCounter();
+                calculateTotalPrice();
+            });
 
             type.addEventListener('change', function (event) {
                 type_preview.textContent = types[event.target.value];
@@ -269,13 +302,19 @@
                 main_message.placeholder = main_msg_placeholders[event.target.value];
             })
 
-            is_framed.addEventListener('change', toggleFrame)
+            is_framed.addEventListener('change', function() {
+                toggleFrame();
+                calculateTotalPrice();
+            })
 
             deceased_full_name_lg.addEventListener('input', function (event) {
                 deceased_full_name_lg_preview.innerHTML = event.target.value.replace(/\n/g, "<br>");
             })
 
-            symbol.addEventListener('change', handleSymbolPreview)
+            symbol.addEventListener('change', function() {
+                handleSymbolPreview();
+                calculateTotalPrice();
+            })
 
             lifespan.addEventListener('input', handleLifespanPreview)
 
@@ -415,6 +454,24 @@
              */
             function handleSignaturePreview() {
                 signature_preview.innerHTML = signature.value.replace(/\n/g, "<br>");
+            }
+
+            /**
+             * Calculate total price
+             */
+            function calculateTotalPrice() {
+                const selectedSize = size.options[size.selectedIndex];
+                const selectedSymbol = symbol.options[symbol.selectedIndex];
+
+                const sizePrice = parseFloat(selectedSize.getAttribute('data-price'));
+                const isFramedPrice = is_framed.checked ? parseFloat(is_framed.dataset.price) : 0;
+                const symbolPrice = parseFloat(selectedSymbol.getAttribute('data-price'));
+                const imagePrice = POST_HAS_IMAGE ? parseFloat('{{ config('eosmrtnice.products.post_image.price') }}') : 0;
+
+                let total = sizePrice + isFramedPrice + symbolPrice + imagePrice;
+
+                console.log('TOTAL: ' + total)
+
             }
         </script>
     @endpush

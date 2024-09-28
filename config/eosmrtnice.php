@@ -86,6 +86,14 @@ return [
             'standard' => ['price_monthly' => 10.00, 'price_annual' => 96.00],
             'premium' => ['price_monthly' => 20.00, 'price_annual' => 192.00],
             'gold' => ['price_monthly' => 25.00, 'price_annual' => 240.00],
-        ]
+        ],
+        'posts' => [
+            ['size' => 40, 'name' => 'small', 'price' => 8.00],
+            ['size' => 80, 'name' => 'medium', 'price' => 25.00],
+            ['size' => 240, 'name' => 'large', 'price' => 80.00],
+        ],
+        'post_frame' => ['title' => 'post_frame', 'price' => 5.00],
+        'post_image' => ['title' => 'post_image', 'price' => 5.00],
+        'post_symbol' => ['title' => 'post_symbol', 'price' => 5.00],
     ],
 ];

@@ -20,7 +20,7 @@ use Illuminate\Support\Str;
  * @property-read       int             id
  * @property            int             user_id
  * @property            PostType        type
- * @property            PostSize        size
+ * @property            int             size
  * @property            int             funeral_county_id
  * @property            int             funeral_city_id
  * @property            Carbon          starts_at
@@ -61,7 +61,6 @@ class Post extends Model
      */
     protected $casts = [
         'type' => PostType::class,
-        'size' => PostSize::class,
         'symbol' => PostSymbol::class,
         'starts_at' => 'date',
         'ends_at' => 'date',
@@ -83,7 +82,7 @@ class Post extends Model
     protected $attributes = [
         'is_framed' => false,
         'type' => PostType::DEATH_NOTICE,
-        'size' => PostSize::SMALL,
+        'size' => 40,
         'symbol' => PostSymbol::NONE,
         'candles' => 0,
         'is_active' => false,

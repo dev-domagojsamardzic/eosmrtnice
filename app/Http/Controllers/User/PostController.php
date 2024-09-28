@@ -89,7 +89,7 @@ class PostController extends Controller
         };
 
         $postTypes = PostType::options();
-        $postSizes = PostSize::options();
+        $postSizes = config('eosmrtnice.products.posts');
         $postSymbols = PostSymbol::options();
 
         $cities = City::query()->orderBy('title')->get();
@@ -112,7 +112,7 @@ class PostController extends Controller
         return view('user.posts.form', [
             'post' => $post,
             'types' => $postTypes,
-            'sizes' => $postSizes,
+            'postSizes' => $postSizes,
             'symbols' => $postSymbols,
             'postOwners' => $postOwners,
             'cities' => $cities,
