@@ -195,7 +195,7 @@
 }
 
 .text-counter-success {
-    color: $fern-green;
+    color: $white;
 }
 
 .text-counter-danger {
@@ -208,6 +208,11 @@
 
 .full_post_wrapper {
     padding: 3rem 4rem;
+}
+
+.post-price-box {
+    background-color: $black;
+    color: $white;
 }
 
 @media screen and (max-width: 768px) {

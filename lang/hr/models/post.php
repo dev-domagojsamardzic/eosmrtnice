@@ -53,4 +53,5 @@ return [
     'post_owner' => 'Vlasnik objave',
     'no_posts_yet' => 'Trenutno nema objava',
     'funeral_city_id' => 'Mjesto pogreba',
+    'current_price' => 'Cijena',
 ];

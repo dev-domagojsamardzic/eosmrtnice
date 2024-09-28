@@ -20,7 +20,22 @@
                     {{ method_field('PUT') }}
                 @endif
 
-
+                <div class="row mt-2">
+                    <div class="offset-md-3 col-md-3 col-sm-6">
+                        <div class="post-price-box">
+                            <div class="post-price-box d-flex flex-col align-items-center justify-center p-3">
+                                <span class="font-weight-bold mb-2">{{ __('models/post.current_word_count') }}</span>
+                                <span id="message_counter" class="text-counter-success font-weight-bold"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-sm-6">
+                        <div class="post-price-box d-flex flex-col align-items-center justify-center p-3">
+                            <span class="font-weight-bold mb-2">{{ __('models/post.current_price') }}</span>
+                            <span id="current_price_box" class="text-counter-success font-weight-bold"></span>
+                        </div>
+                    </div>
+                </div>
                 @if(is_admin())
                     {{-- Post owner (user_id) --}}
                     <div class="form-group row">
@@ -50,10 +65,6 @@
                             @endforeach
                         </select>
                         <x-input-error :messages="$errors->get('size')" class="mt-2"/>
-                        <hr>
-                        <p class="mt-2 font-weight-bold">{{ __('models/post.current_word_count') }}:
-                            <span id="message_counter" class="text-counter-success font-weight-bold"></span>
-                        </p>
                     </div>
                 </div>
 
@@ -457,7 +468,7 @@
             }
 
             /**
-             * Calculate total price
+             * Calculate total price and write in price box
              */
             function calculateTotalPrice() {
                 const selectedSize = size.options[size.selectedIndex];
@@ -470,8 +481,7 @@
 
                 let total = sizePrice + isFramedPrice + symbolPrice + imagePrice;
 
-                console.log('TOTAL: ' + total)
-
+                document.getElementById('current_price_box').innerText = total + ' {{ config('app.currency_symbol') }}';
             }
         </script>
     @endpush
