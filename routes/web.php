@@ -69,7 +69,7 @@ Route::middleware('guest')->group(function () {
     Route::get('partner/registracija', [PartnerRegisteredUserController::class, 'create'])
         ->name('partner.register');
     Route::post('partner/registracija', [PartnerRegisteredUserController::class, 'store'])
-        ->name('partner.register');
+        ->name('partner.register.store');
 
     Route::get('prijava', [AuthenticatedSessionController::class, 'create'])
         ->name('login');

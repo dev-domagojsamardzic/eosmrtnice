@@ -25,7 +25,7 @@
                                 <h5>{{ __('auth.partner_representative_user') }}</h5>
                             </div>
 
-                            <form method="POST" action="{{ route('partner.register') }}">
+                            <form method="POST" action="{{ route('partner.register.store') }}">
                                 @csrf
                                 {{-- first_name & last_name --}}
                                 <div class="form-group row">
