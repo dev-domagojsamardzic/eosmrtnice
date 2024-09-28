@@ -116,7 +116,7 @@
                                    @checked((bool)old('is_framed', $post->is_framed))
                             >
                             <label class="custom-control-label" for="is_framed">
-                                {{ __('models/post.is_framed') }}
+                                {{ __('models/post.is_framed') . " (". config('eosmrtnice.products.post_frame.price').config('app.currency_symbol').")" }}
                             </label>
                         </div>
                     </div>
@@ -170,6 +170,7 @@
                 <div class="form-group row" id="form-panel-image">
                     <div class="col-lg-12 col-md-12 mb-3">
                         <x-input-label for="image" :value="__('models/post.deceased_image')"></x-input-label>
+                        <p>{{ config('eosmrtnice.products.post_image.price').config('app.currency_symbol') }}</p>
                         <x-input-info :content="__('models/post.deceased_image_helper_info')" />
                         <input type="file" name="image" id="image">
                         <small id="logo-message" class="text-xs font-weight-bold"></small>
@@ -187,7 +188,7 @@
                                 <option value="{{ $key }}"
                                         data-price="{{ !$key ? 0 : config('eosmrtnice.products.post_symbol.price') }}"
                                         @selected((string)$key === (string)old('symbol', $post->symbol->value))>
-                                    {{ $value }}
+                                    {{ $value . (!$key ? '' : ' ('.config('eosmrtnice.products.post_symbol.price').config('app.currency_symbol').')') }}
                                 </option>
                             @endforeach
                         </select>
