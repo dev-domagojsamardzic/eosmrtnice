@@ -25,9 +25,9 @@ return [
     'last_goodbye' => 'Posljednji pozdrav',
     'thank_you' => 'Zahvala',
     // App\Enums\PostSize
-    'small' => 'Mali oglas (do 40 riječi)',
-    'medium' => 'Srednji oglas (do 80 riječi)',
-    'large' => 'Veliki oglas (do 180 riječi)',
+    'small' => 'Mali oglas - do 40 riječi',
+    'medium' => 'Srednji oglas - do 80 riječi',
+    'large' => 'Veliki oglas - do 240 riječi',
     // App\Enums\PostSymbol
     'none' => 'Bez simbola',
     'cross' => 'Križ',

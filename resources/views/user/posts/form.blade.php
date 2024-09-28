@@ -60,7 +60,7 @@
                                 <option value="{{ $postSize['size'] }}"
                                         @selected($postSize['size'] === (int)old('type', $post->size))
                                         data-price="{{ $postSize['price'] }}">
-                                    {{ __('enums.'.$postSize['name']) }}
+                                    {{ __('enums.'.$postSize['name']) }} <b>({{ $postSize['price'] . config('app.currency_symbol') }})</b>
                                 </option>
                             @endforeach
                         </select>
