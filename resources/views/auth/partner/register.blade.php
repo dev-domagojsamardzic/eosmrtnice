@@ -166,7 +166,7 @@
                                         <x-text-input
                                             id="company_town"
                                             type="text"
-                                            name="text"
+                                            name="company_town"
                                             :value="old('company_town')"
                                             autocomplete="company_town"
                                             placeholder="{{ __('auth.placeholders.company_town') }}"></x-text-input>
