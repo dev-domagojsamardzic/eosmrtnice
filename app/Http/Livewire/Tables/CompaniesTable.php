@@ -140,12 +140,6 @@ class CompaniesTable extends Component implements HasTable, HasForms
                     1 => __('common.is_active_f_pl'),
                     0 => __('common.is_inactive_f_pl'),
                 ]),
-            SelectFilter::make('county_id')
-                ->label(__('admin.county'))
-                ->options(County::query()->orderBy('title')->pluck('title', 'id')->toArray()),
-            SelectFilter::make('type')
-                ->label(__('admin.company_type'))
-                ->options(CompanyType::options())
         ];
     }
 
