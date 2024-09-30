@@ -128,18 +128,6 @@
                                     <h5>{{ __('auth.company_data') }}</h5>
                                 </div>
 
-                                {{-- company_type --}}
-                                <div class="form-group row">
-                                    <div class="col-sm-12 mb-3">
-                                        <x-input-label for="company_type" :value="__('auth.labels.company_type')" :required_tag="true"/>
-                                        <select class="form-control border border-dark" id="company_type" name="company_type">
-                                            @foreach($companyTypes as $id => $title)
-                                                <option value="{{ $id }}">{{ $title }}</option>
-                                            @endforeach
-                                        </select>
-                                    </div>
-                                </div>
-
                                 {{-- company_title --}}
                                 <div class="form-group row">
                                     <div class="col-sm-12 mb-3">
@@ -153,32 +141,6 @@
                                             autocomplete="company_title"
                                             placeholder="{{ __('auth.placeholders.company_title') }}"/>
                                         <x-input-error :messages="$errors->get('company_title')" class="mt-2"/>
-                                    </div>
-                                </div>
-
-                                {{-- company_county_id --}}
-                                <div class="form-group row">
-                                    <div class="col-sm-12 mb-3">
-                                        <x-input-label for="company_county_id" :value="__('auth.labels.company_county')" :required_tag="true"/>
-                                        <select class="form-control border border-dark" id="company_county_id" name="company_county_id">
-                                            @foreach($counties as $id => $county)
-                                                <option value="{{ $id }}">{{ $county }}</option>
-                                            @endforeach
-                                        </select>
-                                        <x-input-error :messages="$errors->get('company_county_id')" class="mt-2"/>
-                                    </div>
-                                </div>
-
-                                {{-- company_city_id --}}
-                                <div class="form-group row">
-                                    <div class="col-sm-12 mb-3">
-                                        <x-input-label for="company_city_id" :value="__('auth.labels.company_city')" :required_tag="true"/>
-                                        <select class="form-control border border-dark" id="company_city_id" name="company_city_id">
-                                            @foreach($cities as $city)
-                                                <option data-county="{{ $city->county_id }}" value="{{ $city->id }}">{{ $city->title }}</option>
-                                            @endforeach
-                                        </select>
-                                        <x-input-error :messages="$errors->get('company_city_id')" class="mt-2"/>
                                     </div>
                                 </div>
 
