@@ -138,9 +138,6 @@ class CompanyController extends Controller
      */
     private function apply(Company $company, CompanyRequest $request): RedirectResponse
     {
-        $companyLogo = $this->imageService->storeCompanyLogo($request, $company);
-        $company->logo = $companyLogo;
-
         if (is_admin()) {
             $company->user()->associate($request->input('user_id'));
         }
@@ -148,19 +145,15 @@ class CompanyController extends Controller
             $company->user()->associate(auth()->user());
         }
 
-        $company->type = $request->input('type');
         $company->title = $request->input('title');
         $company->address = $request->input('address');
         $company->town = $request->input('town');
         $company->zipcode = $request->input('zipcode');
         $company->oib = $request->input('oib');
-        $company->city()->associate($request->input('city_id'));
-        $company->county()->associate($request->input('county_id'));
         $company->email = $request->input('email');
         $company->phone = $request->input('phone');
         $company->mobile_phone = $request->input('mobile_phone');
         $company->active = $request->boolean('active');
-        $company->website = $request->input('website');
 
         try{
             $company->save();

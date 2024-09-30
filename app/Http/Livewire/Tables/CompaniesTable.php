@@ -16,7 +16,6 @@ use Filament\Tables\Actions\ActionGroup;
 use Filament\Tables\Actions\CreateAction;
 use Filament\Tables\Actions\DeleteAction;
 use Filament\Tables\Actions\EditAction;
-use Filament\Tables\Columns\ImageColumn;
 use Filament\Tables\Columns\Layout\Panel;
 use Filament\Tables\Columns\Layout\Split;
 use Filament\Tables\Columns\Layout\Stack;
@@ -59,7 +58,8 @@ class CompaniesTable extends Component implements HasTable, HasForms
 
     protected function getQuery(): Builder
     {
-        return Company::query();
+        return Company::query()
+            ->orderBy('created_at');
     }
 
     /**
@@ -70,15 +70,6 @@ class CompaniesTable extends Component implements HasTable, HasForms
     {
         return [
             Split::make([
-                ImageColumn::make('logo')
-                    ->circular()
-                    ->defaultImageUrl(function(Company $company): string {
-                        return $company->logo ?
-                            public_storage_asset($company->logo) :
-                            asset($company->alternative_logo);
-                    })
-                    ->tooltip(fn (Company $company): string => $company->type->translate())
-                    ->grow(false),
                 TextColumn::make('title')
                     ->label(__('admin.company_title'))
                     ->tooltip(__('admin.company_title'))
@@ -95,8 +86,7 @@ class CompaniesTable extends Component implements HasTable, HasForms
                     ->color(fn(int $state): string => match($state) {
                         1 => 'success',
                         0 => 'danger',
-                    })
-                    ->sortable(),
+                    }),
                 TextColumn::make('user.full_name')
                     ->label(__('admin.company_representative'))
                     ->tooltip(__('admin.company_representative'))
@@ -113,24 +103,15 @@ class CompaniesTable extends Component implements HasTable, HasForms
                 Stack::make([
                     TextColumn::make('address')
                         ->label(__('admin.address'))
-                        ->icon('heroicon-m-home')
-                        ->formatStateUsing(
-                            fn(Company $company): string =>
-                                $company->address . ', ' . $company->zipcode . ' ' . $company->town
-                        ),
-                    TextColumn::make('county.title')
-                        ->label(__('admin.county'))
+                        ->icon('heroicon-m-home'),
+                    TextColumn::make('town')
+                        ->label(__('models/company.town'))
                         ->icon('heroicon-m-map-pin')
-                        ->formatStateUsing(
-                            fn(Company $company): string => $company->county?->title . ' | ' . $company->city?->title
-                        ),
+                        ->searchable(['town', 'zipcode'])
+                        ->formatStateUsing(fn(Company $company): string => $company->town.', '.$company->zipcode),
                     TextColumn::make('oib')
                         ->label(__('admin.oib'))
                         ->icon('heroicon-m-identification'),
-                    TextColumn::make('website')
-                        ->label(__('models/companies.website'))
-                        ->icon('heroicon-m-globe-alt')
-                        ->url(fn(Company $c):string|null => $c->website, true),
                     TextColumn::make('email')
                         ->label(__('admin.email'))
                         ->icon('heroicon-m-envelope'),

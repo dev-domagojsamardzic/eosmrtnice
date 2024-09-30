@@ -27,44 +27,6 @@
                 </div>
             @endif
 
-            {{-- Logo --}}
-            <div class="form-group row">
-                <div class="col-lg-6 col-md-12 mb-3">
-                    <x-input-label for="logo" :value="__('models/company.logo')"></x-input-label>
-                    <x-input-info :content="__('models/company.logo_helper_info')" />
-                    <input type="file" name="logo" id="logo">
-                    <small id="logo-message" class="text-xs font-weight-bold"></small>
-                </div>
-            </div>
-
-            {{-- website --}}
-            <div class="form-group row">
-                <div class="col-lg-6 col-md-12 mb-3">
-                    <x-input-label for="website" :value="__('models/company.website')"></x-input-label>
-                    <x-text-input
-                        id="website"
-                        name="website"
-                        type="text"
-                        :value="old('website', $company->website)"
-                        placeholder="{{ __('models/company.placeholders.website') }}"/>
-                    <x-input-error :messages="$errors->get('website')" class="mt-2" />
-                </div>
-            </div>
-
-
-            <div class="form-group row">
-                {{-- type --}}
-                <div class="col-lg-6 col-sm-12 mb-3">
-                    <x-input-label for="type" :value="__('admin.labels.company_type')" :required_tag="true"/>
-                    <select class="form-control border border-dark" name="type" id="type">
-                        @foreach($types as $value => $type)
-                            <option value="{{ $value }}" @selected((int)old('type', $company->type?->value) === (int)$value)>{{ $type }}</option>
-                        @endforeach
-                    </select>
-                    <x-input-error :messages="$errors->get('type')" class="mt-2" />
-                </div>
-            </div>
-
             <div class="form-group row">
                 {{-- title --}}
                 <div class="col-lg-6 mb-3">
@@ -81,36 +43,6 @@
             </div>
 
             <div class="form-group row">
-                {{-- county_id --}}
-                <div class="col-md-6 mb-3">
-                    <x-input-label for="county_id" :value="__('auth.labels.company_county')" :required_tag="true"/>
-                    <select class="form-control border border-dark" id="county_id" name="county_id">
-                        @foreach($counties as $county)
-                            @if((int) old('county_id', $company->county_id) === $county->id)
-                                <option value="{{ $county->id }}" selected>{{ $county->title }}</option>
-                            @else
-                                <option value="{{ $county->id }}">{{ $county->title }}</option>
-                            @endif
-                        @endforeach
-                    </select>
-                    <x-input-error :messages="$errors->get('county_id')" class="mt-2"/>
-                </div>
-
-                {{-- city_id --}}
-                <div class="col-md-6 mb-3">
-                    <x-input-label for="city_id" :value="__('auth.labels.company_city')" :required_tag="true"/>
-                    <select class="form-control border border-dark" id="city_id" name="city_id">
-                        @foreach($cities as $city)
-                            @if((int) old('city_id', $company->city_id) === $city->id)
-                                <option value="{{ $city->id }}" selected>{{ $city->title }}</option>
-                            @else
-                                <option value="{{ $city->id }}">{{ $city->title }}</option>
-                            @endif
-                        @endforeach
-                    </select>
-                    <x-input-error :messages="$errors->get('city_id')" class="mt-2"/>
-                </div>
-
                 {{-- address --}}
                 <div class="col-sm-12 mb-2">
                     <x-input-label for="address" :value="__('admin.labels.company_address')" />
@@ -225,5 +157,4 @@
             </div>
         </form>
     </div>
-    @include('partials.filepond.logo')
 </x-app-layout>

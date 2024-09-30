@@ -2,10 +2,8 @@
 
 namespace App\Http\Requests\Partner;
 
-use App\Enums\CompanyType;
 use App\Enums\UserType;
 use App\Models\Company;
-use App\Rules\CityBelongsToCounty;
 use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
@@ -46,18 +44,14 @@ class CompanyRequest extends FormRequest
     public function rules(): array
     {
         $rules = [
-            'type' => ['required', Rule::enum(CompanyType::class)],
             'title' => ['required', 'string', 'max:255'],
             'address' => ['nullable','string', 'max:512'],
             'town' => ['nullable','string', 'max:255'],
             'zipcode' => ['nullable','numeric', 'digits:5'],
-            'city_id' => ['required', 'exists:cities,id', new CityBelongsToCounty('county_id')],
-            'county_id' => ['required','exists:counties,id'],
             'oib' => ['required','numeric', 'digits:11'],
             'email' => ['required','string', 'email', 'max:255', Rule::unique(Company::class)->ignore($this->route('company')?->id)],
             'phone' => ['nullable','string', 'max:64'],
             'mobile_phone' => ['nullable','string', 'max:64'],
-            'website' => ['nullable', 'string', 'url:https', 'active_url'],
         ];
 
         if (is_admin()) {

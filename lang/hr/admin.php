@@ -29,7 +29,7 @@ return [
     'placeholders' => [
         'company_title' => 'Unesite naziv tvrtke',
         'company_address' => 'Unesite adresu tvrtke',
-        'company_town' => 'Unesite mjesto unutar općine',
+        'company_town' => 'Unesite grad/mjesto',
         'company_zipcode' => 'Poštanski broj',
         'company_oib' => 'OIB tvrtke',
         'company_email' => 'Unesite poslovni email',
@@ -40,7 +40,7 @@ return [
         'company_type' => 'Vrsta tvrtke',
         'company_title' => 'Naziv tvrtke',
         'company_address' => 'Adresa',
-        'company_town' => 'Mjesto (ako se razlikuje od grada / općine)',
+        'company_town' => 'Grad/Mjesto',
         'company_zipcode' => 'Poštanski broj',
         'company_oib' => 'OIB tvrtke',
         'company_email' => 'Službena email adresa',
