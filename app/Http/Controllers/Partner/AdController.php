@@ -3,13 +3,16 @@
 namespace App\Http\Controllers\Partner;
 
 use App\Enums\AdType;
+use App\Enums\CompanyType;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Partner\AdRequest;
 use App\Models\Ad;
+use App\Models\City;
 use App\Models\Company;
 use App\Services\ImageService;
 use Exception;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\DB;
 use Illuminate\View\View;
 use Livewire\Features\SupportRedirects\Redirector;
 
@@ -42,6 +45,17 @@ class AdController extends Controller
     }
 
     /**
+     *  Show the form for editing the specified resource.
+     *
+     * @param Ad $ad
+     * @return View
+     */
+    public function edit(Ad $ad): View
+    {
+        return $this->form($ad, 'edit');
+    }
+
+    /**
      * Update the specified resource in storage.
      * @param Ad $ad
      * @param AdRequest $request
@@ -55,18 +69,6 @@ class AdController extends Controller
     public function store(AdRequest $request): RedirectResponse
     {
         return $this->apply(new Ad, $request);
-    }
-
-
-    /**
-     *  Show the form for editing the specified resource.
-     *
-     * @param Ad $ad
-     * @return View
-     */
-    public function edit(Ad $ad): View
-    {
-        return $this->form($ad, 'edit');
     }
 
     /**
@@ -107,6 +109,21 @@ class AdController extends Controller
 
         $types = AdType::options();
 
+        // Get all company types
+        $companyTypes = CompanyType::options();
+        $existingCompanyTypes = DB::table('ads')
+            ->select('company_type')
+            ->where('company_id', $company->id)
+            ->whereNull('expired_at')
+            ->pluck('company_type')
+            ->toArray();
+
+        foreach ($existingCompanyTypes as $existingCompanyType) {
+            unset($companyTypes[$existingCompanyType]);
+        }
+
+        $cities = City::query()->get();
+
         $route = match($action) {
             'edit' => route(auth_user_type() . '.ads.update', ['ad' => $ad]),
             'create' => route(auth_user_type() . '.ads.store'),
@@ -118,6 +135,8 @@ class AdController extends Controller
             'company' => $company,
             'ad' => $ad,
             'types' => $types,
+            'companyTypes' => $companyTypes,
+            'cities' => $cities,
             'action_name' => $action,
             'action' => $route,
             'quit' => $quit,
@@ -140,14 +159,11 @@ class AdController extends Controller
                 ->with('alert', ['class' => 'danger', 'message' => __('common.ad_company_not_found')]);
         }
 
-        $companyLogo = $this->imageService->storeCompanyLogo($request, $company);
-        $company->logo = $companyLogo;
-        $company->save();
-
+        // What company is ad related to?
         if ($ad->company()->doesntExist()) {
             $ad->company()->associate($company);
         }
-
+        // Standard, premium or gold type
         if ($request->input('type')) {
             $ad->type = $request->input('type');
         }
@@ -156,6 +172,16 @@ class AdController extends Controller
         $ad->months_valid = $request->input('months_valid', 1);
         $ad->caption = $request->input('caption');
 
+        $ad->company_type = $request->input('company_type');
+        $ad->company_title = $request->input('company_title');
+        $ad->company_address = $request->input('company_address');
+        $ad->city_id = $request->input('city_id');
+        $ad->company_website = $request->input('company_website');
+        $ad->company_phone = $request->input('company_phone');
+        $ad->company_mobile_phone = $request->input('company_mobile_phone');
+
+        $companyLogo = $this->imageService->storeAdCompanyLogo($request, $ad);
+        $ad->logo = $companyLogo;
         $adBanner = $this->imageService->storeAdBanner($request, $ad);
         $ad->banner = $adBanner;
 
