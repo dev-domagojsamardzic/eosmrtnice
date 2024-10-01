@@ -54,6 +54,7 @@ return [
     'save_and_resend_offer' => 'Spremi i ponovno pošalji ponudu',
     'ongoing' => 'U toku',
     'expired' => 'Isteklo',
+    'not_expired' => 'Nije isteklo',
     'close' => 'Zatvori',
     'to' => 'do',
     'words' => 'riječi',

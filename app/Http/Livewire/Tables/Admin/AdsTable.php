@@ -18,7 +18,6 @@ use Filament\Tables\Columns\Layout\Split;
 use Filament\Tables\Columns\Layout\View as ViewLayout;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Columns\ViewColumn;
-use Filament\Tables\Filters\SelectFilter;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\RedirectResponse;
 use Livewire\Features\SupportRedirects\Redirector;
@@ -32,29 +31,34 @@ class AdsTable extends BaseAdsTable
      */
     protected function getQuery(): Builder
     {
-        return Ad::query()->orderByDesc('created_at');
+        return Ad::query();
     }
 
     protected function getColumns(): array
     {
         return [
             Split::make([
+                TextColumn::make('title')
+                    ->label(__('models/ad.title'))
+                    ->searchable()
+                    ->sortable(),
+                ViewColumn::make('type')
+                    ->view('filament.tables.columns.ad-type-icon')
+                    ->label(__('models/ad.type'))
+                    ->grow(false),
                 ImageColumn::make('logo')
                     ->circular()
                     ->defaultImageUrl(function(Ad $ad): string {
-                        return $ad->company?->logo ?
-                            public_storage_asset($ad->company->logo) :
-                            asset($ad->company->alternative_logo);
+                        return $ad->logo ?
+                            public_storage_asset($ad->logo) :
+                            asset($ad->alternative_logo);
                     })
-                    ->tooltip(fn (Ad $ad): string => $ad->company?->type?->translate())
+                    ->tooltip(fn (Ad $ad): string => $ad->company_type->translate())
                     ->grow(false),
-                TextColumn::make('company.title')
+                TextColumn::make('company_title')
                     ->label(__('models/ad.company_id'))
                     ->sortable()
                     ->searchable(),
-                ViewColumn::make('type')
-                    ->view('filament.tables.columns.ad-type-icon')
-                    ->label(__('models/ad.type')),
                 TextColumn::make('approved')
                     ->label(__('models/ad.approved'))
                     ->badge()
@@ -65,7 +69,8 @@ class AdsTable extends BaseAdsTable
                     ->color(fn(int $state): string => match($state) {
                         1 => 'success',
                         0 => 'danger',
-                    }),
+                    })
+                    ->grow(false),
                 TextColumn::make('active')
                     ->label(__('models/ad.active'))
                     ->badge()
@@ -76,20 +81,17 @@ class AdsTable extends BaseAdsTable
                     ->color(fn(int $state): string => match($state) {
                         1 => 'success',
                         0 => 'danger',
-                    }),
-                ViewColumn::make('offer_sent')
-                    ->view('filament.tables.columns.ad-offer-sent-badge'),
-                TextColumn::make('expired')
-                    ->label(__('models/ad.expired'))
-                    ->badge()
-                    ->formatStateUsing(fn(int $state): string => match($state) {
-                        1 => __('models/ad.expired'),
-                        default => ''
                     })
-                    ->color(fn(int $state): string => match($state) {
-                        1 => 'danger',
-                        default => '',
-                    }),
+                    ->grow(false),
+                ViewColumn::make('offer_sent')
+                    ->view('filament.tables.columns.ad-offer-sent-badge')
+                    ->grow(false),
+                TextColumn::make('expired_at')
+                    ->label(__('models/ad.expired_at'))
+                    ->badge()
+                    ->formatStateUsing(fn(Ad $ad)=> $ad->expired_at ? __('common.expired') . ' ' . $ad->expired_at->format('d.m.Y.') : __('common.not_expired'))
+                    ->default(__('common.not_expired'))
+                    ->color(fn(Ad $ad): string => is_null($ad->expired_at) ? 'success' : 'danger')
             ])->from('md'),
 
             ViewLayout::make('partner.table.ads-table-collapsible-panel')
@@ -105,12 +107,12 @@ class AdsTable extends BaseAdsTable
     protected function getFilters(): array
     {
         return [
-            SelectFilter::make('expired')
+            /*SelectFilter::make('expired_at')
                 ->label(__('models/ad.actuality'))
                 ->options([
                     0 => __('models/ad.ongoing_group'),
                     1 => __('models/ad.expired_group'),
-                ])
+                ])*/
         ];
     }
 
@@ -177,8 +179,7 @@ class AdsTable extends BaseAdsTable
                         ->label(__('models/ad.select_company_for_new_ad'))
                         ->searchable()
                         ->options(
-                            Company::query()
-                                ->availableForAd()
+                            Company::availableForAd()
                                 ->get()
                                 ->pluck('title', 'id')
                                 ->toArray()

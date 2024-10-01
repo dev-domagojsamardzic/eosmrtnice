@@ -34,7 +34,7 @@ class AdsTable extends BaseAdsTable
     protected function getQuery(): Builder
     {
         return Ad::query()
-            ->where('expired', 0)
+            ->whereNull('expired_at')
             ->whereHas('company', function (Builder $query) {
                 $query->where('user_id', auth()->id());
             });
@@ -48,19 +48,23 @@ class AdsTable extends BaseAdsTable
     {
         return [
             Split::make([
+                TextColumn::make('title')
+                    ->label(__('models/ad.title'))
+                    ->searchable()
+                    ->sortable(),
                 ViewColumn::make('type')
                     ->view('filament.tables.columns.ad-type-icon')
                     ->label(__('models/ad.type')),
                 ImageColumn::make('logo')
                     ->circular()
                     ->defaultImageUrl(function(Ad $ad): string {
-                        return $ad->company?->logo ?
-                            public_storage_asset($ad->company->logo) :
-                            asset($ad->company->alternative_logo);
+                        return $ad->logo ?
+                            public_storage_asset($ad->logo) :
+                            asset($ad->alternative_logo);
                     })
-                    ->tooltip(fn (Ad $ad): string => $ad->company?->type?->translate())
+                    ->tooltip(fn (Ad $ad): string => $ad->company_type->translate())
                     ->grow(false),
-                TextColumn::make('company.title')
+                TextColumn::make('company_title')
                     ->label(__('models/ad.company_id'))
                     ->sortable()
                     ->searchable(),

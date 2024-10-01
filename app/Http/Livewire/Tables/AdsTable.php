@@ -51,7 +51,8 @@ class AdsTable extends Component implements HasForms, HasTable
      */
     protected function getQuery(): Builder
     {
-        return Ad::query();
+        return Ad::query()
+            ->orderBy('created_at', 'desc');
     }
 
     /**
