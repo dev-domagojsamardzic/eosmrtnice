@@ -3,7 +3,6 @@
 namespace App\Services;
 
 use App\Models\Ad;
-use App\Models\Company;
 use App\Models\Post;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
@@ -15,22 +14,23 @@ class ImageService
     public const LOGO_PATH = 'images/partners/logo/';
     public const BANNER_PATH = 'images/ads/banners/';
     public const POST_IMAGE_PATH = 'images/posts/';
+
     /**
-     * Store company logo
+     * Store ad company logo
      *
-     * @param Request $request Request model
-     * @param Company $company Company model
+     * @param Request $request
+     * @param Ad $ad
      * @return string|null return logo filename if success, null if failure
      */
-    public function storeCompanyLogo(Request $request, Company $company): string|null
+    public function storeAdCompanyLogo(Request $request, Ad $ad): string|null
     {
         // This can be either logo in tmp file, or logo already saved in images/partners/logo directory
         $source = $request->input('logo');
         // Return null if no source is sent
         if(!$source) {
             // Maybe user is removing logo, check if logo existed and delete
-            if ($company->logo) {
-                Storage::disk('public')->delete($company->logo);
+            if ($ad->logo) {
+                Storage::disk('public')->delete($ad->logo);
             }
             return null;
         }
@@ -44,8 +44,8 @@ class ImageService
         $filename = pathinfo($source, PATHINFO_BASENAME);
         $destination = self::LOGO_PATH . $filename;
 
-        if (!is_null($company->logo)) {
-            Storage::disk('public')->delete($company->logo);
+        if (!is_null($ad->logo)) {
+            Storage::disk('public')->delete($ad->logo);
         }
 
         try {
