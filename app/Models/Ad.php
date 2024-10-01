@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Enums\AdType;
+use App\Enums\CompanyType;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -16,22 +17,30 @@ use Illuminate\Support\Carbon;
 /**
  * @property-read       int                     id
  * @property            int                     company_id
- * @property            string                  title
+ * @property            int                     city_id
  * @property            int                     type
+ * @property            int                     company_type
+ * @property            string                  title
  * @property            bool                    approved
  * @property            bool                    active
  * @property            int                     months_valid
- * @property            Carbon                  valid_from
- * @property            Carbon                  valid_until
+ * @property            string                  company_title
+ * @property            string                  company_address
+ * @property            string                  company_phone
+ * @property            string                  company_mobile_phone
+ * @property            string                  company_website
+ * @property            string                  logo
  * @property            string                  banner
  * @property            string                  caption
- * @property            bool                    expired
+ * @property            Carbon                  valid_from
+ * @property            Carbon                  valid_until
  * @property            Carbon                  expired_at
  * @property            Carbon                  created_at
  * @property            Carbon                  updated_at
  * @property            Carbon                  deleted_at
  * --------------------------------------------------------
  * @property-read       string                  fallbackTitle
+ * @property-read       string                  alternative_logo
  * --------------------------------------------------------
  * @property            Company                 company
  * @property            Offer                   offers
@@ -57,10 +66,10 @@ class Ad extends Model
      */
     protected $attributes = [
         'type' => AdType::STANDARD,
+        'company_type' => CompanyType::FUNERAL,
         'months_valid' => 1,
         'approved' => false,
         'active' => false,
-        'expired' => false,
         'expired_at' => null,
     ];
 
@@ -71,8 +80,10 @@ class Ad extends Model
      */
     protected $casts = [
         'type' => AdType::class,
+        'company_type' => CompanyType::class,
         'valid_from' => 'datetime',
         'valid_until' => 'datetime',
+        'expired_at' => 'datetime',
     ];
 
     /**
@@ -92,6 +103,15 @@ class Ad extends Model
     public function company(): BelongsTo
     {
         return $this->belongsTo(Company::class);
+    }
+
+    /**
+     * City the ad company is located
+     * @return BelongsTo
+     */
+    public function city(): BelongsTo
+    {
+        return $this->belongsTo(City::class);
     }
 
     /**
@@ -122,6 +142,22 @@ class Ad extends Model
         $query->where('active', 1)
             ->where('approved', 1)
             ->where('valid_from', '<=', now()->toDateString())
-            ->where('valid_until', '>=', now()->toDateString());
+            ->where('valid_until', '>=', now()->toDateString())
+            ->whereNull('expired_at');
+    }
+
+    /**
+     * Get alternative logo based on company type
+     */
+    protected function alternativeLogo(): Attribute
+    {
+        return Attribute::make(
+            get: fn() => match($this->company_type) {
+                CompanyType::FUNERAL => 'graphics/company_symbol/coffin-outline.svg',
+                CompanyType::MASONRY => 'graphics/company_symbol/tomb-outline.svg',
+                CompanyType::FLOWERS => 'graphics/company_symbol/flowers-outline.svg',
+                default => 'graphics/company_symbol/cross-outline.svg',
+            },
+        );
     }
 }

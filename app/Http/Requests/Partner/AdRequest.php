@@ -3,14 +3,26 @@
 namespace App\Http\Requests\Partner;
 
 use App\Enums\AdType;
+use App\Enums\CompanyType;
 use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
 /**
+ * @property        int         company_id
  * @property        int         type
+ * @property        string      title
  * @property        int         months_valid
  * @property        string      caption
+ * @property        string      company_type
+ * @property        string      company_title
+ * @property        string      company_address
+ * @property        int         city_id
+ * @property        string      company_website
+ * @property        string      company_phone
+ * @property        string      company_mobile_phone
+ * @property        string      logo
+ * @property        string      banner
  */
 class AdRequest extends FormRequest
 {
@@ -40,7 +52,7 @@ class AdRequest extends FormRequest
         return [
             'logo.required' => 'Postavite logo ako ste odabrali vrstu oglasa: Premium ili Gold.',
             'banner.required' => 'Postavite naslovnu sliku ako ste odabrali vrstu oglasa: Gold.',
-            'caption.required' => 'Postavite naslov ako ste odabrali vrstu oglasa: Gold.',
+            'caption.required' => 'Napišite tekst ako ste odabrali vrstu oglasa: Gold.',
         ];
     }
 
@@ -58,6 +70,12 @@ class AdRequest extends FormRequest
             'type' => $typeValidation,
             'title' => ['nullable', 'string:255'],
             'months_valid' => ['required', 'integer', 'in:1,3,6,12'],
+            'company_type' => ['required', Rule::enum(CompanyType::class)],
+            'company_title' => ['required', 'string:255'],
+            'company_address' => ['required', 'string:512'],
+            'company_phone' => ['nullable', 'string:64'],
+            'company_mobile_phone' => ['nullable', 'string:64'],
+            'company_website' => ['nullable', 'string:255'],
         ];
     }
 
@@ -75,7 +93,7 @@ class AdRequest extends FormRequest
             3 => [
                 'logo' => ['required'],
                 'banner' => ['required'],
-                'caption' => ['required','string','max:256'],
+                'caption' => ['required','string','max:512'],
             ],
             default => []
         };
