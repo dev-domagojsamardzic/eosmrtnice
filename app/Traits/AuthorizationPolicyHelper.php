@@ -41,7 +41,7 @@ trait AuthorizationPolicyHelper
         return $user->companies()
             ->where('active', 1)
             ->whereDoesntHave('ads', function ($query) {
-                $query->where('expired', false);
+                $query->whereNull('expired_at');
             })
             ->exists();
     }
