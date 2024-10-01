@@ -28,12 +28,11 @@ class UpdateAdExpired extends Command
     public function handle(): int
     {
         $ads = Ad::query()
-            ->where('expired', 0)
+            ->whereNull('expired_at')
             ->where('valid_until', '<', now()->format('Y-m-d H:i:s'))
             ->get();
 
         foreach ($ads as $ad) {
-            $ad->expired = true;
             $ad->expired_at = now();
             $ad->active = false;
             $ad->save();
