@@ -2,9 +2,11 @@
 
 namespace App\Models;
 
+use App\Enums\CompanyType;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Carbon;
 use Illuminate\Database\Eloquent\Builder;
@@ -26,6 +28,7 @@ use Illuminate\Database\Eloquent\Builder;
  * @property        Carbon      deleted_at
  * -------------------------------------------
  * @method          static      active(Builder $query)
+ * @method          static      availableForAd(Builder $query)
  * -------------------------------------------
  * @property        Partner     user
  */
@@ -71,10 +74,35 @@ class Company extends Model
     }
 
     /**
+     * Company's ads
+     * @return HasMany
+     */
+    public function ads(): HasMany
+    {
+        return $this->hasMany(Ad::class, 'company_id');
+    }
+
+    /**
      * Scope a query to only include active companies.
      */
     public function scopeActive(Builder $query): void
     {
         $query->where('active', 1);
+    }
+
+    /**
+     * Scope a query to only include companies available for ads
+     */
+    public function scopeAvailableForAd(Builder $query): void
+    {
+        $query->whereDoesntHave('ads', static function ($query) {
+            $query->where('company_type', CompanyType::FUNERAL)->whereNull('expired_at');
+        })
+        ->whereDoesntHave('ads', static function ($query) {
+            $query->where('company_type', CompanyType::MASONRY)->whereNull('expired_at');
+        })
+        ->whereDoesntHave('ads', static function ($query) {
+            $query->where('company_type', CompanyType::FLOWERS)->whereNull('expired_at');
+        });
     }
 }
