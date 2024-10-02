@@ -40,7 +40,7 @@ Route::get('trazi',[HomepageController::class, 'search'])->name('homepage.search
 
 Route::post('zapali-svijecu', [PostController::class, 'candle'])->name('posts.candle');
 
-Route::get('objava/{post}/{slug?}', [PostController::class, 'show'])->name('posts.show');
+Route::get('osmrtnice/{post}/{slug?}', [PostController::class, 'show'])->name('posts.show');
 
 Route::get('obavijesti-o-smrti',[DeathNoticeController::class, 'index'])->name('guest.death-notices');
 Route::post('obavijesti-o-smrti', [DeathNoticeController::class, 'items'])->name('guest.death-notices.items');
