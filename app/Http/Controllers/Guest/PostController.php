@@ -212,6 +212,6 @@ class PostController extends Controller
                 return $item->starts_at->format('d.m.Y.');
             });
 
-        return view('guest.search', ['posts' => $posts, 'name' => $name, 'date' => $date]);
+        return view('guest.search', ['posts' => $posts, 'name' => $name, 'date' => $date, 'county' => $county]);
     }
 }

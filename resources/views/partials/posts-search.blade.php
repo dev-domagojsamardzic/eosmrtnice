@@ -40,11 +40,12 @@
                 </div>
             </div>
 
+            @php($county = $county ?? 0)
             <div class="col-sm-12 col-md-3 mb-3">
                 <x-input-label for="county_id" :value="__('guest.county')"/>
                 <select class="form-control border border-dark" id="county_id" name="county_id">
-                    @foreach(get_counties_array() as $countyID => $county)
-                        <option value="{{ $countyID }}">{{ $county }}</option>
+                    @foreach(get_counties_array() as $id => $title)
+                        <option value="{{ $id }}" @selected($id === $county ?? '')>{{ $title }}</option>
                     @endforeach
                 </select>
             </div>
