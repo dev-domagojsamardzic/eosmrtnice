@@ -67,7 +67,7 @@ return [
     'approved' => 'Odobreno',
     'select_company_for_new_ad' => 'Odaberite tvrtku za koju želite stvoriti oglas',
     'banner' => 'Naslovna slika oglasa',
-    'banner_helper_info' => 'U Gold verziji oglasa, naslovna slika je obavezna. Podržani tipovi su: jpeg,jpg,png,svg,webp.',
+    'banner_helper_info' => 'U Gold verziji oglasa, naslovna slika je obavezna. Podržani tipovi su: jpeg,jpg,png,webp.',
     'caption' => 'Tekst',
     'caption_helper_info' => 'Napiši nešto kratko i dovoljno upečatljivo.',
     'no_banner' => 'Naslovna slika nije postavljena',

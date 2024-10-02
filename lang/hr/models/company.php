@@ -3,7 +3,7 @@
 return [
     'oib' => 'OIB',
     'logo' => 'Logo',
-    'logo_helper_info' => 'Preporučeno postavljanje logotipa. Podržani tipovi su: jpeg,jpg,png,svg,webp.',
+    'logo_helper_info' => 'Preporučeno postavljanje logotipa. Podržani tipovi su: jpeg,jpg,png,webp.',
     'company_email_info' => 'Na ovu adresu ćemo Vam slati ponude, račune i ostale dokumente',
     'website' => 'Službena web stranica',
     'placeholders' => [

@@ -24,10 +24,10 @@
                 labelButtonUndoItemProcessing: '{{ __('filepond.labelButtonUndoItemProcessing') }}',
                 labelButtonRetryItemProcessing: '{{ __('filepond.labelButtonRetryItemProcessing') }}',
                 labelButtonProcessItem: '{{ __('filepond.labelButtonProcessItem') }}',
-                imageValidateSizeMinWidth: 100,
+                imageValidateSizeMinWidth: 200,
                 imageValidateSizeMaxWidth: 1200,
-                imageValidateSizeMinHeight: 50,
-                imageValidateSizeMaxHeight: 900,
+                imageValidateSizeMinHeight: 200,
+                imageValidateSizeMaxHeight: 1200,
                 imageValidateSizeLabelFormatError: '{{ __('filepond.imageValidateSizeLabelFormatError') }}',
                 imageValidateSizeLabelImageSizeTooSmall: '{{ __('filepond.imageValidateSizeLabelImageSizeTooSmall') }}',
                 imageValidateSizeLabelImageSizeTooBig: '{{ __('filepond.imageValidateSizeLabelImageSizeTooBig') }}',
@@ -37,7 +37,7 @@
                 checkValidity: true,
                 credits: null,
                 dropValidation: true,
-                acceptedFileTypes: ['image/jpeg', 'image/png', 'image/svg+xml', 'image/webp'],
+                acceptedFileTypes: ['image/jpeg', 'image/png', 'image/webp'],
                 files: [
                     @if(old('logo', $company->logo))
                     {

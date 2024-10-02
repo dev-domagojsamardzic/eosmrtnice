@@ -24,10 +24,10 @@
                 labelButtonUndoItemProcessing: '{{ __('filepond.labelButtonUndoItemProcessing') }}',
                 labelButtonRetryItemProcessing: '{{ __('filepond.labelButtonRetryItemProcessing') }}',
                 labelButtonProcessItem: '{{ __('filepond.labelButtonProcessItem') }}',
-                imageValidateSizeMinWidth: 100,
-                imageValidateSizeMaxWidth: 1200,
-                imageValidateSizeMinHeight: 50,
-                imageValidateSizeMaxHeight: 900,
+                imageValidateSizeMinWidth: 350,
+                imageValidateSizeMaxWidth: 2400,
+                imageValidateSizeMinHeight: 250,
+                imageValidateSizeMaxHeight: 1800,
                 imageValidateSizeLabelFormatError: '{{ __('filepond.imageValidateSizeLabelFormatError') }}',
                 imageValidateSizeLabelImageSizeTooSmall: '{{ __('filepond.imageValidateSizeLabelImageSizeTooSmall') }}',
                 imageValidateSizeLabelImageSizeTooBig: '{{ __('filepond.imageValidateSizeLabelImageSizeTooBig') }}',
@@ -37,7 +37,7 @@
                 checkValidity: true,
                 credits: null,
                 dropValidation: true,
-                acceptedFileTypes: ['image/jpeg', 'image/png', 'image/svg+xml', 'image/webp'],
+                acceptedFileTypes: ['image/jpeg', 'image/png', 'image/webp'],
                 files: [
                         @if($ad?->banner)
                     {

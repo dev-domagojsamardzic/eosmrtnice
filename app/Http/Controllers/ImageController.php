@@ -31,7 +31,7 @@ class ImageController extends Controller
         }
 
         $validator = Validator::make($request->all(), [
-            $field => ['image', 'mimes:jpeg,jpg,png,svg+xml,webp', 'max:4096'], // Max 2MB
+            $field => ['image', 'mimetypes:image/jpeg,image/png,image/webp', 'max:4096'], // Max 2MB
         ]);
 
         if ($validator->fails()) {
