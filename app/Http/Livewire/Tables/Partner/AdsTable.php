@@ -2,10 +2,12 @@
 
 namespace App\Http\Livewire\Tables\Partner;
 
+use App\Enums\AdType;
 use App\Http\Controllers\Partner\AdController;
 use App\Models\Ad;
 use App\Models\Company;
 use App\Services\ImageService;
+use Filament\Actions\StaticAction;
 use Filament\Forms\Components\Select;
 use Filament\Support\Enums\IconPosition;
 use Filament\Tables\Actions\Action;
@@ -22,6 +24,7 @@ use Filament\Tables\Columns\ViewColumn;
 use Illuminate\Database\Eloquent\Builder;
 use App\Http\Livewire\Tables\AdsTable as BaseAdsTable;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\View\View;
 use Livewire\Features\SupportRedirects\Redirector;
 
 
@@ -100,6 +103,22 @@ class AdsTable extends BaseAdsTable
     protected function getActions(): array
     {
         return  [
+            Action::make('preview')
+                ->label(__('common.view'))
+                ->iconButton()
+                ->icon('heroicon-s-eye')
+                ->color('grey-900')
+                ->modalHeading('')
+                ->modalCancelAction(fn (StaticAction $action) => $action->label(__('common.close')))
+                ->modalSubmitAction(false)
+                ->modalContent(function (Ad $ad): View {
+                    $view = match($ad->type) {
+                        AdType::PREMIUM => 'partials.ad_preview.premium',
+                        AdType::GOLD => 'partials.ad_preview.gold',
+                        default => 'partials.ad_preview.standard',
+                    };
+                    return view($view, ['ad' => $ad]);
+                }),
             ActionGroup::make([
                 EditAction::make('edit')
                     ->label(__('common.edit'))

@@ -2,11 +2,13 @@
 
 namespace App\Http\Livewire\Tables\Admin;
 
+use App\Enums\AdType;
 use App\Http\Controllers\Partner\AdController;
 use App\Models\Ad;
 use App\Models\Company;
 use App\Services\ImageService;
 use Exception;
+use Filament\Actions\StaticAction;
 use Filament\Forms\Components\Select;
 use Filament\Support\Enums\IconPosition;
 use Filament\Tables\Actions\Action;
@@ -20,6 +22,7 @@ use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Columns\ViewColumn;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\View\View;
 use Livewire\Features\SupportRedirects\Redirector;
 use App\Http\Livewire\Tables\AdsTable as BaseAdsTable;
 
@@ -123,6 +126,22 @@ class AdsTable extends BaseAdsTable
     protected function getActions(): array
     {
         return  [
+            Action::make('preview')
+                ->label(__('common.view'))
+                ->iconButton()
+                ->icon('heroicon-s-eye')
+                ->color('grey-900')
+                ->modalHeading('')
+                ->modalCancelAction(fn (StaticAction $action) => $action->label(__('common.close')))
+                ->modalSubmitAction(false)
+                ->modalContent(function (Ad $ad): View {
+                    $view = match($ad->type) {
+                        AdType::PREMIUM => 'partials.ad_preview.premium',
+                        AdType::GOLD => 'partials.ad_preview.gold',
+                        default => 'partials.ad_preview.standard',
+                    };
+                    return view($view, ['ad' => $ad]);
+                }),
             ActionGroup::make([
                 Action::make('create_offer')
                     ->label(__('models/offer.create'))
