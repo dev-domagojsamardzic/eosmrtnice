@@ -1,32 +1,36 @@
 <div class="col-sm-12 col-lg-6 ad_preview_col">
     <div class="ad_preview standard">
-        <h5 class="mb-5">{{ $ad->company->title }}</h5>
-        @if($ad->company?->address)
-            <p class="text-black">{{ __('guest.address') }}:<span class="ml-2">{{ $ad->company->address }}</span></p>
+        <h5 class="mb-5">{{ $ad->company_title }}</h5>
+        @if($ad->company_address)
+            <p class="text-black">
+                <i class="fas fa-home icon-fixed-width-20" title="{{ __('guest.address') }}"></i>
+                <span class="ml-2">{{ $ad->company_address }}</span>
+            </p>
         @endif
-        @if($ad->company->town || $ad->company?->city?->title)
-            <p class="text-black">{{ __('guest.city') }}:
+        @if($ad->city)
+            <p class="text-black">
+                <i class="fas fa-map-marker-alt icon-fixed-width-20" title="{{ __('guest.city') }}"></i>
+                <span class="ml-2">{{ $ad->city->title }}</span>
+            </p>
+        @endif
+        @if($ad->company_phone)
+            <p class="text-black">
+                <i class="fas fa-phone icon-fixed-width-20" title="{{ __('guest.phone') }}"></i>
+                <span class="ml-2">{{ $ad->company_phone }}</span>
+            </p>
+        @endif
+        @if($ad->company_mobile_phone)
+            <p class="text-black">
+                <i class="fas fa-mobile-alt icon-fixed-width-20" title="{{ __('guest.mobile_phone') }}"></i>
+                <span class="ml-2">{{ $ad->company_mobile_phone }}</span>
+            </p>
+        @endif
+        @if($ad->company_website)
+            <p class="text-black">
+                <i class="fas fa-globe icon-fixed-width-20" title="{{ __('guest.web') }}"></i>
                 <span class="ml-2">
-                {{ implode(' / ', [$ad->company?->city?->title, $ad->company->town]) }}
-            </span></p>
-        @endif
-        @if($ad->company?->county?->title)
-            <p class="text-black">{{ __('guest.county') }}:<span class="ml-2">{{ $ad->company->county->title }}</span></p>
-        @endif
-        @if($ad->company?->phone)
-            <p class="text-black">{{ __('guest.phone') }}:<span class="ml-2">{{ $ad->company->phone }}</span></p>
-        @endif
-        @if($ad->company?->mobile_phone)
-            <p class="text-black">{{ __('guest.mobile_phone') }}:<span class="ml-2">{{ $ad->company->mobile_phone }}</span></p>
-        @endif
-        @if($ad->company?->email)
-            <p class="text-black">{{ __('guest.email') }}:<span class="ml-2">{{ $ad->company->email }}</span></p>
-        @endif
-        @if($ad->company?->website)
-            <p class="text-black">{{ __('guest.web') }}:
-                <span class="ml-2">
-                <a target="_blank" href="{{ $ad->company->website }}">{{ $ad->company->website }}</a>
-            </span>
+                        <a target="_blank" href="{{ $ad->company_website }}">{{ $ad->company_website }}</a>
+                    </span>
             </p>
         @endif
     </div>
