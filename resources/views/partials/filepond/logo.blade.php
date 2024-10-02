@@ -39,9 +39,9 @@
                 dropValidation: true,
                 acceptedFileTypes: ['image/jpeg', 'image/png', 'image/webp'],
                 files: [
-                    @if(old('logo', $company->logo))
+                    @if(old('logo', $ad->logo))
                     {
-                        source: '{{ old('logo', $company->logo) }}',
+                        source: '{{ old('logo', $ad->logo) }}',
                         options: {
                             type: 'local',
                         },
@@ -51,7 +51,7 @@
                 server: {
                     load: (source, load) => {
                         // Override img path with img asset URL
-                        source = '{{ public_storage_asset(old('logo', $company->logo) ?? '') }}';
+                        source = '{{ public_storage_asset(old('logo', $ad->logo) ?? '') }}';
                         fetch(source)
                             .then(res => res.blob())
                             .then(load);
