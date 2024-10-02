@@ -6,6 +6,7 @@ use App\Enums\PostSize;
 use App\Enums\PostSymbol;
 use App\Enums\PostType;
 use Carbon\Carbon;
+use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Collection;
@@ -29,6 +30,7 @@ use Illuminate\Support\Str;
  * @property            bool            is_framed
  * @property            string          image
  * @property            string          deceased_full_name_lg
+ * @property            string          slug
  * @property            string          deceased_full_name_sm
  * @property            string          lifespan
  * @property            string          intro_message
@@ -42,7 +44,6 @@ use Illuminate\Support\Str;
  * @property            Carbon          deleted_at
  * -------------------------------------------------
  * @property            int             words_count
- * @property            string          slug
  * -------------------------------------------------
  * @property            User                user
  * @property            Collection<Offer>   offers
@@ -53,6 +54,7 @@ class Post extends Model
 {
     use HasFactory;
     use SoftDeletes;
+    use Sluggable;
 
     /**
      * The attributes that should be cast.
@@ -103,16 +105,6 @@ class Post extends Model
     }
 
     /**
-     * Get posts slug
-     */
-    protected function slug(): Attribute
-    {
-        return Attribute::make(
-            get: fn () => Str::slug($this->deceased_full_name_lg)
-        );
-    }
-
-    /**
      * Get posts url
      */
     protected function url(): Attribute
@@ -153,5 +145,19 @@ class Post extends Model
         })
         ->where('is_active', true)
         ->where('is_approved', true);
+    }
+
+    /**
+     * Return the sluggable configuration array for this model.
+     *
+     * @return array
+     */
+    public function sluggable(): array
+    {
+        return [
+            'slug' => [
+                'source' => 'deceased_full_name_lg'
+            ]
+        ];
     }
 }

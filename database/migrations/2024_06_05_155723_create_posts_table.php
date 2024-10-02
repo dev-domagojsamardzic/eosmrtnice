@@ -29,6 +29,7 @@ return new class extends Migration
             $table->string('image')->nullable();
             $table->string('symbol')->nullable(false)->default(PostSymbol::NONE);
             $table->string('deceased_full_name_lg', 128);
+            $table->string('slug', 128)->unique();
             $table->string('deceased_full_name_sm', 128)->nullable();
             $table->string('lifespan', 50);
             $table->string('intro_message', 1024)->nullable();
