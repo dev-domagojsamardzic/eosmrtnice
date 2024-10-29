@@ -91,7 +91,7 @@
                                type="number"
                                min="1"
                                step="1"
-                               value="{{ old('quantity', $offer->offerables?->first()) ?? "1" }}"
+                               value="{{ old('quantity', $offer->quantity) ?? "1" }}"
                                required>
                     </div>
                     <x-input-error :messages="$errors->get('quantity')" class="mt-2"/>
@@ -106,7 +106,7 @@
                                type="number"
                                min="0.00"
                                step=".01"
-                               value="{{ old('price', $offer->offerables?->first()?->price)  ?? "0.00" }}"
+                               value="{{ old('price', $offer->price)  ?? "0.00" }}"
                                required>
                         <span class="input-group-text">{{ config('app.currency_symbol') }}</span>
                     </div>
@@ -179,8 +179,8 @@
                     let price = isNaN(parseFloat(priceHtml.value)) ? 0.00 : parseFloat(priceHtml.value);
 
                     let total = quantity * price;
-                    let taxes = total * (parseInt('{{ config('app.tax_percentage') }}') / 100);
-                    let net_total = total - taxes;
+                    let net_total = total / (1 + (parseInt('{{ config('app.tax_percentage') }}') / 100));
+                    let taxes = total - net_total;
 
 
                     netTotalHtml.textContent = net_total.toFixed(2);

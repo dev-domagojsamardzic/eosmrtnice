@@ -100,7 +100,7 @@ class PostsOffersTable extends Component implements HasForms, HasTable
                         TextColumn::make('post.type')
                             ->formatStateUsing(fn(PostsOffer $o): string => $o->post?->type->translate()),
                         TextColumn::make('post.size')
-                            ->formatStateUsing(fn(PostsOffer $o): string => __('common.to').' '.$o->post?->size->value.' '.__('common.words')),
+                            ->formatStateUsing(fn(PostsOffer $o): string => __('common.to').' '.$o->post?->size.' '.__('common.words')),
                         TextColumn::make('post.starts_at')
                             ->formatStateUsing(fn(PostsOffer $o): string => __('models/post.starts_at').': '.$o->post?->starts_at->format('d.m.Y.')),
                         TextColumn::make('post.image')

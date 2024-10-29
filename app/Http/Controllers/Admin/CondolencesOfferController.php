@@ -169,11 +169,11 @@ class CondolencesOfferController extends Controller
         $condolences_offer->quantity = (int)$request->input('quantity');
         $condolences_offer->price = (float)$request->input('price');
 
-        $total = $condolences_offer->price * $condolences_offer->quantity;
-        $taxes = ($total * ((float)config('app.tax_percentage') / 100));
+        $total = (float)$condolences_offer->price * (int)$condolences_offer->quantity;
+
         $condolences_offer->total = $total;
-        $condolences_offer->taxes = $taxes;
-        $condolences_offer->net_total = $total - $taxes;
+        $condolences_offer->taxes = get_tax_value($total);
+        $condolences_offer->net_total = get_nett_amount($total);
         $condolences_offer->valid_from = Carbon::parse($request->input('valid_from'))->format('Y-m-d');
         $condolences_offer->valid_until = Carbon::parse($request->input('valid_until'))->format('Y-m-d');
 

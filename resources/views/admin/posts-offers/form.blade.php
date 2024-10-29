@@ -65,7 +65,7 @@
                         {{ $post->type->translate() }}
                     </span>
                     <span>
-                        {{ $post->size->value . ' ' . __('common.words') }}
+                        {{ $post->size . ' ' . __('common.words') }}
                     </span>
                     <span>
                         {{ __('models/post.starts_at') . ': ' . $post->starts_at->format('d.m.Y.') }}
@@ -165,8 +165,9 @@
                     let price = isNaN(parseFloat(priceHtml.value)) ? 0.00 : parseFloat(priceHtml.value);
 
                     let total = quantity * price;
-                    let taxes = total * (parseInt('{{ config('app.tax_percentage') }}') / 100);
-                    let net_total = total - taxes;
+                    let net_total = total / (1 + (parseInt('{{ config('app.tax_percentage') }}') / 100));
+                    let taxes = total - net_total;
+                    console.log(quantity, price, total, net_total, taxes);
 
 
                     netTotalHtml.textContent = net_total.toFixed(2);

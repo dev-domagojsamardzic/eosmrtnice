@@ -179,10 +179,9 @@ class AdsOfferController extends Controller
         $ads_offer->price = (float)$request->input('price');
 
         $total = $ads_offer->price * $ads_offer->quantity;
-        $taxes = ($total * ((float)config('app.tax_percentage') / 100));
         $ads_offer->total = $total;
-        $ads_offer->taxes = $taxes;
-        $ads_offer->net_total = $total - $taxes;
+        $ads_offer->taxes = get_tax_value($total);
+        $ads_offer->net_total = get_nett_amount($total);
         $ads_offer->valid_from = Carbon::parse($request->input('valid_from'))->format('Y-m-d');
         $ads_offer->valid_until = Carbon::parse($request->input('valid_until'))->format('Y-m-d');
 

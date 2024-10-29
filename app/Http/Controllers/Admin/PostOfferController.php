@@ -174,15 +174,13 @@ class PostOfferController extends Controller
             $posts_offer->post()->associate($request->input('post_id'));
         }
 
-        // TODO: SOLVE OFFER_NUMBER GENERATING
         $posts_offer->quantity = (int)$request->input('quantity');
         $posts_offer->price = (float)$request->input('price');
 
-        $total = $posts_offer->price * $posts_offer->quantity;
-        $taxes = ($total * ((float)config('app.tax_percentage') / 100));
+        $total = (float)$posts_offer->price * (int)$posts_offer->quantity;
         $posts_offer->total = $total;
-        $posts_offer->taxes = $taxes;
-        $posts_offer->net_total = $total - $taxes;
+        $posts_offer->taxes = get_tax_value($total);
+        $posts_offer->net_total = get_nett_amount($total);
         $posts_offer->valid_from = Carbon::parse($request->input('valid_from'))->format('Y-m-d');
         $posts_offer->valid_until = Carbon::parse($request->input('valid_until'))->format('Y-m-d');
 

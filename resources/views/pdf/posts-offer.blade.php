@@ -60,7 +60,7 @@
         <tr>
             <td class="text-align-left">
                 <b>{{ $offer->post?->type->translate() }}</b><br>
-                {{ __('common.to') . ' ' . $offer->post?->size->value . ' ' . __('common.words') }}<br>
+                {{ __('common.to') . ' ' . $offer->post?->size . ' ' . __('common.words') }}<br>
                 {{ __('models/post.starts_at') . ': ' . $offer->post?->starts_at->format('d.m.Y.') }}<br>
                 {{ __('models/post.deceased_full_name') . ': ' . $offer->post?->deceased_full_name_lg }}<br>
                 {{ __('models/post.deceased_image') . ': ' . ($offer->post?->image ? __('common.yes') : __('common.no')) }}<br>

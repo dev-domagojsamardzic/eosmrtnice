@@ -173,3 +173,29 @@ if(!function_exists('get_counties_array')) {
         return $counties;
     }
 }
+
+if(!function_exists('get_nett')) {
+    /**
+     * Get nett value from total amount
+     *
+     * @param float $amount
+     * @return float
+     */
+    function get_nett_amount(float $amount): float
+    {
+        $taxesPercentage = config('app.tax_percentage');
+        return $amount / (1 + ($taxesPercentage / 100));
+    }
+}
+
+if(!function_exists('get_tax_value')) {
+    /**
+     * Get tax amount from total amount
+     * @param float $amount
+     * @return float
+     */
+    function get_tax_value(float $amount): float
+    {
+        return $amount - get_nett_amount($amount);
+    }
+}

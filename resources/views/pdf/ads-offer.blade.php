@@ -19,7 +19,7 @@
                     <tr><td><strong>{{ __('models/offer.buyer') }}:</strong></td></tr>
                     <tr><td>{{ $offer->company->title }}</td></tr>
                     <tr><td>{{ $offer->company->address }}</td></tr>
-                    <tr><td>{{ $offer->company->zipcode . ' ' . $offer->company->city->title }}</td></tr>
+                    <tr><td>{{ $offer->company->zipcode . ' ' . $offer->company->town }}</td></tr>
                     <tr><td>{{ config('app.country') }}</td></tr>
                 </table>
             </td>
