@@ -272,6 +272,9 @@
             autoSize: true,
             language: "hr",
             maxDate: '{{ now()->format('d.m.Y.') }}',
+            changeYear: true,
+            changeMonth: true,
+            yearRange: '{{ now()->subYears(100)->format('Y').':'.now()->format('Y') }}',
         });
     });
 </script>
