@@ -19,6 +19,16 @@ enum CompanyType: int
     }
 
     /**
+     * Enum values as array
+     *
+     * @return array
+     */
+    public static function values(): array
+    {
+        return array_column(self::cases(), 'value');
+    }
+
+    /**
      * Translate resource
      * @param string $locale
      * @return string
