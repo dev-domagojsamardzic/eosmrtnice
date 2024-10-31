@@ -95,14 +95,11 @@ class Company extends Model
      */
     public function scopeAvailableForAd(Builder $query): void
     {
-        $query->whereDoesntHave('ads', static function ($query) {
-            $query->where('company_type', CompanyType::FUNERAL)->whereNull('expired_at');
-        })
-        ->whereDoesntHave('ads', static function ($query) {
-            $query->where('company_type', CompanyType::MASONRY)->whereNull('expired_at');
-        })
-        ->whereDoesntHave('ads', static function ($query) {
-            $query->where('company_type', CompanyType::FLOWERS)->whereNull('expired_at');
+        $query->whereDoesntHave('ads', function (Builder $query) {
+            $query->whereNull('expired_at')
+                ->whereIn('company_type', CompanyType::values())
+                ->groupBy('company_id')
+                ->havingRaw('COUNT(DISTINCT company_type) = ?', [count(CompanyType::values())]);
         });
     }
 }
