@@ -186,7 +186,7 @@ class PostController extends Controller
     {
         $name = $request->input('name');
         $date = $request->input('date');
-        $county = $request->input('county_id');
+        $county = (int)$request->input('county_id');
 
         $posts = Post::query()
             ->where('is_active', true)
@@ -212,6 +212,6 @@ class PostController extends Controller
                 return $item->starts_at->format('d.m.Y.');
             });
 
-        return view('guest.search', ['posts' => $posts, 'name' => $name, 'date' => $date, 'county' => $county]);
+        return view('guest.search', compact('posts', 'name', 'date', 'county'));
     }
 }

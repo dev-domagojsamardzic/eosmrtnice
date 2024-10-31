@@ -164,12 +164,15 @@ if(!function_exists('get_counties_array')) {
      */
     function get_counties_array(bool $withAllCounties = true): array
     {
-        $counties = County::query()->pluck('title', 'id')->toArray();
+        $counties = County::query()
+            ->orderBy('title')
+            ->get()
+            ->toArray();
 
         if($withAllCounties) {
-            $counties[0] = __('common.all_counties');
-            ksort($counties);
+            array_unshift($counties, ['id' => 0, 'title' => __('common.all_counties')]);
         }
+
         return $counties;
     }
 }
