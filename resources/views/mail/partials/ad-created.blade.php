@@ -28,7 +28,7 @@
         @if($ad->type !== \App\Enums\AdType::STANDARD)
             <tr>
                 <td class="text-bold">{{ __('models/company.logo') }}</td>
-                <td class="text-right">{{ $ad->company?->logo ? __('common.yes') : __('common.no') }}</td>
+                <td class="text-right">{{ $ad->logo ? __('common.yes') : __('common.no') }}</td>
             </tr>
         @endif
         @if($ad->type === \App\Enums\AdType::GOLD)

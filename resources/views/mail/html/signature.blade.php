@@ -11,7 +11,7 @@
                 <td>{{ __('models/company.phone') . ': ' . company_data('phone') }}</td>
             </tr>
             <tr>
-                <td>{{ __('models/company.fax') . ': ' . company_data('fax') }}</td>
+                <td>{{ __('models/company.fax_short') . ': ' . company_data('fax') }}</td>
             </tr>
         </tbody>
     </table>

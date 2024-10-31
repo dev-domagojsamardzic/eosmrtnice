@@ -6,8 +6,8 @@ return [
     'team' => 'Team',
     'ad_created' => [
         'subject' => 'Novi oglas',
-        'intro' => 'Obavještavamo Vas da je korisnik :owner napravio novu reklamu za tvrtku :company, u vrijeme :datetime.',
-        'ad_properties' => 'Svojstva',
+        'intro' => 'Obavještavamo Vas da je korisnik :owner napravio novi oglas za tvrtku :company, u vrijeme :datetime.',
+        'ad_properties' => 'Značajke',
         'outro' => 'Pošaljite korisniku ponudu, a nakon uplate ne zaboravite odobriti oglas kako bi postao spreman za prikazivanje.',
     ],
     'offer_created' => [
