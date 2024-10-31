@@ -151,6 +151,7 @@ class AdsTable extends BaseAdsTable
                         ->options(
                             Company::query()
                                 ->where('user_id', auth()->id())
+                                ->where('active', 1)
                                 ->availableForAd()
                                 ->get()
                                 ->pluck('title', 'id')

@@ -194,7 +194,9 @@ class AdsTable extends BaseAdsTable
                         ->label(__('models/ad.select_company_for_new_ad'))
                         ->searchable()
                         ->options(
-                            Company::availableForAd()
+                            Company::query()
+                                ->where('active', 1)
+                                ->availableForAd()
                                 ->get()
                                 ->pluck('title', 'id')
                                 ->toArray()
