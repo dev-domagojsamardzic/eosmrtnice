@@ -119,7 +119,7 @@ class AdController extends Controller
             ->toArray();
 
         foreach ($existingCompanyTypes as $existingCompanyType) {
-            unset($companyTypes[$existingCompanyType]);
+            unset($companyTypes[$existingCompanyType->value]);
         }
 
         $cities = City::query()->get();
