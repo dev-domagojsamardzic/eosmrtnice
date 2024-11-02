@@ -68,6 +68,20 @@
                     </div>
                 </div>
 
+                {{-- Post type --}}
+                <div class="form-group row">
+                    <div class="col-sm-12">
+                        <x-input-label for="type" :value="__('models/post.type')" :required_tag="true"/>
+                        <select class="form-control border border-dark" id="type" name="type">
+                            @foreach($types as $key => $type)
+                                <option
+                                    value="{{ $key }}" @selected($key === (int)old('type', $post->type->value))>{{ $type }}</option>
+                            @endforeach
+                        </select>
+                        <x-input-error :messages="$errors->get('type')" class="mt-2"/>
+                    </div>
+                </div>
+
                 {{-- Starts at --}}
                 <div class="form-group row">
                     {{-- city_id --}}
@@ -119,20 +133,6 @@
                                 {{ __('models/post.is_framed') . " (". config('eosmrtnice.products.post_frame.price').config('app.currency_symbol').")" }}
                             </label>
                         </div>
-                    </div>
-                </div>
-
-                {{-- Post type --}}
-                <div class="form-group row">
-                    <div class="col-sm-12">
-                        <x-input-label for="type" :value="__('models/post.type')" :required_tag="true"/>
-                        <select class="form-control border border-dark" id="type" name="type">
-                            @foreach($types as $key => $type)
-                                <option
-                                    value="{{ $key }}" @selected($key === (int)old('type', $post->type->value))>{{ $type }}</option>
-                            @endforeach
-                        </select>
-                        <x-input-error :messages="$errors->get('type')" class="mt-2"/>
                     </div>
                 </div>
 
