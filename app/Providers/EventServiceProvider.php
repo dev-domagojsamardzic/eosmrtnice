@@ -4,9 +4,11 @@ namespace App\Providers;
 
 use App\Models\Ad;
 use App\Models\AdsOffer;
+use App\Models\Condolence;
 use App\Models\CondolencesOffer;
 use App\Models\PostsOffer;
 use App\Observers\AdObserver;
+use App\Observers\CondolenceObserver;
 use App\Observers\OfferObserver;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
@@ -33,6 +35,7 @@ class EventServiceProvider extends ServiceProvider
         Ad::observe(AdObserver::class);
         AdsOffer::observe(OfferObserver::class);
         PostsOffer::observe(OfferObserver::class);
+        Condolence::observe(CondolenceObserver::class);
         CondolencesOffer::observe(OfferObserver::class);
     }
 }
