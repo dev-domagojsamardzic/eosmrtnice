@@ -111,7 +111,7 @@ class AdController extends Controller
 
         // Get all company types
         $companyTypes = CompanyType::options();
-        $existingCompanyTypes = DB::table('ads')
+        $existingCompanyTypes = Ad::query()
             ->select('company_type')
             ->where('company_id', $company->id)
             ->whereNull('expired_at')
