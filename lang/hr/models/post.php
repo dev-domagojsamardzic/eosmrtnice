@@ -47,7 +47,7 @@ return [
     'post_not_approved' => 'Objava nije odobrena',
     'empty_state_description' => 'Prvo morate dodati pokojnika da biste mogli kreirati svoju prvu objavu.',
     'edit_post' => 'Uređivanje objave',
-    'edit_post_instructions' => 'Kako budete popunjavate formu, vaši unosi automatski će se prikazivati u području za pregled.',
+    'edit_post_instructions' => 'Kako popunjavate formu, vaši unosi će se automatski prikazivati u pregledu.',
     'deceased_image' => 'Slika pokojnika',
     'deceased_image_helper_info' => 'Podržani formati: jpeg, jpg, png. Preporučene dimenzije: 200 x 280.',
     'post_owner' => 'Vlasnik objave',

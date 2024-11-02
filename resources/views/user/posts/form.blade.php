@@ -82,9 +82,8 @@
                     </div>
                 </div>
 
-                {{-- Starts at --}}
-                <div class="form-group row">
-                    {{-- city_id --}}
+                {{-- Funeral city --}}
+                <div class="form-group row" id="funeral_city_form_group">
                     <div class="col-md-6 col-sm-12">
                         <x-input-label for="funeral_city_id" :value="__('models/post.funeral_city_id')"/>
                         <select class="form-control border border-dark" id="funeral_city_id" name="funeral_city_id">
@@ -98,6 +97,10 @@
                         </select>
                         <x-input-error :messages="$errors->get('funeral_city_id')" class="mt-2"/>
                     </div>
+                </div>
+
+                {{-- Starts at --}}
+                <div class="form-group row">
                     <div class="col-lg-4 col-sm-12">
                         <x-input-label for="starts_at" :value="__('models/post.starts_at')" :required_tag="true"></x-input-label>
                         <div class="input-group input-group-joined date">
@@ -279,6 +282,8 @@
             const main_msg_placeholders = @json(__('models/post.main_message_placeholders'), JSON_THROW_ON_ERROR);
             const types = @json($types, JSON_THROW_ON_ERROR);
 
+            const funeral_city_form_group = document.getElementById('funeral_city_form_group');
+
             document.addEventListener('DOMContentLoaded', function () {
                 $('#starts_at').datepicker({
                     dateFormat: "dd.mm.yy.",
@@ -290,6 +295,7 @@
 
                 updateCounter()
                 handlePostPreview();
+                toggleFuneralCityFormGroup();
 
                 calculateTotalPrice();
             })
@@ -312,6 +318,7 @@
                 type_preview.textContent = types[event.target.value];
                 intro_message.placeholder = intro_msg_placeholders[event.target.value];
                 main_message.placeholder = main_msg_placeholders[event.target.value];
+                toggleFuneralCityFormGroup();
             })
 
             is_framed.addEventListener('change', function() {
@@ -483,6 +490,14 @@
                 let total = sizePrice + isFramedPrice + symbolPrice + imagePrice;
 
                 document.getElementById('current_price_box').innerText = total + ' {{ config('app.currency_symbol') }}';
+            }
+
+            /**
+             * If death notice is selected, display funeral_city_id select box
+             */
+            function toggleFuneralCityFormGroup() {
+                const isDeathNoticeSelected = (type.value === '{{ \App\Enums\PostType::DEATH_NOTICE}}');
+                funeral_city_form_group.style.display = (isDeathNoticeSelected) ? 'block' : 'none';
             }
         </script>
     @endpush

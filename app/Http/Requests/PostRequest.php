@@ -42,6 +42,7 @@ class PostRequest extends FormRequest
             'type' => ['required', Rule::enum(PostType::class)],
             'size' => ['required', Rule::enum(PostSize::class), new PostWordCount()],
             'starts_at' => ['required'],
+            'funeral_city_id' => [Rule::requiredIf((int)$this->type === PostType::DEATH_NOTICE->value)],
             'deceased_full_name_lg' => ['required', 'string', 'max:128'],
             'deceased_full_name_sm' => ['max:128'],
             'lifespan' => ['required', 'string', 'max:30'],
@@ -57,5 +58,12 @@ class PostRequest extends FormRequest
             'intro_message' => trim($this->intro_message, " \r\n\t"),
             'main_message' => trim($this->main_message, " \r\n\t"),
         ]);
+    }
+
+    public function messages(): array
+    {
+        return [
+            'funeral_city_id.required' => 'Uz obavijest o smrti je obavezno naznačiti mjesto pogreba.',
+        ];
     }
 }

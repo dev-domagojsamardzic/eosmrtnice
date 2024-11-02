@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\User;
 
-use App\Enums\PostSize;
 use App\Enums\PostSymbol;
 use App\Enums\PostType;
 use App\Http\Controllers\Controller;
@@ -21,7 +20,7 @@ class PostController extends Controller
 
     public function __construct(protected ImageService $imageService)
     {
-
+        // because of dependency injection
     }
     /**
      * Display a listing of the resource.
@@ -137,15 +136,18 @@ class PostController extends Controller
             $post->user()->associate($request->input('user_id'));
         }
 
-        $funeralCity = City::query()
-            ->where('id', $request->input('funeral_city_id'))
-            ->first();
-
         $post->type = $request->input('type');
         $post->size = $request->input('size');
 
-        $post->funeral_county_id = $funeralCity?->county_id ?? 0;
-        $post->funeral_city_id = $funeralCity?->id ?? 0;
+        // funeral_city_id is inserted only when post === PostType::DEATH_NOTICE
+        if ($post->type === PostType::DEATH_NOTICE) {
+            $funeralCity = City::query()
+                ->where('id', $request->input('funeral_city_id'))
+                ->first();
+
+            $post->funeral_city_id = $request->input('funeral_city_id');
+            $post->funeral_county_id = $funeralCity?->county_id;
+        }
 
         $startDate = Carbon::parse($request->input('starts_at'));
         $postDurationInDays = (int)config('eosmrtnice.post_duration_days');
