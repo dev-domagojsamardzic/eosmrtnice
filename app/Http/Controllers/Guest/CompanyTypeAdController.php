@@ -31,15 +31,15 @@ class CompanyTypeAdController
 
         $ads = $this->query()
             ->when($county, function ($query, $county) {
-                $query->whereHas('company', function ($query) use ($county) {
-                    $query->where('county_id', $county);
+                $query->whereHas('city', function ($query) use ($county) {
+                    $query->whereHas('county', function ($query) use ($county) {
+                        $query->where('county_id', $county);
+                    });
                 });
             })
             ->when($city, function ($query, $city) {
-                $query->whereHas('company', function ($query) use ($city) {
-                    $query->whereHas('city', function ($query) use ($city) {
-                        $query->where('title', 'LIKE', '%'.$city.'%');
-                    });
+                $query->whereHas('city', function ($query) use ($city) {
+                    $query->where("title", "like" , "%$city%");
                 });
             })
             ->get();
