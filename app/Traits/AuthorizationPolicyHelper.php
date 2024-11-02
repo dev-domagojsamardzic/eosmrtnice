@@ -36,6 +36,12 @@ trait AuthorizationPolicyHelper
             ->exists();
     }
 
+    /**
+     * Does user own at least one company available for ad?
+     * CURRENTLY, NOT IN USE!!
+     * @param User $user
+     * @return bool
+     */
     protected function userOwnsCompaniesAvailableForAds(User $user): bool
     {
         return $user->companies()

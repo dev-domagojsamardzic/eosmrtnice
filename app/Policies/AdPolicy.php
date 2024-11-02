@@ -33,8 +33,8 @@ class AdPolicy
         return is_admin() ||
             (
                 is_partner() &&
-                $this->userOwnsAtLeastOneCompany($user) &&
-                $this->userOwnsCompaniesAvailableForAds($user)
+                $this->userOwnsAtLeastOneCompany($user)
+                //&& $this->userOwnsCompaniesAvailableForAds($user)
             );
     }
 
