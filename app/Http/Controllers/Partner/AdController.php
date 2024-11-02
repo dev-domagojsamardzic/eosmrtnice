@@ -113,6 +113,9 @@ class AdController extends Controller
         $companyTypes = CompanyType::options();
         $existingCompanyTypes = Ad::query()
             ->select('company_type')
+            ->when($action === 'edit', function ($query) use ($ad) {
+                $query->where('company_type', '!=', $ad->company_type);
+            })
             ->where('company_id', $company->id)
             ->whereNull('expired_at')
             ->pluck('company_type')
