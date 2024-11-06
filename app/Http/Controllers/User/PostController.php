@@ -145,7 +145,7 @@ class PostController extends Controller
                 ->where('id', $request->input('funeral_city_id'))
                 ->first();
 
-            $post->funeral_city_id = $request->input('funeral_city_id');
+            $post->funeral_city_id = $funeralCity?->id;
             $post->funeral_county_id = $funeralCity?->county_id;
         }
 
