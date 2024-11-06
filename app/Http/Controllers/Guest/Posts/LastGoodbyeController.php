@@ -19,6 +19,7 @@ class LastGoodbyeController extends PostController
 
         if (count($latestDates) === 0) {
             return view('guest.posts',[
+                'pageTitle' => __('guest.last_goodbyes'),
                 'posts' => collect([]),
                 'nextDateToLoad' => null,
                 'loadMoreItemsRoute' => $loadMoreItemsRoute,

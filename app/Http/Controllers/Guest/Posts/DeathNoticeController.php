@@ -19,6 +19,8 @@ class DeathNoticeController extends PostController
 
         if (count($latestDates) === 0) {
             return view('guest.posts',[
+                'pageTitle' => __('guest.death_notices'),
+                'canSearchByCounty' => true,
                 'posts' => collect([]),
                 'nextDateToLoad' => null,
                 'loadMoreItemsRoute' => $loadMoreItemsRoute,
@@ -35,6 +37,7 @@ class DeathNoticeController extends PostController
 
         return view('guest.posts', [
             'pageTitle' => __('guest.death_notices'),
+            'canSearchByCounty' => true,
             'posts' => $posts,
             'nextDateToLoad' => $nextDateToLoad,
             'loadMoreItemsRoute' => route('guest.death-notices.items'),

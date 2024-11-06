@@ -22,4 +22,9 @@ return [
     'light_a_candle' => 'Zapali svijeću',
     'candle_already_lit' => 'Već ste zapalili svijeću.',
     'candle_lit_successfuly' => 'Zapalili ste svijeću.',
+    'search_default' => 'Pretraži sve objave',
+    'search_death_notice' => 'Pretraži osmrtnice',
+    'search_last_goodbye' => 'Pretraži posljednje pozdrave',
+    'search_memory' => 'Pretraži objave sjećanja',
+    'search_thank_you' => 'Pretraži objave zahvale'
 ];

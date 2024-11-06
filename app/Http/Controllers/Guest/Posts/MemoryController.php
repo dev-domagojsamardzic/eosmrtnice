@@ -19,6 +19,7 @@ class MemoryController extends PostController
 
         if (count($latestDates) === 0) {
             return view('guest.posts',[
+                'pageTitle' => __('guest.memories'),
                 'posts' => collect([]),
                 'nextDateToLoad' => null,
                 'loadMoreItemsRoute' => $loadMoreItemsRoute,

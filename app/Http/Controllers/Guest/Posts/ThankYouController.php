@@ -19,6 +19,7 @@ class ThankYouController extends PostController
 
         if (count($latestDates) === 0) {
             return view('guest.posts',[
+                'pageTitle' => __('guest.thank_yous'),
                 'posts' => collect([]),
                 'nextDateToLoad' => null,
                 'loadMoreItemsRoute' => $loadMoreItemsRoute,

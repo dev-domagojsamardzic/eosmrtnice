@@ -186,7 +186,7 @@ class PostController extends Controller
     {
         $name = $request->input('name');
         $date = $request->input('date');
-        $county = (int)$request->input('county_id');
+        $county = $request->input('county_id', 0);
 
         $posts = Post::query()
             ->where('is_active', true)
