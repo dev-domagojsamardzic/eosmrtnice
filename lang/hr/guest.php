@@ -26,5 +26,6 @@ return [
     'search_death_notice' => 'Pretraži osmrtnice',
     'search_last_goodbye' => 'Pretraži posljednje pozdrave',
     'search_memory' => 'Pretraži objave sjećanja',
-    'search_thank_you' => 'Pretraži objave zahvale'
+    'search_thank_you' => 'Pretraži objave zahvale',
+    'terms_of_sale' => 'Uvjeti kupovine',
 ];

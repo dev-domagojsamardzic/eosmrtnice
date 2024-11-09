@@ -49,7 +49,7 @@
                     <a href="#" @class(['text-black'])>#Uvjeti korištenja</a>
                 </div>
                 <div class="text-center p-1">
-                    <a href="#" @class(['text-black'])>#Uvjeti kupnje</a>
+                    <a href="{{ route('guest.terms-of-sale') }}" @class(['text-black'])>{{ __('guest.terms_of_sale') }}</a>
                 </div>
                 <div class="text-center p-1">
                     <a href="#" @class(['text-black'])>#Politika privatnosti</a>
