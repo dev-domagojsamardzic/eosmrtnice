@@ -76,4 +76,5 @@ return [
     'monthly' => 'Mjesečna',
     'annual' => 'Godišnja',
     'all_counties' => 'Sve županije',
+    'all' => 'Sve',
 ];

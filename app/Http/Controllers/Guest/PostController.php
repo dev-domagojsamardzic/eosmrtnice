@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Guest;
 
 use App\Enums\PostType;
 use App\Http\Controllers\Controller;
+use App\Models\County;
 use App\Models\Post;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\JsonResponse;
@@ -188,6 +189,9 @@ class PostController extends Controller
         $date = $request->input('date');
         $county = $request->input('county_id', 0);
 
+        $county = County::query()->where('id', $county)->first();
+        $search_county = $county?->title;
+
         $posts = Post::query()
             ->where('is_active', true)
             ->where('is_approved', true)
@@ -212,6 +216,6 @@ class PostController extends Controller
                 return $item->starts_at->format('d.m.Y.');
             });
 
-        return view('guest.search', compact('posts', 'name', 'date', 'county'));
+        return view('guest.search', compact('posts', 'name', 'date', 'county','search_county'));
     }
 }

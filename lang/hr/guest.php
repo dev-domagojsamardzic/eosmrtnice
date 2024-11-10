@@ -30,4 +30,7 @@ return [
     'terms_of_sale' => 'Uvjeti kupnje',
     'privacy_policy' => 'Pravila privatnosti',
     'terms_and_conditions' => 'Opći uvjeti i pravila korištenja',
+    'post_type' => 'Vrsta objave',
+    'search_term' => 'Pojam pretrage',
+    'date' => 'Datum',
 ];
