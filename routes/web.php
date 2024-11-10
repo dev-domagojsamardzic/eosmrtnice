@@ -129,5 +129,8 @@ Route::group(['as' => 'guest.'], static function() {
     Route::get('pravila-privatnosti', static function() {
         return view('guest.legal.privacy-policy');
     })->name('privacy-policy');
+    Route::get('opci-uvjeti-i-pravila-koristenja', static function() {
+        return view('guest.legal.terms-and-conditions');
+    })->name('terms-and-conditions');
 });
 

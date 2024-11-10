@@ -29,4 +29,5 @@ return [
     'search_thank_you' => 'Pretraži objave zahvale',
     'terms_of_sale' => 'Uvjeti kupovine',
     'privacy_policy' => 'Pravila privatnosti',
+    'terms_and_conditions' => 'Opći uvjeti i pravila korištenja',
 ];

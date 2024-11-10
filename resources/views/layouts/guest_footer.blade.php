@@ -46,7 +46,7 @@
                     <b>Korisni linkovi</b>
                 </div>
                 <div class="text-center p-1">
-                    <a href="#" @class(['text-black'])>#Uvjeti korištenja</a>
+                    <a href="{{ route('guest.terms-and-conditions') }}" @class(['text-black'])>{{ __('guest.terms_and_conditions') }}</a>
                 </div>
                 <div class="text-center p-1">
                     <a href="{{ route('guest.terms-of-sale') }}" @class(['text-black'])>{{ __('guest.terms_of_sale') }}</a>

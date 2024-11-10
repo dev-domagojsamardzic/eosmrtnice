@@ -176,25 +176,4 @@
         </li>
         <li><p class="lh-1p75"><b>Adresa: </b>Vinogradska 3, 40313 Sveti Martin na Muri</p></li>
     </ul>
-    {{--<h3 class="mb-3">II. Proces narudžbe</h3>
-    <ol class="legal-terms-ol">
-        <li>
-            <p class="lh-1p75">
-                Korisnik može odabrati željeni proizvod ili uslugu na Portalu eOsmrtnice, a zatim
-                ispuniti potrebne podatke za narudžbu.
-            </p>
-        </li>
-        <li>
-            <p class="lh-1p75">
-                Nakon što Korisnik ispuni sve potrebne informacije, na e-mail adresu navedenu u
-                narudžbi Korisnik će dobiti ponudu s točnim iznosom za uplatu.
-            </p>
-        </li>
-        <li>
-            <p class="lh-1p75">
-                Narudžba se smatra potvrđenom nakon što Korisnik izvrši uplatu na transakcijski
-                račun tvrtke naveden u ponudi.
-            </p>
-        </li>
-    </ol>--}}
 </x-guest-layout>
