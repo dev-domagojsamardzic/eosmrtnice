@@ -86,7 +86,7 @@
 
     <h3 class="mb-3">VI. Sigurnost podataka i privatnost</h3>
     <p class="lh-1p75">
-        Korisnikovi podaci bit će obrađivani sukladno <a href="#">Pravilima privatnosti</a> navedenim na
+        Korisnikovi podaci bit će obrađivani sukladno <a class="underline" href="{{ route('guest.privacy-policy') }}">Pravilima privatnosti</a> navedenim na
         Portalu eOsmrtnice. Svi podaci korišteni u svrhu obrade narudžbe i dostave čuvaju
         se u skladu s važećim zakonima i propisima o zaštiti osobnih podataka.
     </p>
