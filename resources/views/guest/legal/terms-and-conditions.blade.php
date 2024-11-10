@@ -113,7 +113,7 @@
 
     <h3 class="mb-3">XII. REKLAMACIJE I PRITUŽBE</h3>
     <p class="lh-1p75">
-        Korisnici mogu uputiti prigovor putem adrese elektroničke pošte prigovori@eosmrtnice.com ili na adresu sjedišta Nakladnika.
+        Korisnici mogu uputiti prigovor putem adrese elektroničke pošte <b>prigovori@eosmrtnice.com</b> ili na adresu sjedišta Nakladnika.
         Nakladnik će odgovoriti na prigovor u roku od 15 dana.
     </p>
 
@@ -127,6 +127,6 @@
     <h3 class="mb-3">XIV. MODERIRANJE SADRŽAJA</h3>
     <p class="lh-1p75">
         Portal eOsmrtnice zadržava pravo moderiranja sadržaja kako bi osigurao poštivanje ovih Uvjeta korištenja.
-        Korisnici mogu prijaviti neprimjereni sadržaj putem e-pošte prigovori@eosmrtnice.com.
+        Korisnici mogu prijaviti neprimjereni sadržaj putem e-pošte <b>prigovori@eosmrtnice.com</b>.
     </p>
 </x-guest-layout>
