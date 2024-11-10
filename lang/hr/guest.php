@@ -28,4 +28,5 @@ return [
     'search_memory' => 'Pretraži objave sjećanja',
     'search_thank_you' => 'Pretraži objave zahvale',
     'terms_of_sale' => 'Uvjeti kupovine',
+    'privacy_policy' => 'Pravila privatnosti',
 ];

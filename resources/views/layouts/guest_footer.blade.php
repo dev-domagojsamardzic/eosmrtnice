@@ -52,7 +52,7 @@
                     <a href="{{ route('guest.terms-of-sale') }}" @class(['text-black'])>{{ __('guest.terms_of_sale') }}</a>
                 </div>
                 <div class="text-center p-1">
-                    <a href="#" @class(['text-black'])>#Politika privatnosti</a>
+                    <a href="{{ route('guest.privacy-policy') }}" @class(['text-black'])>{{ __('guest.privacy_policy') }}</a>
                 </div>
             </div>
 

@@ -123,8 +123,11 @@ Route::group(['as' => 'guest.'], static function() {
     Route::post('klesari', [MasonryCompanyAdController::class, 'items'])->name('masonries.items');
     Route::get('cvjecari', [FlowersCompanyAdController::class, 'flowers'])->name('flowers');
     Route::post('cvjecari', [FlowersCompanyAdController::class, 'items'])->name('flowers.items');
-    Route::get('uvjeti-kupovine', function() {
+    Route::get('uvjeti-kupovine', static function() {
         return view('guest.legal.terms-of-sale');
     })->name('terms-of-sale');
+    Route::get('pravila-privatnosti', static function() {
+        return view('guest.legal.privacy-policy');
+    })->name('privacy-policy');
 });
 
