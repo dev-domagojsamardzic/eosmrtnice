@@ -1,5 +1,5 @@
 <x-guest-layout>
-    <h1 class="mt-3 my-5">Uvjeti kupovine</h1>
+    <h1 class="mt-3 my-5">Uvjeti kupnje za portal eOsmrtnice</h1>
 
     <h3 class="mb-3">I. Opće odredbe</h3>
     <p class="lh-1p75">
