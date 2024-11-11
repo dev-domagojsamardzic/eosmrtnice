@@ -1,3 +1,8 @@
+html {
+    overflow-x: hidden;
+    -ms-overflow-x: hidden;
+}
+
 .ads-search {
     background-color: #eee;
     padding: 1rem 2rem;
@@ -56,7 +61,7 @@
     }
 
     .ads-search {
-        padding: 0 !important;
+        padding: 1rem;
     }
 }
 
