@@ -35,8 +35,6 @@ class PostFactory extends Factory
             $funeral_county_id = $city?->county_id;
         }
 
-        $postDurationInDays = (int)config('eosmrtnice.post_duration_days');
-
         $deceasedName = $this->faker->name();
 
         $startDate = $this->faker->dateTimeBetween('-30 days', 'now')->format('Y-m-d');

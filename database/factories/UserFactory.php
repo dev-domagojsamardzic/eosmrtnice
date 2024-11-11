@@ -30,7 +30,7 @@ class UserFactory extends Factory
             'first_name' => $this->faker->firstName(),
             'last_name' => $this->faker->lastName(),
             'email' => $this->faker->unique()->safeEmail(),
-            'type' => UserType::MEMBER,
+            'type' => $this->faker->randomElement([UserType::PARTNER, UserType::MEMBER]),
             'birthday' => $this->faker->dateTimeBetween('-45 years', '-20 years', 'Europe/Zagreb')->format('Y-m-d'),
             'gender' => $this->faker->randomElement([Gender::MALE, Gender::FEMALE]),
             'email_verified_at' => now(),
@@ -44,12 +44,38 @@ class UserFactory extends Factory
     }
 
     /**
-     * Indicate that the model's email address should be unverified.
+     * Creates user with type=partner.
+     *
+     * @return Factory
      */
-    public function unverified(): static
+    public function partner(): Factory
     {
-        return $this->state(fn (array $attributes) => [
-            'email_verified_at' => null,
-        ]);
+        return $this->state(function (array $attributes) {
+            return [
+                'first_name' => 'Partner',
+                'last_name' => 'Partner',
+                'email' => 'partner@email.com',
+                'password' => Hash::make('partner'),
+                'type' => UserType::PARTNER,
+            ];
+        });
+    }
+
+    /**
+     * Creates user with type=member.
+     *
+     * @return Factory
+     */
+    public function member(): Factory
+    {
+        return $this->state(function (array $attributes) {
+            return [
+                'first_name' => 'Member',
+                'last_name' => 'Member',
+                'email' => 'member@email.com',
+                'password' => Hash::make('member'),
+                'type' => UserType::MEMBER,
+            ];
+        });
     }
 }
