@@ -49,7 +49,10 @@ class PostFactory extends Factory
             'starts_at' => $startDate,
             'ends_at' => $endDate,
             'is_framed' => $this->faker->randomElement([0, 1]),
-            'image' => 'images/posts/default_person.jpg',
+            'image' => $this->faker->randomElement([
+                'images/posts/default_person_m.jpg',
+                'images/posts/default_person_f.jpg',
+            ]),
             'symbol' => $this->faker->randomElement([PostSymbol::NONE, PostSymbol::CROSS, PostSymbol::DOVE, PostSymbol::MOON_STAR, PostSymbol::OLIVE_BRANCH, PostSymbol::STAR_OF_DAVID]),
             'deceased_full_name_lg' => $deceasedName,
             'slug' => Str::slug($deceasedName),
@@ -60,7 +63,7 @@ class PostFactory extends Factory
             'signature' => $this->faker->text(80),
             'is_active' => 1,
             'is_approved' => 1,
-            'candles' => $this->faker->numberBetween(0, 1000)
+            'candles' => $this->faker->numberBetween(0, 520)
         ];
     }
 }
