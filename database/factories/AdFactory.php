@@ -99,7 +99,6 @@ class AdFactory extends Factory
         return $this->state(function (array $attributes) {
 
             $type = $this->faker->randomElement([AdType::STANDARD, AdType::PREMIUM, AdType::GOLD]);
-            echo $type->value;
             $logo = $this->getLogo($type, CompanyType::FUNERAL);
             $banner = $this->getBanner($type, CompanyType::FUNERAL);
 
