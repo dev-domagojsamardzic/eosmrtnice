@@ -17,10 +17,7 @@ class FlowersCompanyAdController extends CompanyTypeAdController
     protected function query(): Builder
     {
         return Ad::query()
-            ->with('company')
-            ->whereHas('company', function ($query) {
-                $query->where('type', CompanyType::FLOWERS);
-            })
+            ->where('company_type', CompanyType::FLOWERS)
             ->where('active', 1)
             ->where('approved', 1)
             ->orderByRaw('CASE WHEN type = 3 THEN 1 ELSE 2 END')

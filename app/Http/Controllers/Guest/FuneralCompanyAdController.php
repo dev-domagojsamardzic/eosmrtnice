@@ -17,10 +17,7 @@ class FuneralCompanyAdController extends CompanyTypeAdController
     protected function query(): Builder
     {
         return Ad::query()
-            ->with('company')
-            ->whereHas('company', function ($query) {
-                $query->where('type', CompanyType::FUNERAL);
-            })
+            ->where('company_type', CompanyType::FUNERAL)
             ->where('active', 1)
             ->where('approved', 1)
             ->orderByRaw('CASE WHEN type = 3 THEN 1 ELSE 2 END')
