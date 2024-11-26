@@ -71,19 +71,14 @@
                         {{ __('models/condolence.recipient_full_name') }}
                     </label>
                     <br>
-                    {{--<small class="d-inline-block font-weight-normal">
+                    <small class="d-inline-block font-weight-normal">
                         <i class="fas fa-info-circle mr-2"></i>
                         {{ __('models/condolence.recipient_full_name_info') }}
-                    </small>--}}
-                    <x-text-input id="recipient_full_name"
-                                  name="recipient_full_name"
-                                  value="{{ old('recipient_full_name') }}"
-                    />
+                    </small>
+                    <input class="form-control" id="recipient_full_name" name="recipient_full_name" value="{{ old('recipient_full_name') }}"/>
                     <x-input-error :messages="$errors->get('recipient_full_name')" class="mt-2" />
                 </div>
-            </div>
 
-            <div class="col-md-6 col-sm-12">
                 {{-- recipient_address --}}
                 <div class="form-group col-12">
                     <label for="recipient_address" class="text-md-left font-weight-bold mb-0">
@@ -99,24 +94,37 @@
                 </div>
 
                 {{-- recipient_zipcode --}}
-                <div class="form-group col-md-3 col-sm-12">
+                <div class="form-group col-sm-12">
                     <label for="recipient_zipcode" class="text-md-left font-weight-bold mb-0">
                         {{ __('models/condolence.recipient_zipcode') }}
                     </label>
                     <br>
+                    <small class="d-inline-block font-weight-normal">
+                        <i class="fas fa-info-circle mr-2"></i>
+                        {{ __('models/condolence.sender_zipcode_info') }}
+                    </small>
                     <input type="text" id="recipient_zipcode" name="recipient_zipcode" class="form-control" value="{{ old('recipient_zipcode') }}">
                     <x-input-error :messages="$errors->get('recipient_zipcode')" class="mt-2" />
                 </div>
 
                 {{-- recipient_town --}}
-                <div class="form-group col-md-9 col-sm-12">
+                <div class="form-group col-sm-12">
                     <label for="recipient_town" class="text-md-left font-weight-bold mb-0">
                         {{ __('models/condolence.recipient_town') }}
                     </label>
                     <br>
+                    <small class="d-inline-block font-weight-normal">
+                        <i class="fas fa-info-circle mr-2"></i>
+                        {{ __('models/condolence.recipient_town_info') }}
+                    </small>
                     <input type="text" id="recipient_town" name="recipient_town" class="form-control" value="{{ old('recipient_town') }}">
                     <x-input-error :messages="$errors->get('recipient_town')" class="mt-2" />
                 </div>
+            </div>
+
+            {{-- Right column (empty) --}}
+            <div class="col-md-6 col-sm-12">
+
             </div>
         </div>
 
@@ -126,8 +134,10 @@
         <hr class="hr_gray_500 w-75">
 
         <div class="row">
-            <div class="col-md-6 col-sm-12">
 
+
+            {{-- Left column --}}
+            <div class="col-md-6 col-sm-12">
                 {{-- sender_full_name --}}
                 <div class="form-group col-12">
                     <label for="sender_full_name" class="text-md-left font-weight-bold mb-0">
@@ -138,51 +148,10 @@
                         <i class="fas fa-info-circle mr-2"></i>
                         {{ __('models/condolence.sender_full_name_info') }}
                     </small>
-                    <x-text-input id="sender_full_name"
-                                  name="sender_full_name"
-                                  value="{{ old('sender_full_name') }}"
-                    />
+                    <input class="form-control" id="sender_full_name" name="sender_full_name" value="{{ old('sender_full_name') }}"/>
                     <x-input-error :messages="$errors->get('sender_full_name')" class="mt-2" />
                 </div>
 
-                {{-- sender_email --}}
-                <div class="form-group col-12">
-                    <label for="sender_email" class="text-md-left font-weight-bold mb-0">
-                        {{ __('models/condolence.sender_email') }}
-                    </label>
-                    <br>
-                    <small class="d-inline-block font-weight-normal">
-                        <i class="fas fa-info-circle mr-2"></i>
-                        {{ __('models/condolence.sender_email_info') }}
-                    </small>
-
-                    <x-text-input id="sender_email"
-                                  name="sender_email"
-                                  value="{{ old('sender_email') }}"
-                    />
-                    <x-input-error :messages="$errors->get('sender_email')" class="mt-2" />
-                </div>
-
-                {{-- sender_phone --}}
-                <div class="form-group col-12">
-                    <label for="sender_phone" class="text-md-left font-weight-bold mb-0">
-                        {{ __('models/condolence.sender_phone') }}
-                    </label>
-                    <br>
-                    <small class="d-inline-block font-weight-normal">
-                        <i class="fas fa-info-circle mr-2"></i>
-                        {{ __('models/condolence.sender_phone_info') }}
-                    </small>
-
-                    <x-text-input id="sender_phone"
-                                  name="sender_phone"
-                                  value="{{ old('sender_phone') }}"
-                    />
-                    <x-input-error :messages="$errors->get('sender_phone')" class="mt-2" />
-                </div>
-            </div>
-
-            <div class="col-md-6 col-sm-12">
                 {{-- sender_address --}}
                 <div class="form-group col-12">
                     <label for="sender_address" class="text-md-left font-weight-bold mb-0">
@@ -198,7 +167,7 @@
                 </div>
 
                 {{-- sender_zipcode --}}
-                <div class="form-group col-md-6 col-sm-12">
+                <div class="form-group col-sm-12">
                     <label for="sender_zipcode" class="text-md-left font-weight-bold mb-0">
                         {{ __('models/condolence.sender_zipcode') }}
                     </label>
@@ -212,7 +181,7 @@
                 </div>
 
                 {{-- sender_town --}}
-                <div class="form-group col-md-9 col-sm-12">
+                <div class="form-group col-sm-12">
                     <label for="sender_town" class="text-md-left font-weight-bold mb-0">
                         {{ __('models/condolence.sender_town') }}
                     </label>
@@ -225,8 +194,43 @@
                     <x-input-error :messages="$errors->get('sender_town')" class="mt-2" />
                 </div>
 
+            </div>
 
-                {{-- Sender additiona info --}}
+            {{-- Right column --}}
+            <div class="col-md-6 col-sm-12">
+                {{-- sender_email --}}
+                <div class="form-group col-12">
+                    <label for="sender_email" class="text-md-left font-weight-bold mb-0">
+                        {{ __('models/condolence.sender_email') }}
+                    </label>
+                    <br>
+                    <small class="d-inline-block font-weight-normal">
+                        <i class="fas fa-info-circle mr-2"></i>
+                        {{ __('models/condolence.sender_email_info') }}
+                    </small>
+
+                    <input class="form-control" id="sender_email" name="sender_email" value="{{ old('sender_email') }}"/>
+                    <x-input-error :messages="$errors->get('sender_email')" class="mt-2" />
+                </div>
+
+                {{-- sender_phone --}}
+                <div class="form-group col-12">
+                    <label for="sender_phone" class="text-md-left font-weight-bold mb-0">
+                        {{ __('models/condolence.sender_phone') }}
+                    </label>
+                    <br>
+                    <small class="d-inline-block font-weight-normal">
+                        <i class="fas fa-info-circle mr-2"></i>
+                        {{ __('models/condolence.sender_phone_info') }}
+                    </small>
+
+                    <input class="form-control" id="sender_phone" name="sender_phone" value="{{ old('sender_phone') }}"/>
+                    <x-input-error :messages="$errors->get('sender_phone')" class="mt-2" />
+                </div>
+            </div>
+
+            {{-- Sender additional info --}}
+            <div class="col-12">
                 <div class="form-group col-12">
                     <label for="sender_additional_info" class="text-md-left font-weight-bold mb-0">
                         {{ __('models/condolence.sender_additional_info') }}
@@ -236,7 +240,7 @@
                         <i class="fas fa-info-circle mr-2"></i>
                         {{ __('models/condolence.sender_additional_info_info') }}
                     </small>
-                    <textarea id="sender_additional_info" name="sender_additional_info" class="form-control" rows="5">{{ old('sender_additional_info') }}</textarea>
+                    <textarea id="sender_additional_info" name="sender_additional_info" class="form-control border border-dark" rows="5">{{ old('sender_additional_info') }}</textarea>
                     <x-input-error :messages="$errors->get('sender_additional_info')" class="mt-2" />
                 </div>
             </div>
@@ -245,7 +249,7 @@
         <div class="form-group row my-5">
             <div class="col-12">
                 <button type="submit" class="btn btn-primary btn-user">
-                    {{ __('common.send_order') }}
+                    {{ __('models/condolence.order_condolence_package') }}
                 </button>
             </div>
         </div>
