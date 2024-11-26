@@ -120,8 +120,8 @@
             </div>
         </div>
 
-        {{-- SENDER DATA --}}
-        <h3 class="mt-5">{{ __('models/condolence.your_data') }}</h3>
+        {{-- CUSTOMER DATA --}}
+        <h3 class="mt-5">{{ __('models/condolence.customer_data') }}</h3>
         <p>{{ __('models/condolence.sender_data_info') }}</p>
         <hr class="hr_gray_500 w-75">
 
@@ -198,13 +198,17 @@
                 </div>
 
                 {{-- sender_zipcode --}}
-                <div class="form-group col-md-3 col-sm-12">
+                <div class="form-group col-md-6 col-sm-12">
                     <label for="sender_zipcode" class="text-md-left font-weight-bold mb-0">
                         {{ __('models/condolence.sender_zipcode') }}
                     </label>
                     <br>
+                    <small class="d-inline-block font-weight-normal">
+                        <i class="fas fa-info-circle mr-2"></i>
+                        {{ __('models/condolence.sender_zipcode_info') }}
+                    </small>
                     <input type="text" id="sender_zipcode" name="sender_zipcode" class="form-control" value="{{ old('sender_zipcode') }}">
-                    <x-input-error :messages="$errors->get('sender_zipcode')" class="mt-2" />
+                    <x-input-error :messages="$errors->get('sender_zipcode')" class="mt-2"/>
                 </div>
 
                 {{-- sender_town --}}
@@ -213,6 +217,10 @@
                         {{ __('models/condolence.sender_town') }}
                     </label>
                     <br>
+                    <small class="d-inline-block font-weight-normal">
+                        <i class="fas fa-info-circle mr-2"></i>
+                        {{ __('models/condolence.sender_town_info') }}
+                    </small>
                     <input type="text" id="sender_town" name="sender_town" class="form-control" value="{{ old('sender_town') }}">
                     <x-input-error :messages="$errors->get('sender_town')" class="mt-2" />
                 </div>
