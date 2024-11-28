@@ -44,10 +44,11 @@ class CondolenceRequest extends FormRequest
         return [
             'motive' => ['required', Rule::enum(CondolenceMotive::class)],
             'message' => ['required', 'string', 'max:2048'],
+            'package_addon' => ['sometimes', 'array'],
             'recipient_full_name' => ['required', 'string', 'max:255'],
             'recipient_address' => ['required', 'string', 'max:512'],
             'recipient_zipcode' => ['required', 'string', 'max:5'],
-            'recipient_town' => ['required', 'string', 'max:256'],
+            'recipient_town' => ['required', 'string', 'max:255'],
             'sender_full_name' => ['required', 'string', 'max:255'],
             'sender_email' => ['required', 'email', 'max:128'],
             'sender_phone' => ['required', 'string', 'max:64'],
@@ -55,7 +56,6 @@ class CondolenceRequest extends FormRequest
             'sender_zipcode' => ['required', 'string', 'max:5'],
             'sender_town' => ['required', 'string', 'max:256'],
             'sender_additional_info' => ['nullable', 'string'],
-            'package_addon' => ['sometimes', 'array'],
         ];
     }
 }

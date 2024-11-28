@@ -219,6 +219,7 @@ return [
         'sender_email' => 'email adresa naručitelja',
         'sender_phone' => 'broj telefona naručitelja',
         'sender_address' => 'adresa naručitelja',
+        'sender_zipcode' => 'poštanski broj naručitelja',
         'sender_town' => 'grad ili mjesto naručitelja',
     ],
 
