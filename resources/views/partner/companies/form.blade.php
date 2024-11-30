@@ -45,7 +45,8 @@
             <div class="form-group row">
                 {{-- address --}}
                 <div class="col-sm-12 mb-2">
-                    <x-input-label for="address" :value="__('admin.labels.company_address')" />
+                    <x-input-label for="address" :value="__('admin.labels.company_address')" :required_tag="true"/>
+                    <x-input-info style="display:inline-block;" :content="__('models/company.address_info')" inline/>
                     <x-text-input
                         id="address"
                         type="text"
@@ -57,7 +58,8 @@
 
                 {{-- town --}}
                 <div class="col-md-8 mb-2">
-                    <x-input-label for="town" :value="__('admin.labels.company_town')" />
+                    <x-input-label for="town" :value="__('admin.labels.company_town')" :required_tag="true"/>
+                    <x-input-info style="display:inline-block;" :content="__('models/company.town_info')" inline/>
                     <x-text-input
                         id="town"
                         type="text"
@@ -69,7 +71,8 @@
 
                 {{-- zipcode --}}
                 <div class="col-md-4 mb-2">
-                    <x-input-label for="zipcode" :value="__('admin.labels.company_zipcode')" />
+                    <x-input-label for="zipcode" :value="__('admin.labels.company_zipcode')" :required_tag="true"/>
+                    <x-input-info style="display:inline-block;" :content="__('models/company.zipcode_info')" inline/>
                     <x-text-input
                         id="zipcode"
                         type="text"

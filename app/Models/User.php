@@ -17,23 +17,23 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
 /**
- * @property        int         id
- * @property        string      first_name
- * @property        string      last_name
- * @property        string      email
- * @property        UserType    type
- * @property        Carbon      birthday
- * @property        Gender      gender
- * @property        Carbon      email_verified_at
- * @property        string      password
- * @property        string      remember_token
- * @property        bool        active
- * @property        Carbon      created_at
- * @property        Carbon      updated_at
- * @property        Carbon      deleted_at
- * -------------------------------------------
- * @property-read   string      full_name
- * -------------------------------------------
+ * @property        int                     id
+ * @property        string                  first_name
+ * @property        string                  last_name
+ * @property        string                  email
+ * @property        UserType                type
+ * @property        Carbon                  birthday
+ * @property        Gender                  gender
+ * @property        Carbon                  email_verified_at
+ * @property        string                  password
+ * @property        string                  remember_token
+ * @property        bool                    active
+ * @property        Carbon                  created_at
+ * @property        Carbon                  updated_at
+ * @property        Carbon                  deleted_at
+ * --------------------------------------------------------------
+ * @property-read   string                  full_name
+ * --------------------------------------------------------------
  * @property        Company                 companies
  * @property        Ad<Collection>          ads
  */
