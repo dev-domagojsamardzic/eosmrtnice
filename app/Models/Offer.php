@@ -18,6 +18,7 @@ use Milon\Barcode\Facades\DNS2DFacade;
  * @property-read       int                 id
  * @property            int                 company_id
  * @property            int                 ad_id
+ * @property            int                 condolence_id
  * @property            int                 user_id
  * @property            int                 post_id
  * @property            string              number
@@ -39,11 +40,15 @@ use Milon\Barcode\Facades\DNS2DFacade;
  * @property-read       array               HUB30Data
  * @property-read       string              HUB30String
  * @property-read       string              base64_pdf417
+ * @property-read       bool                isCondolenceOffer
+ * @property-read       bool                isAdOffer
+ * @property-read       bool                isPostOffer
  *  ------------------------------------------------------------
  * @property            Company             company
  * @property            Ad                  ad
  * @property            User                user
  * @property            Post                post
+ * @property            Condolence          condolence
  */
 class Offer extends Model
 {
@@ -206,6 +211,45 @@ class Offer extends Model
                 $this->created_at->format('Y'),
                 Str::padLeft($this->id, 5, '0')
             ])
+        );
+    }
+
+    /**
+     * Check if is condolence offer
+     *
+     * @return Attribute
+     */
+    protected function isCondolenceOffer(): Attribute
+    {
+        return Attribute::make(
+            get: fn() => is_null($this->company_id) && is_null($this->ad_id) &&
+                is_null($this->user_id) && is_null($this->post_id) && !is_null($this->condolence_id),
+        );
+    }
+
+    /**
+     * Check if is ad offer
+     *
+     * @return Attribute
+     */
+    protected function isAdOffer(): Attribute
+    {
+        return Attribute::make(
+            get: fn() => !is_null($this->company_id) && !is_null($this->ad_id) &&
+                is_null($this->condolence_id) && is_null($this->user_id) && is_null($this->post_id),
+        );
+    }
+
+    /**
+     * Check if is post offer
+     *
+     * @return Attribute
+     */
+    protected function isPostOffer(): Attribute
+    {
+        return Attribute::make(
+            get: fn() => !is_null($this->post_id) && !is_null($this->user_id) &&
+                is_null($this->company_id) && is_null($this->ad_id) && is_null($this->condolence_id),
         );
     }
 }
