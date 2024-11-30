@@ -36,7 +36,7 @@ return [
     'pdf' => [
         'enabled' => true,
         'binary'  => '/usr/local/bin/wkhtmltopdf',
-        'timeout' => true,
+        'timeout' => 2,
         'options' => [
             'enable-local-file-access' => true,
             'encoding' => 'UTF-8',

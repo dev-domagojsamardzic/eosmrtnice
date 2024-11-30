@@ -4,7 +4,7 @@
 @endsection
 
 @section('body')
-    @include('pdf.partials.header', ['reference_number' => str_replace('/web1/', '-', $offer->number)])
+    @include('pdf.partials.header')
 
     <table class="w-100 mt-16">
         <thead>

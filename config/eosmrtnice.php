@@ -27,8 +27,7 @@ return [
         'title' => env('EOS_BANK_TITLE', 'Raiffeisen Bank d.d.'),
         'iban' => env('EOS_BANK_IBAN', 'HR5524840081135274361'),
         'swift_code' => env('EOS_BANK_SWIFT_CODE', 'RZBHHR2X'),
-        'model' => env('EOS_BANK_MODEL', '05'),
-        'reference_number' => env('EOS_BANK_REFNUMBER', '2410-0387'),
+        'model' => env('EOS_BANK_MODEL', 'HR01'),
     ],
 
     'mail_from_address' => env('EOS_MAIL_FROM_ADDRESS', 'info@eosmrtnice.com'),

@@ -13,9 +13,14 @@
 
 <table style="float: right">
     <tbody>
-    <tr><td>{{ __('models/company.bank_iban') }}: {{ company_bank_data('iban') }}</td></tr>
-    <tr><td>{{ __('models/company.bank_swift') }}: {{ company_bank_data('swift_code') }}</td></tr>
-    <tr><td>{{ __('models/company.bank_model_reference_number') }}: {{ company_bank_data('model').' / ' . $reference_number }}</td></tr>
-    <tr><td>{{ __('models/company.bank_title') }}: {{ company_bank_data('title') }}</td></tr>
+        <tr><td>{{ __('models/company.bank_iban') }}: {{ company_bank_data('iban') }}</td></tr>
+        <tr><td>{{ __('models/company.bank_swift') }}: {{ company_bank_data('swift_code') }}</td></tr>
+        <tr><td>{{ __('models/company.bank_model_reference_number') }}: <br>{{ company_bank_data('model').' / ' . $offer->reference_number }}</td></tr>
+        <tr><td>{{ __('models/company.bank_title') }}: {{ company_bank_data('title') }}</td></tr>
+        <tr>
+            <td style="padding: 32px 0 0 0;">
+                <img src="{!! $offer->base64pdf417 !!}" style="width: 56mm;height:auto;" alt="PDF417">
+            </td>
+        </tr>
     </tbody>
 </table>

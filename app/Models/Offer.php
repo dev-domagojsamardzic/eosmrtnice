@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Helpers\HUB30;
 use Barryvdh\Snappy\Facades\SnappyPdf;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Builder;
@@ -10,6 +11,8 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Http\Response;
+use Illuminate\Support\Str;
+use Milon\Barcode\Facades\DNS2DFacade;
 
 /**
  * @property-read       int                 id
@@ -32,6 +35,10 @@ use Illuminate\Http\Response;
  * @property            Carbon              deleted_at
  *  ------------------------------------------------------------
  * @property-read       bool                is_valid
+ * @property-read       string              reference_number
+ * @property-read       array               HUB30Data
+ * @property-read       string              HUB30String
+ * @property-read       string              base64_pdf417
  *  ------------------------------------------------------------
  * @property            Company             company
  * @property            Ad                  ad
@@ -104,7 +111,7 @@ class Offer extends Model
      */
     public function condolence(): BelongsTo
     {
-        return $this->belongsTo(Condolence::class);
+        return $this->belongsTo(Condolence::class, 'condolence_id');
     }
 
     /**
@@ -124,6 +131,18 @@ class Offer extends Model
         return Attribute::make(
             get: fn () => $this->valid_from->startOfDay()->lt(now()) &&
                 $this->valid_until->endOfDay()->gt(now())
+        );
+    }
+
+    /**
+     * Return base64 encoded svg string for PDF417 barcode
+     * @return Attribute
+     */
+    protected function base64pdf417(): Attribute
+    {
+        return Attribute::make(
+            get: fn () => 'data:image/svg+xml;base64,' .
+                base64_encode(DNS2DFacade::getBarcodeSVG($this->HUB30String, "PDF417", 3, 1))
         );
     }
 
@@ -151,4 +170,42 @@ class Offer extends Model
             ->download($this->number . '.pdf');
     }
 
+    /**
+     * HUB30 data as array
+     *
+     * @return Attribute
+     */
+    protected function HUB30Data(): Attribute
+    {
+        return Attribute::make(
+            get: fn() => (new HUB30($this))->data()
+        );
+    }
+
+    /**
+     * HUB30 data as string concatenated with LF
+     * @return Attribute
+     */
+    protected function HUB30String(): Attribute
+    {
+        return Attribute::make(
+            get: fn() => implode("\n", $this->hub30Data)
+        );
+    }
+
+    /**
+     * Offer's payment reference number
+     *
+     * @return Attribute
+     */
+    protected function referenceNumber(): Attribute
+    {
+        return Attribute::make(
+            get: fn () => implode('-', [
+                config('eosmrtnice.company.oib'),
+                $this->created_at->format('Y'),
+                Str::padLeft($this->id, 5, '0')
+            ])
+        );
+    }
 }
