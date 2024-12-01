@@ -20,6 +20,9 @@ use Illuminate\Notifications\Notifiable;
  * @property        int                     id
  * @property        string                  first_name
  * @property        string                  last_name
+ * @property        string                  address
+ * @property        string                  zipcode
+ * @property        string                  town
  * @property        string                  email
  * @property        UserType                type
  * @property        Carbon                  birthday

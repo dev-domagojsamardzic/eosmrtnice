@@ -19,10 +19,13 @@ return new class extends Migration
             $table->id();
             $table->string('first_name');
             $table->string('last_name');
+            $table->string('address')->nullable();
+            $table->string('town')->nullable();
+            $table->string('zipcode', 5)->nullable();
             $table->string('email')->unique();
             $table->string('type')->default(UserType::MEMBER);
             $table->date('birthday')->nullable(false);
-            $table->enum('gender',['m', 'f'])->nullable(false);
+            $table->enum('gender',[Gender::MALE->value, Gender::FEMALE->value])->nullable(false);
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->boolean('active')->default(true);

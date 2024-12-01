@@ -29,6 +29,9 @@ class UserFactory extends Factory
         return [
             'first_name' => $this->faker->firstName(),
             'last_name' => $this->faker->lastName(),
+            'address' => $this->faker->address(),
+            'zipcode' => $this->faker->postcode(),
+            'town' => $this->faker->city(),
             'email' => $this->faker->unique()->safeEmail(),
             'type' => $this->faker->randomElement([UserType::PARTNER, UserType::MEMBER]),
             'birthday' => $this->faker->dateTimeBetween('-45 years', '-20 years', 'Europe/Zagreb')->format('Y-m-d'),
