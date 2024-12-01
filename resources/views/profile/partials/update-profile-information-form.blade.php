@@ -45,6 +45,7 @@
         {{-- birthday --}}
         <div class="form-group row">
             <div class="col-sm-12 col-md-6 mb-3 mb-sm-0">
+                <x-input-label class="d-block" for="birthday" :value="__('admin.labels.birthday')" :required_tag="true"/>
                 <x-input-info :content="__('auth.birthday_info')" />
                 <div class="input-group input-group-joined date">
                     <input name="birthday"

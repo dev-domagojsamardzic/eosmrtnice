@@ -145,4 +145,22 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         $query->where('active', true);
     }
+
+    /**
+     * Check if PDF417 barcode data is complete
+     *
+     * @return bool
+     */
+    public function isPDF417DataComplete(): bool
+    {
+        $requiredFields = ['first_name', 'last_name', 'address', 'town', 'zipcode'];
+
+        foreach ($requiredFields as $field) {
+            if (!model_attribute_valid($this, $field)) {
+                return false;
+            }
+        }
+
+        return true;
+    }
 }

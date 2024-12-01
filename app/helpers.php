@@ -3,6 +3,7 @@
 use App\Enums\UserType;
 use App\Models\County;
 use App\Models\User;
+use Illuminate\Database\Eloquent\Model;
 
 if (!function_exists('auth_user_type')) {
     /**
@@ -200,5 +201,18 @@ if(!function_exists('get_tax_value')) {
     function get_tax_value(float $amount): float
     {
         return $amount - get_nett_amount($amount);
+    }
+}
+
+if(!function_exists('model_attribute_valid')) {
+    /**
+     * Check if model attribute is valid (not empty or falsly)
+     * @param Model $model
+     * @param string $attribute
+     * @return bool
+     */
+    function model_attribute_valid(Model $model, string $attribute): bool
+    {
+        return (bool)trim($model->$attribute ?? '');
     }
 }

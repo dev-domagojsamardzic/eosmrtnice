@@ -18,3 +18,4 @@ Route::get('posts-offers/{posts_offer}/download', [PostOfferController::class, '
 
 Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
 Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+Route::patch('/profile/payment-info', [ProfileController::class, 'updatePaymentInfo'])->name('profile.payment-info.update');

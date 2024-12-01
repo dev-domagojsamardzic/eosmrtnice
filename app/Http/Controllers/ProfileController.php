@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Enums\Gender;
+use App\Http\Requests\PaymentInfoRequest;
 use App\Http\Requests\ProfileUpdateRequest;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -48,6 +49,25 @@ class ProfileController extends Controller
 
         return redirect()->route(auth_user_type() . '.profile.edit')
             ->with('alert', ['class' => 'success', 'message' => $message]);
+    }
+
+    /**
+     * Update profile payment info
+     *
+     * @param PaymentInfoRequest $request
+     * @return RedirectResponse
+     */
+    public function updatePaymentInfo(PaymentInfoRequest $request): RedirectResponse
+    {
+        $user = $request->user();
+        $user->address = $request->input('address');
+        $user->town = $request->input('town');
+        $user->zipcode = $request->input('zipcode');
+
+        $user->save();
+
+        return redirect()->route(auth_user_type() . '.profile.edit')
+            ->with('alert', ['class' => 'success', 'message' => __('common.updated')]);
     }
 
     /**
