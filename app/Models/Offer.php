@@ -38,7 +38,6 @@ use Milon\Barcode\Facades\DNS2DFacade;
  * @property-read       bool                is_valid
  * @property-read       string              reference_number
  * @property            HUB30               hub30
- * @property-read       string              pdf417AsBase64
  * @property-read       bool                isCondolenceOffer
  * @property-read       bool                isAdOffer
  * @property-read       bool                isPostOffer
@@ -135,18 +134,6 @@ class Offer extends Model
         return Attribute::make(
             get: fn() => $this->valid_from->startOfDay()->lt(now()) &&
                 $this->valid_until->endOfDay()->gt(now())
-        );
-    }
-
-    /**
-     * Return base64 encoded svg string for PDF417 barcode
-     * @return Attribute
-     */
-    protected function pdf417AsBase64(): Attribute
-    {
-        return Attribute::make(
-            get: fn () => 'data:image/svg+xml;base64,' .
-                base64_encode(DNS2DFacade::getBarcodeSVG($this->hub30->asString(), "PDF417", 3, 1))
         );
     }
 

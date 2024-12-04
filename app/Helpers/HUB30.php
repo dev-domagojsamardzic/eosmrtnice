@@ -5,6 +5,7 @@ namespace App\Helpers;
 use App\Constants\HUB30FieldLength;
 use App\Models\Offer;
 use Illuminate\Support\Str;
+use Milon\Barcode\Facades\DNS2DFacade;
 
 class HUB30
 {
@@ -42,6 +43,7 @@ class HUB30
         $this->data = match (true) {
             $offer->isCondolenceOffer => $this->dataFromCondolencesOffer(),
             $offer->isAdOffer => $this->dataFromAdsOffer(),
+            $offer->isPostOffer => $this->dataFromPostsOffer(),
             default => [],
         };
     }
@@ -114,6 +116,16 @@ class HUB30
         ];
     }
 
+
+    /**
+     * Return base64 encoded svg string for PDF417 barcode
+     * @return string
+     */
+    public function pdf417AsBase64(): string
+    {
+        return 'data:image/svg+xml;base64,' . base64_encode(DNS2DFacade::getBarcodeSVG($this->asString(), "PDF417", 3, 1));
+    }
+
     private function dataFromAdsOffer(): array
     {
         $payer_zipcode_town = $this->offer->company?->zipcode . ' ' . $this->offer->company?->town;
@@ -134,6 +146,33 @@ class HUB30
             substr($this->offer->reference_number, 0, HUB30FieldLength::TRANSACTION_REFERENCE_NUMBER),
             substr($this->purposeCode, 0, HUB30FieldLength::TRANSACTION_PURPOSE_CODE),
             substr($this->description(), 0, HUB30FieldLength::TRANSACTION_DESCRIPTION),
+        ];
+    }
+
+    /**
+     * Extract data from posts offer
+     * @return array
+     */
+    private function dataFromPostsOffer(): array
+    {
+        $payer_zipcode_town = $this->offer->user?->zipcode . ' ' . $this->offer->user?->town;
+        $receiver_zipcode_town = config('eosmrtnice.company.zipcode') . ' ' . config('eosmrtnice.company.town');
+
+        return [
+            strtoupper(substr($this->header, 0, HUB30FieldLength::HEADER)),
+            strtoupper(substr(config('app.currency'), 0, HUB30FieldLength::CURRENCY)),
+            strtoupper($this->amount()),
+            strtoupper(substr($this->offer->user?->full_name, 0, HUB30FieldLength::PAYER_TITLE)),
+            strtoupper(substr($this->offer->user?->address, 0, HUB30FieldLength::PAYER_ADDRESS)),
+            strtoupper(substr($payer_zipcode_town, 0, HUB30FieldLength::PAYER_ZIPCODE_TOWN)),
+            strtoupper(substr(config('eosmrtnice.company.title'), 0,HUB30FieldLength::RECEIVER_TITLE)),
+            strtoupper(substr(config('eosmrtnice.company.address'), 0,HUB30FieldLength::RECEIVER_ADDRESS)),
+            strtoupper(substr($receiver_zipcode_town, 0, HUB30FieldLength::RECEIVER_ZIPCODE_TOWN)),
+            strtoupper(substr(config('eosmrtnice.bank.iban'), 0, HUB30FieldLength::RECEIVER_IBAN)),
+            strtoupper(substr(config('eosmrtnice.bank.model'), 0, HUB30FieldLength::TRANSACTION_MODEL)),
+            strtoupper(substr($this->offer->reference_number, 0, HUB30FieldLength::TRANSACTION_REFERENCE_NUMBER)),
+            strtoupper(substr($this->purposeCode, 0, HUB30FieldLength::TRANSACTION_PURPOSE_CODE)),
+            strtoupper(substr($this->description(), 0, HUB30FieldLength::TRANSACTION_DESCRIPTION)),
         ];
     }
 
