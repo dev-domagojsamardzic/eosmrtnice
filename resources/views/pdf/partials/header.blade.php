@@ -17,10 +17,12 @@
         <tr><td>{{ __('models/company.bank_swift') }}: {{ company_bank_data('swift_code') }}</td></tr>
         <tr><td>{{ __('models/company.bank_model_reference_number') }}: <br>{{ company_bank_data('model').' / ' . $offer->reference_number }}</td></tr>
         <tr><td>{{ __('models/company.bank_title') }}: {{ company_bank_data('title') }}</td></tr>
-        <tr>
-            <td style="padding: 32px 0 0 0;">
-                <img src="{!! $offer->base64pdf417 !!}" style="width: 56mm;height:auto;" alt="PDF417">
-            </td>
-        </tr>
+        @if($offer->hub30->isValidForPdf417())
+            <tr>
+                <td style="padding: 32px 0 0 0;">
+                    <img src="{!! $offer->hub30->pdf417AsBase64() !!}" style="width: 56mm;height:auto;" alt="PDF417">
+                </td>
+            </tr>
+        @endif
     </tbody>
 </table>

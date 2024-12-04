@@ -37,9 +37,8 @@ use Milon\Barcode\Facades\DNS2DFacade;
  *  ------------------------------------------------------------
  * @property-read       bool                is_valid
  * @property-read       string              reference_number
- * @property-read       array               HUB30Data
- * @property-read       string              HUB30String
- * @property-read       string              base64_pdf417
+ * @property            HUB30               hub30
+ * @property-read       string              pdf417AsBase64
  * @property-read       bool                isCondolenceOffer
  * @property-read       bool                isAdOffer
  * @property-read       bool                isPostOffer
@@ -134,7 +133,7 @@ class Offer extends Model
     protected function isValid(): Attribute
     {
         return Attribute::make(
-            get: fn () => $this->valid_from->startOfDay()->lt(now()) &&
+            get: fn() => $this->valid_from->startOfDay()->lt(now()) &&
                 $this->valid_until->endOfDay()->gt(now())
         );
     }
@@ -143,11 +142,11 @@ class Offer extends Model
      * Return base64 encoded svg string for PDF417 barcode
      * @return Attribute
      */
-    protected function base64pdf417(): Attribute
+    protected function pdf417AsBase64(): Attribute
     {
         return Attribute::make(
             get: fn () => 'data:image/svg+xml;base64,' .
-                base64_encode(DNS2DFacade::getBarcodeSVG($this->HUB30String, "PDF417", 3, 1))
+                base64_encode(DNS2DFacade::getBarcodeSVG($this->hub30->asString(), "PDF417", 3, 1))
         );
     }
 
@@ -175,26 +174,10 @@ class Offer extends Model
             ->download($this->number . '.pdf');
     }
 
-    /**
-     * HUB30 data as array
-     *
-     * @return Attribute
-     */
-    protected function HUB30Data(): Attribute
+    protected function hub30(): Attribute
     {
         return Attribute::make(
-            get: fn() => (new HUB30($this))->data()
-        );
-    }
-
-    /**
-     * HUB30 data as string concatenated with LF
-     * @return Attribute
-     */
-    protected function HUB30String(): Attribute
-    {
-        return Attribute::make(
-            get: fn() => implode("\n", $this->hub30Data)
+            get: fn() => new HUB30($this)
         );
     }
 
