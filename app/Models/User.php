@@ -92,7 +92,7 @@ class User extends Authenticatable implements MustVerifyEmail
     protected function fullName(): Attribute
     {
         return Attribute::make(
-            get: fn () => $this->first_name . ' ' . $this->last_name,
+            get: fn() => $this->first_name . ' ' . $this->last_name,
         );
     }
 
@@ -151,7 +151,7 @@ class User extends Authenticatable implements MustVerifyEmail
      *
      * @return bool
      */
-    public function isPDF417DataComplete(): bool
+    public function isPdf417DataComplete(): bool
     {
         $requiredFields = ['first_name', 'last_name', 'address', 'town', 'zipcode'];
 
