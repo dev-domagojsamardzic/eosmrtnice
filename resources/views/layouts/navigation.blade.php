@@ -164,7 +164,7 @@
                     </span>
                     <img class="img-profile rounded-circle"
                          src="{{ asset('graphics/avatar/' . auth()->user()->gender . '.svg') }}">
-                    @if(!auth()->user()->isPdf417DataComplete())
+                    @if(is_member() && !auth()->user()->isPdf417DataComplete())
                         <i class="fas fa-exclamation-circle text-danger" title="{{ __('models/profile.payment_data_incomplete') }}"></i>
                     @endif
                 </a>
@@ -174,7 +174,7 @@
                     <a class="dropdown-item" href="{{ route(auth_user_type() . '.profile.edit') }}">
                         <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
                         {{ __('common.profile') }}
-                        @if(!auth()->user()->isPdf417DataComplete())
+                        @if(is_member() && !auth()->user()->isPdf417DataComplete())
                             <i class="fas fa-exclamation-circle text-danger" title="{{ __('models/profile.payment_data_incomplete') }}"></i>
                         @endif
                     </a>
