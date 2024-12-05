@@ -14,14 +14,14 @@ class HUB30
      *
      * @var string
      */
-    private string $header = 'HRVHUB30';
+    private string $header = "HRVHUB30";
 
     /**
      * Fixed value purpose code
-     *
+     * GDSV = Kupoprodaja roba i usluga
      * @var string
      */
-    private string $purposeCode = 'COST';
+    private string $purposeCode = "GDSV";
 
     /**
      * Offer model
@@ -40,12 +40,17 @@ class HUB30
     {
         $this->offer = $offer;
 
-        $this->data = match (true) {
-            $offer->isCondolenceOffer => $this->dataFromCondolencesOffer(),
-            $offer->isAdOffer => $this->dataFromAdsOffer(),
-            $offer->isPostOffer => $this->dataFromPostsOffer(),
-            default => [],
-        };
+        // Init HUB30 data array
+        $basic = [
+            substr($this->header, 0, HUB30FieldLength::HEADER),
+            substr(config('app.currency'), 0, HUB30FieldLength::CURRENCY),
+            $this->amount(),
+        ];
+        $payer = $this->payerData();
+        $payee = $this->payeeData();
+        $transaction = $this->transactionData();
+
+        $this->data = [...$basic, ...$payer, ...$payee, ...$transaction];
     }
 
     /**
@@ -81,58 +86,65 @@ class HUB30
      */
     public function pdf417AsBase64(): string
     {
-        return 'data:image/svg+xml;base64,' . base64_encode(DNS2DFacade::getBarcodeSVG($this->asString(), "PDF417", 3, 1));
+        return 'data:image/svg+xml;base64,' . base64_encode(DNS2DFacade::getBarcodeSVG($this->asString(), "PDF417", 3, 1, '#000000'));
     }
 
     /**
-     * Extract data from condolence offer
+     * Extract payer data for condolence offer
      * @return array
      */
-    private function dataFromCondolencesOffer(): array
+    private function payerDataForCondolencesOffer(): array
     {
         $this->offer->load('condolence');
-
-        $payer_zipcode_town = $this->offer->condolence?->sender_zipcode . ' ' . $this->offer->condolence?->sender_town;
-        $receiver_zipcode_town = config('eosmrtnice.company.zipcode') . ' ' . config('eosmrtnice.company.town');
+        $zipcodeAndTown = (!$this->offer->condolence?->sender_zipcode || !$this->offer->condolence?->sender_town) ?
+            '' : $this->offer->condolence?->sender_zipcode . ' ' . $this->offer->condolence?->sender_town;
 
         return [
-            substr($this->header, 0, HUB30FieldLength::HEADER), // 1.
-            substr(config('app.currency'), 0, HUB30FieldLength::CURRENCY), // 2.
-            $this->amount(), // 3.
-            substr($this->offer->condolence?->sender_full_name ?? '', 0, HUB30FieldLength::PAYER_TITLE),  // 4.
-            substr($this->offer->condolence?->sender_address ?? '', 0, HUB30FieldLength::PAYER_ADDRESS), // 5.
-            substr($payer_zipcode_town, 0, HUB30FieldLength::PAYER_ZIPCODE_TOWN), // 6.
-            substr(config('eosmrtnice.company.title'), 0,HUB30FieldLength::RECEIVER_TITLE), // 7.
-            substr(config('eosmrtnice.company.address'), 0,HUB30FieldLength::RECEIVER_ADDRESS), // 8.
-            substr($receiver_zipcode_town, 0, HUB30FieldLength::RECEIVER_ZIPCODE_TOWN), // 9.
-            substr(config('eosmrtnice.bank.iban'), 0, HUB30FieldLength::RECEIVER_IBAN), // 10.
-            substr(config('eosmrtnice.bank.model'), 0, HUB30FieldLength::TRANSACTION_MODEL), // 11.
-            substr($this->offer->reference_number, 0, HUB30FieldLength::TRANSACTION_REFERENCE_NUMBER), // 12.
-            substr($this->purposeCode, 0, HUB30FieldLength::TRANSACTION_PURPOSE_CODE), // 13.
-            substr($this->description(), 0, HUB30FieldLength::TRANSACTION_DESCRIPTION), // 14.
+            substr($this->offer->condolence?->sender_full_name ?? '', 0, HUB30FieldLength::PAYER_TITLE),
+            substr($this->offer->condolence?->sender_address ?? '', 0, HUB30FieldLength::PAYER_ADDRESS),
+            substr($zipcodeAndTown, 0, HUB30FieldLength::PAYER_ZIPCODE_TOWN),
         ];
     }
 
     /**
-     * Extract data from ads offer
+     * Extract payer data for ads offer
      * @return array
      */
-    private function dataFromAdsOffer(): array
+    private function payerDataForAdsOffer(): array
     {
-        $payer_zipcode_town = $this->offer->company?->zipcode . ' ' . $this->offer->company?->town;
-        $receiver_zipcode_town = config('eosmrtnice.company.zipcode') . ' ' . config('eosmrtnice.company.town');
+        $zipcodeAndTown = (!$this->offer->company?->zipcode || !$this->offer->company?->town) ?
+            '' : $this->offer->company?->zipcode . ' ' . $this->offer->company?->town;
 
         return [
-            substr($this->header, 0, HUB30FieldLength::HEADER),
-            substr(config('app.currency'), 0, HUB30FieldLength::CURRENCY),
-            $this->amount(),
             substr($this->offer->company?->title, 0, HUB30FieldLength::PAYER_TITLE),
             substr($this->offer->company->address, 0, HUB30FieldLength::PAYER_ADDRESS),
-            substr($payer_zipcode_town, 0, HUB30FieldLength::PAYER_ZIPCODE_TOWN),
-            substr(config('eosmrtnice.company.title'), 0,HUB30FieldLength::RECEIVER_TITLE),
-            substr(config('eosmrtnice.company.address'), 0,HUB30FieldLength::RECEIVER_ADDRESS),
-            substr($receiver_zipcode_town, 0, HUB30FieldLength::RECEIVER_ZIPCODE_TOWN),
-            substr(config('eosmrtnice.bank.iban'), 0, HUB30FieldLength::RECEIVER_IBAN),
+            substr($zipcodeAndTown, 0, HUB30FieldLength::PAYER_ZIPCODE_TOWN),
+        ];
+    }
+
+    /**
+     * Extract payer data for posts offer
+     * @return array
+     */
+    private function payerDataForPostsOffer(): array
+    {
+        $zipcodeAndTown = (!$this->offer->user?->zipcode || !$this->offer->user?->town) ?
+            '' : $this->offer->user?->zipcode . ' ' . $this->offer->user?->town;
+
+        return [
+            substr($this->offer->user?->full_name, 0, HUB30FieldLength::PAYER_TITLE),
+            substr($this->offer->user?->address, 0, HUB30FieldLength::PAYER_ADDRESS),
+            substr($zipcodeAndTown, 0, HUB30FieldLength::PAYER_ZIPCODE_TOWN),
+        ];
+    }
+
+    /**
+     * Get transaction related data
+     * @return array
+     */
+    private function transactionData(): array
+    {
+        return [
             substr(config('eosmrtnice.bank.model'), 0, HUB30FieldLength::TRANSACTION_MODEL),
             substr($this->offer->reference_number, 0, HUB30FieldLength::TRANSACTION_REFERENCE_NUMBER),
             substr($this->purposeCode, 0, HUB30FieldLength::TRANSACTION_PURPOSE_CODE),
@@ -140,31 +152,37 @@ class HUB30
         ];
     }
 
+
     /**
-     * Extract data from posts offer
+     * Payment receiver data
      * @return array
      */
-    private function dataFromPostsOffer(): array
+    private function payeeData(): array
     {
-        $payer_zipcode_town = $this->offer->user?->zipcode . ' ' . $this->offer->user?->town;
-        $receiver_zipcode_town = config('eosmrtnice.company.zipcode') . ' ' . config('eosmrtnice.company.town');
-
         return [
-            strtoupper(substr($this->header, 0, HUB30FieldLength::HEADER)),
-            strtoupper(substr(config('app.currency'), 0, HUB30FieldLength::CURRENCY)),
-            strtoupper($this->amount()),
-            strtoupper(substr($this->offer->user?->full_name, 0, HUB30FieldLength::PAYER_TITLE)),
-            strtoupper(substr($this->offer->user?->address, 0, HUB30FieldLength::PAYER_ADDRESS)),
-            strtoupper(substr($payer_zipcode_town, 0, HUB30FieldLength::PAYER_ZIPCODE_TOWN)),
-            strtoupper(substr(config('eosmrtnice.company.title'), 0,HUB30FieldLength::RECEIVER_TITLE)),
-            strtoupper(substr(config('eosmrtnice.company.address'), 0,HUB30FieldLength::RECEIVER_ADDRESS)),
-            strtoupper(substr($receiver_zipcode_town, 0, HUB30FieldLength::RECEIVER_ZIPCODE_TOWN)),
-            strtoupper(substr(config('eosmrtnice.bank.iban'), 0, HUB30FieldLength::RECEIVER_IBAN)),
-            strtoupper(substr(config('eosmrtnice.bank.model'), 0, HUB30FieldLength::TRANSACTION_MODEL)),
-            strtoupper(substr($this->offer->reference_number, 0, HUB30FieldLength::TRANSACTION_REFERENCE_NUMBER)),
-            strtoupper(substr($this->purposeCode, 0, HUB30FieldLength::TRANSACTION_PURPOSE_CODE)),
-            strtoupper(substr($this->description(), 0, HUB30FieldLength::TRANSACTION_DESCRIPTION)),
+            substr(config('eosmrtnice.company.title'), 0, HUB30FieldLength::RECEIVER_TITLE),
+            substr(config('eosmrtnice.company.address'), 0, HUB30FieldLength::RECEIVER_ADDRESS),
+            substr(
+                config('eosmrtnice.company.zipcode') . ' ' . config('eosmrtnice.company.town'),
+                0,
+                HUB30FieldLength::RECEIVER_ZIPCODE_TOWN
+            ),
+            substr(config('eosmrtnice.bank.iban'), 0, HUB30FieldLength::RECEIVER_IBAN),
         ];
+    }
+
+    /**
+     * Get payer data based on offer type
+     * @return array
+     */
+    private function payerData(): array
+    {
+        return match (true) {
+            $this->offer->isCondolenceOffer => $this->payerDataForCondolencesOffer(),
+            $this->offer->isAdOffer => $this->payerDataForAdsOffer(),
+            $this->offer->isPostOffer => $this->payerDataForPostsOffer(),
+            default => ["", "", ""],
+        };
     }
 
     /**
