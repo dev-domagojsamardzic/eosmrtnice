@@ -65,7 +65,7 @@ class CondolenceController extends Controller
         $condolence = new Condolence();
         $condolence->motive = $request->input('motive');
 
-        $condolence->message = trim($request->input('message'), " \r\n\t");
+        $condolence->message = trim($request->input('message', ''), " \r\n\t");
         $condolence->recipient_full_name = $request->input('recipient_full_name');
         $condolence->recipient_address = $request->input('recipient_address');
         $condolence->recipient_zipcode = $request->input('recipient_zipcode');
@@ -77,7 +77,7 @@ class CondolenceController extends Controller
         $condolence->sender_address = $request->input('sender_address');
         $condolence->sender_zipcode = $request->input('sender_zipcode');
         $condolence->sender_town = $request->input('sender_town');
-        $condolence->sender_additional_info = trim($request->input('sender_additional_info'), " \r\n\t");
+        $condolence->sender_additional_info = trim($request->input('sender_additional_info', ''), " \r\n\t");
         $condolence->package_addon = $request->input('package_addon', []);
 
         try {
