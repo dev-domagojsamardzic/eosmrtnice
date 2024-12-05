@@ -164,9 +164,6 @@
                     </span>
                     <img class="img-profile rounded-circle"
                          src="{{ asset('graphics/avatar/' . auth()->user()->gender . '.svg') }}">
-                    @if(is_member() && !auth()->user()->isPdf417DataComplete())
-                        <i class="fas fa-exclamation-circle text-danger" title="{{ __('models/profile.payment_data_incomplete') }}"></i>
-                    @endif
                 </a>
                 <!-- Dropdown - User Information -->
                 <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
@@ -174,9 +171,6 @@
                     <a class="dropdown-item" href="{{ route(auth_user_type() . '.profile.edit') }}">
                         <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
                         {{ __('common.profile') }}
-                        @if(is_member() && !auth()->user()->isPdf417DataComplete())
-                            <i class="fas fa-exclamation-circle text-danger" title="{{ __('models/profile.payment_data_incomplete') }}"></i>
-                        @endif
                     </a>
                     {{--<a class="dropdown-item" href="#">
                         <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>

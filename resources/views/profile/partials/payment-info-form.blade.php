@@ -1,3 +1,4 @@
+{{-- Form section --}}
 <section>
     <header class="row">
         <div class="col-12">
@@ -12,44 +13,7 @@
             </p>
         </div>
     </header>
-</section>
 
-{{-- Info section --}}
-<section class="mt-3">
-    <header class="row">
-        <div class="col-12">
-            <div @class(["alert", 'alert-success' => $user->isPdf417DataComplete(), 'alert-danger' => !$user->isPdf417DataComplete()]) role="alert">
-                {{ $user->isPdf417DataComplete() ? __('admin.data_complete_info') : __('admin.data_missing_info') }}
-            </div>
-        </div>
-    </header>
-    <p>
-        <span style="display: inline-block; width: 60%">{{ __('admin.full_name') }}</span>
-        <small @class(['font-bold', 'text-success' => model_attribute_valid($user, 'first_name') && model_attribute_valid($user, 'last_name'), 'text-danger' => !model_attribute_valid($user, 'first_name') || !model_attribute_valid($user, 'last_name')])>
-            {{ model_attribute_valid($user, 'first_name') && model_attribute_valid($user, 'last_name') ? __('common.entered') : __('common.missing') }}
-        </small>
-    </p>
-    <p>
-        <span style="display: inline-block; width: 60%">{{ __('admin.address') }}</span>
-        <small @class(['font-bold', 'text-success' => model_attribute_valid($user, 'address'), 'text-danger' => !model_attribute_valid($user, 'address')])>
-            {{ model_attribute_valid($user, 'address') ? __('common.entered') : __('common.missing') }}
-        </small>
-    </p>
-    <p>
-        <span style="display: inline-block; width: 60%;">{{ __('admin.labels.zipcode') }}</span>
-        <small @class(['font-bold', 'text-success' => model_attribute_valid($user, 'zipcode'), 'text-danger' => !model_attribute_valid($user, 'zipcode')])>
-            {{ model_attribute_valid($user, 'zipcode') ? __('common.entered') : __('common.missing') }}
-        </small>
-    </p>
-    <p>
-        <span style="display: inline-block; width: 60%;">{{ __('admin.labels.town') }}</span>
-        <small @class(['font-bold', 'text-success' => model_attribute_valid($user, 'town'), 'text-danger' => !model_attribute_valid($user, 'town')])>
-            {{ model_attribute_valid($user, 'town') ? __('common.entered') : __('common.missing') }}
-        </small>
-    </p>
-</section>
-{{-- Form section --}}
-<section>
     <form id="send-verification" method="post" action="{{ route('verification.send') }}">
         @csrf
     </form>
