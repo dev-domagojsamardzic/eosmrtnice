@@ -69,7 +69,7 @@
             <li>
                 <p class="lh-1p75">
                     Pravo na povrat sredstava Korisnik može ostvariti slanjem zahtjeva putem e-pošte
-                    na <b>info@provexio.hr</b>, uz priloženu dokumentaciju koja dokazuje osnovanost
+                    na <b>info@eosmrtnice.hr</b>, uz priloženu dokumentaciju koja dokazuje osnovanost
                     zahtjeva.
                 </p>
             </li>
@@ -98,7 +98,7 @@
         <h3 class="mb-3">VIII. Kontakt za podršku korisnicima</h3>
         <p class="lh-1p75">
             Za sve dodatne informacije, pritužbe ili reklamacije, Korisnici se mogu obratiti na e-
-            mail adresu <b>info@provexio.hr</b> ili kontaktirati Nakladnika na adresu sjedišta.
+            mail adresu <b>info@eosmrtnice.hr</b> ili kontaktirati Nakladnika na adresu sjedišta.
         </p>
     </div>
 </x-guest-layout>
