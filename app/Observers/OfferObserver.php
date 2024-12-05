@@ -3,6 +3,7 @@
 namespace App\Observers;
 
 use App\Models\Offer;
+use Illuminate\Support\Str;
 
 class OfferObserver
 {
@@ -11,7 +12,7 @@ class OfferObserver
      */
     public function created(Offer $offer): void
     {
-        $offer->number = $offer->id . '/web1/' . now()->format('Y');
+        $offer->number = Str::padLeft($offer->id, 5, '0') . '/web1/' . now()->format('m-Y');
         $offer->save();
     }
 }
