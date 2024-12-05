@@ -72,19 +72,16 @@ class HUB30
      */
     public function isValidForPdf417(): bool
     {
-        // Check if the array has exactly 14 elements
-        if (count($this->data) !== 14) {
-            return false;
-        }
+        return count($this->data) === 14;
+    }
 
-        // Check if all elements are non-null and not empty strings
-        foreach ($this->data as $element) {
-            if ($element === null || $element === '') {
-                return false;
-            }
-        }
-
-        return true;
+    /**
+     * Return base64 encoded svg string for PDF417 barcode
+     * @return string
+     */
+    public function pdf417AsBase64(): string
+    {
+        return 'data:image/svg+xml;base64,' . base64_encode(DNS2DFacade::getBarcodeSVG($this->asString(), "PDF417", 3, 1));
     }
 
     /**
@@ -102,8 +99,8 @@ class HUB30
             substr($this->header, 0, HUB30FieldLength::HEADER), // 1.
             substr(config('app.currency'), 0, HUB30FieldLength::CURRENCY), // 2.
             $this->amount(), // 3.
-            substr($this->offer->condolence->sender_full_name, 0, HUB30FieldLength::PAYER_TITLE),  // 4.
-            substr($this->offer->condolence->sender_address, 0, HUB30FieldLength::PAYER_ADDRESS), // 5.
+            substr($this->offer->condolence?->sender_full_name ?? '', 0, HUB30FieldLength::PAYER_TITLE),  // 4.
+            substr($this->offer->condolence?->sender_address ?? '', 0, HUB30FieldLength::PAYER_ADDRESS), // 5.
             substr($payer_zipcode_town, 0, HUB30FieldLength::PAYER_ZIPCODE_TOWN), // 6.
             substr(config('eosmrtnice.company.title'), 0,HUB30FieldLength::RECEIVER_TITLE), // 7.
             substr(config('eosmrtnice.company.address'), 0,HUB30FieldLength::RECEIVER_ADDRESS), // 8.
@@ -116,16 +113,10 @@ class HUB30
         ];
     }
 
-
     /**
-     * Return base64 encoded svg string for PDF417 barcode
-     * @return string
+     * Extract data from ads offer
+     * @return array
      */
-    public function pdf417AsBase64(): string
-    {
-        return 'data:image/svg+xml;base64,' . base64_encode(DNS2DFacade::getBarcodeSVG($this->asString(), "PDF417", 3, 1));
-    }
-
     private function dataFromAdsOffer(): array
     {
         $payer_zipcode_town = $this->offer->company?->zipcode . ' ' . $this->offer->company?->town;
@@ -135,7 +126,7 @@ class HUB30
             substr($this->header, 0, HUB30FieldLength::HEADER),
             substr(config('app.currency'), 0, HUB30FieldLength::CURRENCY),
             $this->amount(),
-            substr($this->offer->company->title, 0, HUB30FieldLength::PAYER_TITLE),
+            substr($this->offer->company?->title, 0, HUB30FieldLength::PAYER_TITLE),
             substr($this->offer->company->address, 0, HUB30FieldLength::PAYER_ADDRESS),
             substr($payer_zipcode_town, 0, HUB30FieldLength::PAYER_ZIPCODE_TOWN),
             substr(config('eosmrtnice.company.title'), 0,HUB30FieldLength::RECEIVER_TITLE),
